@@ -50,7 +50,7 @@ export default {
           this.setItems();
         })
         .catch((response) => {
-          console.log(response);
+          console.log('err',response);
         });
     },
     nextPage() {
