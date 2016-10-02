@@ -1,16 +1,13 @@
 <template>
-  <div id="app">
-    <div class="list-group">
-     <a class="list-group-item" v-link="{ path: '/a'}">Home Hello</a>
-    <a class="list-group-item" v-link="{ path: '/c'}">Rank</a>
-    <a class="list-group-item" v-link="{ path: '/d'}">Login</a>
-
-    </div>
+  <div id="app" class="container">
+      <nav class="navbar navbar-fixed-bottom navbar-light bg-faded">
+      <a class="navbar-brand" href="#">Joy & Will</a>
+      <a class="btn btn-default" v-link="{ path: '/auth'}">Profile</a>
+      <a class="btn btn-default" v-link="{ path: '/rank'}">Rank</a>
+    </nav>
 
     <div id="routerDiv">
-
-    <router-view><!-- matched component renders here --></router-view>
-
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -22,15 +19,12 @@ html {
 
 body {
   display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100%;
 }
 
 #app {
   color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
+  margin-top: 100px;
   font-family: Source Sans Pro, Helvetica, sans-serif;
   text-align: center;
 }
@@ -44,4 +38,5 @@ body {
   width: 100px;
   height: 100px
 }
+
 </style>

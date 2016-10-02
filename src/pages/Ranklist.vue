@@ -33,7 +33,7 @@
               </div>
             </div>
 
-       
+
 
 </template>
 
@@ -56,7 +56,7 @@ export default {
         city:'xian',
         headimgurl:'http://cloudbean.qiniudn.com/hbg2-100x81-logo.png',
       },
-    }  
+    }
   },
 };
 </script>
