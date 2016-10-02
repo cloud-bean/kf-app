@@ -5,10 +5,9 @@ import App from './App';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 
-import ViewA from './components/Chart';
-import ViewB from './pages/Profile';
-import ViewC from './pages/Ranklist';
-import ViewD from './pages/Records';
+
+import RankPage from './pages/Ranklist';
+import loginPage from './pages/Login';
 
 /* eslint-disable no-new */
 
@@ -26,10 +25,9 @@ Vue.directive('echarts', require('./directives/echarts'));
 const router = new VueRouter();
 
 router.map({
-  '/a': { component: ViewD },
-  '/b': { component: ViewB },
-  '/c': { component: ViewC },
-  '/d': { component: ViewA },
+
+  '/rank': { component: RankPage },
+  '/auth': { component: loginPage },
 
 });
 
