@@ -18,7 +18,7 @@ export default {
       apiUrl:"http://192.168.31.227:7000/oauth/token",
     };
   },
-    methods: {    
+    methods: {
         login() {
             console.log('login');
             this.$http.post(this.apiUrl,{
@@ -27,6 +27,8 @@ export default {
                     client_id: "kf-app",
                     client_secret: "prometheus",
                     grant_type: 'password',
+            },{
+                
             })
                 .then((response) => {
                     console.log(response.data);

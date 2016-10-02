@@ -1,6 +1,8 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="exp">
+    <span>经验：{{ exp }} |</span>
+    <span>排名：{{ rank }} |</span>
+    <span>财富：{{ ponit }}</span>
   </div>
 </template>
 
@@ -12,7 +14,9 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      msg: 'Hello World!',
+      exp: '1000',
+      rank: '5',
+      ponit: '30',
     };
   },
 };
@@ -20,7 +24,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  color: #42b983;
-}
+  .exp {
+    color: #42b983;
+    background: #232455;
+  }
 </style>

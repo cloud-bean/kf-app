@@ -28,9 +28,7 @@
 
 <script>
     export default{
-      name:'Head',
-      data(){
-      }
+     
     }
 </script>
 
