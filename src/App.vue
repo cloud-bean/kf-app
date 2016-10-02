@@ -2,7 +2,6 @@
   <div id="app">
     <div class="list-group">
      <a class="list-group-item" v-link="{ path: '/a'}">Home Hello</a>
-     <a class="list-group-item" v-link="{ path: '/b'}">About CB</a>
     <a class="list-group-item" v-link="{ path: '/c'}">Rank</a>
     <a class="list-group-item" v-link="{ path: '/d'}">Login</a>
 

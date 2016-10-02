@@ -15,10 +15,12 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       msg: 'Hello World!',
-      apiUrl:"http://192.168.31.227:7000/oauth/token",
+      apiUrl:"http://120.25.227.156:7000/oauth/token",
+      username: "test@test.com",
+      password: "default"
     };
   },
-    methods: {    
+    methods: {
         login() {
             console.log('login');
             this.$http.post(this.apiUrl,{
@@ -34,7 +36,7 @@ export default {
                 .catch((response) => {
                     console.log('err',response);
                 });
-        }  
+        }
     }
 }
 </script>
