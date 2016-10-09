@@ -26,10 +26,10 @@ export default {
         }
         else if(query && query.code){
           console.log('code');
-          const res = yield util.auth(config.appid,query.code);
+          const res = yield this.auth(config.appid,query.code);
           console.log(res);
           localStorage.setItem('kf_accessToken', res.accessToken);
-          const userInfo = yield util.getUserInfo(res.userid);
+          const userInfo = yield this.getUserInfo(res.userid);
           console.log(userInfo);
           localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
           this.$router.go('/auth?state=user');
@@ -44,14 +44,41 @@ export default {
         console.log(err);
       }
     });
-
-    // if(!localStorage.getItem('kf_accessToken')){
-    //   const redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/admin', 'wechat', 'snsapi_userinfo');
-    //   console.log(redirctUrl);
-    //   window.location.href = redirctUrl;
-    // }else{
-    //   this.$router.go('/login?state=user');
-    // }
   },
+  method: {
+    auth(appid, code) {
+      return new Promise((resolve, reject) => {
+        this.$http.get(`http://joywill.cc/admin/auth?appid=${appid}&code=${code}`)
+        .then((result) => {
+          console.log(result);
+          const userid = result.userid;
+          const accessToken = result.accessToken;
+          resolve({ userid, accessToken });
+        })
+        .catch((err) => {
+          reject(err);
+        });
+      });
+    },
+
+    getUserInfo(userid, accessToken) {
+      return new Promise((resolve, reject) => {
+        this.$http.get(`http://120.25.227.156:7000/api/base/users/${userid}`,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+        .then((result) => {
+          console.log(result);
+          resolve(result.data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+      });
+    }
+  }
 }
 </script>
