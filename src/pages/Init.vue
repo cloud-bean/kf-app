@@ -26,9 +26,11 @@ export default {
         }
         else if(query && query.code){
           console.log('code');
-          const res = yield util.auth(config.appid,query.code)
+          const res = yield util.auth(config.appid,query.code);
+          console.log(res);
           localStorage.setItem('kf_accessToken', res.accessToken);
           const userInfo = yield util.getUserInfo(res.userid);
+          console.log(userInfo);
           localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
           this.$router.go('/auth?state=user');
         }
