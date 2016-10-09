@@ -15,11 +15,11 @@ export default {
 
   created() {
     if(!localStorage.getItem('kf_accessToken')){
-      const redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/#!/login', 'wechat', 'snsapi_userinfo');
+      const redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/auth', 'wechat', 'snsapi_userinfo');
       console.log(redirctUrl);
       window.location.href = redirctUrl;
     }else{
-      this.$router.go('/login?state=user');
+      this.$router.go('/auth?state=user');
     }
   },
 }

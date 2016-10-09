@@ -12,7 +12,11 @@
     <input type="text" placeholder="password" v-model="password"></input>
     <button class="btn btn-default" v-on:click="login">login</button>
   </div> -->
-  <div>{{user}}<div>
+
+  <div>
+    <p>login page. in the route /auth</p>
+    user: {{user.displayName}}
+  <div>
 
   </div>
 </template>
@@ -29,7 +33,7 @@ export default {
   },
 
   created() {
-
+    console.log('created');
     co(function * () {
       try {
         const query = wurl('?')

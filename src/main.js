@@ -25,8 +25,12 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.directive('echarts', require('./directives/echarts'));
 
-const router = new VueRouter();
-
+const router = new VueRouter({
+    history: true,
+    hashbang: false,
+    linkActiveClass: 'active'
+})
+router.mode = 'html5'
 
 router.map({
   '/': { component: InitPage },
