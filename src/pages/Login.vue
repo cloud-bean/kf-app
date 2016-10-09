@@ -29,59 +29,11 @@ export default {
   },
 
   created() {
-
-    co(function * () {
-      try {
-        const query = wurl('?')
-        const state = query.state;
-        if(state == 'wechat'){
-          const res = yield this.auth(config.appid, query.code);
-          const userinfo = yield this.getUserInfo(res.userid, res.accessToken);
-          this.user = userinfo;
-        }else if(state == 'user'){
-          this.user = localStorage.getItem('kf_user');
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    });
-
-
+    this.user = localStorage.getItem('kf_userInfo');
   },
 
   methods: {
-    auth(appid, code){
-      return new Promise((resolve, reject) => {
-        this.$http.get(`http://joywill.cc/admin/auth?appid=${config.appid}&code=${query.code}`)
-        .then((result)=>{
-          console.log(result);
-          const userid = result.userid;
-          const accessToken = result.accessToken;
-          resolve({userid, accessToken});
-        })
-        .catch((err) => {
-          reject(err)
-        })
-      })
-    },
-    getUserInfo(userid,accessToken){
-      return new Promise((resolve, reject) => {
-        this.$http.get(`http://120.25.227.156:7000/api/base/users/${userid}`,
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-            }
-          })
-        .then((result)=>{
-          console.log(result);
-          resolve(result.data);
-        })
-        .catch((err) => {
-          reject(err)
-        })
-      })
-    }
+
 
 
 
