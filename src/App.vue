@@ -4,6 +4,7 @@
       <a class="navbar-brand" href="#">Joy & Will</a>
       <a class="btn btn-default" v-link="{ path: '/auth'}">Profile</a>
       <a class="btn btn-default" v-link="{ path: '/rank'}">Rank</a>
+      <a class="btn btn-default" v-link="{ path: '/signup'}">Signup</a>
     </nav>
     <div id="routerDiv">
       <router-view></router-view>

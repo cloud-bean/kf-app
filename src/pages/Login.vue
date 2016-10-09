@@ -1,5 +1,5 @@
 <template>
-  <div class="logged" v-if="isLogged">
+  <!-- <div class="logged" v-if="isLogged">
     <h3>{{ userData.displayName + userData.email }}</h3>
     <img class="avatar" v-bind:src="apiBaseUrl + userData.profileImageURL">
     <p>排名{{userData.option.order}}&nbsp;&nbsp;&nbsp;&nbsp;悦维币{{userData.option.token}}</p>
@@ -11,64 +11,81 @@
     <input type="text" placeholder="username" v-model="username" placeholder="test@test.com or test1@test.com"></input>
     <input type="text" placeholder="password" v-model="password"></input>
     <button class="btn btn-default" v-on:click="login">login</button>
+  </div> -->
+  <div>{{user}}<div>
+
   </div>
 </template>
 
 <script>
+const wurl = require('wurl');
+const co = require('co');
+
 export default {
   data() {
     return {
-      // note: changing this line won't causes changes
-      // with hot-reload because the reloaded component
-      // preserves its current state and we are modifying
-      // its initial state.
-      msg: 'Hello World!',
-      apiBaseUrl: "http://120.25.227.156:7000/",
-      authRoute:"oauth/token",
-      userRoute:"api/base/users/",
-      username: "t@t.com",
-      password: "default",
-      isLogged: false,
-      credential: null,
-      userData: null
+      user: {},
     };
   },
-    methods: {
-        login() {
-            this.$http.post(this.apiBaseUrl + this.authRoute, {
-                    username:this.username,
-                    password:this.password,
-                    client_id: "kf-app",
-                    client_secret: "prometheus",
-                    grant_type: 'password',
-            },{
-                
-            })
-                .then((response) => {
-                    if (response.data.access_token && response.data.user_id) {
-                      this.isLogged = true;
-                      this.credential = response.data;
-                      // this.$http.headers.common['Authorization'] = 'bearer ' + response.data.access_token;
-                      this.$http.get(this.apiBaseUrl + this.userRoute + response.data.user_id, {
-                          withCredentials: true,
-                          headers: {
-                            Authorization: 'Bearer ' + response.data.access_token
-                          }
-                      }).then((result) => {
-                          this.userData = result.data.data;
-                      });
-                    }
-                })
-                .catch((response) => {
-                    console.log('err',response);
-                });
-        },
-        logout() {
-          this.credential = null;
-          this.isLogged = false;
-          this.userData = null;
+
+  created() {
+
+    co(function * () {
+      try {
+        const query = wurl('?')
+        const state = query.state;
+        if(state == 'wechat'){
+          const res = yield this.auth(config.appid, query.code);
+          const userinfo = yield this.getUserInfo(res.userid, res.accessToken);
+          this.user = userinfo;
+        }else if(state == 'user'){
+          this.user = localStorage.getItem('kf_user');
         }
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+
+  },
+
+  methods: {
+    auth(appid, code){
+      return new Promise((resolve, reject) => {
+        this.$http.get(`http://joywill.cc/admin/auth?appid=${config.appid}&code=${query.code}`)
+        .then((result)=>{
+          console.log(result);
+          const userid = result.userid;
+          const accessToken = result.accessToken;
+          resolve({userid, accessToken});
+        })
+        .catch((err) => {
+          reject(err)
+        })
+      })
+    },
+    getUserInfo(userid,accessToken){
+      return new Promise((resolve, reject) => {
+        this.$http.get(`http://120.25.227.156:7000/api/base/users/${userid}`,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+            }
+          })
+        .then((result)=>{
+          console.log(result);
+          resolve(result.data);
+        })
+        .catch((err) => {
+          reject(err)
+        })
+      })
     }
+
+
+
+  }
 }
 </script>
 
