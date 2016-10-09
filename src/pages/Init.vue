@@ -28,10 +28,10 @@ export default {
         else if(query && query.code){
           console.log('code');
           const res = yield self.auth(config.appid,query.code);
-          console.log(res);
+          console.log('res',res);
           localStorage.setItem('kf_accessToken', res.accessToken);
           const userInfo = yield self.getUserInfo(res.userid);
-          console.log(userInfo);
+          console.log('userInfo',userInfo);
           localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
           self.$router.go('/auth?state=user');
         }
@@ -52,8 +52,8 @@ export default {
         this.$http.get(`http://joywill.cc/admin/auth?appid=${appid}&code=${code}`)
         .then((result) => {
           console.log(result);
-          const userid = result.userid;
-          const accessToken = result.accessToken;
+          const userid = result.body.userid;
+          const accessToken = result.body.accessToken;
           resolve({ userid, accessToken });
         })
         .catch((err) => {
@@ -73,7 +73,7 @@ export default {
           })
         .then((result) => {
           console.log(result);
-          resolve(result.data);
+          resolve(result.body.data);
         })
         .catch((err) => {
           reject(err);
