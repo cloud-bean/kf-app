@@ -17,22 +17,23 @@ export default {
   },
 
   created() {
+    let self = this;
     co(function * () {
       try {
         const query = wurl('?');
 
         if(localStorage.getItem('kf_accessToken')){
-          this.$router.go('/auth?state=user');
+          self.$router.go('/auth?state=user');
         }
         else if(query && query.code){
           console.log('code');
-          const res = yield this.auth(config.appid,query.code);
+          const res = yield self.auth(config.appid,query.code);
           console.log(res);
           localStorage.setItem('kf_accessToken', res.accessToken);
-          const userInfo = yield this.getUserInfo(res.userid);
+          const userInfo = yield self.getUserInfo(res.userid);
           console.log(userInfo);
           localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-          this.$router.go('/auth?state=user');
+          self.$router.go('/auth?state=user');
         }
         else {
           const redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
@@ -45,7 +46,7 @@ export default {
       }
     });
   },
-  method: {
+  methods: {
     auth(appid, code) {
       return new Promise((resolve, reject) => {
         this.$http.get(`http://joywill.cc/admin/auth?appid=${appid}&code=${code}`)
