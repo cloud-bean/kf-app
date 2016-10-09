@@ -18,7 +18,43 @@ function storeUserInfo(accessToken, user) {
   localStorage.setItem('kf_user', JSON.stringify(user));
 }
 
+function auth(appid, code) {
+  return new Promise((resolve, reject) => {
+    this.$http.get(`http://joywill.cc/admin/auth?appid=${appid}&code=${code}`)
+    .then((result) => {
+      console.log(result);
+      const userid = result.userid;
+      const accessToken = result.accessToken;
+      resolve({ userid, accessToken });
+    })
+    .catch((err) => {
+      reject(err);
+    });
+  });
+}
+
+function getUserInfo(userid, accessToken) {
+  return new Promise((resolve, reject) => {
+    this.$http.get(`http://120.25.227.156:7000/api/base/users/${userid}`,
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+    .then((result) => {
+      console.log(result);
+      resolve(result.data);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+  });
+}
+
 export default {
   getAuthorizeURL,
   storeUserInfo,
+  auth,
+  getUserInfo,
 };
