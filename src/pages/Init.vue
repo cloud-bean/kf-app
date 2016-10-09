@@ -30,7 +30,7 @@ export default {
           const res = yield self.auth(config.appid,query.code);
           console.log('res',res);
           localStorage.setItem('kf_accessToken', res.accessToken);
-          const userInfo = yield self.getUserInfo(res.userid);
+          const userInfo = yield self.getUserInfo(res.userid, res.accessToken);
           console.log('userInfo',userInfo);
           localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
           self.$router.go('/auth?state=user');
