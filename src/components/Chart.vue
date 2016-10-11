@@ -17,19 +17,36 @@ data() {
       expOptions:{},
     };
   },
+  props:['type','data'],
   created() {
     this.expOptions = {
-    title: { text: 'ECharts 入门示例' },
+      title: {
+        text: '成绩曲线',
+        textStyle: {
+          fontSize: 10,
+        },
+      },
     tooltip: {},
     xAxis: {
-        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        data: ["1月","2月","3月","4月","5月"]
     },
     yAxis: {},
     series: [{
-        name: '销量',
-        type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
-    }]
+        name: '成绩',
+        type: 'line',
+        data: [65, 70, 86, 76, 90],
+        markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+            markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            }
+    }],
 };
 
   }
@@ -40,6 +57,6 @@ data() {
 <style scoped>
     .echart {
         width: 100%;
-        height: 400px;
+        height: 200px;
     }
 </style>

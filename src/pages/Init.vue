@@ -24,7 +24,7 @@ export default {
         const query = wurl('?');
 
         if(localStorage.getItem('kf_accessToken')){
-          self.$router.go('/auth?state=user');
+          self.$router.go('/profile');
         }
         else if(query && query.code){
           console.log('code');
@@ -33,8 +33,14 @@ export default {
           localStorage.setItem('kf_accessToken', res.accessToken);
           const userInfo = yield self.getUserInfo(res.userid, res.accessToken);
           console.log('userInfo',userInfo);
-          localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-          self.$router.go('/auth?state=user');
+          if(userInfo.option.phone){
+            localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+            self.$router.go('/profile');
+          }else{
+            localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+            self.$router.go('/signup');
+          }
+
         }
         else {
           const redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
@@ -50,7 +56,7 @@ export default {
   methods: {
     auth(appid, code) {
       return new Promise((resolve, reject) => {
-        this.$http.get(`http://joywill.cc/admin/auth?appid=${appid}&code=${code}`)
+        this.$http.get(`${config.route.auth}?appid=${appid}&code=${code}`)
         .then((result) => {
           console.log(result);
           const userid = result.body.userid;
@@ -65,7 +71,7 @@ export default {
 
     getUserInfo(userid, accessToken) {
       return new Promise((resolve, reject) => {
-        this.$http.get(`http://120.25.227.156:7000/api/base/users/${userid}`,
+        this.$http.get(`${config.route.user}${userid}`,
           {
             withCredentials: true,
             headers: {

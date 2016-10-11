@@ -1,24 +1,36 @@
 <template>
-    <div class="title">Keep记录</div>
-    <div class="keeprecord"><span>累计</span>24</div>
+    <div class="keeprecord">
+      <div class="nickname">
+        {{user.displayName}}
+      </div>
+      <div class="headimg">
+        <img :src="user.profileImageURL" alt="" style="width:80px;" />
+      </div>
+    </div>
     <div class="detail">
       <div class='row'>
-        <div class='col-xs-4'>
+        <div class='col-25'>
           <div class="detailInfo">
             <div>经验值</div>
-            <div>1000</div>
+            <div>{{user.option.exp}}</div>
           </div>
         </div>
-        <div class='col-xs-4'>
+        <div class='col-25'>
           <div class="detailInfo">
-            <div>经验值</div>
-            <div>1000</div>
+            <div>悦维币</div>
+            <div>{{user.option.goldtoken}}</div>
           </div>
         </div>
-        <div class='col-xs-4'>
+        <div class='col-25'>
           <div class="detailInfo">
-            <div>经验值</div>
-            <div>1000</div>
+            <div>等级</div>
+            <div>{{user.option.level}}</div>
+          </div>
+        </div>
+        <div class='col-25'>
+          <div class="detailInfo">
+            <div>排名</div>
+            <div>{{user.option.level}}</div>
           </div>
         </div>
       </div>
@@ -28,7 +40,8 @@
 
 <script>
     export default{
-     
+      props:['user'],
+
     }
 </script>
 
@@ -43,31 +56,29 @@
   color: #141515;
 }
 .keeprecord {
+  text-align: center;
   /* 20: */
-  font-size: 36px;
+  font-size: 16px;
   color: #141515;
 }
 .line {
-  border-bottom: 1px solid #fcfcfc;
+  border-bottom: 1px solid #111111;
 }
 .detail {
   padding-top: 20px;
   padding-bottom: 10px;
 }
-
-.keeprecord span {
-    /* 累计: */
-  font-size: 10px;
-  color: #141515;
-
+.headimg {
+  padding-top: 10px;
 }
-
+.nickname{
+  color: #ffffff;
+}
 .detailInfo {
   /* 经验值: */
- font-size: 9.97px;
- color: #141515;
+ font-size: 12px;
+ color: #FFFFFF;
  text-align: center;
- list-style-type: none;
 }
 
 

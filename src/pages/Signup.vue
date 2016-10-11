@@ -1,14 +1,14 @@
 <template>
   <div class="login">
-    <img src="" alt="headpic" />
-    <span class="info">姓名</span>
-    <input type="text" placeholder="真实姓名" v-model="username" ></input>
-    <input type="text" placeholder="手机号" v-model="password"></input>
-    <button class="btn btn-default" v-on:click="login">login</button>
+    <h1>补充你的信息</h1>
+    <input type="text" placeholder="手机号" v-model="phone"></input>
+    <button class="btn btn-default" v-on:click="signUp">submit</button>
   </div>
 </template>
 
 <script>
+import config from '../config/config';
+
 export default {
   data() {
     return {
@@ -18,9 +18,29 @@ export default {
       // its initial state.
     }
   },
-    methods: {
-
+  methods: {
+    signUp() {
+      const phone = this.phone;
+      const accessToken = localStorage.getItem('kf_accessToken');
+      const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
+      const option = Object.assign(userInfo.option,{phone});
+      const user = Object.assign(userInfo,option);
+      this.$http.put(`${config.route.user}${user._id}`, user, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        //localStorage.setItem('kf_userInfo',result.body);
+        this.$router.go('/profile');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     }
+  }
 }
 </script>
 

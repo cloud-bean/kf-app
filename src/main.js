@@ -8,9 +8,9 @@ import VueResource from 'vue-resource';
 
 import RankPage from './pages/Ranklist';
 import loginPage from './pages/Login';
-import SignupPage from './pages/Signup';
-import InitPage from './pages/Init';
-
+import TaskPage from './pages/Task';
+// import InitPage from './pages/Init';
+import ProfilePage from './pages/Profile';
 
 /* eslint-disable no-new */
 
@@ -20,23 +20,24 @@ import InitPage from './pages/Init';
 //   components: { App },
 // });
 
-
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.directive('echarts', require('./directives/echarts'));
 
-const router = new VueRouter({
-    history: true,
-    hashbang: false,
-    linkActiveClass: 'active'
-})
-router.mode = 'html5'
+const router = new VueRouter();
+ // {
+//     history: true,
+//     hashbang: false,
+//     linkActiveClass: 'active'
+// })
+// router.mode = 'html5'
 
 router.map({
-  '/': { component: InitPage },
+  // '/': { component: InitPage },
   '/rank': { component: RankPage },
   '/auth': { component: loginPage },
-  '/signup': { component: SignupPage },
+  '/task': { component: TaskPage },
+  '/profile': { component: ProfilePage },
 });
 
 router.start(App, 'app');
