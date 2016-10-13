@@ -1,8 +1,9 @@
 <template>
   <div class="login">
     <h1>补充你的信息</h1>
-    <input type="text" placeholder="手机号" v-model="phone"></input>
-    <button class="btn btn-default" v-on:click="signUp">submit</button>
+    <input type="text" class="form-control" placeholder="姓名" v-model="displayName"></input>
+    <input type="text" class="form-control" placeholder="手机号" v-model="phone"></input>
+    <button class="btn btn-info" v-on:click="signUp">submit</button>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ export default {
   methods: {
     signUp() {
       const phone = this.phone;
+      const name = this.displayName;
       const accessToken = localStorage.getItem('kf_accessToken');
       const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
       const option = Object.assign(userInfo.option,{phone});

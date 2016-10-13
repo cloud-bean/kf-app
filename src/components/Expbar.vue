@@ -1,10 +1,11 @@
 <template>
-  <div class="exp">
-    <span>经验：{{ exp }} |</span>
-    <span>排名：{{ rank }} |</span>
-    <span>财富：{{ ponit }}</span>
-  </div>
-</template>
+  <div class="col-md-12">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">60%</div>
+                  </div>
+                </div>
+
+    </template>
 
 <script>
 export default {

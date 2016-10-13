@@ -1,85 +1,93 @@
 <template>
-    <div class="keeprecord">
-      <div class="nickname">
-        {{user.displayName}}
-      </div>
-      <div class="headimg">
-        <img :src="user.profileImageURL" alt="" style="width:80px;" />
-      </div>
-    </div>
-    <div class="detail">
-      <div class='row'>
-        <div class='col-25'>
-          <div class="detailInfo">
-            <div>经验值</div>
-            <div>{{user.option.exp}}</div>
-          </div>
-        </div>
-        <div class='col-25'>
-          <div class="detailInfo">
-            <div>悦维币</div>
-            <div>{{user.option.goldtoken}}</div>
-          </div>
-        </div>
-        <div class='col-25'>
-          <div class="detailInfo">
-            <div>等级</div>
-            <div>{{user.option.level}}</div>
-          </div>
-        </div>
-        <div class='col-25'>
-          <div class="detailInfo">
-            <div>排名</div>
-            <div>{{user.option.level}}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+  <div class="jumbotron">
+              <div class="jumbotron-contents">
+
+                <div class="row">
+                  <div class="col-xs-4">
+                    <img :src="user.profileImageURL" style="width:100%;">
+                  </div>
+                  <div class="col-xs-8">
+                    <div class="row">
+                      <div class="col-xs-12">
+                      <p class="lead">
+                        {{user.displayName}}
+                      </p>
+
+                    <p>
+                      <span class="test_mark">90分</span>/2016-09-01
+                    </p>
+                      </div>
+
+                    </div>
+                    <p>
+
+
+                    <div class='row'>
+                      <div class="detail">
+                          <div class='col-xs-4'>
+                            <div class="detailInfo">
+                              <div>经验值</div>
+                              <div>{{user.option.exp}}</div>
+                            </div>
+                          </div>
+                          <div class='col-xs-4'>
+                            <div class="detailInfo">
+                              <div>悦维币</div>
+                              <div>{{user.option.goldtoken}}</div>
+                            </div>
+                          </div>
+                          <div class='col-xs-4'>
+                            <div class="detailInfo">
+                              <div>等级</div>
+                              <div>{{user.option.level}}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                        </p>
+                  </div>
+                </div>
+              </div>
+  </div>
 
 </template>
 
 <script>
+import Exp from './Expbar';
     export default{
       props:['user'],
-
+      components:{
+        Exp
+      },
     }
 </script>
 
 
 <style scoped>
 .title {
-  /* Keep 记录: */
   text-align: left;
   padding-left: 12px;
   padding-top: 5px;
   font-size: 14px;
-  color: #141515;
 }
-.keeprecord {
-  text-align: center;
-  /* 20: */
-  font-size: 16px;
-  color: #141515;
-}
-.line {
-  border-bottom: 1px solid #111111;
-}
+
 .detail {
-  padding-top: 20px;
-  padding-bottom: 10px;
-}
-.headimg {
-  padding-top: 10px;
+  width:100%;
+  /*padding-top: 5px;*/
 }
 .nickname{
-  color: #ffffff;
+  font-size: 1em;
 }
 .detailInfo {
-  /* 经验值: */
- font-size: 12px;
- color: #FFFFFF;
+ font-size: 0.6em;
  text-align: center;
 }
-
-
+.test_mark {
+  font-size: 1em;
+  /*color: #E9573f;*/
+}
+p{
+  margin-bottom: 5px;
+}
 </style>
