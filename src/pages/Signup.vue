@@ -1,9 +1,18 @@
 <template>
   <div class="login">
     <h1>补充你的信息</h1>
-    <input type="text" class="form-control" placeholder="姓名" v-model="displayName"></input>
-    <input type="text" class="form-control" placeholder="手机号" v-model="phone"></input>
-    <button class="btn btn-info" v-on:click="signUp">submit</button>
+    <!-- <div class="form-group">
+      <label for="headimg">选择头像</label>
+      <input type="file" name='headimg' class="form-control" placeholder="头像" v-model="headimg" accept="image/*"></input>
+    </div> -->
+<div class="form-group">
+  <input type="text" name='displayName' class="form-control" placeholder="姓名" v-model="displayName"></input>
+</div>
+    <div class="form-group">
+      <input type="text" name='phone' class="form-control" placeholder="手机号" v-model="phone"></input>
+    </div>
+
+    <button class="btn btn-info pull-right" v-on:click="signUp">完成</button>
   </div>
 </template>
 
@@ -13,6 +22,9 @@ import config from '../config/config';
 export default {
   data() {
     return {
+      displayName: '',
+      phone: '',
+      headimg: '',
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
@@ -23,6 +35,7 @@ export default {
     signUp() {
       const phone = this.phone;
       const name = this.displayName;
+      const headimg = this.headimg;
       const accessToken = localStorage.getItem('kf_accessToken');
       const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
       const option = Object.assign(userInfo.option,{phone});

@@ -11,6 +11,7 @@ import loginPage from './pages/Login';
 import TaskPage from './pages/Task';
 // import InitPage from './pages/Init';
 import ProfilePage from './pages/Profile';
+import SignUpPage from './pages/Signup';
 
 /* eslint-disable no-new */
 
@@ -37,6 +38,7 @@ router.map({
   '/rank': { component: RankPage },
   '/auth': { component: loginPage },
   '/task': { component: TaskPage },
+  '/signup': { component: SignUpPage },
   '/profile': { component: ProfilePage },
 });
 

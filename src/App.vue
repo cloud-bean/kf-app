@@ -18,6 +18,7 @@
                       <ul class="nav navbar-nav">
                         <li class=""><a v-link="{ path: '/task'}" href="#">TASK</a></li>
                         <li class=""><a v-link="{ path: '/rank'}" href="#">RANK</a></li>
+                        <li class=""><a v-link="{ path: '/signup'}" href="#">SIGNUP</a></li>
 
                         <!-- <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>

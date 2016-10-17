@@ -9,17 +9,18 @@
       </div>
       <div class="events-body">
         <div class="row">
-          <div class="col-xs-10">
+          <div class="col-xs-8">
             <h4 class="events-heading">{{taskdata.name}}</h4>
             <p>{{taskdata.difficult}}</p>
-            <p>任务经验:{{taskdata.experience}} | 任务金币:{{taskdata.goldToken}}</p>
+            <p>经验:{{taskdata.experience}} | 金币:{{taskdata.goldToken}}</p>
             <p>{{taskdata.subject}}</p>
           </div>
-          <div class="col-xs-2">
-            <div class="checkbox">
-                <div class="icheckbox_flat">
-                  <input type="checkbox">
-                </div>
+          <div class="col-xs-4">
+              <div class="" v-if="taskdata.complete">
+                完成
+              </div>
+              <div class="" v-else>
+                未完成
               </div>
             </div>
 
