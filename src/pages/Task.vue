@@ -1,4 +1,5 @@
 <template>
+
   <info :user="user"></info>
   <div class="example">
 		<h4 class="example-title">Task Records</h4>
@@ -33,12 +34,14 @@
     import mockdata from '../../test/mock';
     import Info from '../components/Head';
     import Exp from '../components/Expbar';
+    import { spinner } from 'vue-strap'
 
     export default{
         components:{
             TaskItem,
             Info,
             Exp,
+            spinner,
         },
       data(){
           return {
@@ -49,6 +52,7 @@
       created(){
         this.user = localStorage.getItem('kf_userInfo');
       },
+
 
     }
 </script>

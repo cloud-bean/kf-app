@@ -1,6 +1,6 @@
 
 <template>
-  <spinner v-ref:spinner fixed="true" size="md" fixed text="Loading"></spinner>
+  <spinner v-ref:loading fixed="true" size="md" fixed text="Loading"></spinner>
 </template>
 
 <script>
@@ -20,8 +20,11 @@ export default {
     spinner,
   },
   created() {
-    this.$refs.spinner.show();
 
+
+  },
+  ready(){
+    this.$refs.loading.show();
     let self = this;
     co(function * () {
       try {
@@ -37,7 +40,6 @@ export default {
           localStorage.setItem('kf_accessToken', res.accessToken);
           const userInfo = yield self.getUserInfo(res.userid, res.accessToken);
           console.log('userInfo',userInfo);
-          this.$refs.spinner.hide();
           if(userInfo.option.phone){
             localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
             self.$router.go('/task');
