@@ -9,7 +9,7 @@ import VueResource from 'vue-resource';
 import RankPage from './pages/Ranklist';
 import loginPage from './pages/Login';
 import TaskPage from './pages/Task';
-// import InitPage from './pages/Init';
+import InitPage from './pages/Init';
 import ProfilePage from './pages/Profile';
 import SignUpPage from './pages/Signup';
 
@@ -34,7 +34,7 @@ const router = new VueRouter();
 // router.mode = 'html5'
 
 router.map({
-  // '/': { component: InitPage },
+  '/': { component: InitPage },
   '/rank': { component: RankPage },
   '/auth': { component: loginPage },
   '/task': { component: TaskPage },

@@ -16,10 +16,10 @@
             <p>{{taskdata.subject}}</p>
           </div>
           <div class="col-xs-4">
-              <div class="" v-if="taskdata.complete">
+              <div style="color:green" v-if="taskdata.complete">
                 完成
               </div>
-              <div class="" v-else>
+              <div style="color:red" v-else>
                 未完成
               </div>
             </div>

@@ -1,11 +1,12 @@
 
 <template>
-loading....
+  <spinner v-ref:spinner fixed="true" size="md" fixed text="Loading"></spinner>
 </template>
 
 <script>
 import config from '../config/config';
 import util from '../config/util';
+import { spinner } from 'vue-strap'
 
 const wurl = require('wurl');
 const co = require('co');
@@ -15,8 +16,11 @@ export default {
     return {
     };
   },
-
+  components: {
+    spinner,
+  },
   created() {
+    this.$refs.spinner.show();
 
     let self = this;
     co(function * () {
@@ -24,7 +28,7 @@ export default {
         const query = wurl('?');
 
         if(localStorage.getItem('kf_accessToken')){
-          self.$router.go('/profile');
+          self.$router.go('/task');
         }
         else if(query && query.code){
           console.log('code');
@@ -33,9 +37,10 @@ export default {
           localStorage.setItem('kf_accessToken', res.accessToken);
           const userInfo = yield self.getUserInfo(res.userid, res.accessToken);
           console.log('userInfo',userInfo);
+          this.$refs.spinner.hide();
           if(userInfo.option.phone){
             localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-            self.$router.go('/profile');
+            self.$router.go('/task');
           }else{
             localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
             self.$router.go('/signup');

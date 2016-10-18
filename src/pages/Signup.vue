@@ -1,6 +1,7 @@
 <template>
   <div class="login">
-    <h1>补充你的信息</h1>
+    <img :src="mockdata.user.profileImageURL" alt="" class="avatar"/>
+    <h3>补充你的信息</h3>
     <!-- <div class="form-group">
       <label for="headimg">选择头像</label>
       <input type="file" name='headimg' class="form-control" placeholder="头像" v-model="headimg" accept="image/*"></input>
@@ -18,6 +19,8 @@
 
 <script>
 import config from '../config/config';
+import mockdata from '../../test/mock';
+
 
 export default {
   data() {
@@ -25,6 +28,7 @@ export default {
       displayName: '',
       phone: '',
       headimg: '',
+      mockdata,
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
@@ -60,15 +64,13 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+h3 {
   color: #42b983;
 }
 
 .avatar {
   width: 128px;
-  height: 128px;
   margin: 0 auto;
-  display: inline-block;
 }
 
 .info {

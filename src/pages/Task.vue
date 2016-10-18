@@ -43,24 +43,17 @@
       data(){
           return {
               tasks:mockdata.task,
-              user:mockdata.user,
+              user:{},
           };
-      }
+      },
+      created(){
+        this.user = localStorage.getItem('kf_userInfo');
+      },
 
     }
 </script>
 
 
 <style scoped>
-.vs {
-  /* Keep 记录: */
-  font-size: 14px;
-  color: #141515;
-  background-color:green;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
 
 </style>
