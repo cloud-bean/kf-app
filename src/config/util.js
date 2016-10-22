@@ -22,10 +22,12 @@ function storeUserInfo(accessToken, user) {
 
 function auth(appid, code) {
   return new Promise((resolve, reject) => {
-    request.get(`http://joywill.cc/admin/auth?appid=${appid}&code=${code}`)
+    request.get('http://joywill.cc/admin/auth')
+    .query({ appid, code })
     .then((result) => {
-      const userid = result.userid;
-      const accessToken = result.accessToken;
+      console.log('auth', result);
+      const userid = result.body.userid;
+      const accessToken = result.body.accessToken;
       resolve({ userid, accessToken });
     })
     .catch((err) => {
@@ -36,15 +38,11 @@ function auth(appid, code) {
 
 function getUserInfo(userid, accessToken) {
   return new Promise((resolve, reject) => {
-    request.get(`http://120.25.227.156:7000/api/base/users/${userid}`,
-      {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+    request.get(`http://120.25.227.156:7000/api/base/users/${userid}`)
+    // .withCredentials()
+    .set('Authorization', `Bearer ${accessToken}`)
     .then((result) => {
-      resolve(result.data);
+      resolve(result.body.data);
     })
     .catch((err) => {
       reject(err);

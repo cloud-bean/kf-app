@@ -1,12 +1,13 @@
 
 <template>
-  <div class="panel-overlay"><spinner v-ref:loading fixed="true" size="md" fixed text="Loading"></spinner></div>
+  <spinner v-ref:loading fixed="true" size="md" fixed text="Loading"></spinner>
 </template>
 
 <script>
 import config from '../config/config';
 import util from '../config/util';
-import { spinner } from 'vue-strap'
+import { spinner } from 'vue-strap';
+import mockdata from '../../test/mock';
 
 const wurl = require('wurl');
 const co = require('co');
@@ -14,6 +15,7 @@ const co = require('co');
 export default {
   data() {
     return {
+      mockdata,
     };
   },
   components: {
@@ -38,10 +40,11 @@ export default {
           const res = yield util.auth(config.appid,query.code);
           console.log('res',res);
           localStorage.setItem('kf_accessToken', res.accessToken);
+          localStorage.setItem('kf_userid', res.userid);
           const userInfo = yield util.getUserInfo(res.userid, res.accessToken);
           console.log('userInfo',userInfo);
           if(userInfo.option.phone){
-            // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+            localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
             self.$router.go('/task');
           }else{
             localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
@@ -75,24 +78,24 @@ export default {
     //   });
     // },
     //
-    // getUserInfo(userid, accessToken) {
-    //   return new Promise((resolve, reject) => {
-    //     this.$http.get(`${config.route.user}${userid}`,
-    //       {
-    //         withCredentials: true,
-    //         headers: {
-    //           Authorization: `Bearer ${accessToken}`,
-    //         },
-    //       })
-    //     .then((result) => {
-    //       console.log(result);
-    //       resolve(result.body.data);
-    //     })
-    //     .catch((err) => {
-    //       reject(err);
-    //     });
-    //   });
-    // }
+    getUserInfo(userid, accessToken) {
+      return new Promise((resolve, reject) => {
+        this.$http.get(`${config.route.user}${userid}`,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+        .then((result) => {
+          console.log(result);
+          resolve(result.body.data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+      });
+    }
   }
 }
 </script>

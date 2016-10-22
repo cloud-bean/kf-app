@@ -6,7 +6,9 @@
         <ul>
           <li class="item-content">
             <div class="item-media">
-              <img :src="user.profileImageURL" height="44">
+              <div class="headimg">
+                <img :src="user.profileImageURL" height="44">
+              </div>
             </div>
             <div class="item-inner">
               <div class="item-title-row">
@@ -31,7 +33,7 @@
           <div class='col-33'>
             <div class="detailInfo">
               <div>悦币</div>
-              <div>{{user.option.goldtoken}}</div>
+              <div>{{user.option.goldToken}}</div>
             </div>
           </div>
           <div class='col-33'>
@@ -136,7 +138,10 @@ import Exp from './Expbar';
   width:100%;
   /*padding-top: 5px;*/
 }
-
+.headimg{
+  width: 44px;
+  height: 44px;
+}
 .detailInfo {
  text-align: center;
 }

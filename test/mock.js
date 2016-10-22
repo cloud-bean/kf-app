@@ -1,4 +1,8 @@
 export default {
+  fakeuser: {
+    userid: '57f44a1674e8b8f5664c76c3',
+    accessToken: '4307a0a134bc2471e47fb96ded140827295ae61932c19cda8d8f11f45eb4ee87',
+  },
   user: {
     _id: '57f44a1674e8b8f5664c76c3',
     salt: 'h0dw49cc9stoyjmkwevbva==',

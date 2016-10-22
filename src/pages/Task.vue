@@ -33,12 +33,12 @@
       data(){
           return {
               tasks:mockdata.task,
-              user:mockdata.user,
+              user:{},
           };
       },
-      // created(){
-      //   this.user = JSON.parse(localStorage.getItem('kf_userInfo'));
-      // },
+      created(){
+        this.user = JSON.parse(localStorage.getItem('kf_userInfo'));
+      },
 
 
     }

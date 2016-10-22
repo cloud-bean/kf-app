@@ -19,7 +19,16 @@
   </div> -->
 
 
+
   <div class="content">
+    <div class="headimg">
+
+        <img :src="userdisplay.profileImageURL" alt="" class="avatar"/>
+      <p>
+        <span class="name">{{displayName}}</span>
+      </p>
+    </div>
+
     <div class="list-block">
       <ul>
         <!-- Text inputs -->
@@ -40,7 +49,7 @@
             <div class="item-inner">
               <div class="item-title label">手机</div>
               <div class="item-input">
-                <input type="phone" placeholder="Cell Phone" v-model="phone">
+                <input type="text" placeholder="Cell Phone" v-model="phone">
               </div>
             </div>
           </div>
@@ -59,7 +68,7 @@
 
 <script>
 import config from '../config/config';
-import mockdata from '../../test/mock';
+import util from '../config/util';
 
 
 export default {
@@ -68,7 +77,7 @@ export default {
       displayName: '',
       phone: '',
       headimg: '',
-      mockdata,
+      userdisplay: {},
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
@@ -77,13 +86,19 @@ export default {
   },
   methods: {
     signUp() {
+      this.userdisplay = JSON.parse(localStorage.getItem('kf_userInfo'));
+
+      const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
+
       const phone = this.phone;
       const displayName = this.displayName;
       // const headimg = this.headimg;
       const accessToken = localStorage.getItem('kf_accessToken');
-      const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
+      const userid = localStorage.getItem('kf_userid');
       const useroption = Object.assign(userInfo.option,{phone});
-      const user = Object.assign(userInfo,useroption,displayName);
+      const user1 = Object.assign(userInfo, useroption);
+      const user = Object.assign(user1, {displayName});
+
       this.$http.put(`${config.route.user}${user._id}`, user, {
         withCredentials: true,
         headers: {
@@ -91,7 +106,11 @@ export default {
         },
       })
       .then((result) => {
-        this.$router.go('/task');
+        util.getUserInfo(userid, accessToken)
+        .then((user)=>{
+          localStorage.setItem('kf_userInfo',JSON.stringify(user));
+          this.$router.go('/task');
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -110,11 +129,23 @@ h3 {
   color: #42b983;
 }
 
-.avatar {
-  width: 128px;
-  margin: 0 auto;
+.headimg {
+  width: 100%;
+  margin: 1rem auto;
+  text-align: center;
+  font-size: 0.5rem;
 }
 
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto;
+  border: 1px solid white;
+}
+.name{
+  height: 0.7rem;
+}
 .info {
   background: yellow;
   width: 95%;
