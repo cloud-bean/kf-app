@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Info from '../components/Head';
+import Info from '../components/HeadInfo';
 import Expbar from '../components/Expbar';
 import Chart from '../components/Chart';
 import config from '../config/config';

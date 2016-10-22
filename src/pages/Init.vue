@@ -1,6 +1,6 @@
 
 <template>
-  <spinner v-ref:loading fixed="true" size="md" fixed text="Loading"></spinner>
+  <div class="panel-overlay"><spinner v-ref:loading fixed="true" size="md" fixed text="Loading"></spinner></div>
 </template>
 
 <script>

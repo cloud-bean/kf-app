@@ -1,54 +1,34 @@
 <template>
-  <div id="app">
 
-    <!-- <nav class="navbar navbar-default navbar-fixed-top top-bar" role="navigation">
-                  <div class="container-fluid">
-                    <div class="navbar-header">
-                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      </button>
-                      <a class="navbar-brand" href="#">JOYBOX</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                      <ul class="nav navbar-nav">
-                        <li class=""><a v-link="{ path: '/task'}" href="#">TASK</a></li>
-                        <li class=""><a v-link="{ path: '/rank'}" href="#">RANK</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </nav> -->
 
-                <navbar placement="top" type="default">
-                  <!-- Brand as slot -->
-                  <a slot="brand" href="/" title="Home" class="navbar-brand">JOY & WILL</a>
-
-                  <!-- For right positioning use slot -->
-                  <li slot="right">
-                    <a v-link="{ path: '/task'}" href="#">TASK</a>
-                    <a v-link="{ path: '/rank'}" href="#">RANK</a>
-                    <a v-link="{ path: '/timeline'}" href="#">TIME</a>
-
-                  </li>
-                </navbar>
-
-         <div class="container doucments">
-           <router-view></router-view>
-         </div>
-    <footer class="foot">
-      <div class="container">
-        <p >Better habit makes better future</p>
-      </div>
-    </footer>
-
-      </div>
+  <nav class="bar bar-tab">
+    <a class="tab-item" v-link="{ path: '/task'}" href="#">
+      <span class="icon icon-app"></span>
+      <span class="tab-label">任务</span>
+    </a>
+    <a class="tab-item" v-link="{ path: '/rank'}" href="#">
+      <span class="icon icon-friends"></span>
+      <span class="tab-label">排行</span>
+    </a>
+    <!-- <a class="tab-item" href="#">
+      <span class="icon icon-star"></span>
+      <span class="tab-label">收藏</span>
+    </a>
+    <a class="tab-item"  href="#">
+      <span class="icon icon-settings"></span>
+      <span class="tab-label">TASK</span>
+    </a> -->
+  </nav>
+  <div class="content">
+    <router-view></router-view>
+    <!-- 这里是页面内容区 -->
+  </div>
+  <!-- <span class="tab-label"><a v-link="{ path: '/task'}" href="#">TASK</a></span> -->
 
 </template>
 
  <script>
-import { navbar } from 'vue-strap'
+// import { navbar } from 'vue-strap'
 
 // import config from '../config/config';
 // import util from '../config/util';
@@ -57,9 +37,7 @@ import { navbar } from 'vue-strap'
 // const co = require('co');
 //
  export default {
-   components: {
-     navbar,
-   }
+
 //   data() {
 //     return {
 //     };
@@ -143,18 +121,6 @@ import { navbar } from 'vue-strap'
 
 <style>
 
-.doucments{
-  margin-top: 10px;
-}
-.foot {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 10px;
-  /* Set the fixed height of the footer here */
-  height: 50px;
-  background-color: #434a54;
-  color: #37BC9B;
-}
+
 
 </style>

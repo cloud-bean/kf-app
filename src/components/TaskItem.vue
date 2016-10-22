@@ -1,6 +1,24 @@
 <template>
+  <div class="card facebook-card">
+      <div class="card-header no-border">
+        <div class="facebook-avatar"><img src="../../static/photo-1.jpg" height="40"></div>
+        <div class="facebook-name">{{taskdata.name}}</div>
+        <div class="facebook-date">2017-1-15</div>
+      </div>
+      <!-- <div class="card-content">
+        <div class="card-content-inner">
+          经验:{{taskdata.experience}} | 金币:{{taskdata.goldToken}}
+        <p>此处是内容...</p>
+      </div> -->
+    <!-- </div> -->
+      <div class="card-footer">
 
-  <dd class="pos-right clearfix">
+        <span>经验:{{taskdata.experience}} | 金币:{{taskdata.goldToken}}</span>
+        <span>完成</span>
+      </div>
+    </div>
+
+  <!-- <dd class="pos-right clearfix">
     <div class="circ"></div>
     <div class="time">2015/01/15</div>
     <div class="events">
@@ -29,7 +47,7 @@
 
       </div>
     </div>
-  </dd>
+  </dd> -->
 </template>
 
 <script>

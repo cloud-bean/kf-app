@@ -1,6 +1,52 @@
 <template>
+  <div class="content-block-title mytitle">基本信息</div>
+  <div class="card">
+    <div class="card-content">
+      <div class="list-block media-list">
+        <ul>
+          <li class="item-content">
+            <div class="item-media">
+              <img :src="user.profileImageURL" height="44">
+            </div>
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title">{{user.displayName}}</div>
+              </div>
+              <div class="item-subtitle">子标题</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-footer info">
+      <div class="detail">
+        <div class="row">
 
-  <div class="jumbotron">
+          <div class='col-33'>
+            <div class="detailInfo">
+              <div>经验</div>
+              <div>{{user.option.exp}}</div>
+            </div>
+          </div>
+          <div class='col-33'>
+            <div class="detailInfo">
+              <div>悦币</div>
+              <div>{{user.option.goldtoken}}</div>
+            </div>
+          </div>
+          <div class='col-33'>
+            <div class="detailInfo">
+              <div>等级</div>
+              <div>{{user.option.level}}</div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+    </div>
+  </div>
+
+  <!-- <div class="jumbotron">
               <div class="jumbotron-contents">
 
                 <div class="row info">
@@ -60,7 +106,7 @@
                   </div>
                 </div>
               </div>
-  </div>
+  </div> -->
 
 </template>
 
@@ -86,27 +132,13 @@ import Exp from './Expbar';
   text-align: center;
 }
 .detail {
+  font-size: 0.5rem;
   width:100%;
   /*padding-top: 5px;*/
 }
-.nickname{
-  font-size: 1em;
-}
+
 .detailInfo {
- font-size: 0.6em;
  text-align: center;
 }
-.test_mark {
-  font-size: 3em;
-  color: #E9573f;
-}
-.headimg {
-  width: 50%;
-}
-.profile {
-  padding-top: 20px;
-}
-p{
-  margin-bottom: 5px;
-}
+
 </style>
