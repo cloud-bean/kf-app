@@ -5,13 +5,13 @@
 		<h4 class="example-title">Task Records</h4>
         <div class="row">
 		  <div class="col-md-12">
-			  <div class="timeline">
+			  <!-- <div class="timeline">
 				  <dl>
             <dd v-for="task in tasks" class="pos-right clearfix">
               <task-item :taskdata='task'></task-item>
             </dd>
 				  </dl>
-			  </div>
+			  </div> -->
 		  </div>
 		</div>
     </div>
@@ -26,6 +26,8 @@
 
         </div>
     </div> -->
+    <timeline></timeline>
+
  </template>
 
 
@@ -34,6 +36,7 @@
     import mockdata from '../../test/mock';
     import Info from '../components/Head';
     import Exp from '../components/Expbar';
+    import Timeline from '../components/Timeline';
     import { spinner } from 'vue-strap'
 
     export default{
@@ -42,6 +45,7 @@
             Info,
             Exp,
             spinner,
+            Timeline,
         },
       data(){
           return {
@@ -50,7 +54,7 @@
           };
       },
       created(){
-        this.user = localStorage.getItem('kf_userInfo');
+        this.user = JSON.parse(localStorage.getItem('kf_userInfo'));
       },
 
 

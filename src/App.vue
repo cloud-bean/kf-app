@@ -29,6 +29,8 @@
                   <li slot="right">
                     <a v-link="{ path: '/task'}" href="#">TASK</a>
                     <a v-link="{ path: '/rank'}" href="#">RANK</a>
+                    <a v-link="{ path: '/timeline'}" href="#">TIME</a>
+
                   </li>
                 </navbar>
 
