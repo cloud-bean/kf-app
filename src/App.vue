@@ -6,7 +6,7 @@
       <span class="icon icon-app"></span>
       <span class="tab-label">任务</span>
     </a>
-    <a class="tab-item" v-link="{ path: '/rank'}" href="#">
+    <a class="tab-item" v-link="{ path: '/signup'}" href="#">
       <span class="icon icon-friends"></span>
       <span class="tab-label">排行</span>
     </a>

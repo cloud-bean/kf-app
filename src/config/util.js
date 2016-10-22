@@ -1,4 +1,6 @@
+const request = require('superagent');
 const querystring = require('querystring');
+
 
 function getAuthorizeURL(appid, redirect, state, scope) {
   const url = 'https://open.weixin.qq.com/connect/oauth2/authorize';
@@ -20,9 +22,8 @@ function storeUserInfo(accessToken, user) {
 
 function auth(appid, code) {
   return new Promise((resolve, reject) => {
-    this.$http.get(`http://joywill.cc/admin/auth?appid=${appid}&code=${code}`)
+    request.get(`http://joywill.cc/admin/auth?appid=${appid}&code=${code}`)
     .then((result) => {
-      console.log(result);
       const userid = result.userid;
       const accessToken = result.accessToken;
       resolve({ userid, accessToken });
@@ -35,7 +36,7 @@ function auth(appid, code) {
 
 function getUserInfo(userid, accessToken) {
   return new Promise((resolve, reject) => {
-    this.$http.get(`http://120.25.227.156:7000/api/base/users/${userid}`,
+    request.get(`http://120.25.227.156:7000/api/base/users/${userid}`,
       {
         withCredentials: true,
         headers: {
@@ -43,7 +44,6 @@ function getUserInfo(userid, accessToken) {
         },
       })
     .then((result) => {
-      console.log(result);
       resolve(result.data);
     })
     .catch((err) => {
