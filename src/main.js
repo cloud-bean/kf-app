@@ -4,6 +4,7 @@ import App from './App';
 
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
+const VueValidator = require('vue-validator');
 
 
 import RankPage from './pages/Ranklist';
@@ -25,6 +26,8 @@ import TimeLine from './components/Timeline';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.use(VueValidator);
+
 Vue.directive('echarts', require('./directives/echarts'));
 
 const router = new VueRouter();

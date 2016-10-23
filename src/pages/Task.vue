@@ -2,7 +2,11 @@
 
   <info :user="user"></info>
   <div class="content-block-title mytitle">任务列表</div>
+
   <div class="tasklist" >
+    <p v-if="!tasks" class="no-task">
+      暂无任务
+    </p>
     <div v-for="task in tasks">
       <task-item :taskdata="task"></task-item>
 
@@ -60,5 +64,10 @@
 }
 .tasklist{
   font-size: 0.5rem;
+}
+.no-task{
+  margin-top: 1rem;
+  margin-left: 1rem;
+
 }
 </style>

@@ -4,23 +4,8 @@
     <header class="bar bar-nav">
   <h1 class='title'>补充你的信息</h1>
 </header>
-    <!-- <div class="form-group">
-      <label for="headimg">选择头像</label>
-      <input type="file" name='headimg' class="form-control" placeholder="头像" v-model="headimg" accept="image/*"></input>
-    </div> -->
-<!-- <div class="form-group">
-  <input type="text" name='displayName' class="form-control" placeholder="姓名" v-model="displayName"></input>
-</div>
-    <div class="form-group">
-      <input type="text" name='phone' class="form-control" placeholder="手机号" v-model="phone"></input>
-    </div>
-
-    <button class="btn btn-info pull-right" v-on:click="signUp">完成</button>
-  </div> -->
-
-
-
-  <div class="content">
+<validator name="validation1">
+  <div class="content" novalidate>
     <div class="headimg">
 
         <img :src="userdisplay.profileImageURL" alt="" class="avatar"/>
@@ -38,7 +23,7 @@
             <div class="item-inner">
               <div class="item-title label">姓名</div>
               <div class="item-input">
-                <input type="text" placeholder="" v-model="displayName">
+                <input id="displayName" type="text" placeholder="" v-model="displayName" v-validate:displayName="['required']">
               </div>
             </div>
           </div>
@@ -49,7 +34,7 @@
             <div class="item-inner">
               <div class="item-title label">手机</div>
               <div class="item-input">
-                <input type="text" placeholder="" v-model="phone">
+                <input id="phone" type="text" placeholder="" v-model="phone" v-validate:phone="['required']">
               </div>
             </div>
           </div>
@@ -66,6 +51,7 @@
           </div>
         </li>
       </ul>
+
     </div>
     <div class="content-block">
       <div class="row">
@@ -74,6 +60,8 @@
       </div>
     </div>
   </div>
+
+</validator>
 
 </template>
 
@@ -100,6 +88,9 @@ export default {
   },
   methods: {
     signUp() {
+      if(!this.$validation1.valid){
+        $.alert('请完整填写信息');
+      }
       const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
       const phone = this.phone;
       const solgan = this.solgan;
