@@ -38,7 +38,7 @@
             <div class="item-inner">
               <div class="item-title label">姓名</div>
               <div class="item-input">
-                <input type="text" placeholder="Your name" v-model="displayName">
+                <input type="text" placeholder="" v-model="displayName">
               </div>
             </div>
           </div>
@@ -49,7 +49,18 @@
             <div class="item-inner">
               <div class="item-title label">手机</div>
               <div class="item-input">
-                <input type="text" placeholder="Cell Phone" v-model="phone">
+                <input type="text" placeholder="" v-model="phone">
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-media"><i class="icon icon-form-name"></i></div>
+            <div class="item-inner">
+              <div class="item-title label">座右铭</div>
+              <div class="item-input">
+                <input type="text" placeholder="" v-model="solgan">
               </div>
             </div>
           </div>
@@ -91,11 +102,12 @@ export default {
     signUp() {
       const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
       const phone = this.phone;
+      const solgan = this.solgan;
       const displayName = this.displayName;
       // const headimg = this.headimg;
       const accessToken = localStorage.getItem('kf_accessToken');
       const userid = localStorage.getItem('kf_userid');
-      const useroption = Object.assign(userInfo.option,{phone});
+      const useroption = Object.assign(userInfo.option,{phone},{solgan});
       const user1 = Object.assign(userInfo, useroption);
       const user = Object.assign(user1, {displayName});
 

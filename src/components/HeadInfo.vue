@@ -14,7 +14,7 @@
               <div class="item-title-row">
                 <div class="item-title">{{user.displayName}}</div>
               </div>
-              <div class="item-subtitle">子标题</div>
+              <div class="item-subtitle">{{user.option.solgan || 'Learning with joy, achieving with will.'}}</div>
             </div>
           </li>
         </ul>
@@ -39,7 +39,7 @@
           <div class='col-33'>
             <div class="detailInfo">
               <div>等级</div>
-              <div>{{user.option.level}}</div>
+              <div>{{level(user.option.exp)}}</div>
             </div>
           </div>
         </div>
@@ -114,10 +114,19 @@
 
 <script>
 import Exp from './Expbar';
+import util from '../config/util';
+
     export default{
       props:['user'],
       components:{
         Exp
+      },
+      methods:{
+        level(exp){
+           const lvl = util.getLevel(exp);
+           console.log(lvl);
+           return lvl;
+        }
       },
     }
 </script>

@@ -2,11 +2,11 @@
 
 
   <nav class="bar bar-tab">
-    <a class="tab-item" v-link="{ path: '/task'}" href="#">
+    <a class="tab-item" v-link="{ path: '/task', activeClass: 'active', exact:true}" href="#">
       <span class="icon icon-app"></span>
       <span class="tab-label">任务</span>
     </a>
-    <a class="tab-item" v-link="{ path: '/rank'}" href="#">
+    <a class="tab-item" v-link="{ path: '/rank', activeClass: 'active', exact:true}" href="#">
       <span class="icon icon-friends"></span>
       <span class="tab-label">排行</span>
     </a>

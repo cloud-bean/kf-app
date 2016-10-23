@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import util from '../config/util';
+const moment = require('momentjs');
 
     export default{
       props:['taskdata'],
@@ -65,7 +65,9 @@ import util from '../config/util';
         }
       },
       ready(){
-        this.taskdate = util.localMoment(this.taskdata.expireTime).fromNow();
+         const expireTime = new Date(this.taskdata.expireTime);
+         const now = new Date();
+         this.taskdate = (expireTime - now)>0?moment(expireTime).format('YYYY-MM-DD'):'已过期';
       },
     }
 

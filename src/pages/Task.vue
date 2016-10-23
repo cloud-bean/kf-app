@@ -34,17 +34,19 @@
         },
       data(){
           return {
-              tasks:[],
+              tasks:null,
               user:{},
           };
       },
       created(){
         this.user = JSON.parse(localStorage.getItem('kf_userInfo'));
         const accessToken = localStorage.getItem('kf_accessToken');
-        util.getTaskList(accessToken)
-        .then((res)=>{
-          this.tasks = res;
-        })
+        if(!this.tasks){
+          util.getTaskList(accessToken)
+          .then((res)=>{
+            this.tasks = res;
+          })
+        }
       },
 
 

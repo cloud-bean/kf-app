@@ -72,8 +72,11 @@
             </tr>
           </tbody>
         </table> -->
-        <div v-for="rank in ranks">
-          <rank-item :user='rank' :rank-index='$index+1'></rank-item>
+        <rank-item :user='myRank' :rank-index='myIndex'></rank-item>
+        <div class="divide"></div>
+        <div v-for="rank in ranks" class="rank-list">
+          <rank-item :user='rank' :rank-index='$index+1' class="rank-item"></rank-item>
+
         </div>
       <!-- </div> -->
       </div>
@@ -98,6 +101,8 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       ranks:[],
+      myRank: null,
+      myIndex: null,
     }
 
   },
@@ -105,12 +110,28 @@ export default {
     util.getRanks()
     .then((res) => {
       this.ranks = res;
+      const userid = localStorage.getItem('kf_userid');
+      // console.log('userid',userid);
+      this.ranks.some((item, index) => {
+        if (item.userid == userid) {
+          // console.log('item',item);
+          this.myRank = item;
+          this.myIndex = index+1;
+          return true;
+        }else{
+          return false;
+        }
+      })
     })
   },
 };
 </script>
 
 <style scoped>
+.divide{
+  width: 100%;
+  height: 1rem;
+}
 /*table{
   width: 100%;
 }
@@ -127,4 +148,21 @@ export default {
   .table tr {
     height: 2.5rem;
   }*/
+  .rank-list:last-child .rank-item{
+    border-bottom: none !important;
+
+  }
+
+  .rank-item{
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid lightgray;
+
+  }
+  .line{
+    display: block;
+    width: 100%;
+    height: 0.05rem;
+    background-color: red;
+  }
 </style>

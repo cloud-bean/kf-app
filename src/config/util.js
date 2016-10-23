@@ -23,71 +23,75 @@ function storeUserInfo(accessToken, user) {
 function auth(appid, code) {
   return new Promise((resolve, reject) => {
     request.get('http://joywill.cc/admin/auth')
-    .query({ appid, code })
-    .then((result) => {
-      console.log('auth', result);
-      const userid = result.body.userid;
-      const accessToken = result.body.accessToken;
-      resolve({ userid, accessToken });
-    })
-    .catch((err) => {
-      reject(err);
-    });
+      .query({
+        appid,
+        code
+      })
+      .then((result) => {
+        console.log('auth', result);
+        const userid = result.body.userid;
+        const accessToken = result.body.accessToken;
+        resolve({
+          userid,
+          accessToken
+        });
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 }
 
 function getUserInfo(userid, accessToken) {
   return new Promise((resolve, reject) => {
     request.get(`http://120.25.227.156:7000/api/base/users/${userid}`)
-    // .withCredentials()
-    .set('Authorization', `Bearer ${accessToken}`)
-    .then((result) => {
-      resolve(result.body.data);
-    })
-    .catch((err) => {
-      reject(err);
-    });
+      // .withCredentials()
+      .set('Authorization', `Bearer ${accessToken}`)
+      .then((result) => {
+        resolve(result.body.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 }
 
 function getTaskList(accessToken) {
   return new Promise((resolve, reject) => {
     request.get('http://120.25.227.156:7000/api/base/tasks/')
-    // .withCredentials()
-    .set('Authorization', `Bearer ${accessToken}`)
-    .then((result) => {
-      resolve(result.body.data);
-    })
-    .catch((err) => {
-      reject(err);
-    });
+      // .withCredentials()
+      .set('Authorization', `Bearer ${accessToken}`)
+      .then((result) => {
+        resolve(result.body.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 }
 
 function getRanks(accessToken) {
   return new Promise((resolve, reject) => {
     request.get('http://120.25.227.156:7000/api/base/ranks/')
-    // .withCredentials()
-    .set('Authorization', `Bearer ${accessToken}`)
-    .then((result) => {
-      resolve(result.body.data);
-    })
-    .catch((err) => {
-      reject(err);
-    });
+      // .withCredentials()
+      .set('Authorization', `Bearer ${accessToken}`)
+      .then((result) => {
+        resolve(result.body.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 }
 
 function getLevel(exp) {
-  const maxlevel = 1;
-  const levelExp = [21, 31, 46, 66, 91, 121, 156, 196, 241, 291];
+  const levelExp = [50, 100, 200, 350, 550, 800, 1100, 1450, 1850, 2300, 2800, 3350, 3950, 4600, 5300, 6050, 6850, 7700, 8600, 9550];
+  const maxlevel = levelExp.length;
   for (const key in levelExp) {
     if (exp < levelExp[key]) return Number(key) + 1;
   }
   return maxlevel;
 }
-
-
 
 export default {
   getAuthorizeURL,
