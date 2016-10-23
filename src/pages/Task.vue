@@ -4,7 +4,7 @@
   <div class="content-block-title mytitle">任务列表</div>
 
   <div class="tasklist" >
-    <p v-if="!tasks" class="no-task">
+    <p v-if="!tasks.length" class="no-task">
       暂无任务
     </p>
     <div v-for="task in tasks">
@@ -49,6 +49,11 @@
           util.getTaskList(accessToken)
           .then((res)=>{
             this.tasks = res;
+            const taskNotDone =  this.tasks.filter((item) => {
+              return (!item.isDone);
+            })
+            console.log(taskNotDone);
+            this.$dispatch('tasknum', taskNotDone.length);
           })
         }
       },

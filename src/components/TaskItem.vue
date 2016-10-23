@@ -61,7 +61,6 @@ const moment = require('momentjs');
       data(){
         return {
           taskdate:'',
-
         }
       },
       ready(){

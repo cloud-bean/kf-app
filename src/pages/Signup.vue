@@ -90,6 +90,7 @@ export default {
     signUp() {
       if(!this.$validation1.valid){
         $.alert('请完整填写信息');
+        return;
       }
       const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
       const phone = this.phone;

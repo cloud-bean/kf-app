@@ -5,6 +5,7 @@
     <a class="tab-item" v-link="{ path: '/task', activeClass: 'active', exact:true}" href="#">
       <span class="icon icon-app"></span>
       <span class="tab-label">任务</span>
+      <span class="badge" v-if="num")>{{num}}</span>
     </a>
     <a class="tab-item" v-link="{ path: '/rank', activeClass: 'active', exact:true}" href="#">
       <span class="icon icon-friends"></span>
@@ -37,6 +38,19 @@
 // const co = require('co');
 //
  export default {
+   data(){
+     return {
+       num:null,
+     }
+   },
+   events:{
+     'tasknum': function (num) {
+      // 事件回调内的 `this` 自动绑定到注册它的实例上
+      console.log(num);
+
+      this.num=num;
+    }
+   }
 
 //   data() {
 //     return {

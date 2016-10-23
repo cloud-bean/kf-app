@@ -36,9 +36,7 @@ export default {
         //   self.$router.go('/task');
         // }
         if(query && query.code){
-          console.log('code');
           const res = yield util.auth(config.appid,query.code);
-          console.log('res',res);
           localStorage.setItem('kf_accessToken', res.accessToken);
           localStorage.setItem('kf_userid', res.userid);
           const userInfo = yield util.getUserInfo(res.userid, res.accessToken);
