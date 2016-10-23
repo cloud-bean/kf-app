@@ -78,24 +78,24 @@ export default {
     //   });
     // },
     //
-    getUserInfo(userid, accessToken) {
-      return new Promise((resolve, reject) => {
-        this.$http.get(`${config.route.user}${userid}`,
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          })
-        .then((result) => {
-          console.log(result);
-          resolve(result.body.data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-      });
-    }
+    // getUserInfo(userid, accessToken) {
+    //   return new Promise((resolve, reject) => {
+    //     this.$http.get(`${config.route.user}${userid}`,
+    //       {
+    //         withCredentials: true,
+    //         headers: {
+    //           Authorization: `Bearer ${accessToken}`,
+    //         },
+    //       })
+    //     .then((result) => {
+    //       console.log(result);
+    //       resolve(result.body.data);
+    //     })
+    //     .catch((err) => {
+    //       reject(err);
+    //     });
+    //   });
+    // }
   }
 }
 </script>

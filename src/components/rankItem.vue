@@ -1,24 +1,35 @@
 <template>
   <div class="card facebook-card">
       <div class="card-header no-border">
-        <div class="facebook-avatar"><img :src="taskdata.titleImage.URL" width="40" height="40"></div>
-        <div class="facebook-name">{{taskdata.name}}</div>
-        <div class="facebook-date">{{taskdate}}</div>
+        <div class="row">
+          <div class="col-50">
+            <div class="facebook-avatar "><img :src="user.profileImageURL"  class="headimg"></div>
+            <div class="facebook-name name">{{user.displayName}}</div>
+            <div class="facebook-date rank-index">第{{rankIndex}}名</div>
+          </div>
+          <div class="col-50">
+            <div class="exp">
+              {{user.exp}}
+            </div>
+          </div>
+        </div>
       </div>
+
+
       <!-- <div class="card-content">
         <div class="card-content-inner">
           经验:{{taskdata.experience}} | 金币:{{taskdata.goldToken}}
         <p>此处是内容...</p>
       </div> -->
     <!-- </div> -->
-      <div class="card-footer">
+      <!-- <div class="card-footer">
         <span>难度:{{taskdata.difficult}}</span>
-        <span>经验:{{taskdata.exp}}</span>
+        <span>经验:{{taskdata.experience}}</span>
         <span>金币:{{taskdata.goldToken}}</span>
         <span v-if="taskdata.isDone">完成</span>
         <span style="color:red;" v-else>未完成</span>
 
-      </div>
+      </div> -->
     </div>
 
   <!-- <dd class="pos-right clearfix">
@@ -54,18 +65,16 @@
 </template>
 
 <script>
-import util from '../config/util';
 
     export default{
-      props:['taskdata'],
+      props:['user','rankIndex'],
       data(){
         return {
-          taskdate:'',
 
         }
       },
       ready(){
-        this.taskdate = util.localMoment(this.taskdata.expireTime).fromNow();
+
       },
     }
 
@@ -75,6 +84,24 @@ import util from '../config/util';
 <style scoped>
 p{
   margin-bottom: 2px;
+}
+.exp {
+  padding-right: 0.5rem;
+  text-align: right;
+  color: #23ee2f;
+  font-size: 2rem;
+}
+.headimg{
+  height: 60px;
+  width:60px;
+}
+.name {
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+.rank-index {
+  padding-left: 1rem;
+  color: #ccc;
 }
 
 </style>

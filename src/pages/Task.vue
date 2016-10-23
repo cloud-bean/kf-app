@@ -20,6 +20,8 @@
     import Info from '../components/HeadInfo';
     import Exp from '../components/Expbar';
     import Timeline from '../components/Timeline';
+    import util from '../config/util';
+
     import { spinner } from 'vue-strap'
 
     export default{
@@ -32,12 +34,17 @@
         },
       data(){
           return {
-              tasks:mockdata.task,
+              tasks:[],
               user:{},
           };
       },
       created(){
         this.user = JSON.parse(localStorage.getItem('kf_userInfo'));
+        const accessToken = localStorage.getItem('kf_accessToken');
+        util.getTaskList(accessToken)
+        .then((res)=>{
+          this.tasks = res;
+        })
       },
 
 

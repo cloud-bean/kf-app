@@ -84,12 +84,12 @@ export default {
       // its initial state.
     }
   },
+  ready(){
+    this.userdisplay = JSON.parse(localStorage.getItem('kf_userInfo'));
+  },
   methods: {
     signUp() {
-      this.userdisplay = JSON.parse(localStorage.getItem('kf_userInfo'));
-
       const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
-
       const phone = this.phone;
       const displayName = this.displayName;
       // const headimg = this.headimg;

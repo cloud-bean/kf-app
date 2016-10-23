@@ -52,7 +52,7 @@ export default {
       goldToken: '30',
       experience: '100',
       difficult: '常规',
-      complete: true,
+      isDone: true,
       __v: 0,
     },
     {
@@ -67,7 +67,7 @@ export default {
       goldToken: '30',
       experience: '100',
       difficult: '常规',
-      complete: false,
+      isDone: false,
 
       __v: 0,
     },
@@ -83,7 +83,7 @@ export default {
       goldToken: '30',
       experience: '100',
       difficult: '常规',
-      complete: true,
+      isDone: true,
       __v: 0,
     },
   ],
