@@ -4,7 +4,7 @@
   <div class="content-block-title mytitle">任务列表</div>
 
   <div class="tasklist" >
-    <p v-if="!tasks.length" class="no-task">
+    <p v-if="tasks.length==0" class="no-task">
       暂无任务
     </p>
     <div v-for="task in tasks">

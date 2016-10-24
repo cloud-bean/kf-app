@@ -36,10 +36,13 @@ export default {
         //   self.$router.go('/task');
         // }
         if(query && query.code){
-          const res = yield util.auth(config.appid,query.code);
-          localStorage.setItem('kf_accessToken', res.accessToken);
-          localStorage.setItem('kf_userid', res.userid);
-          const userInfo = yield util.getUserInfo(res.userid, res.accessToken);
+          let secret = config.secret;
+          if(process.env.NODE_ENV == 'production'){
+            secret = yield util.auth(config.appid,query.code);
+          }
+          localStorage.setItem('kf_accessToken', secret.accessToken);
+          localStorage.setItem('kf_userid', secret.userid);
+          const userInfo = yield util.getUserInfo(secret.userid, secret.accessToken);
           console.log('userInfo',userInfo);
           if(userInfo.option.phone){
             localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
@@ -51,7 +54,11 @@ export default {
 
         }
         else {
-          const redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
+          let redirctUrl = config.route.testRedirect;
+          console.log(process.env);
+          if(process.env.NODE_ENV == 'production'){
+              redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
+          }
           window.location.href = redirctUrl;
         }
       }

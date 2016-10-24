@@ -2,76 +2,7 @@
   <div class="card">
       <div class="card-header">排行榜</div>
       <div class="card-content">
-        <!-- <div class="card-content-inner"> -->
-          <!-- <table class="table">
-          <thead>
-            <tr>
-              <th>排名</th>
-              <th>头像</th>
-              <th>姓名</th>
-              <th>等级</th>
-              <th>经验</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td><img :src="user.profileImageURL" style="width:34px;" class="img-circle"></td>
-              <td>{{user.displayName}}</td>
-              <td>{{user.option.level}}</td>
-              <td>{{user.option.exp}}</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td><img :src="user.profileImageURL" style="width:34px;" class="img-circle"></td>
-              <td>{{user.displayName}}</td>
-              <td>{{user.option.level}}</td>
-              <td>{{user.option.exp}}</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td><img :src="user.profileImageURL" style="width:34px;" class="img-circle"></td>
-              <td>{{user.displayName}}</td>
-              <td>{{user.option.level}}</td>
-              <td>{{user.option.exp}}</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td><img :src="user.profileImageURL" style="width:34px;" class="img-circle"></td>
-              <td>{{user.displayName}}</td>
-              <td>{{user.option.level}}</td>
-              <td>{{user.option.exp}}</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td><img :src="user.profileImageURL" style="width:34px;" class="img-circle"></td>
-              <td>{{user.displayName}}</td>
-              <td>{{user.option.level}}</td>
-              <td>{{user.option.exp}}</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td><img :src="user.profileImageURL" style="width:34px;" class="img-circle"></td>
-              <td>{{user.displayName}}</td>
-              <td>{{user.option.level}}</td>
-              <td>{{user.option.exp}}</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td><img :src="user.profileImageURL" style="width:34px;" class="img-circle"></td>
-              <td>{{user.displayName}}</td>
-              <td>{{user.option.level}}</td>
-              <td>{{user.option.exp}}</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td><img :src="user.profileImageURL" style="width:34px;" class="img-circle"></td>
-              <td>{{user.displayName}}</td>
-              <td>{{user.option.level}}</td>
-              <td>{{user.option.exp}}</td>
-            </tr>
-          </tbody>
-        </table> -->
+
         <rank-item :user='myRank' :rank-index='myIndex'></rank-item>
         <div class="divide"></div>
         <div v-for="rank in ranks" class="rank-list">
@@ -88,7 +19,7 @@
 
 <script>
 import vs from '../components/Vs';
-import rankItem from '../components/rankItem';
+import rankItem from '../components/RankItem';
 import util from '../config/util';
 
 import mockdata from '../../test/mock';

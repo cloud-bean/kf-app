@@ -1,9 +1,10 @@
 const request = require('superagent');
 const querystring = require('querystring');
 const localMoment = require('momentjs');
+import config from './config';
 
 function getAuthorizeURL(appid, redirect, state, scope) {
-  const url = 'https://open.weixin.qq.com/connect/oauth2/authorize';
+  const url = config.route.weixin;
   const info = {
     appid,
     redirect_uri: redirect,
@@ -15,17 +16,12 @@ function getAuthorizeURL(appid, redirect, state, scope) {
   return `${url}?${querystring.stringify(info)}#wechat_redirect`;
 }
 
-function storeUserInfo(accessToken, user) {
-  localStorage.setItem('kf_accessToken', accessToken);
-  localStorage.setItem('kf_user', JSON.stringify(user));
-}
-
 function auth(appid, code) {
   return new Promise((resolve, reject) => {
-    request.get('http://joywill.cc/admin/auth')
+    request.get(config.route.auth)
       .query({
         appid,
-        code
+        code,
       })
       .then((result) => {
         console.log('auth', result);
@@ -33,7 +29,7 @@ function auth(appid, code) {
         const accessToken = result.body.accessToken;
         resolve({
           userid,
-          accessToken
+          accessToken,
         });
       })
       .catch((err) => {
@@ -44,7 +40,7 @@ function auth(appid, code) {
 
 function getUserInfo(userid, accessToken) {
   return new Promise((resolve, reject) => {
-    request.get(`http://120.25.227.156:7000/api/base/users/${userid}`)
+    request.get(`${config.route.base}/users/${userid}`)
       // .withCredentials()
       .set('Authorization', `Bearer ${accessToken}`)
       .then((result) => {
@@ -58,7 +54,7 @@ function getUserInfo(userid, accessToken) {
 
 function getTaskList(accessToken) {
   return new Promise((resolve, reject) => {
-    request.get('http://120.25.227.156:7000/api/base/tasks/')
+    request.get(`${config.route.base}/tasks/`)
       // .withCredentials()
       .set('Authorization', `Bearer ${accessToken}`)
       .then((result) => {
@@ -72,7 +68,7 @@ function getTaskList(accessToken) {
 
 function getRanks(accessToken) {
   return new Promise((resolve, reject) => {
-    request.get('http://120.25.227.156:7000/api/base/ranks/')
+    request.get(`${config.route.base}/ranks/`)
       // .withCredentials()
       .set('Authorization', `Bearer ${accessToken}`)
       .then((result) => {
@@ -95,7 +91,6 @@ function getLevel(exp) {
 
 export default {
   getAuthorizeURL,
-  storeUserInfo,
   auth,
   getUserInfo,
   getTaskList,
