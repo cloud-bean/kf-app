@@ -1,13 +1,12 @@
 <template>
+  <rank-item :user='myRank' :rank-index='myIndex'></rank-item>
+
   <div class="card">
       <div class="card-header">排行榜</div>
       <div class="card-content">
 
-        <rank-item :user='myRank' :rank-index='myIndex'></rank-item>
-        <div class="divide"></div>
         <div v-for="rank in ranks" class="rank-list">
           <rank-item :user='rank' :rank-index='$index+1' class="rank-item"></rank-item>
-
         </div>
       <!-- </div> -->
       </div>
@@ -38,7 +37,8 @@ export default {
 
   },
   created(){
-    util.getRanks()
+    const accessToken = localStorage.getItem('kf_accessToken');
+    util.getRanks(accessToken)
     .then((res) => {
       this.ranks = res;
       const userid = localStorage.getItem('kf_userid');

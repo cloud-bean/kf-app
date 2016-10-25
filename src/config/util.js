@@ -68,7 +68,7 @@ function getTaskList(accessToken) {
 
 function getRanks(accessToken) {
   return new Promise((resolve, reject) => {
-    request.get(`${config.route.base}/ranks/`)
+    request.get(`${config.route.base}/ranks`)
       // .withCredentials()
       .set('Authorization', `Bearer ${accessToken}`)
       .then((result) => {
@@ -79,6 +79,22 @@ function getRanks(accessToken) {
       });
   });
 }
+
+function friendLike(friendId, accessToken) {
+  return new Promise((resolve, reject) => {
+    request.post(`${config.route.base}/upVotes`)
+      .send({ userId: friendId })
+      // .withCredentials()
+      .set('Authorization', `Bearer ${accessToken}`)
+      .then((result) => {
+        resolve(result.body.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 
 function getLevel(exp) {
   const levelExp = [50, 100, 200, 350, 550, 800, 1100, 1450, 1850, 2300, 2800, 3350, 3950, 4600, 5300, 6050, 6850, 7700, 8600, 9550];
@@ -97,4 +113,5 @@ export default {
   getLevel,
   getRanks,
   localMoment,
+  friendLike,
 };

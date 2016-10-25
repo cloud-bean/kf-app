@@ -1,79 +1,59 @@
 <template>
   <div class="card facebook-card">
       <div class="card-header no-border">
-        <div class="row">
+        <div class="row ">
           <div class="col-50">
             <div class="facebook-avatar "><img :src="user.profileImageURL"  class="headimg"></div>
             <div class="facebook-name name">{{user.displayName}}</div>
             <div class="facebook-date rank-index">第{{rankIndex}}名</div>
           </div>
+
           <div class="col-50">
-            <div class="exp">
-              {{user.exp}}
+            <div class="row detail">
+              <div class="col-70 pull-right">
+                <div class="exp">
+                  {{user.exp}}
+                </div>
+              </div>
+              <div class="col-30 like">
+                <div class="likenum">
+                    {{user.upCount}}
+                </div>
+                <div class="linkicon" v-on:click="like">
+                  <i class="fa fa-heart fa-lg " v-bind:class="{active:user.isUpVoted,inactive:!user.isUpVoted}"></i>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
-
-      <!-- <div class="card-content">
-        <div class="card-content-inner">
-          经验:{{taskdata.experience}} | 金币:{{taskdata.goldToken}}
-        <p>此处是内容...</p>
-      </div> -->
-    <!-- </div> -->
-      <!-- <div class="card-footer">
-        <span>难度:{{taskdata.difficult}}</span>
-        <span>经验:{{taskdata.experience}}</span>
-        <span>金币:{{taskdata.goldToken}}</span>
-        <span v-if="taskdata.isDone">完成</span>
-        <span style="color:red;" v-else>未完成</span>
-
-      </div> -->
     </div>
-
-  <!-- <dd class="pos-right clearfix">
-    <div class="circ"></div>
-    <div class="time">2015/01/15</div>
-    <div class="events">
-      <div class="pull-left">
-        <img class="events-object img-rounded" src="../../static/photo-1.jpg">
-      </div>
-      <div class="events-body">
-        <div class="row">
-          <div class="col-xs-8">
-            <h4 class="events-heading">{{taskdata.name}}</h4>
-            <p>{{taskdata.difficult}}</p>
-            <p>经验:{{taskdata.experience}} | 金币:{{taskdata.goldToken}}</p>
-            <p>{{taskdata.subject}}</p>
-          </div>
-          <div class="col-xs-4">
-              <div style="color:green" v-if="taskdata.complete">
-                完成
-              </div>
-              <div style="color:red" v-else>
-                未完成
-              </div>
-            </div>
-
-        </div>
-
-
-      </div>
-    </div>
-  </dd> -->
 </template>
 
 <script>
+import util from '../config/util';
 
     export default{
       props:['user','rankIndex'],
       data(){
         return {
-
         }
       },
-    
+      methods: {
+        like(){
+          if(this.user.isUpVoted)return;
+          const userid = this.user.userid;
+          console.log(userid);
+          const accessToken = localStorage.getItem('kf_accessToken');
+          util.friendLike(userid, accessToken)
+          this.user.isUpVoted = true;
+          this.user.upCount = this.user.upCount+1;
+        },
+
+      },
+
     }
 
 </script>
@@ -85,21 +65,49 @@ p{
 }
 .exp {
   padding-right: 0.5rem;
-  text-align: right;
   color: #23ee2f;
   font-size: 2rem;
+  line-height: 3rem;
+
+}
+.like {
+  padding-top: .4rem;
+  padding-right: .3rem;
+  text-align: center;
+}
+.likenum {
+  line-height: 1rem;
+  color: #7d7d7d;
+  display: block;
+}
+.likeicon{
+  line-height: 1.5rem;
+  color: #ccc;
+  display: block;
+
 }
 .headimg{
-  height: 60px;
+  height:60px;
   width:60px;
 }
 .name {
   padding-left: 1rem;
   font-size: 1rem;
 }
+
+.active {
+  color: red;
+}
+.inactive{
+  color: #ccc;
+}
 .rank-index {
   padding-left: 1rem;
   color: #ccc;
+}
+.detail {
+  float: right;
+  vertical-align: baseline;
 }
 
 </style>
