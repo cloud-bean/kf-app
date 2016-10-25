@@ -103,7 +103,7 @@ export default {
       const user1 = Object.assign(userInfo, useroption);
       const user = Object.assign(user1, {displayName});
 
-      this.$http.put(`${config.route.user}${user._id}`, user, {
+      this.$http.put(`${config.route.base}/users/${user._id}`, user, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
