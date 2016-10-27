@@ -25,6 +25,7 @@
     import Exp from '../components/Expbar';
     import Timeline from '../components/Timeline';
     import util from '../config/util';
+    import { getTaskList } from '../vuex/actions';
 
     import { spinner } from 'vue-strap'
 
@@ -38,25 +39,27 @@
         },
       data(){
           return {
-              tasks:null,
-              user:{},
           };
       },
       created(){
-        this.user = JSON.parse(localStorage.getItem('kf_userInfo'));
-        const accessToken = localStorage.getItem('kf_accessToken');
-        if(!this.tasks){
-          util.getTaskList(accessToken)
-          .then((res)=>{
-            this.tasks = res;
-            const taskNotDone =  this.tasks.filter((item) => {
-              return (!item.isDone);
-            })
-            console.log(taskNotDone);
-            this.$dispatch('tasknum', taskNotDone.length);
-          })
+        if(this.tasks.length==0){
+          this.getTaskList()
+            .catch(err => {
+              console.log(err);
+          });
         }
+
       },
+      vuex: {
+        getters: {
+          user: state => state.user,
+          accessToken: state => state.accessToken,
+          tasks: state => state.tasks,
+        },
+        actions: {
+          getTaskList,
+        }
+      }
 
 
     }

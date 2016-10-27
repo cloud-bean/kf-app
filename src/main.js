@@ -15,7 +15,6 @@ import ProfilePage from './pages/Profile';
 import SignUpPage from './pages/Signup';
 import TimeLine from './components/Timeline';
 
-
 /* eslint-disable no-new */
 
 // /* eslint-disable no-new */
@@ -48,4 +47,4 @@ router.map({
   '/profile': { component: ProfilePage },
 });
 
-router.start(App, 'app');
+router.start(Vue.extend(App), 'app');

@@ -8,6 +8,7 @@ import config from '../config/config';
 import util from '../config/util';
 import { spinner } from 'vue-strap';
 import mockdata from '../../test/mock';
+import { auth, getUserInfo, authLocal } from '../vuex/actions';
 
 const wurl = require('wurl');
 const co = require('co');
@@ -21,51 +22,58 @@ export default {
   components: {
     spinner,
   },
-  created() {
-
-
+  vuex: {
+    getters: {
+      loading: state => state.loading,
+      userid: state => state.userid,
+      user: state => state.user,
+    },
+    actions: {
+      auth,
+      getUserInfo,
+      authLocal,
+    }
   },
   ready(){
     this.$refs.loading.show();
-    let self = this;
-    co(function * () {
-      try {
-        const query = wurl('?');
 
-        // if(localStorage.getItem('kf_accessToken')){
-        //   self.$router.go('/task');
-        // }
-        if(query && query.code){
-          let secret = config.secret;
-          if(process.env.NODE_ENV == 'production'){
-            secret = yield util.auth(config.appid,query.code);
-          }
-          localStorage.setItem('kf_accessToken', secret.accessToken);
-          localStorage.setItem('kf_userid', secret.userid);
-          const userInfo = yield util.getUserInfo(secret.userid, secret.accessToken);
-          console.log('userInfo',userInfo);
-          if(userInfo.option.phone){
-            localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-            self.$router.go('/task');
-          }else{
-            localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-            self.$router.go('/signup');
-          }
+    const query = wurl('?');
 
-        }
-        else {
-          let redirctUrl = config.route.testRedirect;
-          console.log(process.env);
-          if(process.env.NODE_ENV == 'production'){
-              redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
-          }
-          window.location.href = redirctUrl;
-        }
+    // if(localStorage.getItem('kf_accessToken')){
+    //   self.$router.go('/task');
+    // }
+    if(query && query.code){
+      let secret = config.secret;
+      if(process.env.NODE_ENV == 'production'){
+        this.auth(config.appid,query.code);
+      }else{
+        this.authLocal(secret.userid, secret.accessToken)
       }
-      catch (err) {
+      // localStorage.setItem('kf_accessToken', secret.accessToken);
+      // localStorage.setItem('kf_userid', secret.userid);
+      this.getUserInfo(this.userid)
+      .then((res) => {
+        if(this.user.option.phone){
+          // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+          this.$router.go('/task');
+        }else{
+          // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+          this.$router.go('/signup');
+        }
+      })
+      .catch(err => {
         console.log(err);
+      })
+
+
+    }
+    else {
+      let redirctUrl = config.route.testRedirect;
+      if(process.env.NODE_ENV == 'production'){
+        redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
       }
-    });
+      window.location.href = redirctUrl;
+    }
   },
   methods: {
     // auth(appid, code) {
@@ -101,6 +109,7 @@ export default {
     //     });
     //   });
     // }
-  }
+  },
+
 }
 </script>

@@ -19,7 +19,7 @@
                 <div class="likenum">
                     {{user.upCount}}
                 </div>
-                <div class="linkicon" v-on:click="like">
+                <div class="linkicon" v-on:click="friendLike(user, rankIndex)">
                   <i class="fa fa-heart fa-lg " v-bind:class="{active:user.isUpVoted,inactive:!user.isUpVoted}"></i>
                 </div>
               </div>
@@ -34,6 +34,7 @@
 
 <script>
 import util from '../config/util';
+import { friendLike } from '../vuex/actions';
 
     export default{
       props:['user','rankIndex'],
@@ -41,19 +42,11 @@ import util from '../config/util';
         return {
         }
       },
-      methods: {
-        like(){
-          if(this.user.isUpVoted)return;
-          const userid = this.user.userid;
-          console.log(userid);
-          const accessToken = localStorage.getItem('kf_accessToken');
-          util.friendLike(userid, accessToken)
-          this.user.isUpVoted = true;
-          this.user.upCount = this.user.upCount+1;
+      vuex: {
+        actions: {
+          friendLike,
         },
-
       },
-
     }
 
 </script>

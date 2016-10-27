@@ -1,5 +1,5 @@
 <template>
-  <rank-item :user='myRank' :rank-index='myIndex'></rank-item>
+  <rank-item :user='myRank.content' :rank-index='myRank.index'></rank-item>
 
   <div class="card">
       <div class="card-header">排行榜</div>
@@ -20,7 +20,7 @@
 import vs from '../components/Vs';
 import rankItem from '../components/RankItem';
 import util from '../config/util';
-
+import {getRanks} from '../vuex/actions';
 import mockdata from '../../test/mock';
 export default {
   components:{vs,rankItem},
@@ -30,29 +30,23 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      ranks:[],
-      myRank: null,
-      myIndex: null,
+    
     }
 
   },
+  vuex: {
+    getters: {
+      ranks: state => state.ranks,
+      myRank: state => state.myRank,
+    },
+    actions: {
+      getRanks,
+    }
+  },
   created(){
-    const accessToken = localStorage.getItem('kf_accessToken');
-    util.getRanks(accessToken)
-    .then((res) => {
-      this.ranks = res;
-      const userid = localStorage.getItem('kf_userid');
-      // console.log('userid',userid);
-      this.ranks.some((item, index) => {
-        if (item.userid == userid) {
-          // console.log('item',item);
-          this.myRank = item;
-          this.myIndex = index+1;
-          return true;
-        }else{
-          return false;
-        }
-      })
+    this.getRanks()
+    .catch(err => {
+      console.log(err);
     })
   },
 };
