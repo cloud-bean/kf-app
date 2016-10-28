@@ -3,7 +3,7 @@
       <div class="card-header no-border">
         <div class="facebook-avatar"><img :src="taskdata.titleImage.URL" width="40" height="40"></div>
         <div class="facebook-name">{{taskdata.name}}</div>
-        <div class="facebook-date">{{taskdate}}</div>
+        <div class="facebook-date">{{taskdata.expireTime | dateFormat}}</div>
       </div>
       <!-- <div class="card-content">
         <div class="card-content-inner">
@@ -60,13 +60,10 @@ const moment = require('momentjs');
       props:['taskdata'],
       data(){
         return {
-          taskdate:'',
         }
       },
       ready(){
-         const expireTime = new Date(this.taskdata.expireTime);
-         const now = new Date();
-         this.taskdate = (expireTime - now)>0?moment(expireTime).format('YYYY-MM-DD'):'已过期';
+
       },
     }
 

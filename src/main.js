@@ -14,7 +14,7 @@ import InitPage from './pages/Init';
 import ProfilePage from './pages/Profile';
 import SignUpPage from './pages/Signup';
 import TimeLine from './components/Timeline';
-
+import { dateFormat, level } from './filter';
 /* eslint-disable no-new */
 
 // /* eslint-disable no-new */
@@ -22,6 +22,8 @@ import TimeLine from './components/Timeline';
 //   el: 'body',
 //   components: { App },
 // });
+Vue.filter('dateFormat', dateFormat);
+Vue.filter('level', level);
 
 Vue.use(VueRouter);
 Vue.use(VueResource);

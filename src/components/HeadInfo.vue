@@ -39,7 +39,7 @@
           <div class='col-33'>
             <div class="detailInfo">
               <div>等级</div>
-              <div>{{level(user.option.exp)}}</div>
+              <div>{{user.option.exp | level}}</div>
             </div>
           </div>
         </div>
