@@ -8,7 +8,7 @@
   <div class="content" novalidate>
     <div class="headimg">
 
-        <img :src="userdisplay.profileImageURL" alt="" class="avatar"/>
+        <img :src="user.profileImageURL" alt="" class="avatar"/>
       <p>
         <span class="name">{{displayName}}</span>
       </p>
@@ -45,7 +45,7 @@
             <div class="item-inner">
               <div class="item-title label">座右铭</div>
               <div class="item-input">
-                <input type="text" placeholder="" v-model="solgan">
+                <input type="text" placeholder="" v-model="slogan">
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@
     <div class="content-block">
       <div class="row">
         <div class="col-50"><a  class="button button-big button-fill button-danger" v-on:click="cleanUp">重填</a></div>
-        <div class="col-50"><a  class="button button-big button-fill button-success" v-on:click="signUp">提交</a></div>
+        <div class="col-50"><a  class="button button-big button-fill button-success" v-on:click="submit(displayName, phone, slogan)">提交</a></div>
       </div>
     </div>
   </div>
@@ -68,6 +68,7 @@
 <script>
 import config from '../config/config';
 import util from '../config/util';
+import {signUp} from '../vuex/actions';
 
 
 export default {
@@ -75,46 +76,31 @@ export default {
     return {
       displayName: '',
       phone: '',
-      headimg: '',
-      userdisplay: {},
+      slogan: '',
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
     }
   },
-  ready(){
-    this.userdisplay = JSON.parse(localStorage.getItem('kf_userInfo'));
+  vuex: {
+    actions: {
+      signUp,
+    },
+    getters: {
+      user: state => state.user,
+    }
   },
   methods: {
-    signUp() {
+    submit(displayName, phone, slogan) {
+
       if(!this.$validation1.valid){
         $.alert('请完整填写信息');
         return;
       }
-      const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
-      const phone = this.phone;
-      const solgan = this.solgan;
-      const displayName = this.displayName;
-      // const headimg = this.headimg;
-      const accessToken = localStorage.getItem('kf_accessToken');
-      const userid = localStorage.getItem('kf_userid');
-      const useroption = Object.assign(userInfo.option,{phone},{solgan});
-      const user1 = Object.assign(userInfo, useroption);
-      const user = Object.assign(user1, {displayName});
-
-      this.$http.put(`${config.route.base}/users/${user._id}`, user, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      this.signUp(displayName, phone, slogan)
       .then((result) => {
-        util.getUserInfo(userid, accessToken)
-        .then((user)=>{
-          localStorage.setItem('kf_userInfo',JSON.stringify(user));
-          this.$router.go('/task');
-        })
+        this.$router.go('/task');
       })
       .catch((err) => {
         console.log(err);

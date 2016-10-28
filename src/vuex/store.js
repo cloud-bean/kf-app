@@ -30,6 +30,10 @@ const mutations = {
     state.loading = false;
   },
 
+  SIGNUP_USER(state, user) {
+    state.user = user;
+  },
+
   GOT_MY_RANK(state, rank ,index){
     state.myRank = {};
     state.myRank.content = rank;

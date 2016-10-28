@@ -14,7 +14,7 @@
               <div class="item-title-row">
                 <div class="item-title">{{user.displayName}}</div>
               </div>
-              <div class="item-subtitle">{{user.option.solgan || 'Learning with joy, achieving with will.'}}</div>
+              <div class="item-subtitle">{{user.option.slogan || 'Learning with joy, achieving with will.'}}</div>
             </div>
           </li>
         </ul>

@@ -108,3 +108,59 @@ export const friendLike = ({ dispatch, state }, user, index, ) => {
       });
   });
 };
+
+
+export const signUp = ({ dispatch, state }, displayName, phone, slogan ) => {
+  const user = state.user;
+  const option = Object.assign({},user.option,{phone},{slogan});
+  const newuser = Object.assign({},user,{option},{displayName});
+  console.log(newuser);
+
+  return new Promise((resolve, reject) => {
+    request.put(`${config.route.base}/users/${user._id}`)
+      .send(newuser)
+      // .withCredentials()
+      .set('Authorization', `Bearer ${state.accessToken}`)
+      .then((result) => {
+        dispatch('SIGNUP_USER',newuser);
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+// signUp() {
+//   if(!this.$validation1.valid){
+//     $.alert('请完整填写信息');
+//     return;
+//   }
+//   const userInfo = JSON.parse(localStorage.getItem('kf_userInfo'));
+//   const phone = this.phone;
+//   const solgan = this.solgan;
+//   const displayName = this.displayName;
+//   // const headimg = this.headimg;
+//   const accessToken = localStorage.getItem('kf_accessToken');
+//   const userid = localStorage.getItem('kf_userid');
+//   const useroption = Object.assign(userInfo.option,{phone},{solgan});
+//   const user1 = Object.assign(userInfo, useroption);
+//   const user = Object.assign(user1, {displayName});
+//
+//   this.$http.put(`${config.route.base}/users/${user._id}`, user, {
+//     withCredentials: true,
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`,
+//     },
+//   })
+//   .then((result) => {
+//     util.getUserInfo(userid, accessToken)
+//     .then((user)=>{
+//       localStorage.setItem('kf_userInfo',JSON.stringify(user));
+//       this.$router.go('/task');
+//     })
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
+// },
