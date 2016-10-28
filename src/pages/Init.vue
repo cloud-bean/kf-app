@@ -36,44 +36,53 @@ export default {
   },
   ready(){
     this.$refs.loading.show();
-
+    let self = this;
     const query = wurl('?');
 
+    co(function * (){
+      try{
+        if(query && query.code){
+          let secret = config.secret;
+          if(process.env.NODE_ENV == 'production'){
+            yield self.auth(config.appid,query.code);
+          }else{
+            self.authLocal(secret.userid, secret.accessToken)
+          }
+          // localStorage.setItem('kf_accessToken', secret.accessToken);
+          // localStorage.setItem('kf_userid', secret.userid);
+          yield self.getUserInfo(self.userid)
+          .then((res) => {
+            if(self.user.option.phone){
+              // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+              self.$router.go('/task');
+            }else{
+              // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+              self.$router.go('/signup');
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        }else {
+          let redirctUrl = config.route.testRedirect;
+          if(process.env.NODE_ENV == 'production'){
+            redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
+          }
+          window.location.href = redirctUrl;
+        }
+      }catch(e){
+        console.log(e);
+      }
+
+    });
     // if(localStorage.getItem('kf_accessToken')){
     //   self.$router.go('/task');
     // }
-    if(query && query.code){
-      let secret = config.secret;
-      if(process.env.NODE_ENV == 'production'){
-        this.auth(config.appid,query.code);
-      }else{
-        this.authLocal(secret.userid, secret.accessToken)
-      }
-      // localStorage.setItem('kf_accessToken', secret.accessToken);
-      // localStorage.setItem('kf_userid', secret.userid);
-      this.getUserInfo(this.userid)
-      .then((res) => {
-        if(this.user.option.phone){
-          // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-          this.$router.go('/task');
-        }else{
-          // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-          this.$router.go('/signup');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
 
 
-    }
-    else {
-      let redirctUrl = config.route.testRedirect;
-      if(process.env.NODE_ENV == 'production'){
-        redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
-      }
-      window.location.href = redirctUrl;
-    }
+
+
+
   },
   methods: {
     // auth(appid, code) {

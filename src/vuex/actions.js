@@ -6,7 +6,6 @@ import config from '../config/config';
 
 
 export const auth = ({ dispatch }, appid, code) => {
-  dispatch('GET_STH_BACKEND');
   return new Promise((resolve, reject) => {
     request.get(config.route.auth)
       .query({
@@ -17,7 +16,8 @@ export const auth = ({ dispatch }, appid, code) => {
         console.log('auth', result);
         const userid = result.body.userid;
         const accessToken = result.body.accessToken;
-        return dispatch('AUTH_CLIENT', userid, accessToken);
+        dispatch('AUTH_CLIENT', userid, accessToken);
+        resolve();
       })
       .catch((err) => {
         reject(err);
@@ -30,12 +30,12 @@ export const authLocal = ({ dispatch }, userid, accessToken) => {
 };
 
 export const getUserInfo = ({ dispatch, state }, userid) => {
-  dispatch('GET_STH_BACKEND');
   return new Promise((resolve, reject) => {
     request.get(`${config.route.base}/users/${userid}`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
+        console.log('user',result.body.data);
         dispatch('GOT_USER', result.body.data);
         resolve();
       })
