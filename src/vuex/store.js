@@ -13,7 +13,7 @@ const state = {
   loading: false,
   accessToken: '',
   userid: '',
-
+  currentRoute: '',
 };
 
 const mutations = {
@@ -60,6 +60,7 @@ const mutations = {
 
   SET_ACTIVE_TASK (state, task) {
     state.activeTask = task;
+    state.currentRoute = '/taskDetail';
   },
 };
 

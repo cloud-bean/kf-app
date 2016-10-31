@@ -8,7 +8,7 @@
       暂无任务
     </p>
     <div v-for="task in tasks">
-      <task-item :taskdata="task"></task-item>
+      <task-item :taskdata="task" v-on:click="handleClick($index)"></task-item>
 
     </div>
 
@@ -25,7 +25,7 @@
     import Exp from '../components/Expbar';
     import Timeline from '../components/Timeline';
     import util from '../config/util';
-    import { getTaskList } from '../vuex/actions';
+    import { getTaskList, taskDetail } from '../vuex/actions';
 
     import { spinner } from 'vue-strap'
 
@@ -50,6 +50,12 @@
         }
 
       },
+      methods: {
+        handleClick(index){
+          this.taskDetail(index);
+          this.$router.go('/taskDetail');
+        }
+      },
       vuex: {
         getters: {
           user: state => state.user,
@@ -58,6 +64,7 @@
         },
         actions: {
           getTaskList,
+          taskDetail,
         }
       }
 

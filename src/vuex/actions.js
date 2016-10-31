@@ -131,6 +131,13 @@ export const signUp = ({ dispatch, state }, displayName, phone, slogan ) => {
   });
 };
 
+
+export const taskDetail = ({ dispatch, state }, index) => {
+  const tasks = state.tasks;
+  const current = tasks[index];
+  dispatch('SET_ACTIVE_TASK', current);
+};
+
 // signUp() {
 //   if(!this.$validation1.valid){
 //     $.alert('请完整填写信息');

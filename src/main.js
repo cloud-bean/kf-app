@@ -13,6 +13,7 @@ import TaskPage from './pages/Task';
 import InitPage from './pages/Init';
 import ProfilePage from './pages/Profile';
 import SignUpPage from './pages/Signup';
+import TaskDetailPage from './pages/TaskDetail';
 import TimeLine from './components/Timeline';
 import { dateFormat, level } from './filter';
 /* eslint-disable no-new */
@@ -47,6 +48,7 @@ router.map({
   '/task': { component: TaskPage },
   '/signup': { component: SignUpPage },
   '/profile': { component: ProfilePage },
+  '/taskDetail': { component: TaskDetailPage },
 });
 
 router.start(Vue.extend(App), 'app');
