@@ -1,7 +1,7 @@
 <template>
 
 
-  <nav class="bar bar-tab">
+  <nav class="bar bar-tab" v-if="user.option.phone">
     <a class="tab-item" v-link="{ path: '/task', activeClass: 'active', exact:true}" href="#">
       <span class="icon icon-app"></span>
       <span class="tab-label">任务</span>
@@ -47,6 +47,7 @@ import store from './vuex/store';
    vuex: {
      getters: {
        taskNotDone: state => state.taskNotDone,
+       user: state => state.user,
      }
    },
    events:{

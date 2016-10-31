@@ -21,7 +21,7 @@
           <div class="item-content">
             <div class="item-media"><i class="icon icon-form-name"></i></div>
             <div class="item-inner">
-              <div class="item-title label">姓名</div>
+              <div class="item-title label" for="displayName">姓名</div>
               <div class="item-input">
                 <input id="displayName" type="text" placeholder="" v-model="displayName" v-validate:displayName="['required']">
               </div>
@@ -32,7 +32,7 @@
           <div class="item-content">
             <div class="item-media"><i class="icon icon-form-email"></i></div>
             <div class="item-inner">
-              <div class="item-title label">手机</div>
+              <div class="item-title label" for="phone">手机</div>
               <div class="item-input">
                 <input id="phone" type="text" placeholder="" v-model="phone" v-validate:phone="['required']">
               </div>
@@ -44,7 +44,7 @@
             <div class="item-media"><i class="icon icon-form-name"></i></div>
             <div class="item-inner">
               <div class="item-title label">座右铭</div>
-              <div class="item-input">
+              <div class="item-input" for="phone">
                 <input type="text" placeholder="" v-model="slogan">
               </div>
             </div>
@@ -125,7 +125,9 @@ h3 {
   text-align: center;
   font-size: 0.5rem;
 }
-
+.label{
+  width: auto !important;
+}
 
 .avatar {
   width: 3rem;
