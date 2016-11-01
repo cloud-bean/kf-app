@@ -2,7 +2,7 @@
 
   <div class="card facebook-card">
       <div class="card-header no-border">
-        <div class="facebook-avatar"><img :src="taskdata.titleImage.URL" width="40" height="40"></div>
+        <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div>
         <div class="facebook-name">{{taskdata.name}}</div>
         <div class="facebook-date">{{taskdata.expireTime | dateFormat}}</div>
       </div>
@@ -25,22 +25,25 @@
 <script>
 
 const moment = require('momentjs');
-
+const taskType = ['语音','书写','测验','行为','市场'];
+const typeLogo = ['speak','write','test','behavior','market'];
     export default{
       props:['taskdata'],
       components: {
       },
       data(){
         return {
+          logo: null,
           showM: false,
         }
       },
-      ready(){
+      created(){
+        const index = taskType.indexOf(this.taskdata.type);
+        this.logo = require(`../assets/${typeLogo[index]}.jpg`);
 
       },
       methods: {
         show(){
-          console.log('hello');
           this.showM = true;
         }
       }

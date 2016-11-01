@@ -92,6 +92,23 @@ export const getRanks = ({ dispatch, state }) => {
   });
 };
 
+// export const getMyRank = ({ dispatch, state }) => {
+//   dispatch('GET_STH_BACKEND');
+//   return new Promise((resolve, reject) => {
+//     request.get(`${config.route.base}/ranks/me`)
+//       // .withCredentials()
+//       .set('Authorization', `Bearer ${state.accessToken}`)
+//       .then((result) => {
+//         console.log(result);
+//         const rank = result.body.data;
+//         dispatch('GOT_MY_RANK', rank);
+//       })
+//       .catch((err) => {
+//         reject(err);
+//       });
+//   });
+// };
+
 export const friendLike = ({ dispatch, state }, user, index, ) => {
   if (user.isUpVoted) return;
   dispatch('LIKE_FRIEND',index - 1);

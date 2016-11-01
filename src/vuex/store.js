@@ -34,12 +34,6 @@ const mutations = {
     state.user = user;
   },
 
-  GOT_MY_RANK(state, rank ,index){
-    state.myRank = {};
-    state.myRank.content = rank;
-    state.myRank.index = index;
-  },
-
   GOT_TASKS(state, tasks) {
     state.tasks = tasks;
     state.loading = false;
@@ -53,6 +47,16 @@ const mutations = {
     state.ranks = ranks;
     state.loading = false;
   },
+  GOT_MY_RANK(state, rank ,index){
+    state.myRank = {};
+    state.myRank.content = rank;
+    state.myRank.index = index;
+  },
+
+  // GOT_MY_RANK (state, rank) {
+  //   state.myRank = rank;
+  //   state.loading = false;
+  // },
   LIKE_FRIEND(state, index){
     state.ranks[index].isUpVoted = true;
     state.ranks[index].upCount++;
