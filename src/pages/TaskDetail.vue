@@ -10,19 +10,19 @@
    </div>
    <div class="card-content">
      <div class="card-content-inner">
-       <p class="color-gray">发表于 2015/01/15</p>
-       <p>{{task.subject}}</p>
-       <p>{{task.subject}}</p>
-       <p>{{task.subject}}</p>
-       <p>{{task.subject}}</p>
-
+       <ul>
+         <li>发布 {{task.created | dateFormat}}</li>
+         <li>过期 {{task.expireTime | dateFormat}}</li>
+         <li>类型 {{task.type}}</li>
+       </ul>
+       <p class="grey">任务详情:</p>
+       <p>{{task.description}}</p>
      </div>
    </div>
    <div class="card-footer">
-     <!-- <a href="#" class="link">赞</a>
-     <a href="#" class="link">更多</a> -->
-     <!-- <audio controls="controls" style="width:100%"> -->
-
+     <span>难度:{{task.difficult}}</span>
+     <span>经验:{{task.exp}}</span>
+     <span>金币:{{task.goldToken}}</span>
      </audio>
    </div>
  </div>

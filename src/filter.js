@@ -3,6 +3,12 @@ const moment = require('momentjs');
 export const dateFormat = (expireTime) => {
   const expireTimel = new Date(expireTime);
   const now = new Date();
+  const result = moment(expireTime).format('YYYY-MM-DD');
+  return result;
+};
+export const dateFormat1 = (expireTime) => {
+  const expireTimel = new Date(expireTime);
+  const now = new Date();
   const result = (expireTimel - now) > 0 ? moment(expireTime).format('YYYY-MM-DD') : '已过期';
   return result;
 };
