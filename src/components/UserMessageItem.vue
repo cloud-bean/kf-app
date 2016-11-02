@@ -2,24 +2,24 @@
   <div class="content-padded">
     <div class="row">
       <div class="col-15">
-          <img src="../../static/head.jpg"  class="userhead" alt="" />
+          <img :src="data.user.profileImageURL"  class="userhead" alt="" />
       </div>
       <div class="col-85">
         <div class="username">
-          辛那克斯 <span class="time">@ 2016.11.1 10:31</span>
+          {{data.user.displayName}} <span class="time">@ {{data.created | dateFormat}}</span>
         </div>
         <div class="message">
-            今天的留言棒棒哒，今天的留言棒棒哒，今天的留言棒棒哒，今天的留言棒棒哒，今天的留言棒棒哒，今天的留言棒棒哒。
+            {{data.content}}
         </div>
       </div>
     </div>
   </div>
 
-
 </template>
 
 <script>
 export default {
+  props:['data'],
 }
 </script>
 

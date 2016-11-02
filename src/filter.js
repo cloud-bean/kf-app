@@ -3,7 +3,7 @@ const moment = require('momentjs');
 export const dateFormat = (expireTime) => {
   const expireTimel = new Date(expireTime);
   const now = new Date();
-  const result = moment(expireTime).format('YYYY-MM-DD');
+  const result = moment(expireTime).format('YYYY-MM-DD HH:mm');
   return result;
 };
 export const dateFormat1 = (expireTime) => {
