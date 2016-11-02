@@ -14,6 +14,7 @@ const state = {
   accessToken: '',
   userid: '',
   currentRoute: '',
+  feedbacks: [],
 };
 
 const mutations = {
@@ -65,6 +66,12 @@ const mutations = {
   SET_ACTIVE_TASK (state, task) {
     state.activeTask = task;
     state.currentRoute = '/taskDetail';
+  },
+  LEAVE_FEEDBACK(state, feedback){
+    state.feedbacks.splice(0, 0, feedback);
+  },
+  GOT_FEEDBACKS(state, feedbacks){
+    state.feedbacks = feedbacks;
   },
 };
 

@@ -154,6 +154,47 @@ export const taskDetail = ({ dispatch, state }, index) => {
   const current = tasks[index];
   dispatch('SET_ACTIVE_TASK', current);
 };
+export const leaveFeedback = ({ dispatch, state }, content) => {
+  dispatch('GET_STH_BACKEND');
+  const user = {
+    displayName: state.user.displayName,
+    profileImageURL: state.user.profileImageURL,
+  };
+  const feedback = {
+    content,
+    user,
+    created: Date.now(),
+  };
+  console.log(feedback);
+  return new Promise((resolve, reject) => {
+    request.post(`${config.route.base}/feedbacks`)
+      .send(feedback)
+      // .withCredentials()
+      .set('Authorization', `Bearer ${state.accessToken}`)
+      .then((result) => {
+        dispatch('LEAVE_FEEDBACK', feedback);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+export const getFeedbacks = ({ dispatch, state }) => {
+  dispatch('GET_STH_BACKEND');
+  return new Promise((resolve, reject) => {
+    request.get(`${config.route.base}/feedbacks`)
+      // .withCredentials()
+      .set('Authorization', `Bearer ${state.accessToken}`)
+      .then((result) => {
+        const feedbacks = result.body.data;
+        dispatch('GOT_FEEDBACKS', feedbacks);
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
 // signUp() {
 //   if(!this.$validation1.valid){
