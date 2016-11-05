@@ -8,7 +8,7 @@ export default {
     testRedirect: 'http://localhost:8080?code=123',
   },
   secret: {
-    accessToken: '171a11a06f48af705a48169ec46a07e9d49ac4ed2ee59eeffda0a1cb42a1c175',
+    accessToken: '54a4ac695283ef63aca2d0766a03a7bc58b9942aba5cd0824987dcc8db3522f5',
     userid: '5817407d2a2d3adc2032290e',
   },
 };

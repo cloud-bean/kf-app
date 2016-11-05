@@ -42,13 +42,20 @@
           };
       },
       created(){
+
+
+      },
+      ready(){
         if(this.tasks.length==0){
           this.getTaskList()
-            .catch(err => {
+          .then(res => {
+            $.hidePreloader();
+          })
+          .catch(err => {
               console.log(err);
           });
         }
-
+        $.hidePreloader();
       },
       methods: {
         handleClick(index){

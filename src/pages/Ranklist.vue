@@ -44,10 +44,20 @@ export default {
     }
   },
   created(){
-    this.getRanks()
-    .catch(err => {
-      console.log(err);
-    })
+
+  },
+  ready(){
+    if(this.ranks.length == 0){
+      $.showPreloader('加载中...');
+      this.getRanks()
+      .then((res) => {
+        $.hidePreloader();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+
   },
 };
 </script>

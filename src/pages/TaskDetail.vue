@@ -23,7 +23,6 @@
      <span>难度:{{task.difficult}}</span>
      <span>经验:{{task.exp}}</span>
      <span>金币:{{task.goldToken}}</span>
-     </audio>
    </div>
  </div>
 </template>

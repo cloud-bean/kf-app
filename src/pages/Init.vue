@@ -1,6 +1,6 @@
 
 <template>
-  <spinner v-ref:loading fixed="true" size="md" fixed text="Loading"></spinner>
+  <!-- <spinner v-ref:loading fixed="true" size="md" fixed text="Loading"></spinner> -->
 </template>
 
 <script>
@@ -9,6 +9,7 @@ import util from '../config/util';
 import { spinner } from 'vue-strap';
 import mockdata from '../../test/mock';
 import { auth, getUserInfo, authLocal } from '../vuex/actions';
+import {loader} from '../config/util'
 
 const wurl = require('wurl');
 const co = require('co');
@@ -35,7 +36,8 @@ export default {
     }
   },
   ready(){
-    this.$refs.loading.show();
+    $.showPreloader('加载中...');
+    // this.$refs.loading.show();
     let self = this;
     const query = wurl('?');
 
