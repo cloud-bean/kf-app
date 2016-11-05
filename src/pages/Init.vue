@@ -36,7 +36,6 @@ export default {
     }
   },
   ready(){
-    $.showPreloader('加载中...');
     // this.$refs.loading.show();
     let self = this;
     const query = wurl('?');
@@ -44,6 +43,7 @@ export default {
     co(function * (){
       try{
         if(query && query.code){
+          $.showPreloader('加载中...');
           let secret = config.secret;
           if(process.env.NODE_ENV == 'production'){
             yield self.auth(config.appid,query.code);
@@ -54,6 +54,7 @@ export default {
           // localStorage.setItem('kf_userid', secret.userid);
           yield self.getUserInfo(self.userid)
           .then((res) => {
+            $.hidePreloader();
             if(self.user.option.phone){
               // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
               self.$router.go('/task');

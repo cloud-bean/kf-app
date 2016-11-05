@@ -47,6 +47,7 @@
       },
       ready(){
         if(this.tasks.length==0){
+          $.showPreloader('加载中...');
           this.getTaskList()
           .then(res => {
             $.hidePreloader();
@@ -55,7 +56,6 @@
               console.log(err);
           });
         }
-        $.hidePreloader();
       },
       methods: {
         handleClick(index){

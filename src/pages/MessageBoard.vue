@@ -28,7 +28,6 @@ export default {
   },
   ready(){
     if(this.feedbacks.length == 0){
-      console.log('111');
       $.showPreloader('加载中...');
       this.getFeedbacks()
       .then(res => {
