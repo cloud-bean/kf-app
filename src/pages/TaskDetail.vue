@@ -1,4 +1,6 @@
 <template lang="html">
+  <div class="content">
+
   <div class="card demo-card-header-pic">
    <div valign="bottom" class="card-header color-white no-border no-padding">
      <div class="image-wrapper">
@@ -15,8 +17,11 @@
          <li>过期 {{task.expireTime | dateFormat}}</li>
          <li>类型 {{task.type}}</li>
        </ul>
-       <p class="grey">任务详情:</p>
-       <p>{{task.description}}</p>
+       <div class="desc">
+         <h1 class="grey">任务详情:</h1>
+         {{{tansMarkdown(task.description)}}}
+       </div>
+
      </div>
    </div>
    <div class="card-footer">
@@ -25,9 +30,12 @@
      <span>金币:{{task.goldToken}}</span>
    </div>
  </div>
+</div>
+
 </template>
 
 <script>
+const markdown = require('markdown').markdown;
 export default {
   data: function () {
     return {
@@ -41,7 +49,11 @@ export default {
   computed: {},
   ready: function () {},
   attached: function () {},
-  methods: {},
+  methods: {
+    tansMarkdown(content){
+      return markdown.toHTML(content);
+    },
+  },
   components: {}
 }
 </script>
@@ -65,5 +77,14 @@ overflow: hidden;
 .image-wrapper{
   width: 100% !important;
   position:relative;
+}
+.desc h1 {
+  font-size: 1rem;
+}
+.desc h2 {
+  font-size: 0.8rem;
+}
+.desc h3 {
+  font-size: 0.6rem;
 }
 </style>

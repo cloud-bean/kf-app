@@ -16,6 +16,7 @@
     "co": "^4.6.0",
     "echarts": "^3.2.3",
     "js-url": "^2.3.0",
+    "markdown": "^0.5.0",
     "mint-ui": "^0.2.10",
     "moment-timezone": "^0.5.7",
     "momentjs": "^1.1.17",
