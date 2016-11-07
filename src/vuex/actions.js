@@ -56,7 +56,6 @@ export const  getTaskList = ({ dispatch, state }) => {
         const taskNotDone = tasks.filter((item) => {
           return (!item.isDone);
         });
-        console.log(tasks);
         dispatch('TASK_NOT_DONE', taskNotDone.length);
         dispatch('GOT_TASKS', tasks);
         resolve();
