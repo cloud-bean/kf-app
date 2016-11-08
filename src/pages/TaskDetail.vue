@@ -7,6 +7,7 @@
        <img class='card-cover' :src="task.titleImage.URL" style="height:8rem;"  alt="">
        <div class="image-content">
          <span class="task-title">{{task.name}}</span>
+
        </div>
      </div>
    </div>
@@ -21,13 +22,21 @@
          <h1 class="grey">任务详情:</h1>
          {{{tansMarkdown(task.description)}}}
        </div>
-
      </div>
    </div>
    <div class="card-footer">
-     <span>难度:{{task.difficult}}</span>
+     <!-- <span>难度:{{task.difficult}}</span>
      <span>经验:{{task.exp}}</span>
-     <span>金币:{{task.goldToken}}</span>
+     <span>金币:{{task.goldToken}}</span> -->
+     <head-list></head-list>
+
+   </div>
+ </div>
+ <message-input></message-input>
+
+ <div class="content-padded">
+   <div v-for="feedback in feedbacks" class="message-item">
+     <message-item :data="feedback"></message-item>
    </div>
  </div>
 </div>
@@ -35,6 +44,10 @@
 </template>
 
 <script>
+import HeadList from '../components/HeadList';
+import MessageItem from '../components/MessageItem';
+import MessageInput from '../components/MessageInput';
+
 const markdown = require('markdown').markdown;
 export default {
   data: function () {
@@ -54,7 +67,11 @@ export default {
       return markdown.toHTML(content);
     },
   },
-  components: {}
+  components: {
+    HeadList,
+    MessageItem,
+    MessageInput,
+  }
 }
 </script>
 

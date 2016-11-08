@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import MessageItem from '../components/UserMessageItem';
+import MessageItem from '../components/MessageItem';
 import MessageInput from '../components/MessageInput';
 import { getFeedbacks } from '../vuex/actions';
 export default {
