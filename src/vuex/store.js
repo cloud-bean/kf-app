@@ -10,6 +10,7 @@ const state = {
   ranks: [],
   myRank: null,
   activeTask: {},
+  activeComments:[],
   loading: false,
   accessToken: '',
   userid: '',
@@ -76,10 +77,14 @@ const mutations = {
   SET_TASK_COMMENT (state, comment) {
     // if(state.activeTask.commits==undefined)
     //   state.activeTask.commits=[];
-    state.activeTask.commits.splice(0, 0, comment);
+    state.activeComments.splice(0, 0, comment);
   },
   GOT_TASK_COMMENTS(state, comments){
-    state.activeTask.commits = comments;
+    state.activeComments = comments;
+  },
+  CLEAR_TASK_COMMENTS(state){
+    state.activeComments = [];
+
   },
 };
 

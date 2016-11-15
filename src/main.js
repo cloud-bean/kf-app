@@ -18,7 +18,7 @@ import MessageBoardPage from './pages/MessageBoard';
 import CommentInputPage from './pages/CommentInput';
 
 import TimeLine from './components/Timeline';
-import { dateFormat, level } from './filter';
+import { dateFormat1, dateFormat, level } from './filter';
 /* eslint-disable no-new */
 
 // /* eslint-disable no-new */
@@ -27,6 +27,8 @@ import { dateFormat, level } from './filter';
 //   components: { App },
 // });
 Vue.filter('dateFormat', dateFormat);
+Vue.filter('dateFormat1', dateFormat1);
+
 Vue.filter('level', level);
 
 Vue.use(VueRouter);

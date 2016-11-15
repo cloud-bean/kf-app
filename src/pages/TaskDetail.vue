@@ -7,6 +7,7 @@
        <img class='card-cover' :src="task.titleImage.URL" style="height:8rem;"  alt="">
        <div class="image-content">
          <span class="task-title">{{task.name}}</span>
+
        </div>
      </div>
    </div>
@@ -29,15 +30,15 @@
      </div>
 
    </div>
-   <div class="card-footer complete-list">
+   <div class="card-footer">
      <!-- <span>难度:{{task.difficult}}</span>
      <span>经验:{{task.exp}}</span>
      <span>金币:{{task.goldToken}}</span> -->
+       <head-list :user-list="task.taskDoneUsers"></head-list>
 
    </div>
-
-
  </div>
+
  <div v-for="comment in comments" class="message-item">
    <message-item :data="comment"></message-item>
  </div>
@@ -47,8 +48,11 @@
 </template>
 
 <script>
+import HeadList from '../components/HeadList';
+import MessageItem from '../components/MessageItem';
+import MessageInput from '../components/MessageInput';
+
 const markdown = require('markdown').markdown;
-import MessageItem from '../components/UserMessageItem';
 import { getComments } from '../vuex/actions';
 export default {
   data: function () {
@@ -57,11 +61,12 @@ export default {
   },
   components: {
     MessageItem,
+    HeadList
   },
   vuex: {
     getters: {
       task : state => state.activeTask,
-      comments: state => state.activeTask.commits,
+      comments: state => state.activeComments,
     },
     actions: {
       getComments,
@@ -81,7 +86,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .image-content{
 position: absolute;
 z-index: 1;
@@ -112,5 +117,11 @@ overflow: hidden;
 }
 .message-item {
   margin-top: 0.8rem;
+}
+.card-footer{
+  background-color: #eee;
+}
+.complete-list{
+
 }
 </style>

@@ -56,7 +56,6 @@ export const  getTaskList = ({ dispatch, state }) => {
         const taskNotDone = tasks.filter((item) => {
           return (!item.isDone);
         });
-        console.log(tasks);
         dispatch('TASK_NOT_DONE', taskNotDone.length);
         dispatch('GOT_TASKS', tasks);
         resolve();
@@ -181,7 +180,7 @@ export const leaveComment = ({ dispatch, state }, content, taskId) => {
 };
 
 export const getComments = ({ dispatch, state }, taskId) => {
-  dispatch('GET_STH_BACKEND');
+  dispatch('CLEAR_TASK_COMMENTS');
   return new Promise((resolve, reject) => {
     request.get(`${config.route.base}/tasks/${taskId}/commits`)
       // .withCredentials()
