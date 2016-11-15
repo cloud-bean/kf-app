@@ -67,11 +67,19 @@ const mutations = {
     state.activeTask = task;
     state.currentRoute = '/taskDetail';
   },
-  LEAVE_FEEDBACK(state, feedback){
-    state.feedbacks.splice(0, 0, feedback);
+  // LEAVE_FEEDBACK(state, feedback){
+  //   state.feedbacks.splice(0, 0, feedback);
+  // },
+  // GOT_FEEDBACKS(state, feedbacks){
+  //   state.feedbacks = feedbacks;
+  // },
+  SET_TASK_COMMENT (state, comment) {
+    // if(state.activeTask.commits==undefined)
+    //   state.activeTask.commits=[];
+    state.activeTask.commits.splice(0, 0, comment);
   },
-  GOT_FEEDBACKS(state, feedbacks){
-    state.feedbacks = feedbacks;
+  GOT_TASK_COMMENTS(state, comments){
+    state.activeTask.commits = comments;
   },
 };
 

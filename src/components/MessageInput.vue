@@ -2,12 +2,12 @@
   <div class="input-area">
 
   <div class="">
-    留言板
+    讨论区
   </div>
-  <textarea class="message-input" v-model="feedback"></textarea>
+  <textarea class="message-input" v-model="comment"></textarea>
   <div class="row">
 
-      <button v-on:click="handClick" class="button button-fill button-success leave-message-button">留言</button>
+      <button v-on:click="leaveMessage" class="button button-fill button-success leave-message-button">留言</button>
 
   </div>
 </div>
@@ -15,28 +15,32 @@
 </template>
 
 <script>
-import { leaveFeedback } from '../vuex/actions'
 
 export default {
   vuex: {
-    actions: {
-      leaveFeedback,
+    getters: {
+      activeTask: state => state.activeTask,
     }
   },
+  props:['handleClick'],
   data(){
     return {
-      feedback:'',
+      comment:'',
     }
   },
   methods: {
-    handClick(){
-      if(this.feedback === ''){
+    leaveMessage(){
+      if(this.comment === ''){
         $.alert('总还是要说点什么吧，科科')
-      }else if(this.feedback.length>280){
+      }else if(this.comment.length>280){
         $.alert('话那么多，哼')
       }else{
-        this.leaveFeedback(this.feedback);
-        this.feedback = '';
+        this.handleClick(this.comment, this.activeTask._id)
+        .then(()=>{
+          this.comment = '';
+          this.$router.go('/taskDetail');
+        })
+
       }
     }
   }

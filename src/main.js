@@ -15,6 +15,7 @@ import ProfilePage from './pages/Profile';
 import SignUpPage from './pages/Signup';
 import TaskDetailPage from './pages/TaskDetail';
 import MessageBoardPage from './pages/MessageBoard';
+import CommentInputPage from './pages/CommentInput';
 
 import TimeLine from './components/Timeline';
 import { dateFormat, level } from './filter';
@@ -52,6 +53,7 @@ router.map({
   '/profile': { component: ProfilePage },
   '/taskDetail': { component: TaskDetailPage },
   '/messageBoard': { component: MessageBoardPage },
+  '/taskComment': {component: CommentInputPage},
 });
 
 router.start(Vue.extend(App), 'app');

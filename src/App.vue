@@ -11,10 +11,10 @@
       <span class="icon icon-friends"></span>
       <span class="tab-label">排行</span>
     </a>
-    <a class="tab-item" v-link="{ path: '/messageBoard', activeClass: 'active', exact:true}" href="#">
+    <!-- <a class="tab-item" v-link="{ path: '/messageBoard', activeClass: 'active', exact:true}" href="#">
       <span class="icon icon-edit"></span>
       <span class="tab-label">留言</span>
-    </a>
+    </a> -->
     <!-- <a class="tab-item" href="#">
       <span class="icon icon-star"></span>
       <span class="tab-label">收藏</span>

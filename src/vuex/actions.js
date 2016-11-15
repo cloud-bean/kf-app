@@ -154,40 +154,41 @@ export const taskDetail = ({ dispatch, state }, index) => {
   const current = tasks[index];
   dispatch('SET_ACTIVE_TASK', current);
 };
-export const leaveFeedback = ({ dispatch, state }, content) => {
+
+
+export const leaveComment = ({ dispatch, state }, content, taskId) => {
   dispatch('GET_STH_BACKEND');
   const user = {
     displayName: state.user.displayName,
     profileImageURL: state.user.profileImageURL,
   };
-  const feedback = {
+  const comment = {
     content,
-    user,
-    created: Date.now(),
   };
-  console.log(feedback);
   return new Promise((resolve, reject) => {
-    request.post(`${config.route.base}/feedbacks`)
-      .send(feedback)
+    request.post(`${config.route.base}/tasks/${taskId}/commits`)
+      .send(comment)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
-        dispatch('LEAVE_FEEDBACK', feedback);
+        dispatch('SET_TASK_COMMENT', result.data);
+        resolve();
       })
       .catch((err) => {
         reject(err);
       });
   });
 };
-export const getFeedbacks = ({ dispatch, state }) => {
+
+export const getComments = ({ dispatch, state }, taskId) => {
   dispatch('GET_STH_BACKEND');
   return new Promise((resolve, reject) => {
-    request.get(`${config.route.base}/feedbacks`)
+    request.get(`${config.route.base}/tasks/${taskId}/commits`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
-        const feedbacks = result.body.data;
-        dispatch('GOT_FEEDBACKS', feedbacks);
+        const comments = result.body.data;
+        dispatch('GOT_TASK_COMMENTS', comments);
         resolve();
       })
       .catch((err) => {

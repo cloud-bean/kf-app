@@ -20,41 +20,64 @@
        <div class="desc">
          <h1 class="grey">任务详情:</h1>
          {{{tansMarkdown(task.description)}}}
+         <!-- <h1 class="grey">老师评价:</h1> -->
+         <!-- {{task}} -->
        </div>
+       <p><a v-on:click="handleComment" class="button">讨论任务</a></p>
+
 
      </div>
+
    </div>
-   <div class="card-footer">
-     <span>难度:{{task.difficult}}</span>
+   <div class="card-footer complete-list">
+     <!-- <span>难度:{{task.difficult}}</span>
      <span>经验:{{task.exp}}</span>
-     <span>金币:{{task.goldToken}}</span>
+     <span>金币:{{task.goldToken}}</span> -->
+
    </div>
+
+
  </div>
+ <div v-for="comment in comments" class="message-item">
+   <message-item :data="comment"></message-item>
+ </div>
+
 </div>
 
 </template>
 
 <script>
 const markdown = require('markdown').markdown;
+import MessageItem from '../components/UserMessageItem';
+import { getComments } from '../vuex/actions';
 export default {
   data: function () {
     return {
     }
   },
+  components: {
+    MessageItem,
+  },
   vuex: {
     getters: {
       task : state => state.activeTask,
+      comments: state => state.activeTask.commits,
+    },
+    actions: {
+      getComments,
     }
   },
-  computed: {},
-  ready: function () {},
-  attached: function () {},
+  created() {
+    this.getComments(this.task._id);
+  },
   methods: {
     tansMarkdown(content){
       return markdown.toHTML(content);
     },
+    handleComment(){
+      this.$router.go('/taskComment');
+    },
   },
-  components: {}
 }
 </script>
 
@@ -86,5 +109,8 @@ overflow: hidden;
 }
 .desc h3 {
   font-size: 0.6rem;
+}
+.message-item {
+  margin-top: 0.8rem;
 }
 </style>
