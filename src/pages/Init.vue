@@ -8,11 +8,13 @@ import config from '../config/config';
 import util from '../config/util';
 import { spinner } from 'vue-strap';
 import mockdata from '../../test/mock';
-import { auth, getUserInfo, authLocal } from '../vuex/actions';
+import { auth, getUserInfo, authLocal, getJsConfig } from '../vuex/actions';
 import {loader} from '../config/util'
 
 const wurl = require('wurl');
 const co = require('co');
+const wx = require('weixin-js-sdk');
+
 
 export default {
   data() {
@@ -28,18 +30,21 @@ export default {
       loading: state => state.loading,
       userid: state => state.userid,
       user: state => state.user,
+      jsConfig: state => state.jsConfig,
     },
     actions: {
       auth,
       getUserInfo,
       authLocal,
+      getJsConfig,
     }
   },
   ready(){
     // this.$refs.loading.show();
     let self = this;
     const query = wurl('?');
-
+    const url = wurl();
+    const sendUrl = url.split('#')[0];
     co(function * (){
       try{
         if(query && query.code){
@@ -47,9 +52,11 @@ export default {
           let secret = config.secret;
           if(process.env.NODE_ENV == 'production'){
             yield self.auth(config.appid,query.code);
+            yield self.getJsConfig(sendUrl);
           }else{
             self.authLocal(secret.userid, secret.accessToken)
           }
+          wx.config(self.jsConfig);
           // localStorage.setItem('kf_accessToken', secret.accessToken);
           // localStorage.setItem('kf_userid', secret.userid);
           yield self.getUserInfo(self.userid)

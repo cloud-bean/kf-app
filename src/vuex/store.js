@@ -16,6 +16,7 @@ const state = {
   userid: '',
   currentRoute: '',
   feedbacks: [],
+  jsConfig:{},
 };
 
 const mutations = {
@@ -84,7 +85,9 @@ const mutations = {
   },
   CLEAR_TASK_COMMENTS(state){
     state.activeComments = [];
-
+  },
+  SET_JS_CONFIG(state, config){
+    state.jsConfig = config;
   },
 };
 

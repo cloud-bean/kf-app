@@ -2,12 +2,11 @@ const request = require('superagent');
 // const querystring = require('querystring');
 // const localMoment = require('momentjs');
 import config from '../config/config';
-
-
+const wurl = require('wurl');
 
 export const auth = ({ dispatch }, appid, code) => {
   return new Promise((resolve, reject) => {
-    request.get(config.route.auth)
+    request.get(`${config.route.little}/auth/`)
       .query({
         appid,
         code,
@@ -196,6 +195,22 @@ export const getComments = ({ dispatch, state }, taskId) => {
   });
 };
 
+export const getJsConfig = ({ dispatch, state }, url) => {
+  dispatch('GET_STH_BACKEND');
+
+  return new Promise((resolve, reject) => {
+    request.post(`${config.route.little}/jssdk/`)
+      .send({url})
+      .then((result) => {
+        console.log(result.data);
+        dispatch('SET_JS_CONFIG', result.data);
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 // signUp() {
 //   if(!this.$validation1.valid){
 //     $.alert('请完整填写信息');

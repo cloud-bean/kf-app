@@ -5,6 +5,7 @@ import App from './App';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 const VueValidator = require('vue-validator');
+const wx = require('weixin-js-sdk');
 
 
 import RankPage from './pages/Ranklist';

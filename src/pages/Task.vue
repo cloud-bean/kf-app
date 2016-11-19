@@ -2,6 +2,7 @@
 
   <info :user="user"></info>
   <div class="content-block-title mytitle">任务列表</div>
+  <!-- <p><a v-on:click="getJsConfig" class="button">getjsConfig</a></p> -->
 
   <div class="tasklist" >
     <p v-if="tasks.length==0" class="no-task">
