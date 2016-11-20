@@ -3,10 +3,13 @@ const request = require('superagent');
 // const localMoment = require('momentjs');
 import config from '../config/config';
 const wurl = require('wurl');
+const bigServer = config.server.bigServer;
+let midServer = config.server.midServer;
+
 
 export const auth = ({ dispatch }, appid, code) => {
   return new Promise((resolve, reject) => {
-    request.get(`${config.route.little}/auth/`)
+    request.get(`${midServer}/admin/auth/`)
       .query({
         appid,
         code,
@@ -30,7 +33,7 @@ export const authLocal = ({ dispatch }, userid, accessToken) => {
 
 export const getUserInfo = ({ dispatch, state }, userid) => {
   return new Promise((resolve, reject) => {
-    request.get(`${config.route.base}/users/${userid}`)
+    request.get(`${bigServer}/users/${userid}`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
@@ -47,7 +50,7 @@ export const getUserInfo = ({ dispatch, state }, userid) => {
 export const  getTaskList = ({ dispatch, state }) => {
   dispatch('GET_STH_BACKEND');
   return new Promise((resolve, reject) => {
-    request.get(`${config.route.base}/tasks/`)
+    request.get(`${bigServer}/tasks/`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
@@ -68,7 +71,7 @@ export const  getTaskList = ({ dispatch, state }) => {
 export const getRanks = ({ dispatch, state }) => {
   dispatch('GET_STH_BACKEND');
   return new Promise((resolve, reject) => {
-    request.get(`${config.route.base}/ranks`)
+    request.get(`${bigServer}/ranks`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
@@ -111,7 +114,7 @@ export const friendLike = ({ dispatch, state }, user, index, ) => {
   if (user.isUpVoted) return;
   dispatch('LIKE_FRIEND',index - 1);
   return new Promise((resolve, reject) => {
-    request.post(`${config.route.base}/upVotes`)
+    request.post(`${bigServer}/upVotes`)
       .send({ userId: user.userid })
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
@@ -132,7 +135,7 @@ export const signUp = ({ dispatch, state }, displayName, phone, slogan ) => {
   console.log(newuser);
 
   return new Promise((resolve, reject) => {
-    request.put(`${config.route.base}/users/${user._id}`)
+    request.put(`${bigServer}/users/${user._id}`)
       .send(newuser)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
@@ -164,7 +167,7 @@ export const leaveComment = ({ dispatch, state }, content, taskId) => {
     content,
   };
   return new Promise((resolve, reject) => {
-    request.post(`${config.route.base}/tasks/${taskId}/commits`)
+    request.post(`${bigServer}/tasks/${taskId}/commits`)
       .send(comment)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
@@ -181,7 +184,7 @@ export const leaveComment = ({ dispatch, state }, content, taskId) => {
 export const getComments = ({ dispatch, state }, taskId) => {
   dispatch('CLEAR_TASK_COMMENTS');
   return new Promise((resolve, reject) => {
-    request.get(`${config.route.base}/tasks/${taskId}/commits`)
+    request.get(`${bigServer}/tasks/${taskId}/commits`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
@@ -199,11 +202,11 @@ export const getJsConfig = ({ dispatch, state }, url) => {
   dispatch('GET_STH_BACKEND');
 
   return new Promise((resolve, reject) => {
-    request.post(`${config.route.little}/jssdk/`)
+    request.post(`${midServer}/admin/jssdk/`)
       .send({url})
       .then((result) => {
-        console.log(result.data);
-        dispatch('SET_JS_CONFIG', result.data);
+        console.log(result.body);
+        dispatch('SET_JS_CONFIG', result.body);
         resolve();
       })
       .catch((err) => {

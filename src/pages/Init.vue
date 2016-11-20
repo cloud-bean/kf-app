@@ -16,6 +16,7 @@ const co = require('co');
 const wx = require('weixin-js-sdk');
 
 
+
 export default {
   data() {
     return {
@@ -74,9 +75,11 @@ export default {
             console.log(err);
           })
         }else {
+
+
           let redirctUrl = config.route.testRedirect;
           if(process.env.NODE_ENV == 'production'){
-            redirctUrl = util.getAuthorizeURL(config.appid,'http://joywill.cc/', 'wechat', 'snsapi_userinfo');
+            redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
           }
           window.location.href = redirctUrl;
         }
