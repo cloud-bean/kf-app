@@ -38,7 +38,8 @@ const mutations = {
   },
 
   GOT_TASKS(state, tasks) {
-    state.tasks = tasks;
+    state.tasks =  state.tasks.concat(tasks);
+    // state.tasks = tasks;
     state.loading = false;
   },
 

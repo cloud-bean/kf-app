@@ -47,20 +47,20 @@ export const getUserInfo = ({ dispatch, state }, userid) => {
   });
 };
 
-export const  getTaskList = ({ dispatch, state }) => {
+export const  getTaskList = ({ dispatch, state }, page) => {
   dispatch('GET_STH_BACKEND');
   return new Promise((resolve, reject) => {
-    request.get(`${bigServer}/tasks/`)
+    request.get(`${bigServer}/tasks?page=${page}&limit=${config.task.limit}`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
         const tasks = result.body.data;
-        const taskNotDone = tasks.filter((item) => {
-          return (!item.isDone);
-        });
-        dispatch('TASK_NOT_DONE', taskNotDone.length);
+        // const taskNotDone = tasks.filter((item) => {
+        //   return (!item.isDone);
+        // });
+        // dispatch('TASK_NOT_DONE', taskNotDone.length);
         dispatch('GOT_TASKS', tasks);
-        resolve();
+        resolve(tasks);
       })
       .catch((err) => {
         reject(err);

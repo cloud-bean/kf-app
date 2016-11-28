@@ -1,11 +1,11 @@
 export default {
-  // appid: 'wxb3762a929cf9e070',
-  appid: 'wxf8e294c011cd47e1',
+  appid: 'wxb3762a929cf9e070',
+  // appid: 'wxf8e294c011cd47e1',
 
   // appsecret: '0a607b7dc2ff4fa027b8594a99f9e086',
   server:{
-    // midServer:'http://joywill.cc',
-    midServer:'http://sab4h63cag.proxy.qqbrowser.cc',
+    midServer:'http://joywill.cc',
+    // midServer:'http://sab4h63cag.proxy.qqbrowser.cc',
     bigServer:'http://120.25.227.156:7000/api/base',
   },
   route: {
@@ -14,7 +14,10 @@ export default {
     testRedirect: 'http://localhost:8080?code=123',
   },
   secret: {
-    accessToken: '47cfb6bfee3ce40490a9167533c9f39e7307ffb97463d11a62e723e3185860de',
+    accessToken: '8ffb96871d4744dcb96c002d93c3286510933468faa11b67163f71d7149a7335',
     userid: '5817407d2a2d3adc2032290e',
+  },
+  task:{
+    limit:10,
   },
 };

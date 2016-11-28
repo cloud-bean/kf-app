@@ -53,11 +53,11 @@ export default {
           let secret = config.secret;
           if(process.env.NODE_ENV == 'production'){
             yield self.auth(config.appid,query.code);
-            yield self.getJsConfig(sendUrl);
+            // yield self.getJsConfig(sendUrl);
           }else{
             self.authLocal(secret.userid, secret.accessToken)
           }
-          wx.config(self.jsConfig);
+          // wx.config(self.jsConfig);
           // localStorage.setItem('kf_accessToken', secret.accessToken);
           // localStorage.setItem('kf_userid', secret.userid);
           yield self.getUserInfo(self.userid)

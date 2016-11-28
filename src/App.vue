@@ -5,7 +5,7 @@
     <a class="tab-item" v-link="{ path: '/task', activeClass: 'active', exact:true}" href="#">
       <span class="icon icon-app"></span>
       <span class="tab-label">任务</span>
-      <span class="badge" v-if="taskNotDone")>{{taskNotDone}}</span>
+      <!-- <span class="badge" v-if="taskNotDone")>{{taskNotDone}}</span> -->
     </a>
     <a class="tab-item" v-link="{ path: '/rank', activeClass: 'active', exact:true}" href="#">
       <span class="icon icon-friends"></span>

@@ -2,7 +2,7 @@
 
   <info :user="user"></info>
   <div class="content-block-title mytitle">任务列表</div>
-  <p><a v-on:click="scan" class="button">scan</a></p>
+  <!-- <p><a v-on:click="scan" class="button">scan</a></p> -->
 
   <div class="tasklist" >
     <p v-if="tasks.length==0" class="no-task">
@@ -12,8 +12,12 @@
       <task-item :taskdata="task" v-on:click="handleClick($index)"></task-item>
 
     </div>
-
-
+  </div>
+  <div v-show="hasMore" class="load-more">
+      <a v-on:click="loadMoreTask" class="button button-big">加载更多...</a>
+  </div>
+  <div v-show="!hasMore" class="load-more">
+    <a class="button button-big disabled">没有更多任务</a>
   </div>
 
  </template>
@@ -41,6 +45,8 @@
         },
       data(){
           return {
+            page:0,
+            hasMore:true,
           };
       },
       created(){
@@ -48,34 +54,44 @@
 
       },
       ready(){
-        // if(this.tasks.length==0){
-          $.showPreloader('加载中...');
-          this.getTaskList()
+         if(this.tasks.length==0){
+          this.getTaskList(this.page)
           .then(res => {
-            $.hidePreloader();
           })
           .catch(err => {
               console.log(err);
           });
-        // }
+         }
       },
       methods: {
         handleClick(index){
           this.taskDetail(index);
           this.$router.go('/taskDetail');
         },
-        scan(){
-          wx.onMenuShareTimeline({
-            title: 'joywill', // 分享标题
-            link: 'joywill.cc', // 分享链接
-            imgUrl: '', // 分享图标
-            success: function () {
-              // 用户确认分享后执行的回调函数
-            },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
+        // scan(){
+        //   wx.onMenuShareTimeline({
+        //     title: 'joywill', // 分享标题
+        //     link: 'joywill.cc', // 分享链接
+        //     imgUrl: '', // 分享图标
+        //     success: function () {
+        //       // 用户确认分享后执行的回调函数
+        //     },
+        //     cancel: function () {
+        //       // 用户取消分享后执行的回调函数
+        //     }
+        //   });
+        // },
+        loadMoreTask(){
+          this.page++;
+          $.showPreloader('加载中...');
+          this.getTaskList(this.page)
+          .then(res => {
+            $.hidePreloader();
+            if(res.length < 10){
+              // console.log(res.length);
+              this.hasMore = false;
             }
-          });
+          })
         },
       },
       vuex: {
@@ -105,6 +121,13 @@
 .no-task{
   margin-top: 1rem;
   margin-left: 1rem;
+
+}
+.load-more{
+  margin: 0.3rem auto;
+  width: 300px;
+  /*padding-left: 0.5rem;*/
+  /*padding-right: 0.5rem;*/
 
 }
 </style>
