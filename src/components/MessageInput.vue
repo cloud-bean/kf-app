@@ -32,9 +32,11 @@ export default {
     leaveMessage(){
       if(this.comment === ''){
         $.alert('总还是要说点什么吧，科科')
-      }else if(this.comment.length>280){
-        $.alert('话那么多，哼')
-      }else{
+      }
+      // else if(this.comment.length>280){
+      //   $.alert('话那么多，哼')
+      // }
+      else{
         this.handleClick(this.comment, this.activeTask._id)
         .then(()=>{
           this.comment = '';

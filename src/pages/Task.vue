@@ -45,7 +45,7 @@
         },
       data(){
           return {
-            page:0,
+            page:1,
             hasMore:true,
           };
       },

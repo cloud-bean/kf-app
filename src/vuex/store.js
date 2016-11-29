@@ -39,8 +39,17 @@ const mutations = {
 
   GOT_TASKS(state, tasks) {
     state.tasks =  state.tasks.concat(tasks);
+
     // state.tasks = tasks;
+    state.tasks.sort((a,b)=>{
+      if (new Date(a.expireTime) > new Date(b.expireTime)){
+        return -1;
+      }else{
+        return 1;
+      }
+    });
     state.loading = false;
+
   },
 
   TASK_NOT_DONE(state, num) {
