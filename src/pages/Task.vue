@@ -1,6 +1,6 @@
 <template>
 
-  <info :user="user"></info>
+  <!-- <info :user="user"></info> -->
   <div class="content-block-title mytitle">任务列表</div>
   <!-- <p><a v-on:click="scan" class="button">scan</a></p> -->
 
@@ -96,7 +96,7 @@
       },
       vuex: {
         getters: {
-          user: state => state.user,
+          // user: state => state.user,
           accessToken: state => state.accessToken,
           tasks: state => state.tasks,
         },

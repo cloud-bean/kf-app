@@ -65,7 +65,7 @@ export default {
             $.hidePreloader();
             if(self.user.option.phone){
               // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-              self.$router.go('/task');
+              self.$router.go('/profile');
             }else{
               // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
               self.$router.go('/signup');

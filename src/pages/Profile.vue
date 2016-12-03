@@ -2,24 +2,10 @@
     <!-- <info></info>
     <expbar></expbar>
     <chart></chart> -->
-    <div class="card info-card">
-      <div class="card-content">
-        <div class="card-content-inner">
-          <div class="info">
-            <info :user="user"></info>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card-content">
+  <info :user="user"></info>
+  <my-chart></my-chart>
 
-          <div class="info">
-            <chart></chart>
-          </div>
-      </div>
-    </div>
 
 
 
@@ -27,11 +13,12 @@
 
 <script>
 import Info from '../components/HeadInfo';
-import Expbar from '../components/Expbar';
-import Chart from '../components/Chart';
-import config from '../config/config';
-import util from '../config/util';
-import mockdata from '../../test/mock';
+import MyChart from '../components/MyChart'
+// import Expbar from '../components/Expbar';
+// import Chart from '../components/Chart';
+// import config from '../config/config';
+// import util from '../config/util';
+// import mockdata from '../../test/mock';
 
 export default {
   data() {
@@ -43,14 +30,17 @@ export default {
 
     };
   },
+  vuex: {
+    getters: {
+      user: state => state.user,
+    },
+  },
   created() {
-     this.user = mockdata.user
 
     // this.getUserInfo('57f44a1674e8b8f5664c76c3')
     // .then((res)=>{
     //   this.user = res;
     // })
-
   },
   methods: {
     // getUserInfo(userid, accessToken) {
@@ -68,8 +58,7 @@ export default {
   },
   components: {
       Info,
-      Expbar,
-      Chart,
+      MyChart,
   }
 }
 </script>
