@@ -9,7 +9,7 @@
       <div class="card-footer">
         <span>难度:{{taskdata.difficult}}</span>
         <span>经验:{{taskdata.exp}}</span>
-        <span>金币:{{taskdata.goldToken}}</span>
+        <span>悦币:{{taskdata.goldToken}}</span>
         <span v-if="taskdata.isDone">完成</span>
         <span style="color:red;" v-else>未完成</span>
 
