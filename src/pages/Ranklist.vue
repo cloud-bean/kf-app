@@ -1,8 +1,30 @@
 <template>
-  <rank-item :user='myRank.content' :rank-index='myRank.index'></rank-item>
+  <!-- <rank-item :user='myRank.content' :rank-index='myRank.index'></rank-item> -->
+  <div class="blue-bg">
+    <div class="">
+      <span class="avatar "><img :src="myRank.content.profileImageURL"  class="headimg"></span>
+      <div class="">
+        {{myRank.content.displayName}}
+      </div>
+    </div>
 
-  <div class="card">
-      <div class="card-header">排行榜</div>
+
+  </div>
+  <div class="white-bg">
+    <div class="row">
+      <div class="col-33">
+        第{{myRank.index}}名
+      </div>
+      <div class="col-33">
+        获{{myRank.content.totalVoteCount}}赞
+      </div>
+      <div class="col-33">
+        经验 {{myRank.content.exp}}
+      </div>
+    </div>
+  </div>
+
+  <div class="card no-margin">
       <div class="card-content">
 
         <div v-for="rank in ranks" class="rank-list">
@@ -99,5 +121,32 @@ export default {
     width: 100%;
     height: 0.05rem;
     background-color: red;
+  }
+  .no-margin{
+    margin: 0;
+    margin-top: 0.3rem;
+    border-radius: 0;
+    box-shadow: 0 0rem 0rem rgba(0, 0, 0, 0.3);
+  }
+  .blue-bg{
+    /*font-size: 0.7rem;*/
+    /*height: 0.8rem !important;*/
+    color: #ffffff;
+    background-color: #4FC1E9;
+    padding: 0.5rem;
+    font-size: 0.5rem;
+    text-align: center;
+  }
+  .white-bg{
+    color: #000000;
+    background-color: #ffffff;
+    padding: 0.9rem;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .headimg {
+    width: 3rem;
+    text-align: center;
+    border-radius: 50%;
   }
 </style>

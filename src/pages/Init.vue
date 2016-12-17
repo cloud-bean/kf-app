@@ -8,7 +8,7 @@ import config from '../config/config';
 import util from '../config/util';
 import { spinner } from 'vue-strap';
 import mockdata from '../../test/mock';
-import { auth, getUserInfo, authLocal, getJsConfig } from '../vuex/actions';
+import { auth, getUserInfo, authLocal, getJsConfig, getMyRecords } from '../vuex/actions';
 import {loader} from '../config/util'
 
 const wurl = require('wurl');
@@ -38,6 +38,7 @@ export default {
       getUserInfo,
       authLocal,
       getJsConfig,
+      getMyRecords,
     }
   },
   ready(){
@@ -60,6 +61,7 @@ export default {
           // wx.config(self.jsConfig);
           // localStorage.setItem('kf_accessToken', secret.accessToken);
           // localStorage.setItem('kf_userid', secret.userid);
+          yield self.getMyRecords();
           yield self.getUserInfo(self.userid)
           .then((res) => {
             $.hidePreloader();

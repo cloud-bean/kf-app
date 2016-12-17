@@ -4,16 +4,16 @@
     <chart></chart> -->
 
   <info :user="user"></info>
-  <my-chart></my-chart>
-
-
-
+  <my-chart :my-chart-data="myRecords"></my-chart>
 
 </template>
 
 <script>
 import Info from '../components/HeadInfo';
-import MyChart from '../components/MyChart'
+import MyChart from '../components/MyChart';
+import {getMyRecords} from '../vuex/actions';
+import { spinner } from 'vue-strap';
+
 // import Expbar from '../components/Expbar';
 // import Chart from '../components/Chart';
 // import config from '../config/config';
@@ -27,16 +27,16 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-
     };
   },
   vuex: {
     getters: {
       user: state => state.user,
+      myRecords: state => state.myRecords,
     },
   },
   created() {
-
+    console.log('my',this.myRecords);
     // this.getUserInfo('57f44a1674e8b8f5664c76c3')
     // .then((res)=>{
     //   this.user = res;
@@ -59,6 +59,7 @@ export default {
   components: {
       Info,
       MyChart,
+      spinner,
   }
 }
 </script>

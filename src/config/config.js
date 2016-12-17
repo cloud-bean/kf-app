@@ -7,6 +7,7 @@ export default {
     midServer:'http://joywill.cc',
     // midServer:'http://sab4h63cag.proxy.qqbrowser.cc',
     bigServer:'http://120.25.227.156:7000/api/base',
+    // bigServer:'http://192.168.0.162:7000/api/base',
   },
   route: {
     auth: '/admin',
@@ -14,7 +15,7 @@ export default {
     testRedirect: 'http://localhost:8080?code=123',
   },
   secret: {
-    accessToken: 'db4a6d977c99eeba606782709b05c77e08cca497b53172cb478e57df202a0cea',
+    accessToken: 'a361189ce5f677dfb75add2be866b8f9aa80873a572b4d0ee8827743baf3dce3',
     userid: '5817407d2a2d3adc2032290e',
   },
   task:{

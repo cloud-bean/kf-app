@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 const state = {
   user: {},
+  taskInfo:{},
   tasks: [],
   taskNotDone: 0,
   ranks: [],
@@ -17,6 +18,7 @@ const state = {
   currentRoute: '',
   feedbacks: [],
   jsConfig:{},
+  myRecords:{},
 };
 
 const mutations = {
@@ -99,6 +101,13 @@ const mutations = {
   SET_JS_CONFIG(state, config){
     state.jsConfig = config;
   },
+  SET_TASK_INFO(state, taskInfo){
+    state.taskInfo = taskInfo;
+  },
+  SET_MY_RECORDS(state, myRecords){
+    state.myRecords = myRecords;
+  },
+
 };
 
 

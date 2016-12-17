@@ -1,7 +1,12 @@
 <template>
 
   <!-- <info :user="user"></info> -->
-  <div class="content-block-title mytitle">任务列表</div>
+  <div class="blue-bg">
+    已完成
+    <div class="task-info">
+      {{taskInfo.totalDone}} / {{taskInfo.totalCount}}<span class="grey-small"></span>
+    </div>
+  </div>
   <!-- <p><a v-on:click="scan" class="button">scan</a></p> -->
 
   <div class="tasklist" >
@@ -55,13 +60,16 @@
       },
       ready(){
          if(this.tasks.length==0){
+          $.showPreloader('加载中...');
           this.getTaskList(this.page)
           .then(res => {
+            $.hidePreloader();
           })
           .catch(err => {
               console.log(err);
           });
          }
+
       },
       methods: {
         handleClick(index){
@@ -99,6 +107,7 @@
           // user: state => state.user,
           accessToken: state => state.accessToken,
           tasks: state => state.tasks,
+          taskInfo: state => state.taskInfo,
         },
         actions: {
           getTaskList,
@@ -111,7 +120,7 @@
 </script>
 
 
-<style>
+<style scoped>
 .mytitle{
   margin-top: 1rem;
 }
@@ -128,6 +137,20 @@
   width: 300px;
   /*padding-left: 0.5rem;*/
   /*padding-right: 0.5rem;*/
-
+}
+.blue-bg{
+  /*font-size: 0.7rem;*/
+  /*height: 0.8rem !important;*/
+  color: #ffffff;
+  background-color: #4FC1E9;
+  padding: 1rem;
+  font-size: 0.5rem;
+}
+.task-info{
+  text-align: center;
+  font-size: 2rem;
+}
+.grey-small{
+  font-size: 0.3rem;
 }
 </style>

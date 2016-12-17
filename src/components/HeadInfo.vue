@@ -1,114 +1,43 @@
 <template>
-  <div class="content-block-title mytitle">基本信息</div>
-  <div class="card">
-    <div class="card-content">
-      <div class="list-block media-list">
-        <ul>
-          <li class="item-content">
-            <div class="item-media">
-              <div class="headimg">
-                <img :src="user.profileImageURL" height="44">
-              </div>
-            </div>
-            <div class="item-inner">
-              <div class="item-title-row">
-                <div class="item-title">{{user.displayName}}</div>
-              </div>
-              <div class="item-subtitle">{{user.option.slogan || 'Learning with joy, achieving with will.'}}</div>
-            </div>
-          </li>
-        </ul>
+  <div class="blue-bg">
+    <div >
+      <div class="headimg">
+          <img :src="user.profileImageURL" alt="" class="avatar"/>
+        <p>
+          <span class="name">{{user.displayName}}</span>
+          <div class="item-subtitle"> {{user.option.slogan || 'Learning with joy, achieving with will.'}} </div>
+        </p>
       </div>
     </div>
-    <div class="card-footer info">
-      <div class="detail">
-        <div class="row">
-
-          <div class='col-33'>
-            <div class="detailInfo">
-              <div>经验</div>
-              <div>{{user.option.exp}}</div>
-            </div>
-          </div>
-          <div class='col-33'>
-            <div class="detailInfo">
-              <div>悦币</div>
-              <div>{{user.option.goldToken}}</div>
-            </div>
-          </div>
-          <div class='col-33'>
-            <div class="detailInfo">
-              <div>等级</div>
-              <div>{{user.option.exp | level}}</div>
-            </div>
+    <div class="row info">
+      <div class="col-33">
+        <div class="detailInfo">
+          <div>经验</div>
+          <div>
+            {{user.option.exp}}
           </div>
         </div>
-
+      </div>
+      <div class="col-33">
+        <div class="detailInfo">
+          <div>悦币</div>
+          <div>
+            {{user.option.goldToken}}
+          </div>
         </div>
+      </div>
+      <div class="col-33">
+        <div class="detailInfo">
+          <div>等级</div>
+          <div >
+            {{user.option.exp | level}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- <div class="jumbotron">
-              <div class="jumbotron-contents">
 
-                <div class="row info">
-                  <div class="col-xs-6 profile">
-                    <div class="row ">
-                        <img :src="user.profileImageURL" class="headimg">
-                        <div class="row">
-                          <div class="col-xs-12">
-                          <p class="lead">
-                            {{user.displayName}}
-                          </p>
-
-
-                          </div>
-
-                        </div>
-                    </div>
-
-                  </div>
-                  <div class="col-xs-6">
-                    <p>
-                      <div class="test_mark">90分</div>
-                      2016-09-01
-                    </p>
-                    <p>
-                      <div class='row'>
-                        <div class="detail">
-                            <div class='col-xs-4'>
-                              <div class="detailInfo">
-                                <div>经验</div>
-                                <div>{{user.option.exp}}</div>
-                              </div>
-                            </div>
-                            <div class='col-xs-4'>
-                              <div class="detailInfo">
-                                <div>悦币</div>
-                                <div>{{user.option.goldtoken}}</div>
-                              </div>
-                            </div>
-                            <div class='col-xs-4'>
-                              <div class="detailInfo">
-                                <div>等级</div>
-                                <div>{{user.option.level}}</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </p>
-                  </div>
-
-
-                    <p>
-
-
-
-                        </p>
-                  </div>
-                </div>
-              </div>
-  </div> -->
 
 </template>
 
@@ -141,18 +70,37 @@ import util from '../config/util';
 }
 .info{
   text-align: center;
+  font-size: 0.8rem;
+  padding: 0.7rem;
 }
 .detail {
-  font-size: 0.8rem;
-  width:100%;
+  font-size: 0.5rem;
   /*padding-top: 5px;*/
 }
-.headimg{
+/*.headimg{
   width: 44px;
   height: 44px;
+}*/
+.name{
+  font-size: 1.2rem;
 }
-.detailInfo {
- text-align: center;
+.headimg {
+  padding-top: 1rem;
+  width: 100%;
+  text-align: center;
+  line-height: 0.5rem;
 }
 
+.avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid white;
+  border-radius:50%;
+}
+.blue-bg{
+  /*font-size: 0.7rem;*/
+  /*height: 0.8rem !important;*/
+  color: #ffffff;
+  background-color: #4FC1E9;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
 
-  <div class="card facebook-card" v-bind:class="{mask:expire}">
+  <div class="card facebook-card no-margin" v-bind:class="{mask:expire}">
       <div class="card-header no-border">
         <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div>
         <div class="facebook-name">{{taskdata.name}}</div>
@@ -67,6 +67,11 @@ p{
   filter:opacity(50%);
 
 }
-
+.no-margin{
+  margin: 0;
+  margin-top: 0.3rem;
+  border-radius: 0;
+  box-shadow: 0 0rem 0rem rgba(0, 0, 0, 0.3);
+}
 
 </style>

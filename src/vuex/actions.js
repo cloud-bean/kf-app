@@ -54,7 +54,16 @@ export const  getTaskList = ({ dispatch, state }, page) => {
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
-        const tasks = result.body.data;
+        const tasks = result.body.data.tasks;
+        const taskinfo = {};
+        taskinfo.totalCount = result.body.data.totalCount;
+        request.get(`${bigServer}/records/doneCount`)
+        .set('Authorization', `Bearer ${state.accessToken}`)
+        .then((result) => {
+          taskinfo.totalDone = result.body.data.doneCount;
+          dispatch('SET_TASK_INFO', taskinfo);
+        });
+
         // const taskNotDone = tasks.filter((item) => {
         //   return (!item.isDone);
         // });
@@ -191,6 +200,22 @@ export const getComments = ({ dispatch, state }, taskId) => {
         const comments = result.body.data;
         dispatch('GOT_TASK_COMMENTS', comments);
         resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const getMyRecords = ({ dispatch, state }) => {
+  return new Promise((resolve, reject) => {
+    request.get(`${bigServer}/records/me`)
+      // .withCredentials()
+      .set('Authorization', `Bearer ${state.accessToken}`)
+      .then((result) => {
+        const myRecords = result.body.data;
+        dispatch('SET_MY_RECORDS', myRecords);
+        resolve(myRecords);
       })
       .catch((err) => {
         reject(err);
