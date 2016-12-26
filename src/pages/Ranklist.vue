@@ -3,7 +3,7 @@
   <div class="blue-bg">
     <div class="">
       <span class="avatar "><img :src="myRank.content.profileImageURL"  class="headimg"></span>
-      <div class="">
+      <div class="name">
         {{myRank.content.displayName}}
       </div>
     </div>
@@ -109,7 +109,9 @@ export default {
     border-bottom: none !important;
 
   }
-
+.name {
+  font-size: 0.6rem;
+}
   .rank-item{
     box-shadow: none !important;
     border-radius: 0 !important;

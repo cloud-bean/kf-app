@@ -95,6 +95,7 @@ p{
 }
 .name {
   /*padding-left: 1rem;*/
+  padding-top: 0.1rem;
   font-size: 0.7rem;
 }
 
@@ -118,7 +119,7 @@ p{
 }
 .grey-small{
   color: #ccc;
-  font-size: 0.4rem;
+  font-size: 0.6rem;
 }
 
 </style>

@@ -94,7 +94,7 @@ import util from '../config/util';
 .avatar {
   width: 3.5rem;
   height: 3.5rem;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius:50%;
 }
 .blue-bg{
