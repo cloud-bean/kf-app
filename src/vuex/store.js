@@ -19,6 +19,7 @@ const state = {
   feedbacks: [],
   jsConfig:{},
   myRecords:{},
+  tip:{},
 };
 
 const mutations = {
@@ -106,6 +107,9 @@ const mutations = {
   },
   SET_MY_RECORDS(state, myRecords){
     state.myRecords = myRecords;
+  },
+  SET_TIP(state, tip){
+    state.tip = tip;
   },
 
 };

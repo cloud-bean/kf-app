@@ -7,18 +7,12 @@
       </div>
     </div>
   </div> -->
-  <div class="cite">
-    <h3 class="grey">Everyday Tips</h3>
-    <p>
-      「Stay hungry. Stay foolish.」
-    </p>
-  </div>
+
   <div class="chart">
     <div class="chart-title">
       成绩趋势
     </div>
     <line-chart :line-data="myChartData['测验']"></line-chart>
-
   </div>
 
 

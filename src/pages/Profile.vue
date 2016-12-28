@@ -4,6 +4,7 @@
     <chart></chart> -->
 
   <info :user="user"></info>
+  <tips :tip="tip"></tips>
   <my-chart :my-chart-data="myRecords"></my-chart>
 
 </template>
@@ -11,6 +12,8 @@
 <script>
 import Info from '../components/HeadInfo';
 import MyChart from '../components/MyChart';
+import Tips from '../components/Tips';
+
 import {getMyRecords} from '../vuex/actions';
 import { spinner } from 'vue-strap';
 
@@ -33,10 +36,11 @@ export default {
     getters: {
       user: state => state.user,
       myRecords: state => state.myRecords,
+      tip: state => state.tip,
     },
   },
   created() {
-    console.log('my',this.myRecords);
+    // console.log('my',this.myRecords);
     // this.getUserInfo('57f44a1674e8b8f5664c76c3')
     // .then((res)=>{
     //   this.user = res;
@@ -59,6 +63,7 @@ export default {
   components: {
       Info,
       MyChart,
+      Tips,
       spinner,
   }
 }

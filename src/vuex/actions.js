@@ -223,6 +223,22 @@ export const getMyRecords = ({ dispatch, state }) => {
   });
 };
 
+export const getTip = ({ dispatch, state }) => {
+  return new Promise((resolve, reject) => {
+    request.get(`${bigServer}/documents?name=tip`)
+      // .withCredentials()
+      .set('Authorization', `Bearer ${state.accessToken}`)
+      .then((result) => {
+        const tip = result.body.data[0];
+        dispatch('SET_TIP', tip);
+        resolve(tip);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 export const getJsConfig = ({ dispatch, state }, url) => {
   dispatch('GET_STH_BACKEND');
 
