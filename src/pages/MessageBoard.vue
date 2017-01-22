@@ -1,10 +1,13 @@
 <template lang="html">
-  <message-input></message-input>
-  <div class="content-padded">
-    <div v-for="feedback in feedbacks" class="message-item">
-      <message-item :data="feedback"></message-item>
+  <div class="">
+    <message-input></message-input>
+    <div class="content-padded">
+      <div v-for="feedback in feedbacks" class="message-item">
+        <message-item :data="feedback"></message-item>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -24,16 +27,16 @@ export default {
       getFeedbacks,
     }
   },
-  created(){
-  },
-  ready(){
-    if(this.feedbacks.length == 0){
-      $.showPreloader('加载中...');
-      this.getFeedbacks()
-      .then(res => {
-        $.hidePreloader();
-      });
-    }
+  mounted(){
+    this.$nextTick(()=>{
+      if(this.feedbacks.length == 0){
+        $.showPreloader('加载中...');
+        this.getFeedbacks()
+        .then(res => {
+          $.hidePreloader();
+        });
+      }
+    })
   },
 
 

@@ -16,7 +16,7 @@ export default {
       // its initial state.
     };
   },
-  ready() {
+  mounted() {
     GM.Global.pixelRatio = 2;
       var Util = GM.Util;
       var data = [];
@@ -96,7 +96,9 @@ export default {
       });
       chart.source(data,defs);
       chart.line().position('index*score');
-      chart.render();
+      this.$nextTick(()=>{
+        chart.render();
+      })
     },
   }
 

@@ -41,7 +41,6 @@ export default {
     LineChart,
   },
   created(){
-    console.log('hello',this.myChartData);
   },
 }
 </script>

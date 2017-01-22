@@ -1,6 +1,8 @@
 <template>
   <!-- <div class="login"> -->
     <!-- <img :src="mockdata.user.profileImageURL" alt="" class="avatar"/> -->
+    <div class="">
+
     <header class="bar bar-nav">
   <h1 class='title'>补充你的信息</h1>
 </header>
@@ -62,13 +64,14 @@
   </div>
 
 </validator>
+</div>
 
 </template>
 
 <script>
 import config from '../config/config';
 import util from '../config/util';
-import {signUp} from '../vuex/actions';
+import {signUp,setLogin} from '../vuex/actions';
 
 
 export default {
@@ -86,6 +89,7 @@ export default {
   vuex: {
     actions: {
       signUp,
+      setLogin,
     },
     getters: {
       user: state => state.user,
@@ -100,7 +104,8 @@ export default {
       }
       this.signUp(displayName, phone, slogan)
       .then((result) => {
-        this.$router.go('/task');
+        this.setLogin(true)
+        this.$router.push('/task');
       })
       .catch((err) => {
         console.log(err);

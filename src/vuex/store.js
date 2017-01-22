@@ -20,6 +20,7 @@ const state = {
   jsConfig:{},
   myRecords:{},
   tip:{},
+  login:false,
 };
 
 const mutations = {
@@ -111,6 +112,9 @@ const mutations = {
   SET_TIP(state, tip){
     state.tip = tip;
   },
+  SET_LOGIN(state , login){
+    state.login = login;
+  }
 
 };
 

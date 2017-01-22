@@ -165,6 +165,9 @@ export const taskDetail = ({ dispatch, state }, index) => {
   dispatch('SET_ACTIVE_TASK', current);
 };
 
+export const setLogin = ({ dispatch, state }, login) => {
+  dispatch('SET_LOGIN', login);
+};
 
 export const leaveComment = ({ dispatch, state }, content, taskId) => {
   dispatch('GET_STH_BACKEND');

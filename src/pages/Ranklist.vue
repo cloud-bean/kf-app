@@ -1,40 +1,46 @@
 <template>
+  <div class="">
+
   <!-- <rank-item :user='myRank.content' :rank-index='myRank.index'></rank-item> -->
-  <div class="blue-bg">
-    <div class="">
-      <span class="avatar "><img :src="myRank.content.profileImageURL"  class="headimg"></span>
-      <div class="name">
-        {{myRank.content.displayName}}
+  <div v-if="myRank">
+    <div class="blue-bg">
+      <div class="">
+        <span class="avatar "><img :src="myRank.content.profileImageURL"  class="headimg"></span>
+        <div class="name">
+          {{myRank.content.displayName}}
+        </div>
       </div>
-    </div>
 
 
-  </div>
-  <div class="white-bg">
-    <div class="row">
-      <div class="col-33">
-        第{{myRank.index}}名
-      </div>
-      <div class="col-33">
-        获{{myRank.content.totalVoteCount}}赞
-      </div>
-      <div class="col-33">
-        经验 {{myRank.content.exp}}
+    </div>
+    <div class="white-bg">
+      <div class="row">
+        <div class="col-33">
+          第{{myRank.index}}名
+        </div>
+        <div class="col-33">
+          获{{myRank.content.totalVoteCount}}赞
+        </div>
+        <div class="col-33">
+          经验 {{myRank.content.exp}}
+        </div>
       </div>
     </div>
   </div>
+
 
   <div class="card no-margin">
       <div class="card-content">
 
-        <div v-for="rank in ranks" class="rank-list">
-          <rank-item :user='rank' :rank-index='$index+1' class="rank-item"></rank-item>
+        <div v-for="(rank, index) in ranks" class="rank-list">
+          <rank-item :user='rank' :rank-index='index+1' class="rank-item"></rank-item>
         </div>
       <!-- </div> -->
       </div>
       <!-- <div class="card-footer">每天更新</div> -->
     </div>
 
+  </div>
 
 </template>
 
@@ -65,21 +71,20 @@ export default {
       getRanks,
     }
   },
-  created(){
 
-  },
-  ready(){
-    if(this.ranks.length == 0){
-      $.showPreloader('加载中...');
-      this.getRanks()
-      .then((res) => {
-        $.hidePreloader();
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
-
+  mounted(){
+    this.$nextTick(()=> {
+      if(this.ranks.length == 0){
+        $.showPreloader('加载中...');
+        this.getRanks()
+        .then((res) => {
+          $.hidePreloader();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }
+    })
   },
 };
 </script>

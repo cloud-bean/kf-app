@@ -40,7 +40,7 @@ export default {
         this.handleClick(this.comment, this.activeTask._id)
         .then(()=>{
           this.comment = '';
-          this.$router.go('/taskDetail');
+          this.$router.push('/taskDetail');
         })
 
       }

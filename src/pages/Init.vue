@@ -1,6 +1,5 @@
 
 <template>
-  <!-- <spinner v-ref:loading fixed="true" size="md" fixed text="Loading"></spinner> -->
 </template>
 
 <script>
@@ -8,7 +7,7 @@ import config from '../config/config';
 import util from '../config/util';
 import { spinner } from 'vue-strap';
 import mockdata from '../../test/mock';
-import { auth, getUserInfo, authLocal, getJsConfig, getMyRecords, getTip } from '../vuex/actions';
+import { auth, getUserInfo, authLocal, getJsConfig, getMyRecords, getTip, setLogin } from '../vuex/actions';
 import {loader} from '../config/util'
 
 const wurl = require('wurl');
@@ -40,102 +39,107 @@ export default {
       getJsConfig,
       getMyRecords,
       getTip,
+      setLogin,
     }
   },
-  ready(){
-    // this.$refs.loading.show();
+  mounted(){
+
     let self = this;
     const query = wurl('?');
     const url = wurl();
     const sendUrl = url.split('#')[0];
-    co(function * (){
-      try{
-        if(query && query.code){
-          $.showPreloader('加载中...');
-          let secret = config.secret;
-          if(process.env.NODE_ENV == 'production'){
-            yield self.auth(config.appid,query.code);
-            yield self.getJsConfig(sendUrl);
-          }else{
-            self.authLocal(secret.userid, secret.accessToken)
-          }
-            wx.config(self.jsConfig);
-          // localStorage.setItem('kf_accessToken', secret.accessToken);
-          // localStorage.setItem('kf_userid', secret.userid);
-          yield self.getMyRecords();
-          yield self.getTip();
-          yield self.getUserInfo(self.userid)
-          .then((res) => {
-            $.hidePreloader();
-            if(self.user.option.phone){
-              // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-              self.$router.go('/profile');
+    this.$nextTick(() => {
+      co(function * (){
+        try{
+          if(query && query.code){
+            $.showPreloader('加载中...');
+            let secret = config.secret;
+            if(process.env.NODE_ENV == 'production'){
+              yield self.auth(config.appid,query.code);
+              yield self.getJsConfig(sendUrl);
             }else{
-              // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
-              self.$router.go('/signup');
+              self.authLocal(secret.userid, secret.accessToken)
             }
-          })
-          .catch(err => {
-            console.log(err);
-          })
-        }else {
+            wx.config(self.jsConfig);
+            // localStorage.setItem('kf_accessToken', secret.accessToken);
+            // localStorage.setItem('kf_userid', secret.userid);
+            yield self.getMyRecords();
+            yield self.getTip();
+            yield self.getUserInfo(self.userid)
+            .then((res) => {
+              $.hidePreloader();
+              if(self.user.option.phone){
+                // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+                self.setLogin(true);
+                self.$router.push('/profile');
+              }else{
+                // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
+                self.$router.push('/signup');
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+          }else {
 
 
-          let redirctUrl = config.route.testRedirect;
-          if(process.env.NODE_ENV == 'production'){
-            redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
+            let redirctUrl = config.route.testRedirect;
+            if(process.env.NODE_ENV == 'production'){
+              redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
+            }
+            window.location.href = redirctUrl;
           }
-          window.location.href = redirctUrl;
+        }catch(e){
+          console.log(e);
         }
-      }catch(e){
-        console.log(e);
-      }
+
+      });
 
     });
-    // if(localStorage.getItem('kf_accessToken')){
-    //   self.$router.go('/task');
-    // }
+  // if(localStorage.getItem('kf_accessToken')){
+  //   self.$router.go('/task');
+  // }
 
 
 
 
 
-  },
-  methods: {
-    // auth(appid, code) {
-    //   return new Promise((resolve, reject) => {
-    //     this.$http.get(`${config.route.auth}?appid=${appid}&code=${code}`)
-    //     .then((result) => {
-    //       console.log(result);
-    //       const userid = result.body.userid;
-    //       const accessToken = result.body.accessToken;
-    //       resolve({ userid, accessToken });
-    //     })
-    //     .catch((err) => {
-    //       reject(err);
-    //     });
-    //   });
-    // },
-    //
-    // getUserInfo(userid, accessToken) {
-    //   return new Promise((resolve, reject) => {
-    //     this.$http.get(`${config.route.user}${userid}`,
-    //       {
-    //         withCredentials: true,
-    //         headers: {
-    //           Authorization: `Bearer ${accessToken}`,
-    //         },
-    //       })
-    //     .then((result) => {
-    //       console.log(result);
-    //       resolve(result.body.data);
-    //     })
-    //     .catch((err) => {
-    //       reject(err);
-    //     });
-    //   });
-    // }
-  },
+},
+methods: {
+  // auth(appid, code) {
+  //   return new Promise((resolve, reject) => {
+  //     this.$http.get(`${config.route.auth}?appid=${appid}&code=${code}`)
+  //     .then((result) => {
+  //       console.log(result);
+  //       const userid = result.body.userid;
+  //       const accessToken = result.body.accessToken;
+  //       resolve({ userid, accessToken });
+  //     })
+  //     .catch((err) => {
+  //       reject(err);
+  //     });
+  //   });
+  // },
+  //
+  // getUserInfo(userid, accessToken) {
+  //   return new Promise((resolve, reject) => {
+  //     this.$http.get(`${config.route.user}${userid}`,
+  //       {
+  //         withCredentials: true,
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       })
+  //     .then((result) => {
+  //       console.log(result);
+  //       resolve(result.body.data);
+  //     })
+  //     .catch((err) => {
+  //       reject(err);
+  //     });
+  //   });
+  // }
+},
 
 }
 </script>

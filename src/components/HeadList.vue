@@ -1,4 +1,6 @@
 <template lang="html">
+  <div class="">
+
   <ul>
     <li v-for="user in shortList">
       <img :src="user.profileImageURL" alt="" />
@@ -9,6 +11,8 @@
 <div class="clearfix">
 
 </div>
+</div>
+
 </template>
 
 <script>

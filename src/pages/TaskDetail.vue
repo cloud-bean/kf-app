@@ -20,7 +20,9 @@
        </ul>
        <div class="desc">
          <h1 class="grey">任务详情:</h1>
-         {{{tansMarkdown(task.description)}}}
+         <div v-html="tansMarkdown(task.description)">
+
+         </div>
          <!-- <h1 class="grey">老师评价:</h1> -->
          <!-- {{task}} -->
        </div>
@@ -80,7 +82,7 @@ export default {
       return markdown.toHTML(content);
     },
     handleComment(){
-      this.$router.go('/taskComment');
+      this.$router.push('/taskComment');
     },
   },
 }

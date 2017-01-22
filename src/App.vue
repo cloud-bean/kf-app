@@ -1,39 +1,29 @@
 <template>
 
+<div class="">
+  <div v-if="login">
+      <nav class="bar bar-tab">
+        <router-link  class="tab-item" active-class="active" to="/profile">
+          <span class="icon icon-me"></span>
+          <span class="tab-label">主页</span>
+        </router-link>
+        <router-link  class="tab-item" active-class="active" to="/task">
+          <span class="icon icon-app"></span>
+          <span class="tab-label">任务</span>
+        </router-link>
+        <router-link  class="tab-item" active-class="active" to="/rank">
+          <span class="icon icon-friends"></span>
+          <span class="tab-label">排行</span>
+        </router-link>
+      </nav>
+  </div>
 
-  <nav class="bar bar-tab" v-if="user.option.phone">
-    <a class="tab-item" v-link="{ path: '/profile', activeClass: 'active', exact:true}" href="#">
-      <span class="icon icon-me"></span>
-      <span class="tab-label">主页</span>
-      <!-- <span class="badge" v-if="taskNotDone")>{{taskNotDone}}</span> -->
-    </a>
-    <a class="tab-item" v-link="{ path: '/task', activeClass: 'active', exact:true}" href="#">
-      <span class="icon icon-app"></span>
-      <span class="tab-label">任务</span>
-      <!-- <span class="badge" v-if="taskNotDone")>{{taskNotDone}}</span> -->
-    </a>
-    <a class="tab-item" v-link="{ path: '/rank', activeClass: 'active', exact:true}" href="#">
-      <span class="icon icon-friends"></span>
-      <span class="tab-label">排行</span>
-    </a>
-    <!-- <a class="tab-item" v-link="{ path: '/messageBoard', activeClass: 'active', exact:true}" href="#">
-      <span class="icon icon-edit"></span>
-      <span class="tab-label">留言</span>
-    </a> -->
-    <!-- <a class="tab-item" href="#">
-      <span class="icon icon-star"></span>
-      <span class="tab-label">收藏</span>
-    </a>
-    <a class="tab-item"  href="#">
-      <span class="icon icon-settings"></span>
-      <span class="tab-label">TASK</span>
-    </a> -->
-  </nav>
-  <div class="content">
-    <router-view></router-view>
-    <!-- 这里是页面内容区 -->
+
+  <div class="content pad-bottom">
+      <router-view></router-view>
   </div>
   <!-- <span class="tab-label"><a v-link="{ path: '/task'}" href="#">TASK</a></span> -->
+</div>
 
 </template>
 
@@ -55,24 +45,25 @@ import store from './vuex/store';
    },
    vuex: {
      getters: {
-       taskNotDone: state => state.taskNotDone,
+       login: state => state.login,
        user: state => state.user,
      }
    },
-   events:{
-     'tasknum': function (num) {
-      // 事件回调内的 `this` 自动绑定到注册它的实例上
-      console.log(num);
-
-      this.num=num;
-    }
-  },
+  //  events:{
+  //    'tasknum': function (num) {
+  //     // 事件回调内的 `this` 自动绑定到注册它的实例上
+  //     console.log(num);
+  //
+  //     this.num=num;
+  //   }
+  // },
  }
 //
 </script>
 
 <style>
 
-
-
+.pad-bottom{
+  padding-bottom: 2.5rem;
+}
 </style>

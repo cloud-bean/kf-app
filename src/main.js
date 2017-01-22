@@ -29,16 +29,14 @@ import { dateFormat1, dateFormat, level } from './filter';
 // });
 Vue.filter('dateFormat', dateFormat);
 Vue.filter('dateFormat1', dateFormat1);
-
 Vue.filter('level', level);
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueValidator);
 
-Vue.directive('echarts', require('./directives/echarts'));
+//Vue.directive('echarts', require('./directives/echarts'));
 
-const router = new VueRouter();
  // {
 //     history: true,
 //     hashbang: false,
@@ -46,17 +44,21 @@ const router = new VueRouter();
 // })
 // router.mode = 'html5'
 
-router.map({
-  '/': { component: InitPage },
-  '/timeline': { component: TimeLine },
-  '/rank': { component: RankPage },
-  '/auth': { component: loginPage },
-  '/task': { component: TaskPage },
-  '/signup': { component: SignUpPage },
-  '/profile': { component: ProfilePage },
-  '/taskDetail': { component: TaskDetailPage },
-  '/messageBoard': { component: MessageBoardPage },
-  '/taskComment': {component: CommentInputPage},
+const router = new VueRouter({
+  routes:[
+    {path:'/',component: InitPage },
+    {path:'/rank', component: RankPage },
+    {path:'/task', component: TaskPage },
+    {path:'/signup', component: SignUpPage },
+    {path:'/profile', component: ProfilePage },
+    {path:'/taskDetail', component: TaskDetailPage },
+    {path:'/taskComment', component: CommentInputPage},
+  ]
 });
 
-router.start(Vue.extend(App), 'app');
+
+new Vue({
+    el: '#app',
+    router: router,
+    render: h => h(App),
+})

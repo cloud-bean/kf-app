@@ -15,7 +15,7 @@ export default {
       // its initial state.
     };
   },
-  ready() {
+  mounted() {
     GM.Global.pixelRatio = 1;
      var data = [
        {name: '张飞',props: '听力', value: 65},
@@ -51,7 +51,9 @@ export default {
      });
      // x和y轴同时缩放的动画
     //  chart.animate().scalexy();
-     chart.render();
+     this.$nextTick(()=>{
+       chart.render();
+     });
     },
   }
 </script>

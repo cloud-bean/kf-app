@@ -1,4 +1,5 @@
 <template>
+<div class="">
 
   <!-- <info :user="user"></info> -->
   <div class="blue-bg">
@@ -13,8 +14,8 @@
     <p v-if="tasks.length==0" class="no-task">
       暂无任务
     </p>
-    <div v-for="task in tasks">
-      <task-item :taskdata="task" v-on:click="handleClick($index)"></task-item>
+    <div v-for="(task, index) in tasks">
+      <task-item :taskdata="task" v-on:click="handleClick(index)"></task-item>
 
     </div>
   </div>
@@ -24,6 +25,8 @@
   <div v-show="!hasMore" class="load-more">
     <a class="button button-big disabled">没有更多任务</a>
   </div>
+</div>
+</div>
 
  </template>
 
@@ -58,23 +61,24 @@
 
 
       },
-      ready(){
-         if(this.tasks.length==0){
-          $.showPreloader('加载中...');
-          this.getTaskList(this.page)
-          .then(res => {
-            $.hidePreloader();
-          })
-          .catch(err => {
-              console.log(err);
-          });
-         }
-
+      mounted(){
+        this.$nextTick(() => {
+          if(this.tasks.length==0){
+           $.showPreloader('加载中...');
+           this.getTaskList(this.page)
+           .then(res => {
+             $.hidePreloader();
+           })
+           .catch(err => {
+               console.log(err);
+           });
+          }
+        });
       },
       methods: {
         handleClick(index){
           this.taskDetail(index);
-          this.$router.go('/taskDetail');
+          this.$router.push('/taskDetail');
         },
         // scan(){
         //   wx.onMenuShareTimeline({

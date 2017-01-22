@@ -2,10 +2,12 @@
     <!-- <info></info>
     <expbar></expbar>
     <chart></chart> -->
-
+<div class="">
   <info :user="user"></info>
   <tips :tip="tip"></tips>
   <my-chart :my-chart-data="myRecords"></my-chart>
+</div>
+
 
 </template>
 
