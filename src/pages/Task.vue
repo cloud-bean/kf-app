@@ -15,8 +15,7 @@
       暂无任务
     </p>
     <div v-for="(task, index) in tasks">
-      <task-item :taskdata="task" v-on:click="handleClick(index)"></task-item>
-
+      <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
     </div>
   </div>
   <div v-show="hasMore" class="load-more">
@@ -77,6 +76,7 @@
       },
       methods: {
         handleClick(index){
+          console.log(index);
           this.taskDetail(index);
           this.$router.push('/taskDetail');
         },
