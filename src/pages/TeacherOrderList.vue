@@ -2,8 +2,8 @@
   <div class="">
     <div class="card no-margin">
       <div class="card-content">
-        <div v-for="(item, index) in submits" class="rank-list">
-          <order-item :submitData='item' class="rank-item" @click.native="handleClick(index)"></order-item>
+        <div v-for="(item, index) in orders" class="rank-list">
+          <order-item :orderData='item' class="rank-item" @click.native="handleClick(index)"></order-item>
         </div>
       </div>
     </div>
@@ -14,7 +14,7 @@
 import vs from '../components/Vs';
 import orderItem from '../components/OrderItem';
 import util from '../config/util';
-import {getOrders} from '../vuex/actions';
+import {getOrders,orderDetail} from '../vuex/actions';
 import mockdata from '../../test/mock';
 export default {
   components:{orderItem},
@@ -24,7 +24,6 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-
     }
 
   },
@@ -41,12 +40,13 @@ export default {
     },
     actions: {
       getOrders,
+      orderDetail,
     }
   },
 
   mounted(){
     this.$nextTick(()=> {
-      if(this.ranks.length == 0){
+      if(this.orders.length == 0){
         $.showPreloader('加载中...');
         this.getOrders()
         .then((res) => {

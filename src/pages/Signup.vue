@@ -6,7 +6,6 @@
     <header class="bar bar-nav">
   <h1 class='title'>补充你的信息</h1>
 </header>
-<validator name="validation1">
   <div class="content" novalidate>
     <div class="headimg">
 
@@ -63,7 +62,6 @@
     </div>
   </div>
 
-</validator>
 </div>
 
 </template>
@@ -98,10 +96,10 @@ export default {
   methods: {
     submit(displayName, phone, slogan) {
 
-      if(!this.$validation1.valid){
-        $.alert('请完整填写信息');
-        return;
-      }
+      // if(!this.$validation1.valid){
+      //   $.alert('请完整填写信息');
+      //   return;
+      // }
       this.signUp(displayName, phone, slogan)
       .then((result) => {
         this.setLogin(true)

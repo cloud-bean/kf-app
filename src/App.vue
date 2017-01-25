@@ -15,6 +15,10 @@
           <span class="icon icon-friends"></span>
           <span class="tab-label">排行</span>
         </router-link>
+        <router-link  class="tab-item" active-class="active" to="/teacherOrderList">
+          <span class="icon icon-gift"></span>
+          <span class="tab-label">评分</span>
+        </router-link>
       </nav>
   </div>
 

@@ -53,12 +53,11 @@ export default {
         try{
           if(query && query.code){
             $.showPreloader('加载中...');
-            let secret = config.secret;
             if(process.env.NODE_ENV == 'production'){
               yield self.auth(config.appid,query.code);
               yield self.getJsConfig(sendUrl);
             }else{
-              self.authLocal(secret.userid, secret.accessToken)
+              self.authLocal(config.secret.userid, config.secret.accessToken)
             }
             wx.config(self.jsConfig);
             // localStorage.setItem('kf_accessToken', secret.accessToken);

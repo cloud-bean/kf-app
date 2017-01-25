@@ -22,6 +22,7 @@ const state = {
   tip:{},
   login:false,
   orders:[],
+  activeOrder:{},
 };
 
 const mutations = {

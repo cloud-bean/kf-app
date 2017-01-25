@@ -25,7 +25,7 @@
          <!-- <h1 class="grey">老师评价:</h1> -->
          <!-- {{task}} -->
        </div>
-       <div class="answer">
+       <!-- <div class="answer">
          <div class="row">
            <div class="col-50">
              <a v-on:click="photo" class="button button-success"><i class="fa fa-camera fa-lg "></i> 拍照提交</a>
@@ -34,7 +34,9 @@
              <a v-on:click="record" class="button button-success"><i class="fa fa-microphone fa-lg"></i> 录音提交</a>
            </div>
          </div>
-       </div>
+       </div> -->
+       <p><a v-on:click="photo" class="button button-success"><i class="fa fa-camera fa-lg "></i> 拍照提交</a></p>
+
        <p><a v-on:click="handleComment" class="button">讨论任务</a></p>
      </div>
 

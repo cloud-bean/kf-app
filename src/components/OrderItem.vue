@@ -1,15 +1,15 @@
 <template lang="html">
   <div>
     <div class="white-bg">
+      <div>
+        {{orderData.student}}
+      </div>
       <div class="row">
-        <div class="col-33">
-          {{orderData.user}}
+        <div class="col-50">
+          {{orderData.task.name}}
         </div>
-        <div class="col-33">
-          {{orderData.task}}
-        </div>
-        <div class="col-33">
-          {{orderData.date}}
+        <div class="col-50">
+          {{orderData.created}}
         </div>
       </div>
     </div>
@@ -28,5 +28,7 @@ export default {
 
 <style lang="css">
 
-
+.white-bg{
+  padding: 1rem;
+}
 </style>
