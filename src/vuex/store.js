@@ -21,6 +21,7 @@ const state = {
   myRecords:{},
   tip:{},
   login:false,
+  orders:[],
 };
 
 const mutations = {
@@ -114,7 +115,13 @@ const mutations = {
   },
   SET_LOGIN(state , login){
     state.login = login;
-  }
+  },
+  SET_ORDERS(state, orders){
+    state.orders = orders;
+  },
+  SET_ACTIVE_ORDER (state, order) {
+    state.activeOrder = order;
+  },
 
 };
 
