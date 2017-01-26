@@ -8,7 +8,7 @@
               <span class="col-30 avatar "><img :src="user.profileImageURL"  class="headimg"></span>
               <span class="col-40 name">
                 <div class="">
-                  {{user.displayName}}
+                  {{user.displayName }} Lv.{{user.exp|level}}
                 </div>
                 <div class="grey-small">
                   收获{{user.totalVoteCount}}赞
