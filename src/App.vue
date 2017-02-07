@@ -15,7 +15,8 @@
           <span class="icon icon-friends"></span>
           <span class="tab-label">排行</span>
         </router-link>
-        <router-link  class="tab-item" active-class="active" to="/teacherOrderList">
+
+        <router-link  class="tab-item" active-class="active" to="/teacherOrderList" v-if="user.roleType=='teacher'">
           <span class="icon icon-gift"></span>
           <span class="tab-label">评分</span>
         </router-link>

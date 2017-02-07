@@ -1,16 +1,9 @@
 <template lang="html">
   <div>
     <div class="white-bg">
-      <div>
-        {{orderData.student}}
-      </div>
-      <div class="row">
-        <div class="col-50">
-          {{orderData.task.name}}
-        </div>
-        <div class="col-50">
-          {{orderData.created}}
-        </div>
+        <p ><span class="name">[{{orderData.student.displayName}}]</span> 提交答案</p>
+        <p>{{orderData.created | dateFormat}}</p>
+        <p>{{orderData.task.name}}</p>
       </div>
     </div>
   </div>
@@ -26,9 +19,17 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 
 .white-bg{
-  padding: 1rem;
+  padding: 0.5rem;
+  font-size: 14px;
 }
+p{
+  margin: 0.2rem;
+}
+.name{
+  color: blue;
+}
+
 </style>

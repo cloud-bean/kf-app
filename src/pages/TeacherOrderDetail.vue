@@ -1,22 +1,18 @@
 <template lang="html">
-  <div class="order-detail">
-    <div class="">
-      {{activeOrder.student}}
-    </div>
-    <div class="">
-      {{activeOrder.task.name}}
-    </div>
-    <div class="">
-      <img :src="localId" alt="" width="100%">
-    </div>
-    <div class="mark">
-      <input type="text" name="" value="" placeholder="分数" >
-    </div>
-    <div class="">
-        <input type="text" name="" value="" placeholder="评语" >
+  <div class="content-padded">
+    <div class="info">
+      <p>{{activeOrder.task.name}}</p>
+      <p>学生姓名：{{activeOrder.student.displayName}}</p>
+      <p>提交时间：{{activeOrder.created | dateFormat}}</p>
     </div>
 
-      <button type="button" name="button" class="button">提交</button>
+    <div class="pic">
+      <input v-model="score" class="input" type="text" name="" value="" placeholder="分数" />
+      <textarea v-model="comments" class="input" type="text" name="" value="" placeholder="评语" />
+      <button @click="handleClick" type="button" name="button" class="button input" >提交</button>
+    </div>
+    <div class="pic">
+      <img :src="localId" alt="" width="100%">
     </div>
 
 
@@ -27,11 +23,14 @@
 
 <script>
 const wx = require('weixin-js-sdk');
+import { setScore } from '../vuex/actions';
 
 export default {
   data(){
     return {
       localId:'',
+      score:'',
+      comments:'',
     }
   },
   vuex: {
@@ -39,6 +38,7 @@ export default {
       activeOrder : state => state.activeOrder,
     },
     actions: {
+      setScore
     }
   },
   mounted(){
@@ -60,13 +60,33 @@ export default {
           console.log('无资源');
         },
       });
+    },
+    handleClick(){
+      const orderId = this.activeOrder._id;
+      const score = this.score;
+      const comments = this.comments;
+      this.setScore(score,comments,orderId)
+      .then(()=>{
+        $.toast("操作成功");
+      })
     }
   }
 }
 </script>
 
 <style lang="css" scoped>
-.order-detail{
+
+.pic {
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  margin-bottom: 0.5rem;
+}
+.input{
   width:100%;
+  font-size: 16px;
+  margin-bottom: 0.4rem;
+}
+.info{
+  font-size: 14px;
 }
 </style>

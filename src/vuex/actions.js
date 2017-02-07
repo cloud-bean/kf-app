@@ -78,24 +78,25 @@ export const  getTaskList = ({ dispatch, state }, page) => {
   });
 };
 
-export const getRanks = ({ dispatch, state }) => {
+export const getRanks = ({ dispatch, state },page) => {
   dispatch('GET_STH_BACKEND');
   return new Promise((resolve, reject) => {
-    request.get(`${bigServer}/ranks`)
+    request.get(`${bigServer}/ranks?page=${page}&limit=${config.task.limit}`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
         const ranks = result.body.data;
         dispatch('GOT_RANK', ranks);
-        ranks.some((item, index) => {
-          if (item.userid === state.userid) {
-            // console.log('item',item);
-            dispatch('GOT_MY_RANK', item, (index + 1));
-            resolve();
-            return true;
-          }
-          return false;
-        });
+        resolve(ranks);
+        // ranks.some((item, index) => {
+        //   if (item.userid === state.userid) {
+        //     // console.log('item',item);
+        //     dispatch('GOT_MY_RANK', item, (index + 1));
+        //     resolve();
+        //     return true;
+        //   }
+        //   return false;
+        // });
       })
       .catch((err) => {
         reject(err);
@@ -213,6 +214,26 @@ export const leaveComment = ({ dispatch, state }, content, taskId) => {
       .then((result) => {
         console.log(result.body.data);
         dispatch('SET_TASK_COMMENT', result.body.data);
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const setScore = ({ dispatch, state }, score, comments, orderId) => {
+  dispatch('GET_STH_BACKEND');
+  const data = {
+    score,
+    comments,
+  }
+  return new Promise((resolve, reject) => {
+    request.post(`${bigServer}/orders/${orderId}/record`)
+      .send(data)
+      // .withCredentials()
+      .set('Authorization', `Bearer ${state.accessToken}`)
+      .then((result) => {
         resolve();
       })
       .catch((err) => {

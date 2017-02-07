@@ -63,7 +63,7 @@ const mutations = {
   },
 
   GOT_RANK (state, ranks) {
-    state.ranks = ranks;
+    state.ranks = state.ranks.concat(ranks);
     state.loading = false;
   },
   GOT_MY_RANK(state, rank ,index){
