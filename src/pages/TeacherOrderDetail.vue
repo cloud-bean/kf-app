@@ -7,7 +7,7 @@
     </div>
 
     <div class="pic">
-      <input v-model="score" class="input" type="text" name="" value="" placeholder="分数" />
+      <input v-model="score" class="input" type="number" name="" value="" placeholder="分数" />
       <textarea v-model="comments" class="input" type="text" name="" value="" placeholder="评语" />
       <button @click="handleClick" type="button" name="button" class="button input" >提交</button>
     </div>
@@ -62,12 +62,15 @@ export default {
       });
     },
     handleClick(){
+      $.showPreloader('加载中...');
       const orderId = this.activeOrder._id;
       const score = this.score;
       const comments = this.comments;
       this.setScore(score,comments,orderId)
       .then(()=>{
-        $.toast("操作成功");
+        $.hidePreloader();
+        this.$router.push('/success');
+
       })
     }
   }

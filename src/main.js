@@ -19,6 +19,7 @@ import MessageBoardPage from './pages/MessageBoard';
 import CommentInputPage from './pages/CommentInput';
 import TeacherOrderListPage from './pages/TeacherOrderList';
 import TeacherOrderDetailPage from './pages/TeacherOrderDetail';
+import SucessPage from './pages/Sucess';
 
 import TimeLine from './components/Timeline';
 import { dateFormat1, dateFormat, level } from './filter';
@@ -57,6 +58,7 @@ const router = new VueRouter({
     {path:'/taskComment', component: CommentInputPage},
     {path:'/teacherOrderList',component: TeacherOrderListPage},
     {path:'/orderDetail',component: TeacherOrderDetailPage},
+    {path:'/success',component:SucessPage},
   ]
 });
 

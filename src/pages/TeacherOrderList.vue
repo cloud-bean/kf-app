@@ -46,7 +46,7 @@ export default {
 
   mounted(){
     this.$nextTick(()=> {
-      if(this.orders.length == 0){
+      // if(this.orders.length == 0){
         $.showPreloader('加载中...');
         this.getOrders()
         .then((res) => {
@@ -55,7 +55,7 @@ export default {
         .catch(err => {
           console.log(err);
         })
-      }
+      // }
     })
   },
 };
