@@ -46,6 +46,7 @@ export default {
   },
   methods:{
     getImageFromWechat(){
+      $.showPreloader('加载中...');
       const serverId = this.activeOrder.files[0].URL;
       console.log(serverId);
       const that = this;
@@ -55,9 +56,11 @@ export default {
         success: function (res) {
           console.log(res.localId);
           that.localId = res.localId; // 返回图片下载后的本地ID
+          $.hidePreloader();
         },
         fail: function(res) {
           console.log('无资源');
+          $.hidePreloader();
         },
       });
     },

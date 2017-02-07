@@ -16,11 +16,14 @@ export default {
     testRedirect: 'http://localhost:8080?code=123',
   },
   secret: {
-    accessToken: '12c48ecc92da977f6d72bc45af40f7960d18e71fd783d3ab3cc281826c3a138f',
+    accessToken: '95954b9d4e134cf34e4fa94ea02a2d2f10c87ce03acaa7decfbfedb004de7b0c',
   //  userid: '58306c044238e8014a52ce05',
     userid: '5817407d2a2d3adc2032290e',
   },
   task:{
     limit:10,
   },
+  rank:{
+    limit:20,
+  }
 };

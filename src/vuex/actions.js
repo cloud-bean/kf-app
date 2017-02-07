@@ -81,7 +81,7 @@ export const  getTaskList = ({ dispatch, state }, page) => {
 export const getRanks = ({ dispatch, state },page) => {
   dispatch('GET_STH_BACKEND');
   return new Promise((resolve, reject) => {
-    request.get(`${bigServer}/ranks?page=${page}&limit=${config.task.limit}`)
+    request.get(`${bigServer}/ranks?page=${page}&limit=${config.rank.limit}`)
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {

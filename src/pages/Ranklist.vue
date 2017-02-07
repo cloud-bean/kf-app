@@ -154,7 +154,7 @@ export default {
   }
   .no-margin{
     margin: 0;
-    margin-top: 0.3rem;
+    margin-top: 0rem;
     border-radius: 0;
     box-shadow: 0 0rem 0rem rgba(0, 0, 0, 0.3);
   }
