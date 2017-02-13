@@ -9,6 +9,7 @@
               <span class="col-40 name">
                 <div class="">
                   {{user.displayName }} Lv.{{user.exp|level}}
+
                 </div>
                 <div class="grey-small">
                   收获{{user.totalVoteCount}}赞

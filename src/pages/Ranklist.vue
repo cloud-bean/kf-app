@@ -2,7 +2,7 @@
   <div class="">
 
   <!-- <rank-item :user='myRank.content' :rank-index='myRank.index'></rank-item> -->
-  <div v-if="myRank">
+  <!-- <div v-if="myRank">
     <div class="blue-bg">
       <div class="">
         <span class="avatar "><img :src="myRank.content.profileImageURL"  class="headimg"></span>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
   <div class="card no-margin">
@@ -38,6 +38,12 @@
       <!-- </div> -->
       </div>
       <!-- <div class="card-footer">每天更新</div> -->
+    </div>
+    <div v-show="hasMore" class="load-more">
+        <a v-on:click="loadMoreRank" class="button button-big">加载更多...</a>
+    </div>
+    <div v-show="!hasMore" class="load-more">
+      <a class="button button-big disabled">没有更多任务</a>
     </div>
 
   </div>
@@ -58,7 +64,8 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-
+      page:1,
+      hasMore:true,
     }
 
   },
@@ -76,16 +83,32 @@ export default {
     this.$nextTick(()=> {
       if(this.ranks.length == 0){
         $.showPreloader('加载中...');
-        this.getRanks()
+        this.getRanks(this.page)
         .then((res) => {
+          console.log(res);
           $.hidePreloader();
         })
         .catch(err => {
+          $.hidePreloader();
           console.log(err);
         })
       }
     })
   },
+  methods:{
+    loadMoreRank(){
+      this.page++;
+      $.showPreloader('加载中...');
+      this.getRanks(this.page)
+      .then(res => {
+        $.hidePreloader();
+        if(res.length < 10){
+          // console.log(res.length);
+          this.hasMore = false;
+        }
+      })
+    },
+  }
 };
 </script>
 
@@ -131,7 +154,7 @@ export default {
   }
   .no-margin{
     margin: 0;
-    margin-top: 0.3rem;
+    margin-top: 0rem;
     border-radius: 0;
     box-shadow: 0 0rem 0rem rgba(0, 0, 0, 0.3);
   }
@@ -155,5 +178,11 @@ export default {
     width: 3rem;
     text-align: center;
     border-radius: 50%;
+  }
+  .load-more{
+    margin: 0.3rem auto;
+    width: 300px;
+    /*padding-left: 0.5rem;*/
+    /*padding-right: 0.5rem;*/
   }
 </style>

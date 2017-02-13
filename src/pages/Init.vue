@@ -53,12 +53,11 @@ export default {
         try{
           if(query && query.code){
             $.showPreloader('加载中...');
-            let secret = config.secret;
             if(process.env.NODE_ENV == 'production'){
               yield self.auth(config.appid,query.code);
               yield self.getJsConfig(sendUrl);
             }else{
-              self.authLocal(secret.userid, secret.accessToken)
+              self.authLocal(config.secret.userid, config.secret.accessToken)
             }
             wx.config(self.jsConfig);
             // localStorage.setItem('kf_accessToken', secret.accessToken);
@@ -82,10 +81,10 @@ export default {
             })
           }else {
 
-
-            let redirctUrl = config.route.testRedirect;
+             let redirctUrl = config.route.testRedirect;
+            // let redirctUrl = util.getAuthorizeURL(config.appidTest, config.server.testServer, 'wechat', 'snsapi_userinfo');
             if(process.env.NODE_ENV == 'production'){
-              redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
+               redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
             }
             window.location.href = redirctUrl;
           }

@@ -21,6 +21,8 @@ const state = {
   myRecords:{},
   tip:{},
   login:false,
+  orders:[],
+  activeOrder:{},
 };
 
 const mutations = {
@@ -61,7 +63,7 @@ const mutations = {
   },
 
   GOT_RANK (state, ranks) {
-    state.ranks = ranks;
+    state.ranks = state.ranks.concat(ranks);
     state.loading = false;
   },
   GOT_MY_RANK(state, rank ,index){
@@ -114,7 +116,13 @@ const mutations = {
   },
   SET_LOGIN(state , login){
     state.login = login;
-  }
+  },
+  SET_ORDERS(state, orders){
+    state.orders = orders;
+  },
+  SET_ACTIVE_ORDER (state, order) {
+    state.activeOrder = order;
+  },
 
 };
 
