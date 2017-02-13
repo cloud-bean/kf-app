@@ -17,7 +17,7 @@ export default {
   },
   secret: {
 
-    accessToken: '95954b9d4e134cf34e4fa94ea02a2d2f10c87ce03acaa7decfbfedb004de7b0c',
+    accessToken: 'a2a9f061b9b04a9ce75eae70b40b1846eccaf08763830e611064209bb2c3a8a6',
   //  userid: '58306c044238e8014a52ce05',
 
     userid: '5817407d2a2d3adc2032290e',

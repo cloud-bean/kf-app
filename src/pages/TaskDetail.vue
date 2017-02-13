@@ -17,9 +17,9 @@
          <li>过期 {{task.expireTime | dateFormat}}</li>
          <li>类型 {{task.type}}</li>
        </ul>
-       <div class="desc">
+       <div class="description">
          <h1 class="grey">任务详情:</h1>
-         <div v-html="tansMarkdown(task.description)">
+         <div  v-html="tansMarkdown(task.description)">
 
          </div>
          <!-- <h1 class="grey">老师评价:</h1> -->
@@ -148,14 +148,16 @@ overflow: hidden;
   width: 100% !important;
   position:relative;
 }
-.desc h1 {
-  font-size: 0.5rem;
+
+.description{
+  width: 100%;
+  word-break:normal;
+  word-wrap:break-word;
+  white-space: normal;
+  font-size: 0.7rem;
 }
-.desc h2 {
-  font-size: 0.4rem;
-}
-.desc h3 {
-  font-size: 0.3rem;
+.description h1{
+  font-size: 1rem;
 }
 .message-item {
   margin-top: 0.8rem;
