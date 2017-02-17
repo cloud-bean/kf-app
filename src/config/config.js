@@ -17,10 +17,10 @@ export default {
   },
   secret: {
 
-    accessToken: 'a2a9f061b9b04a9ce75eae70b40b1846eccaf08763830e611064209bb2c3a8a6',
+    accessToken: '812024257a3562411356b214930091a81eaf988eaebf812b254841d459d912f9',
   //  userid: '58306c044238e8014a52ce05',
-
-    userid: '5817407d2a2d3adc2032290e',
+  userid:'581717002a2d3adc2032206e',//崔
+    // userid: '5817407d2a2d3adc2032290e',
   },
   task:{
     limit:10,

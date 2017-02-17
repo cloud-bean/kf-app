@@ -173,7 +173,7 @@ export const getOrders = ({ dispatch, state }) => {
   return new Promise(
     (resolve, reject) => {
       request
-      .get(`${bigServer}/orders`)
+      .get(`${bigServer}/orders?limit=200`)//默认20，不够用
       // .withCredentials()
       .set('Authorization', `Bearer ${state.accessToken}`)
       .then((result) => {
