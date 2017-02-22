@@ -114,7 +114,6 @@ export default {
     photo(){
       this.submitOrder(this.task._id)
       .then(() => {
-        console.log('leave');
         return this.leaveComment('我上传了作业',this.task._id);
       })
       .then(()=> {

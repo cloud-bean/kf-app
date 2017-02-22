@@ -12,7 +12,7 @@ import {loader} from '../config/util'
 
 const wurl = require('wurl');
 const co = require('co');
-const wx = require('weixin-js-sdk');
+// const wx = require('weixin-js-sdk');
 
 
 

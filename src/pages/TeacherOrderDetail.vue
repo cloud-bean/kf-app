@@ -22,7 +22,7 @@
 </template>
 
 <script>
-const wx = require('weixin-js-sdk');
+// const wx = require('weixin-js-sdk');
 import { setScore } from '../vuex/actions';
 
 export default {
@@ -46,17 +46,16 @@ export default {
   },
   methods:{
     getImageFromWechat(){
-      $.showPreloader('加载中...');
       const serverId = this.activeOrder.files[0].URL;
-      console.log(serverId);
+      console.log('serverId:',serverId);
       const that = this;
       wx.downloadImage({
         serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
-        isShowProgressTips: 0, // 默认为1，显示进度提示
+        isShowProgressTips: 1, // 默认为1，显示进度提示
         success: function (res) {
-          console.log(res.localId);
-          that.localId = res.localId; // 返回图片下载后的本地ID
-          $.hidePreloader();
+          console.log('localId',res.localId);
+          that.localId = res.localId;
+           // 返回图片下载后的本地ID
         },
         fail: function(res) {
           console.log('无资源');
