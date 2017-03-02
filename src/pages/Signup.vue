@@ -70,6 +70,7 @@
 import config from '../config/config';
 import util from '../config/util';
 import {signUp,setLogin} from '../vuex/actions';
+import { mapState, mapActions } from 'vuex';
 
 
 export default {
@@ -84,16 +85,23 @@ export default {
       // its initial state.
     }
   },
-  vuex: {
-    actions: {
-      signUp,
-      setLogin,
-    },
-    getters: {
-      user: state => state.user,
-    }
-  },
+  // vuex: {
+  //   actions: {
+  //     signUp,
+  //     setLogin,
+  //   },
+  //   getters: {
+  //     user: state => state.user,
+  //   }
+  // },
+  computed: mapState({
+    user: state => state.profile.user,
+  }),
   methods: {
+    ...mapActions([
+      'signUp',
+      'setLogin',
+    ]),
     submit(displayName, phone, slogan) {
 
       // if(!this.$validation1.valid){

@@ -17,12 +17,12 @@
 <script>
 
 export default {
-  vuex: {
-    getters: {
-      activeTask: state => state.activeTask,
-    }
-  },
-  props:['handleClick'],
+  // vuex: {
+  //   getters: {
+  //     activeTask: state => state.activeTask,
+  //   }
+  // },
+  props:['handleClick','task'],
   data(){
     return {
       comment:'',
@@ -37,7 +37,7 @@ export default {
       //   $.alert('话那么多，哼')
       // }
       else{
-        this.handleClick(this.comment, this.activeTask._id)
+        this.handleClick(this.comment, this.task._id)
         .then(()=>{
           this.comment = '';
           this.$router.push('/taskDetail');

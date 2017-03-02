@@ -29,7 +29,7 @@
     "vue-router": "^2.0.0",
     "vue-strap": "^1.1.29",
     "vue-validator": "^3.0.0-alpha.2",
-    "vuex": "^1.0.0",
+    "vuex": "^2.2.1",
     "wechat-oauth": "^1.1.1",
     "weixin-js-sdk": "^1.2.0",
     "wurl": "^2.1.0"

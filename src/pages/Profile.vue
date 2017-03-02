@@ -5,7 +5,7 @@
 <div class="">
   <info :user="user"></info>
   <tips :tip="tip"></tips>
-  <my-chart :my-chart-data="myRecords"></my-chart>
+  <my-chart :my-chart-data="userRecords"></my-chart>
 </div>
 
 
@@ -16,8 +16,8 @@ import Info from '../components/HeadInfo';
 import MyChart from '../components/MyChart';
 import Tips from '../components/Tips';
 
-import {getMyRecords} from '../vuex/actions';
-import { spinner } from 'vue-strap';
+// import { getMyRecords } from '../vuex/actions';
+import { mapState, mapActions } from 'vuex';
 
 // import Expbar from '../components/Expbar';
 // import Chart from '../components/Chart';
@@ -34,39 +34,28 @@ export default {
       // its initial state.
     };
   },
-  vuex: {
-    getters: {
-      user: state => state.user,
-      myRecords: state => state.myRecords,
-      tip: state => state.tip,
-    },
-  },
+  computed: mapState({
+    user: state => state.profile.user,
+    userRecords: state => state.profile.userRecords,
+    tip: state => state.profile.tip,
+  }),
+  // vuex: {
+  //   getters: {
+  //     user: state => state.user,
+  //     myRecords: state => state.myRecords,
+  //     tip: state => state.tip,
+  //   },
+  // },
   created() {
-    // console.log('my',this.myRecords);
-    // this.getUserInfo('57f44a1674e8b8f5664c76c3')
-    // .then((res)=>{
-    //   this.user = res;
-    // })
+
   },
   methods: {
-    // getUserInfo(userid, accessToken) {
-    //   return new Promise((resolve, reject) => {
-    //     this.$http.get(`${config.route.user}${userid}`)
-    //     .then((result) => {
-    //       console.log(result);
-    //       resolve(result.body.data);
-    //     })
-    //     .catch((err) => {
-    //       reject(err);
-    //     });
-    //   });
-    // }
+
   },
   components: {
       Info,
       MyChart,
       Tips,
-      spinner,
   }
 }
 </script>

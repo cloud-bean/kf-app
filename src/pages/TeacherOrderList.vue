@@ -11,11 +11,14 @@
 </template>
 
 <script>
-import vs from '../components/Vs';
+// import vs from '../components/Vs';
 import orderItem from '../components/OrderItem';
 import util from '../config/util';
-import {getOrders,orderDetail} from '../vuex/actions';
+// import {getOrders,orderDetail} from '../vuex/actions';
 import mockdata from '../../test/mock';
+import { mapState, mapActions } from 'vuex';
+
+
 export default {
   components:{orderItem},
   data() {
@@ -28,21 +31,28 @@ export default {
 
   },
   methods:{
+    ...mapActions([
+      'getOrders',
+      'orderDetail',
+    ]),
     handleClick(index){
       console.log(index);
       this.orderDetail(index);
       this.$router.push('/orderDetail');
     },
   },
-  vuex: {
-    getters: {
-      orders: state => state.orders,
-    },
-    actions: {
-      getOrders,
-      orderDetail,
-    }
-  },
+  computed: mapState({
+    orders: state => state.score.orders,
+  }),
+  // vuex: {
+  //   getters: {
+  //     orders: state => state.orders,
+  //   },
+  //   actions: {
+  //     getOrders,
+  //     orderDetail,
+  //   }
+  // },
 
   mounted(){
     this.$nextTick(()=> {

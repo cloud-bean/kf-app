@@ -4,7 +4,7 @@
       <div class="card-content">
 
         <div v-for="(rank, index) in ranks" class="rank-list">
-          <rank-item :user='rank' :rank-index='index+1' class="rank-item"></rank-item>
+          <rank-item :user='rank' :rank-index='index+1' :like='friendLike' class="rank-item"></rank-item>
         </div>
       </div>
     </div>
@@ -19,13 +19,14 @@
 </template>
 
 <script>
-import vs from '../components/Vs';
 import rankItem from '../components/RankItem';
 import util from '../config/util';
-import {getRanks} from '../vuex/actions';
+// import {getRanks} from '../vuex/actions';
 import mockdata from '../../test/mock';
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  components:{vs,rankItem},
+  components:{ rankItem },
   data() {
     return {
       // note: changing this line won't causes changes
@@ -37,16 +38,19 @@ export default {
     }
 
   },
-  vuex: {
-    getters: {
-      ranks: state => state.ranks,
-      myRank: state => state.myRank,
-    },
-    actions: {
-      getRanks,
-    }
-  },
+  computed: mapState({
+    ranks: state => state.rank.ranks,
+  }),
 
+  // vuex: {
+  //   getters: {
+  //     ranks: state => state.ranks,
+  //     myRank: state => state.myRank,
+  //   },
+  //   actions: {
+  //     getRanks,
+  //   }
+  // },
   mounted(){
     this.$nextTick(()=> {
       if(this.ranks.length == 0){
@@ -63,6 +67,10 @@ export default {
     })
   },
   methods:{
+    ...mapActions([
+      'getRanks',
+      'friendLike',
+    ]),
     loadMoreRank(){
       this.page++;
       $.showPreloader('加载中...');
@@ -75,7 +83,7 @@ export default {
         }
       })
     },
-  }
+  },
 };
 </script>
 

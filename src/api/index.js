@@ -158,7 +158,7 @@ new Promise((resolve, reject) => {
     });
 });
 
-export const getMyRecords = () =>
+export const getUserRecords = () =>
 new Promise((resolve, reject) => {
   request.get(`${bigServer}/records/me`)
     .set('Authorization', `Bearer ${store.state.accessToken}`)

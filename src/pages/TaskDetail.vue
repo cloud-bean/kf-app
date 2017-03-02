@@ -64,10 +64,11 @@
 import HeadList from '../components/HeadList';
 import MessageItem from '../components/MessageItem';
 import MessageInput from '../components/MessageInput';
+import { mapState, mapActions } from 'vuex';
 
 const markdown = require('markdown').markdown;
 
-import { getComments, leaveComment, submitOrder } from '../vuex/actions';
+// import { getComments, leaveComment, submitOrder } from '../vuex/actions';
 
 export default {
   data: function () {
@@ -78,21 +79,31 @@ export default {
     MessageItem,
     HeadList
   },
-  vuex: {
-    getters: {
-      task : state => state.activeTask,
-      comments: state => state.activeComments,
-    },
-    actions: {
-      getComments,
-      leaveComment,
-      submitOrder,
-    }
-  },
+  computed: mapState({
+    task : state => state.task.activeTask,
+    comments: state => state.task.activeComments,
+  }),
+  //
+  // vuex: {
+  //   getters: {
+  //     task : state => state.activeTask,
+  //     comments: state => state.activeComments,
+  //   },
+  //   actions: {
+  //     getComments,
+  //     leaveComment,
+  //     submitOrder,
+  //   }
+  // },
   mounted() {
     this.getComments(this.task._id);
   },
   methods: {
+    ...mapActions([
+      'getComments',
+      'leaveComment',
+      'submitOrder',
+    ]),
     tansMarkdown(content){
       return markdown.toHTML(content);
     },

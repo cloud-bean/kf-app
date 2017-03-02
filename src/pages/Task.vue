@@ -5,7 +5,7 @@
   <div class="blue-bg">
     已完成
     <div class="task-info">
-      {{taskInfo.totalDone}} / {{taskInfo.totalCount}}<span class="grey-small"></span>
+      {{taskQuantityInfo.totalDone}} / {{taskQuantityInfo.totalCount}}<span class="grey-small"></span>
     </div>
   </div>
   <!-- <p><a v-on:click="scan" class="button">scan</a></p> -->
@@ -33,23 +33,16 @@
 <script>
     import TaskItem from '../components/TaskItem';
     import mockdata from '../../test/mock';
-    import Info from '../components/HeadInfo';
-    import Exp from '../components/Expbar';
-    import Timeline from '../components/Timeline';
     import util from '../config/util';
-    import { getTaskList, taskDetail } from '../vuex/actions';
-    const wx = require('weixin-js-sdk');
+    // import { getTaskList, taskDetail } from '../vuex/actions';
+    // const wx = require('weixin-js-sdk');
+    import { mapState, mapActions } from 'vuex';
 
-    import { spinner } from 'vue-strap'
 
     export default{
-        components:{
-            TaskItem,
-            Info,
-            Exp,
-            spinner,
-            Timeline,
-        },
+      components: {
+        TaskItem,
+      },
       data(){
           return {
             page:1,
@@ -58,23 +51,24 @@
       },
       created(){
 
-
       },
       mounted(){
         this.$nextTick(() => {
-          if(this.tasks.length==0){
-           $.showPreloader('加载中...');
-           this.getTaskList(this.page)
-           .then(res => {
-             $.hidePreloader();
-           })
-           .catch(err => {
-               console.log(err);
-           });
-          }
+          this.init();
         });
       },
       methods: {
+        ...mapActions([
+          'getTaskList',
+          'taskDetail',
+        ]),
+        async init(){
+          if(this.tasks.length==0){
+           $.showPreloader('加载中...');
+           await this.getTaskList(this.page)
+           $.hidePreloader();
+          }
+        },
         handleClick(index){
           console.log(index);
           this.taskDetail(index);
@@ -106,20 +100,21 @@
           })
         },
       },
-      vuex: {
-        getters: {
-          // user: state => state.user,
-          accessToken: state => state.accessToken,
-          tasks: state => state.tasks,
-          taskInfo: state => state.taskInfo,
-        },
-        actions: {
-          getTaskList,
-          taskDetail,
-        }
-      }
-
-
+      computed: mapState({
+        tasks: state => state.task.tasks,
+        taskQuantityInfo: state => state.task.taskQuantityInfo,
+      }),
+      // vuex: {
+      //   getters: {
+      //     // user: state => state.user,
+      //     tasks: state => state.tasks,
+      //     taskInfo: state => state.taskInfo,
+      //   },
+      //   actions: {
+      //     getTaskList,
+      //     taskDetail,
+      //   }
+      // }
     }
 </script>
 

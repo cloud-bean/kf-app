@@ -42,14 +42,14 @@
 </template>
 
 <script>
-import Exp from './Expbar';
+// import Exp from './Expbar';
 import util from '../config/util';
-const wx = require('weixin-js-sdk');
+// const wx = require('weixin-js-sdk');
 
     export default{
       props:['user'],
       components:{
-        Exp
+        // Exp
       },
       methods:{
         level(exp){
@@ -57,20 +57,19 @@ const wx = require('weixin-js-sdk');
            console.log(lvl);
            return lvl;
         },
-        share(){
-          wx.onMenuShareTimeline({
-            title: '哈哈', // 分享标题
-            link: 'http://baidu.com', // 分享链接
-            imgUrl: '../../static/background.jpg', // 分享图标
-            success: function () {
-              // 用户确认分享后执行的回调函数
-              alert('already share');
-            },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
-            }
-          });
-        }
+        // share(){
+        //   wx.onMenuShareTimeline({
+        //     title: '哈哈', // 分享标题
+        //     link: 'http://baidu.com', // 分享链接
+        //     imgUrl: '../../static/background.jpg', // 分享图标
+        //     success: function () {
+        //       // 用户确认分享后执行的回调函数
+        //       alert('already share');
+        //     },
+        //     cancel: function () {
+        //       // 用户取消分享后执行的回调函数
+        //     }
+        //   });
       },
     }
 </script>

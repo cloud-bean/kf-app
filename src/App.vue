@@ -22,8 +22,6 @@
         </router-link>
       </nav>
   </div>
-
-
   <div class="content pad-bottom">
       <router-view></router-view>
   </div>
@@ -34,36 +32,25 @@
 
  <script>
 // import { navbar } from 'vue-strap'
-import store from './vuex/store';
+// import store from './vuex/store';
 // import config from '../config/config';
 // import util from '../config/util';
 //
 // const wurl = require('wurl');
 // const co = require('co');
 //
+import { mapState } from 'vuex';
  export default {
-   store,
+  //  store,
    data(){
      return {
-       num:null,
      }
    },
-   vuex: {
-     getters: {
-       login: state => state.login,
-       user: state => state.user,
-     }
-   },
-  //  events:{
-  //    'tasknum': function (num) {
-  //     // 事件回调内的 `this` 自动绑定到注册它的实例上
-  //     console.log(num);
-  //
-  //     this.num=num;
-  //   }
-  // },
+   computed: mapState({
+     login: state => state.login,
+     user: state => state.profile.user,
+   }),
  }
-//
 </script>
 
 <style>

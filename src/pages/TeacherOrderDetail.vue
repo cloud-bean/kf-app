@@ -24,6 +24,7 @@
 <script>
 // const wx = require('weixin-js-sdk');
 import { setScore } from '../vuex/actions';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   data(){
@@ -33,18 +34,24 @@ export default {
       comments:'',
     }
   },
-  vuex: {
-    getters: {
-      activeOrder : state => state.activeOrder,
-    },
-    actions: {
-      setScore
-    }
-  },
+  computed: mapState({
+    activeOrder : state => state.score.activeOrder,
+  }),
+  // vuex: {
+  //   getters: {
+  //     activeOrder : state => state.activeOrder,
+  //   },
+  //   actions: {
+  //     setScore
+  //   }
+  // },
   mounted(){
     this.getImageFromWechat();
   },
   methods:{
+    ...mapActions([
+      'setScore',
+    ]),
     getImageFromWechat(){
       const serverId = this.activeOrder.files[0].URL;
       console.log('serverId:',serverId);
@@ -68,7 +75,7 @@ export default {
       const orderId = this.activeOrder._id;
       const score = this.score;
       const comments = this.comments;
-      this.setScore(score,comments,orderId)
+      this.setScore({score,comments,orderId})
       .then(()=>{
         $.hidePreloader();
         this.$router.push('/success');
