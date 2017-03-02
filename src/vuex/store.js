@@ -26,7 +26,7 @@ const state = {
 };
 
 const mutations = {
-  AUTH_CLIENT(state, userid, accessToken){
+  AUTH_CLIENT(state, { userid, accessToken }){
     state.userid = userid;
     state.accessToken = accessToken;
   },

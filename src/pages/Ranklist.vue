@@ -85,7 +85,6 @@ export default {
         $.showPreloader('加载中...');
         this.getRanks(this.page)
         .then((res) => {
-          console.log(res);
           $.hidePreloader();
         })
         .catch(err => {

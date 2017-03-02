@@ -13,27 +13,8 @@ function getAuthorizeURL(appid, redirect, state, scope) {
 
   return `${url}?${querystring.stringify(info)}#wechat_redirect`;
 }
-// 加载动画
-export const loader = {
-  show () {
-    if ($('.ball-beat')[0]) {
-      return
-    }
-    let modalContainer = document.body
-    $(modalContainer).append('<div class="loader-inner ball-beat"><div></div><div></div><div></div></div>')
-  },
-  hide () {
-    $('.ball-beat').remove()
-  }
-}
+
 
 export default {
   getAuthorizeURL,
-  // auth,
-  // getUserInfo,
-  // getTaskList,
-  // getLevel,
-  // getRanks,
-  // localMoment,
-  // friendLike,
 };

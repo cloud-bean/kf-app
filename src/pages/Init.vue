@@ -5,14 +5,12 @@
 <script>
 import config from '../config/config';
 import util from '../config/util';
-import { spinner } from 'vue-strap';
 import mockdata from '../../test/mock';
 import { auth, getUserInfo, authLocal, getJsConfig, getMyRecords, getTip, setLogin } from '../vuex/actions';
-import {loader} from '../config/util'
+import {loader} from '../config/util';
 
 const wurl = require('wurl');
 const co = require('co');
-// const wx = require('weixin-js-sdk');
 
 
 
@@ -22,9 +20,7 @@ export default {
       mockdata,
     };
   },
-  components: {
-    spinner,
-  },
+
   vuex: {
     getters: {
       loading: state => state.loading,
@@ -60,19 +56,15 @@ export default {
               self.authLocal(config.secret.userid, config.secret.accessToken)
             }
             wx.config(self.jsConfig);
-            // localStorage.setItem('kf_accessToken', secret.accessToken);
-            // localStorage.setItem('kf_userid', secret.userid);
             yield self.getMyRecords();
             yield self.getTip();
             yield self.getUserInfo(self.userid)
             .then((res) => {
               $.hidePreloader();
               if(self.user.option.phone){
-                // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
                 self.setLogin(true);
                 self.$router.push('/profile');
               }else{
-                // localStorage.setItem('kf_userInfo', JSON.stringify(userInfo));
                 self.$router.push('/signup');
               }
             })
@@ -105,39 +97,7 @@ export default {
 
 },
 methods: {
-  // auth(appid, code) {
-  //   return new Promise((resolve, reject) => {
-  //     this.$http.get(`${config.route.auth}?appid=${appid}&code=${code}`)
-  //     .then((result) => {
-  //       console.log(result);
-  //       const userid = result.body.userid;
-  //       const accessToken = result.body.accessToken;
-  //       resolve({ userid, accessToken });
-  //     })
-  //     .catch((err) => {
-  //       reject(err);
-  //     });
-  //   });
-  // },
-  //
-  // getUserInfo(userid, accessToken) {
-  //   return new Promise((resolve, reject) => {
-  //     this.$http.get(`${config.route.user}${userid}`,
-  //       {
-  //         withCredentials: true,
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       })
-  //     .then((result) => {
-  //       console.log(result);
-  //       resolve(result.body.data);
-  //     })
-  //     .catch((err) => {
-  //       reject(err);
-  //     });
-  //   });
-  // }
+
 },
 
 }
