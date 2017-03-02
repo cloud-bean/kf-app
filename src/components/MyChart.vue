@@ -31,13 +31,11 @@
 </template>
 
 <script>
-import Radar from '../components/charts/Radar';
 import LineChart from '../components/charts/LineChart';
 
 export default {
   props:['myChartData'],
   components: {
-    Radar,
     LineChart,
   },
   created(){

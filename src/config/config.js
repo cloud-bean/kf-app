@@ -17,7 +17,7 @@ export default {
   },
   secret: {
 
-    accessToken: '3aa610adfb03ca10206ce2ee8a73ff6048c0ecee70bfab7f1a74b0bffb42f7b0',
+    accessToken: '3a7ae4823873a21fd52d8c4d7dc3f5c7498f426dc26851b598a03b6bb473a9de',
   //  userid: '58306c044238e8014a52ce05',
   // userid:'583a8905bb1a619b3b2b1d34',//张彦云
 //  userid:'581717002a2d3adc2032206e',//崔
