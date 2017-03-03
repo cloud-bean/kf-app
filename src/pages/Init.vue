@@ -45,7 +45,7 @@ export default {
         if(query && query.code){
           $.showPreloader('加载中...');
           if(process.env.NODE_ENV == 'production'){
-            await this.auth(config.appid,query.code);
+            await this.auth({appid:config.appid,code:query.code});
             await this.getJsConfig(sendUrl);
         }else{
           console.log('aaa');
