@@ -45,7 +45,7 @@ export default {
   //     setScore
   //   }
   // },
-  mounted(){
+  created(){
     this.getImageFromWechat();
   },
   methods:{

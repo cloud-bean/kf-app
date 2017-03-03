@@ -10,8 +10,8 @@ export function authLocal({ commit }, { userid, accessToken }) {
 export function setLogin({ commit, state }, login) {
   commit(types.SET_LOGIN, login);
 }
-export async function getJsConfig({ dispatch }, url) {
-  dispatch(types.SET_JS_CONFIG, await api.getJsConfig(url));
+export async function getJsConfig({ commit }, url) {
+  commit(types.SET_JS_CONFIG, await api.getJsConfig(url));
 }
 // export async function getUserInfo({ dispatch, state }, userid) {
 //   dispatch('GOT_USER', await api.getUserInfo(userid));
