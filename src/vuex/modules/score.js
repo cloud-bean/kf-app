@@ -24,7 +24,7 @@ const actions = {
     const current = orders[index];
     commit(types.SET_ACTIVE_ORDER, current);
   },
-  async setScore({ score, comments, orderId }) {
+  async setScore({ commit }, { score, comments, orderId }) {
     await api.setScore(score, comments, orderId);
   },
 };

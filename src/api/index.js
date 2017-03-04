@@ -232,9 +232,9 @@ new Promise((resolve, reject) => {
         created: Date.now(),
       },
     };
+    console.log(data);
     request.post(`${bigServer}/orders`)
     .send(data)
-    // .withCredentials()
     .set('Authorization', `Bearer ${store.state.accessToken}`)
     .then((result) => {
       resolve(result.body.data);

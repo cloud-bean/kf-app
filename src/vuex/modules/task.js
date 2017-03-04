@@ -52,14 +52,15 @@ const actions = {
     const current = tasks[index];
     commit(types.SET_ACTIVE_TASK, current);
   },
-  async leaveComment({ commit }, content, taskId) {
+  async leaveComment({ commit }, { content, taskId }) {
     commit(types.ADD_TASK_COMMENT, await api.leaveComment(content, taskId));
   },
   async getComments({ commit }, taskId) {
     commit(types.CLEAR_ACTIVE_TASK_COMMENTS);
     commit(types.SET_ACTIVE_TASK_COMMENTS, await api.getTaskComment(taskId));
   },
-  async submitOrder(taskId) {
+  async submitOrder({ commit }, taskId) {
+    console.log('taskId', taskId);
     await api.submitOrder(taskId);
   },
 };

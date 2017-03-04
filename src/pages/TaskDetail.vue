@@ -122,14 +122,11 @@ export default {
     //   };
     //   return this.submitOrder(data);
     // },
-    photo(){
-      this.submitOrder(this.task._id)
-      .then(() => {
-        return this.leaveComment('我上传了作业',this.task._id);
-      })
-      .then(()=> {
-        $.toast("提交作业成功");
-      })
+    async photo(){
+      console.log(this.task._id);
+      await this.submitOrder(this.task._id)
+      await this.leaveComment({content:'我上传了作业', taskId:this.task._id})
+      $.toast("提交作业成功");
     },
     record(){
       wx.startRecord();
