@@ -18,3 +18,6 @@ export const CLEAR_ACTIVE_TASK_COMMENTS = 'CLEAR_ACTIVE_TASK_COMMENTS';
 
 export const SET_ACTIVE_ORDER = 'SET_ACTIVE_ORDER';
 export const SET_ORDERS = 'SET_ORDERS';
+
+export const FETCH_STH = 'FETCH_STH';
+export const GOT_STH = 'GOT_STH';

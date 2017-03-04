@@ -2,7 +2,9 @@ import * as api from '../api';
 import * as types from './mutation_types';
 
 export async function auth({ commit }, { appid, code }) {
+  commit(types.FETCH_STH);
   commit(types.AUTH_CLIENT, await api.auth(appid, code));
+  commit(types.GOT_STH);
 }
 export function authLocal({ commit }, { userid, accessToken }) {
   commit(types.AUTH_CLIENT, { userid, accessToken });
