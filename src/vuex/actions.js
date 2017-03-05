@@ -9,7 +9,7 @@ export async function auth({ commit }, { appid, code }) {
 export function authLocal({ commit }, { userid, accessToken }) {
   commit(types.AUTH_CLIENT, { userid, accessToken });
 }
-export function setLogin({ commit, state }, login) {
+export function setLogin({ commit }, login) {
   commit(types.SET_LOGIN, login);
 }
 export async function getJsConfig({ commit }, url) {

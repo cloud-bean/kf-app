@@ -24,7 +24,7 @@
             <div class="item-inner">
               <div class="item-title label" for="displayName">姓名</div>
               <div class="item-input">
-                <input id="displayName" type="text" placeholder="" v-model="displayName" v-validate:displayName="['required']">
+                <input id="displayName" type="text" placeholder="" v-model="displayName">
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@
             <div class="item-inner">
               <div class="item-title label" for="phone">手机</div>
               <div class="item-input">
-                <input id="phone" type="text" placeholder="" v-model="phone" v-validate:phone="['required']">
+                <input id="phone" type="text" placeholder="" v-model="phone">
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
     <div class="content-block">
       <div class="row">
         <div class="col-50"><a  class="button button-big button-fill button-danger" v-on:click="cleanUp">重填</a></div>
-        <div class="col-50"><a  class="button button-big button-fill button-success" v-on:click="submit(displayName, phone, slogan)">提交</a></div>
+        <div class="col-50"><a  class="button button-big button-fill button-success" v-on:click="submit()">提交</a></div>
       </div>
     </div>
   </div>
@@ -69,7 +69,6 @@
 <script>
 import config from '../config/config';
 import util from '../config/util';
-import {signUp,setLogin} from '../vuex/actions';
 import { mapState, mapActions } from 'vuex';
 
 
@@ -102,20 +101,21 @@ export default {
       'signUp',
       'setLogin',
     ]),
-    submit(displayName, phone, slogan) {
+    async submit() {
 
       // if(!this.$validation1.valid){
       //   $.alert('请完整填写信息');
       //   return;
       // }
-      this.signUp(displayName, phone, slogan)
-      .then((result) => {
-        this.setLogin(true)
-        this.$router.push('/task');
-      })
-      .catch((err) => {
+      const displayName = this.displayName;
+      const phone = this.phone;
+      const slogan = this.slogan;
+      try {
+        await this.signUp({displayName, phone, slogan});
+      } catch (err) {
         console.log(err);
-      })
+      }
+      this.$router.push('/profile');
     },
     cleanUp(){
       this.phone = '';

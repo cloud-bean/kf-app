@@ -40,11 +40,13 @@ const actions = {
   async getTip({ commit }) {
     commit(types.SET_TIP, await api.getTips());
   },
-  async signUp({ state }, displayName, phone, slogan) {
+  async signUp({ commit, state }, { displayName, phone, slogan }) {
     const user = state.user;
     const option = Object.assign({}, user.option, { phone }, { slogan });
     const newuser = Object.assign({}, user, { option }, { displayName });
     await api.signUp(user._id, newuser);
+    commit(types.SET_USER_INFO, newuser);
+    commit(types.SET_LOGIN, true);
   },
 };
 export default {

@@ -42,7 +42,7 @@ const mutations = {
   [types.GOT_STH](state) {
     state.loading = false;
   },
-  [types.SET_LOGIN](state , login) {
+  [types.SET_LOGIN](state, login) {
     state.login = login;
   },
   [types.SET_JS_CONFIG](state, config) {
