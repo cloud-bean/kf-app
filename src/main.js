@@ -5,6 +5,10 @@ import App from './App';
 import router from './router';
 import { dateFormat1, dateFormat, level } from './filter';
 import store from './vuex/store';
+import MintUI from 'mint-ui';
+// import 'mint-ui/lib/style.css';
+
+Vue.use(MintUI);
 
 Vue.filter('dateFormat', dateFormat);
 Vue.filter('dateFormat1', dateFormat1);
