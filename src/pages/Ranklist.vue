@@ -54,15 +54,7 @@ export default {
   mounted(){
     this.$nextTick(()=> {
       if(this.ranks.length == 0){
-        $.showPreloader('加载中...');
-        this.getRanks(this.page)
-        .then((res) => {
-          $.hidePreloader();
-        })
-        .catch(err => {
-          $.hidePreloader();
-          console.log(err);
-        })
+        this.getRanks(this.page);
       }
     })
   },
@@ -73,10 +65,8 @@ export default {
     ]),
     loadMoreRank(){
       this.page++;
-      $.showPreloader('加载中...');
       this.getRanks(this.page)
       .then(res => {
-        $.hidePreloader();
         if(res.length < 10){
           // console.log(res.length);
           this.hasMore = false;

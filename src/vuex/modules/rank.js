@@ -18,8 +18,10 @@ const mutations = {
 
 const actions = {
   async getRanks({ commit }, page) {
+    commit(types.FETCH_STH);
     const ranks = await api.getRanks(page);
     commit(types.SET_RANK, ranks);
+    commit(types.GOT_STH);
     return ranks;
   },
   async friendLike({ commit }, { user, index }) {

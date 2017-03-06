@@ -7,13 +7,19 @@ export async function auth({ commit }, { appid, code }) {
   commit(types.GOT_STH);
 }
 export function authLocal({ commit }, { userid, accessToken }) {
+  commit(types.FETCH_STH);
   commit(types.AUTH_CLIENT, { userid, accessToken });
+  commit(types.GOT_STH);
 }
 export function setLogin({ commit }, login) {
+  commit(types.FETCH_STH);
   commit(types.SET_LOGIN, login);
+  commit(types.GOT_STH);
 }
 export async function getJsConfig({ commit }, url) {
+  commit(types.FETCH_STH);
   commit(types.SET_JS_CONFIG, await api.getJsConfig(url));
+  commit(types.GOT_STH);
 }
 // export async function getUserInfo({ dispatch, state }, userid) {
 //   dispatch('GOT_USER', await api.getUserInfo(userid));

@@ -64,9 +64,7 @@
         ]),
         async init(){
           if(this.tasks.length==0){
-           $.showPreloader('加载中...');
            await this.getTaskList(this.page)
-           $.hidePreloader();
           }
         },
         handleClick(index){
@@ -89,10 +87,8 @@
         // },
         loadMoreTask(){
           this.page++;
-          $.showPreloader('加载中...');
           this.getTaskList(this.page)
           .then(res => {
-            $.hidePreloader();
             if(res.length < 10){
               // console.log(res.length);
               this.hasMore = false;

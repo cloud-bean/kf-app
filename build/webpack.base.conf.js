@@ -66,14 +66,14 @@ module.exports = {
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
-      // {
-      //   test: /\.css$/,
-      //   loader: 'style-loader!css-loader',
-      //   include: [
-      //     /src/,
-      //     '/node_modules/mint-ui/lib/'   //增加此项
-      //   ],
-      // },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+        include: [
+          /src/,
+          '/node_modules/mint-ui/lib/'   //增加此项
+        ],
+      },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url',

@@ -17,7 +17,9 @@ const mutations = {
 
 const actions = {
   async getOrders({ commit }) {
+    commit(types.FETCH_STH);
     commit(types.SET_ORDERS, await api.getOrders());
+    commit(types.GOT_STH);
   },
   orderDetail({ commit, state }, index) {
     const orders = state.orders;
@@ -25,7 +27,9 @@ const actions = {
     commit(types.SET_ACTIVE_ORDER, current);
   },
   async setScore({ commit }, { score, comments, orderId }) {
+    commit(types.FETCH_STH);
     await api.setScore(score, comments, orderId);
+    commit(types.GOT_STH);
   },
 };
 

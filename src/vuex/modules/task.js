@@ -38,6 +38,7 @@ const mutations = {
 
 const actions = {
   async getTaskList({ commit }, page) {
+    commit(types.FETCH_STH);
     const { tasks, taskQuantity } = await api.getTaskList(page);
     const { taskDoneQuantity } = await api.getTaskDoneQuantity();
     const taskinfo = {
@@ -46,22 +47,29 @@ const actions = {
     };
     commit(types.SET_TASK_QUANTITY_INFO, taskinfo);
     commit(types.SET_TASKS, tasks);
+    commit(types.GOT_STH);
   },
   taskDetail({ commit, state }, index) {
+    commit(types.FETCH_STH);
     const tasks = state.tasks;
     const current = tasks[index];
     commit(types.SET_ACTIVE_TASK, current);
   },
   async leaveComment({ commit }, { content, taskId }) {
+    commit(types.FETCH_STH);
     commit(types.ADD_TASK_COMMENT, await api.leaveComment(content, taskId));
+    commit(types.GOT_STH);
   },
   async getComments({ commit }, taskId) {
+    commit(types.FETCH_STH);
     commit(types.CLEAR_ACTIVE_TASK_COMMENTS);
     commit(types.SET_ACTIVE_TASK_COMMENTS, await api.getTaskComment(taskId));
+    commit(types.GOT_STH);
   },
   async submitOrder({ commit }, taskId) {
-    console.log('taskId', taskId);
+    commit(types.FETCH_STH);
     await api.submitOrder(taskId);
+    commit(types.GOT_STH);
   },
 };
 

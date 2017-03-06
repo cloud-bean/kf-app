@@ -6,13 +6,15 @@
 import config from '../config/config';
 import util from '../config/util';
 import mockdata from '../../test/mock';
+import * as types from '../vuex/mutation_types';
+
 // import { auth, getUserInfo, authLocal, getJsConfig, getMyRecords, getTip, setLogin } from '../vuex/actions';
 // import {loader} from '../config/util';
 import { mapState, mapActions } from 'vuex';
 
-const wurl = require('wurl');
+const url = require('url');
 const co = require('co');
-
+const querystring = require('querystring');
 
 
 export default {
@@ -22,7 +24,6 @@ export default {
     };
   },
   computed: mapState({
-    loading: state => state.loading,
     userid: state => state.userid,
     jsConfig: state => state.jsConfig,
     user: state => state.profile.user,
@@ -38,20 +39,19 @@ export default {
       'setLogin',
     ]),
     async init(){
-      const query = wurl('?');
-      const url = wurl();
-      const sendUrl = url.split('#')[0];
+      const urlObj = url.parse(window.location.href,true);
+      var code = urlObj.query.code;
+      const sendUrl = window.location.href.split('#')[0];
       try{
-        if(query && query.code){
-          $.showPreloader('加载中...');
+        if(code){
+          this.$store.commit(types.FETCH_STH);
+          // $.showPreloader('加载中...');
           if(process.env.NODE_ENV == 'production'){
-            await this.auth({appid:config.appid,code:query.code});
+            await this.auth({appid:config.appid,code});
             await this.getJsConfig(sendUrl);
-        }else{
-          console.log('aaa');
-          await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
-          console.log('bb');
-        }
+          }else{
+            await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
+          }
         wx.config(this.jsConfig);
         await this.getUserRecords()
 
@@ -59,7 +59,7 @@ export default {
 
         await this.getUserInfo(this.userid)
 
-        $.hidePreloader();
+        // this.$store.commit(types.GOT_STH);
         if(this.user.option.phone){
           this.setLogin(true);
           this.$router.push('/profile');

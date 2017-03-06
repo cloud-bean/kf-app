@@ -57,14 +57,7 @@ export default {
   mounted(){
     this.$nextTick(()=> {
       // if(this.orders.length == 0){
-        $.showPreloader('加载中...');
-        this.getOrders()
-        .then((res) => {
-          $.hidePreloader();
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        this.getOrders();
       // }
     })
   },

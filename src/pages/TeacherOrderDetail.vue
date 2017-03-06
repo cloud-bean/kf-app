@@ -66,18 +66,15 @@ export default {
         },
         fail: function(res) {
           console.log('无资源');
-          $.hidePreloader();
         },
       });
     },
     handleClick(){
-      $.showPreloader('加载中...');
       const orderId = this.activeOrder._id;
       const score = this.score;
       const comments = this.comments;
       this.setScore({score,comments,orderId})
       .then(()=>{
-        $.hidePreloader();
         this.$router.push('/success');
 
       })

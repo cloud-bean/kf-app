@@ -25,6 +25,12 @@
   <div class="content pad-bottom">
       <router-view></router-view>
   </div>
+  <div class="mask opacity" v-if="loading">
+    <div class="spinner">
+      <mt-spinner type="triple-bounce" color="#26a2ff" :size="40" ></mt-spinner>
+      <p>加载中...</p>
+    </div>
+  </div>
   <!-- <span class="tab-label"><a v-link="{ path: '/task'}" href="#">TASK</a></span> -->
 </div>
 
@@ -49,13 +55,39 @@ import { mapState } from 'vuex';
    computed: mapState({
      login: state => state.login,
      user: state => state.profile.user,
+     loading: state => state.loading,
    }),
  }
 </script>
 
-<style>
+<style scoped>
 
 .pad-bottom{
   padding-bottom: 2.5rem;
+
 }
+
+.spinner{
+  margin:0 auto;
+  margin-top: 12rem;
+  width: 12rem;
+  padding:0.8rem;
+  background-color: white;
+  color: #555555;
+  font-size: 0.7rem;
+  /*opacity: .8;*/
+  border-radius: 10px;
+
+}
+.mask{
+  height:100%;
+  width:100%;
+  position:fixed;
+  _position:absolute;
+  top:0;
+  z-index:1000;
+  text-align: center;
+}
+.opacity{background:rgba(0,0,0,.5); }
+
 </style>

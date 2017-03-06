@@ -38,7 +38,6 @@
        <p><a v-on:click="photo" class="button button-success"><i class="fa fa-camera fa-lg "></i> 拍照提交</a></p>
 
        <p><a v-on:click="handleComment" class="button">讨论任务</a></p>
-       <mt-button type="default">default</mt-button>
      </div>
 
    </div>
