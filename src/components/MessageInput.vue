@@ -1,15 +1,14 @@
 <template lang="html">
   <div class="input-area">
 
-  <div class="">
     讨论区
-  </div>
-  <textarea class="message-input" v-model="comment"></textarea>
-  <div class="row">
+  <!-- <textarea class="message-input" v-model="comment"></textarea> -->
+  <mt-field v-model="comment" type="textarea" rows="4"></mt-field>
 
-      <button v-on:click="leaveMessage" class="button button-fill button-success leave-message-button">留言</button>
 
-  </div>
+      <!-- <button v-on:click="leaveMessage" class="button button-fill button-success leave-message-button">留言</button> -->
+      <mt-button type="primary" size="large"  @click="leaveMessage">留言</mt-button>
+
 </div>
 
 </template>
@@ -64,8 +63,11 @@ export default {
 }
 .input-area{
   padding: 0.5rem;
+  background-color: #eef;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 15rem;
 }
-textarea{
-  resize: none;
-}
+
 </style>

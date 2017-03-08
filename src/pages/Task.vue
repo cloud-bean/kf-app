@@ -19,10 +19,12 @@
     </div>
   </div>
   <div v-show="hasMore" class="load-more">
-      <a v-on:click="loadMoreTask" class="button button-big">加载更多...</a>
+    <mt-button @click="loadMoreTask" size="large" type="primary" icon="more" plain>加载更多</mt-button>
+
+      <!-- <a v-on:click="loadMoreTask" class="button button-big">加载更多...</a> -->
   </div>
   <div v-show="!hasMore" class="load-more">
-    <a class="button button-big disabled">没有更多任务</a>
+    <mt-button  size="large" type="primary" plain disabled>没有更多任务</mt-button>
   </div>
 </div>
 </div>
@@ -128,8 +130,8 @@
 
 }
 .load-more{
-  margin: 0.3rem auto;
-  width: 300px;
+  margin: 0.5rem auto;
+  width: 350px;
   /*padding-left: 0.5rem;*/
   /*padding-right: 0.5rem;*/
 }
@@ -137,7 +139,7 @@
   /*font-size: 0.7rem;*/
   /*height: 0.8rem !important;*/
   color: #ffffff;
-  background-color: #4FC1E9;
+  background-color: #26a2ff;
   padding: 1rem;
   font-size: 0.5rem;
 }

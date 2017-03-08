@@ -9,10 +9,10 @@
       </div>
     </div>
     <div v-show="hasMore" class="load-more">
-        <a v-on:click="loadMoreRank" class="button button-big">加载更多...</a>
+      <mt-button @click="loadMoreRank" size="large" type="primary" icon="more" plain>加载更多</mt-button>
     </div>
     <div v-show="!hasMore" class="load-more">
-      <a class="button button-big disabled">没有更多任务</a>
+      <mt-button  size="large" type="primary"  plain disabled>排名到底了</mt-button>
     </div>
   </div>
 

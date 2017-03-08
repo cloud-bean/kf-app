@@ -1,53 +1,35 @@
 <template lang="html">
   <div class="">
 
-  <div class="card demo-card-header-pic">
-   <div valign="bottom" class="card-header color-white no-border no-padding">
-     <div class="image-wrapper">
-       <img class='card-cover' :src="task.titleImage.URL" style="height:8rem;"  alt="">
-       <div class="image-content">
-         <span class="task-title">{{task.name}}</span>
+
+  <div class="task-detail">
+    <div class="task-title">{{task.name}}</div>
+     <div class="task-head">
+       <div>发布 {{task.created | dateFormat}}</div>
+       <div>过期 {{task.expireTime | dateFormat}}</div>
+       <div>类型 {{task.type}}</div>
+    </div>
+       <div class="task-content">
+          <div v-html="tansMarkdown(task.description)"></div>
        </div>
-     </div>
-   </div>
-   <div class="card-content">
-     <div class="card-content-inner">
-       <ul>
-         <li>发布 {{task.created | dateFormat}}</li>
-         <li>过期 {{task.expireTime | dateFormat}}</li>
-         <li>类型 {{task.type}}</li>
-       </ul>
-       <div class="description">
-         <h1 class="grey">任务详情:</h1>
-         <div  v-html="tansMarkdown(task.description)">
-
-         </div>
-         <!-- <h1 class="grey">老师评价:</h1> -->
-         <!-- {{task}} -->
+       <div class="button-area">
+         <mt-button @click="photo" type="default" size="large" plain>
+            <i class="fa fa-camera " slot="icon"></i>
+             拍照提交
+         </mt-button>
+          <mt-button @click="handleComment" type="default" size="large" plain>
+            <i class="fa fa-commenting" slot="icon"></i>
+            讨论任务</mt-button>
        </div>
-       <!-- <div class="answer">
-         <div class="row">
-           <div class="col-50">
-             <a v-on:click="photo" class="button button-success"><i class="fa fa-camera fa-lg "></i> 拍照提交</a>
-           </div>
-           <div class="col-50">
-             <a v-on:click="record" class="button button-success"><i class="fa fa-microphone fa-lg"></i> 录音提交</a>
-           </div>
-         </div>
-       </div> -->
-       <p><a v-on:click="photo" class="button button-success"><i class="fa fa-camera fa-lg "></i> 拍照提交</a></p>
 
-       <p><a v-on:click="handleComment" class="button">讨论任务</a></p>
+
+     <div class="task-footer">
+       <!-- <span>难度:{{task.difficult}}</span>
+       <span>经验:{{task.exp}}</span>
+       <span>金币:{{task.goldToken}}</span> -->
+         <head-list :user-list="task.taskDoneUsers"></head-list>
+
      </div>
-
-   </div>
-   <div class="card-footer">
-     <!-- <span>难度:{{task.difficult}}</span>
-     <span>经验:{{task.exp}}</span>
-     <span>金币:{{task.goldToken}}</span> -->
-       <head-list :user-list="task.taskDoneUsers"></head-list>
-
-   </div>
  </div>
 
  <div v-for="comment in comments" class="message-item">
@@ -55,8 +37,9 @@
  </div>
 
 
-
 </div>
+
+
 
 </template>
 
@@ -65,6 +48,7 @@ import HeadList from '../components/HeadList';
 import MessageItem from '../components/MessageItem';
 import MessageInput from '../components/MessageInput';
 import { mapState, mapActions } from 'vuex';
+import { Toast } from 'mint-ui';
 
 const markdown = require('markdown').markdown;
 
@@ -77,7 +61,8 @@ export default {
   },
   components: {
     MessageItem,
-    HeadList
+    HeadList,
+    Toast,
   },
   computed: mapState({
     task : state => state.task.activeTask,
@@ -123,10 +108,13 @@ export default {
     //   return this.submitOrder(data);
     // },
     async photo(){
-      console.log(this.task._id);
       await this.submitOrder(this.task._id)
       await this.leaveComment({content:'我上传了作业', taskId:this.task._id})
-      $.toast("提交作业成功");
+      Toast({
+        message: '作业提交成功',
+        position: 'middle',
+        duration: 3000
+      });
     },
     record(){
       wx.startRecord();
@@ -136,7 +124,52 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.image-content{
+.taskc h1{
+  font-size: 1rem;
+}
+.task-detail{
+  /*padding: 0.5rem 0.5rem;*/
+  /*background-color: #eef;*/
+
+}
+.task-title{
+  padding: 1rem 1rem;
+  font-size: 1.5rem;
+  background-color: #26a2ff;
+  opacity: 0.8;
+  color: white;
+}
+.task-head{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1rem 1rem;
+  height: 5rem;
+  background-color: #26a2ff;
+  font-size: 0.8rem;
+  color: white;
+}
+.task-content{
+  padding: 1rem 1rem;
+  background-color: #eef;
+}
+.button-area{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0rem 1rem;
+  height: 6rem;
+  font-size: 1rem;
+  background-color: #eef;
+}
+.task-footer{
+  padding: 1rem 1rem;
+  margin-bottom: 0.2rem;
+}
+.message-item{
+  margin-bottom: 0.3rem;
+}
+/*.image-content{
 position: absolute;
 z-index: 1;
 left: 0;
@@ -163,9 +196,7 @@ overflow: hidden;
   white-space: normal;
   font-size: 0.7rem;
 }
-.description h1{
-  font-size: 1rem;
-}
+
 .message-item {
   margin-top: 0.8rem;
 }
@@ -175,5 +206,5 @@ overflow: hidden;
 .answer{
   text-align: center;
   padding: 0.1rem 0;
-}
+}*/
 </style>

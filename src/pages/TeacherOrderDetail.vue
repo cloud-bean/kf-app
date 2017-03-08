@@ -1,15 +1,21 @@
 <template lang="html">
-  <div class="content-padded">
+  <div class="score">
     <div class="info">
-      <p>{{activeOrder.task.name}}</p>
-      <p>学生姓名：{{activeOrder.student.displayName}}</p>
-      <p>提交时间：{{activeOrder.created | dateFormat}}</p>
+      <div>{{activeOrder.task.name}}</div>
+      <div>学生姓名：{{activeOrder.student.displayName}}</div>
+      <div>提交时间：{{activeOrder.created | dateFormat}}</div>
     </div>
 
-    <div class="pic">
-      <input v-model="score" class="input" type="number" name="" value="" placeholder="分数" />
-      <textarea v-model="comments" class="input" type="text" name="" value="" placeholder="评语" />
-      <button @click="handleClick" type="button" name="button" class="button input" >提交</button>
+    <div class="inputarea">
+      <!-- <input v-model="score" class="input" type="number" name="" value="" placeholder="分数" /> -->
+      <mt-field placeholder="评分" type="number" v-model="score" ></mt-field>
+
+      <!-- <textarea v-model="comments" class="input" type="text" name="" value="" placeholder="评语" /> -->
+      <mt-field placeholder="评语" type="textarea" v-model="comments" rows="4"></mt-field>
+
+      <!-- <button  type="button" name="button" class="button input" >提交</button> -->
+      <mt-button @click="handleClick" type="primary" size="large">提交</mt-button>
+
     </div>
     <div class="pic">
       <img :src="localId" alt="" width="100%">
@@ -87,8 +93,8 @@ export default {
 
 .pic {
   padding: 0.5rem;
-  border: 1px solid #cccccc;
-  margin-bottom: 0.5rem;
+  border: 1px solid #eef;
+  margin-top: 1rem;
 }
 .input{
   width:100%;
@@ -97,5 +103,23 @@ export default {
 }
 .info{
   font-size: 14px;
+  padding: 0rem 0.5rem;
+  background: #eef;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height:6rem;
+}
+.score{
+  /*background: #eee;*/
+}
+.inputarea{
+  padding: 0.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /*align-items: center;*/
+  height:16rem;
+  background: #eef;
 }
 </style>

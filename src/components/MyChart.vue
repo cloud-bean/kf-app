@@ -48,7 +48,7 @@ export default {
   margin-top:0.3rem;
   width: 100%;
   text-align: center;
-  background-color: #ffffff;
+  /*background-color: #eee;*/
 }
 .cite{
   text-align: center;
@@ -66,7 +66,7 @@ export default {
   font-size: 0.7rem;
   text-align: left;
   padding: 0.5rem;
-  border-bottom: 1px solid #cccccc;
+  /*border-bottom: 1px solid #cccccc;*/
 
 }
 

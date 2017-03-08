@@ -1,35 +1,32 @@
 <template>
   <div class="blue-bg">
-    <div >
-      <div class="headimg">
+    <div class="userhead">
           <img :src="user.profileImageURL" alt="" class="avatar"/>
-        <p>
-          <span class="name">{{user.displayName}}</span>
-          <div class="item-subtitle"> {{user.option.slogan || 'Learning with joy, achieving with will.'}} </div>
-        </p>
-      </div>
+          <div class="name">{{user.displayName}}</div>
+          <!-- <div class="slogan"> {{user.option.slogan || 'Learning with joy, achieving with will.'}} </div> -->
+
     </div>
-    <div class="row info">
-      <div class="col-33">
+    <div class="info">
+      <div class="item">
         <div class="detailInfo">
           <div>经验</div>
-          <div>
+          <div class="number">
             {{user.option.exp}}
           </div>
         </div>
       </div>
-      <div class="col-33">
+      <div class="item">
         <div class="detailInfo">
           <div>悦币</div>
-          <div>
+          <div class="number">
             {{user.option.goldToken}}
           </div>
         </div>
       </div>
-      <div class="col-33">
+      <div class="item">
         <div class="detailInfo">
           <div>等级</div>
-          <div >
+          <div class="number">
             {{user.option.exp | level}}
           </div>
         </div>
@@ -85,40 +82,70 @@ import util from '../config/util';
 .info{
   text-align: center;
   font-size: 0.8rem;
-  padding: 0.7rem;
+  padding: 0.5rem 0.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #26a2ff;
+  color: #fff;
+  /*border-top: 1px solid white;*/
 }
-.detail {
-  font-size: 0.5rem;
+
+.detailInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #eee;
   /*padding-top: 5px;*/
+}
+.number{
+  font-size: 0.8rem;
+
+  color: #fff;
+
 }
 /*.headimg{
   width: 44px;
   height: 44px;
 }*/
 .name{
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 .headimg {
-  padding-top: 1rem;
-  width: 100%;
-  text-align: center;
-  line-height: 0.5rem;
+
 }
 
 .avatar {
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 2px solid white;
+  width: 5rem;
+  height: 5rem;
+  /*border: 2px solid white;*/
   border-radius:50%;
+  box-shadow:0px 0px 5px #555555;
 }
 .blue-bg{
   /*font-size: 0.7rem;*/
   /*height: 0.8rem !important;*/
   color: #ffffff;
-  background-color: #4FC1E9;
+  background-color: #cccccc;
 }
 .pull-left{
   float:left;
   display: inline-block;
+}
+.slogan{
+  color:#ddd;
+}
+.userhead{
+  background-color: #26a2ff;
+  padding: 0.4rem 0;
+  width: 100%;
+  height: 8rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>

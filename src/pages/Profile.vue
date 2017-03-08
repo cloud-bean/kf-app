@@ -3,9 +3,15 @@
     <expbar></expbar>
     <chart></chart> -->
 <div class="">
-  <info :user="user"></info>
-  <tips :tip="tip"></tips>
-  <my-chart :my-chart-data="userRecords"></my-chart>
+  <div class="info-card">
+    <info :user="user"></info>
+    <tips :tip="tip"></tips>
+    <div class="chart">
+      <my-chart :my-chart-data="userRecords"></my-chart>
+
+    </div>
+</div>
+
 </div>
 
 
@@ -63,7 +69,9 @@ export default {
 
 <style scoped>
 .info-card{
-  background-color: #3C6DF9;
+  /*background-color: #eef;*/
 }
-
+.chart{
+  width: 100%;
+}
 </style>

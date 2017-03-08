@@ -1,5 +1,6 @@
 
 <template>
+
 </template>
 
 <script>
@@ -44,7 +45,7 @@ export default {
       const sendUrl = window.location.href.split('#')[0];
       try{
         if(code){
-          this.$store.commit(types.FETCH_STH);
+          // this.$store.commit(types.FETCH_STH);
           // $.showPreloader('加载中...');
           if(process.env.NODE_ENV == 'production'){
             await this.auth({appid:config.appid,code});
@@ -108,3 +109,6 @@ export default {
 
 }
 </script>
+<style scoped>
+
+</style>

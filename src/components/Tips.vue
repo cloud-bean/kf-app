@@ -43,8 +43,6 @@ export default {
   background-color: #ffffff;
   width: 100%;
   /*padding: 0.3rem 1rem;*/
-  font-size: 1rem;
-  height: 9.4rem;
   position: relative;
 }
 .grey{
@@ -56,7 +54,7 @@ export default {
 }
 .back-img{
   width: 100%;
-  height:100%;
+  height:180px;
 }
 .close{
   top:0.3rem;

@@ -1,19 +1,25 @@
 <template>
 
-  <div class="card facebook-card no-margin" v-bind:class="{mask:expire}">
-      <div class="card-header no-border">
-        <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div>
-        <div class="facebook-name">{{taskdata.name}}</div>
-        <div class="facebook-date">{{taskdata.expireTime | dateFormat1}}</div>
+  <div class="task-item" v-bind:class="{mask:expire}">
+    <div class="left"  v-bind:class="[type]">
+    </div>
+    <div class="right">
+      <div class="task-content">
+        <!-- <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div> -->
+        <h1 >{{taskdata.name}}</h1>
+        <div class="gery">{{taskdata.expireTime | dateFormat1}} # <span class="gery">{{taskdata.type}}</span></div>
+
+
       </div>
-      <div class="card-footer">
+      <div class="task-footer">
         <span>难度:{{taskdata.difficult}}</span>
         <span>经验:{{taskdata.exp}}</span>
         <span>悦币:{{taskdata.goldToken}}</span>
         <span v-if="taskdata.isDone">完成</span>
         <span style="color:red;" v-else>未完成</span>
-
       </div>
+    </div>
+
     </div>
 
 
@@ -35,12 +41,11 @@ const typeLogo = ['speak','write','test','behavior','market'];
           logo: null,
           showM: false,
           expire: false,
+          type:'read'
         }
       },
       created(){
-        const index = taskType.indexOf(this.taskdata.type);
-        this.logo = require(`../assets/${typeLogo[index]}.jpg`);
-
+        this.type = this.transType(this.taskdata.type)
         const now = new Date();
         const expireTime = new Date(this.taskdata.expireTime);
         this.expire = !((expireTime - now) > 0);
@@ -48,6 +53,12 @@ const typeLogo = ['speak','write','test','behavior','market'];
       methods: {
         show(){
           this.showM = true;
+        },
+        transType(type){
+          const taskType = ['语音','书写','测验','行为','市场'];
+          const typeLogo = ['speak','write','test','behavior','market'];
+          const index = taskType.indexOf(this.taskdata.type);
+          return typeLogo[index];
         }
       }
     }
@@ -67,11 +78,55 @@ p{
   filter:opacity(50%);
 
 }
+.gery {
+  color:#999;
+}
 .no-margin{
   margin: 0;
   margin-top: 0.3rem;
   border-radius: 0;
-  box-shadow: 0 0rem 0rem rgba(0, 0, 0, 0.3);
+}
+.task-item{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #ccc;
+}
+.task-content{
+    padding: 0 1rem;
+    background-color: #EEEEFF;
+
+}
+h1{
+  margin: 0;
+  padding:0.3rem 0;
+}
+.left{
+  width: 1%;
+}
+.read{
+  background-color: #ED5565;
+}
+.test{
+  background-color: #FFCE54;
+}
+.speak{
+  background-color: #48CFAD;
+}
+.write{
+  background-color: #4FC1E9;
+}
+.right{
+  width:99%;
+}
+.task-footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5rem 1rem;
+  background-color: #EEEEFF;
 }
 
 </style>
