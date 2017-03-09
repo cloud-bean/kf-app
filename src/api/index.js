@@ -131,10 +131,10 @@ new Promise((resolve, reject) => {
     });
 });
 
-export const leaveComment = (comment, taskId) =>
+export const leaveComment = (content, taskId) =>
 new Promise((resolve, reject) => {
   request.post(`${bigServer}/tasks/${taskId}/commits`)
-  .send({ content: comment })
+  .send({ content })
   .set('Authorization', `Bearer ${store.state.accessToken}`)
   .then((result) => {
     resolve(result);

@@ -78,11 +78,11 @@
   border-radius: 50%;
 }
 .name {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 .grey-small{
   color: #ccc;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 .exp {
   padding-right: 0.5rem;

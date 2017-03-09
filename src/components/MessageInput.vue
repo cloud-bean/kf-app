@@ -1,20 +1,19 @@
 <template lang="html">
   <div class="input-area">
-
     讨论区
   <!-- <textarea class="message-input" v-model="comment"></textarea> -->
   <mt-field v-model="comment" type="textarea" rows="4"></mt-field>
 
 
       <!-- <button v-on:click="leaveMessage" class="button button-fill button-success leave-message-button">留言</button> -->
-      <mt-button type="primary" size="large"  @click="leaveMessage">留言</mt-button>
+  <mt-button type="primary" size="large"  @click="leaveMessage">留言</mt-button>
 
 </div>
 
 </template>
 
 <script>
-
+import { Toast } from 'mint-ui';
 export default {
   // vuex: {
   //   getters: {
@@ -28,20 +27,16 @@ export default {
     }
   },
   methods: {
-    leaveMessage(){
+    async leaveMessage(){
+      console.log(this.comment);
+      console.log(this.task._id);
       if(this.comment === ''){
-        $.alert('总还是要说点什么吧，科科')
-      }
-      // else if(this.comment.length>280){
-      //   $.alert('话那么多，哼')
-      // }
-      else{
-        this.handleClick(this.comment, this.task._id)
-        .then(()=>{
-          this.comment = '';
-          this.$router.push('/taskDetail');
-        })
+        Toast('说点啥呢？');
+      }else{
 
+        await this.handleClick({ content:this.comment, taskId:this.task._id });
+        this.comment = '';
+        this.$router.push('/taskDetail');
       }
     }
   }

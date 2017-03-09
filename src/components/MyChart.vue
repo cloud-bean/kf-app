@@ -45,7 +45,6 @@ export default {
 
 <style lang="css" scoped>
 .chart{
-  margin-top:0.3rem;
   width: 100%;
   text-align: center;
   /*background-color: #eee;*/

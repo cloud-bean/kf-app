@@ -6,8 +6,12 @@
     已完成
     <div class="task-info">
       {{taskQuantityInfo.totalDone}} / {{taskQuantityInfo.totalCount}}<span class="grey-small"></span>
+
     </div>
   </div>
+  <mt-progress :value="progress" :barHeight='2'>
+
+  </mt-progress>
   <!-- <p><a v-on:click="scan" class="button">scan</a></p> -->
 
   <div class="tasklist" >
@@ -98,10 +102,15 @@
           })
         },
       },
-      computed: mapState({
-        tasks: state => state.task.tasks,
-        taskQuantityInfo: state => state.task.taskQuantityInfo,
-      }),
+      computed: {
+        ...mapState({
+          tasks: state => state.task.tasks,
+          taskQuantityInfo: state => state.task.taskQuantityInfo,
+        }),
+        progress(){
+          return 100*this.taskQuantityInfo.totalDone/this.taskQuantityInfo.totalCount;
+        }
+      }
       // vuex: {
       //   getters: {
       //     // user: state => state.user,

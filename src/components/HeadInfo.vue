@@ -1,5 +1,5 @@
 <template>
-  <div class="blue-bg">
+  <div class=".blue-bg">
     <div class="userhead">
           <img :src="user.profileImageURL" alt="" class="avatar"/>
           <div class="name">{{user.displayName}}</div>
@@ -77,9 +77,10 @@ import util from '../config/util';
   text-align: left;
   padding-left: 12px;
   padding-top: 5px;
-  font-size: 14px;
+  font-size: 12px;
 }
 .info{
+  width:80%;
   text-align: center;
   font-size: 0.8rem;
   padding: 0.5rem 0.3rem;
@@ -87,8 +88,13 @@ import util from '../config/util';
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: #26a2ff;
-  color: #fff;
+  background-color: #eef;
+  color: #000;
+  margin: 0 auto;
+  margin-top:-0.8rem;
+  box-shadow:0px 0px 5px #555555;
+  border-radius: 5px;
+
   /*border-top: 1px solid white;*/
 }
 
@@ -97,13 +103,13 @@ import util from '../config/util';
   flex-direction: column;
   justify-content: space-between;
   font-size: 1rem;
-  color: #eee;
+  color: #000;
   /*padding-top: 5px;*/
 }
 .number{
   font-size: 0.8rem;
-
-  color: #fff;
+  margin-top: 0.3rem;
+  color: #999;
 
 }
 /*.headimg{
@@ -111,7 +117,8 @@ import util from '../config/util';
   height: 44px;
 }*/
 .name{
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  color: #fff;
 }
 .headimg {
 
@@ -124,12 +131,7 @@ import util from '../config/util';
   border-radius:50%;
   box-shadow:0px 0px 5px #555555;
 }
-.blue-bg{
-  /*font-size: 0.7rem;*/
-  /*height: 0.8rem !important;*/
-  color: #ffffff;
-  background-color: #cccccc;
-}
+
 .pull-left{
   float:left;
   display: inline-block;
@@ -137,9 +139,12 @@ import util from '../config/util';
 .slogan{
   color:#ddd;
 }
+.blue-bg{
+  height: 10rem;
+}
 .userhead{
   background-color: #26a2ff;
-  padding: 0.4rem 0;
+  padding: 0.8rem 0;
   width: 100%;
   height: 8rem;
   text-align: center;

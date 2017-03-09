@@ -3,9 +3,11 @@
     <expbar></expbar>
     <chart></chart> -->
 <div class="">
-  <div class="info-card">
+  <div class="profile">
     <info :user="user"></info>
-    <tips :tip="tip"></tips>
+    <div class="tip">
+      <tips :tip="tip"></tips>
+    </div>
     <div class="chart">
       <my-chart :my-chart-data="userRecords"></my-chart>
 
@@ -68,10 +70,17 @@ export default {
 
 
 <style scoped>
-.info-card{
+.profile{
   /*background-color: #eef;*/
 }
 .chart{
   width: 100%;
+}
+.user-wrap{
+
+}
+.tip{
+  position: relative;
+  z-index: -1;
 }
 </style>

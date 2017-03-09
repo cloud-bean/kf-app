@@ -124,9 +124,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.taskc h1{
-  font-size: 1rem;
-}
+
 .task-detail{
   /*padding: 0.5rem 0.5rem;*/
   /*background-color: #eef;*/
@@ -152,12 +150,15 @@ export default {
 .task-content{
   padding: 1rem 1rem;
   background-color: #eef;
+  font-size: 0.8rem;
+
 }
+
 .button-area{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 0rem 1rem;
+  padding: 1rem 1rem;
   height: 6rem;
   font-size: 1rem;
   background-color: #eef;
@@ -167,7 +168,6 @@ export default {
   margin-bottom: 0.2rem;
 }
 .message-item{
-  margin-bottom: 0.3rem;
 }
 /*.image-content{
 position: absolute;
@@ -207,4 +207,8 @@ overflow: hidden;
   text-align: center;
   padding: 0.1rem 0;
 }*/
+h1 {
+  color: red;
+/*margin: 0 auto;*/
+}
 </style>

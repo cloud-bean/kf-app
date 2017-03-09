@@ -80,6 +80,8 @@ p{
 }
 .gery {
   color:#999;
+  font-size: 0.8rem;
+
 }
 .no-margin{
   margin: 0;
@@ -119,6 +121,7 @@ h1{
 }
 .right{
   width:99%;
+  /*font-size: 0.8rem;*/
 }
 .task-footer{
   display: flex;
@@ -127,6 +130,7 @@ h1{
   align-items: baseline;
   padding: 0.5rem 1rem;
   background-color: #EEEEFF;
+  font-size: 0.8rem;
 }
 
 </style>

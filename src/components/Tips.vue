@@ -36,7 +36,6 @@ export default {
 
 .cite{
   text-align: center;
-  margin-top:0.3rem;
   /*background-image:url('../../static/background.jpg');*/
   background-repeat:no-repeat;
   background-size: cover;

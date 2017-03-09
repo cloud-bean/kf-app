@@ -20,7 +20,7 @@
           <span class="icon icon-gift"></span>
           <span class="tab-label">评分</span>
         </router-link> -->
-        <mt-tabbar v-model="selected" fixed>
+        <mt-tabbar @click.native="handleClick" v-model="selected" fixed>
           <mt-tab-item id="主页">
               <i class="fa fa-user-circle-o" slot="icon" aria-hidden="true"></i>
               主页
@@ -82,8 +82,11 @@ import { mapState } from 'vuex';
      loading: state => state.loading,
    }),
    watch: {
-     selected(val){
-       switch (val) {
+
+   },
+   methods:{
+     handleClick(){
+       switch (this.selected) {
          case '主页':
          this.$router.push('/profile')
          break;
@@ -99,8 +102,6 @@ import { mapState } from 'vuex';
          default:
        }
      }
-   },
-   methods:{
    }
  }
 </script>
