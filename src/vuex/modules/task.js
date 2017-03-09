@@ -48,6 +48,7 @@ const actions = {
     commit(types.SET_TASK_QUANTITY_INFO, taskinfo);
     commit(types.SET_TASKS, tasks);
     commit(types.GOT_STH);
+    return tasks;
   },
   taskDetail({ commit, state }, index) {
     commit(types.FETCH_STH);

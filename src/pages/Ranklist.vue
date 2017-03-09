@@ -1,19 +1,21 @@
 <template>
   <div class="">
   <div class="card no-margin">
-      <div class="card-content">
-
+      <div
+        v-infinite-scroll="loadMoreRank"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="0">
         <div v-for="(rank, index) in ranks" class="rank-list">
           <rank-item :user='rank' :rank-index='index+1' :like='friendLike' class="rank-item"></rank-item>
         </div>
       </div>
     </div>
-    <div v-show="hasMore" class="load-more">
+    <!-- <div v-show="hasMore" class="load-more">
       <mt-button @click="loadMoreRank" size="large" type="primary" icon="more" plain>加载更多</mt-button>
-    </div>
-    <div v-show="!hasMore" class="load-more">
+    </div> -->
+    <!-- <div v-show="!hasMore" class="load-more">
       <mt-button  size="large" type="primary"  plain disabled>排名到底了</mt-button>
-    </div>
+    </div> -->
   </div>
 
 </template>
@@ -33,7 +35,8 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      page:1,
+      loading:false,
+      page:0,
       hasMore:true,
     }
 
@@ -52,11 +55,11 @@ export default {
   //   }
   // },
   mounted(){
-    this.$nextTick(()=> {
-      if(this.ranks.length == 0){
-        this.getRanks(this.page);
-      }
-    })
+    // this.$nextTick(()=> {
+    //   if(this.ranks.length == 0){
+    //     this.getRanks(this.page);
+    //   }
+    // })
   },
   methods:{
     ...mapActions([
@@ -64,14 +67,19 @@ export default {
       'friendLike',
     ]),
     loadMoreRank(){
-      this.page++;
-      this.getRanks(this.page)
-      .then(res => {
-        if(res.length < 10){
-          // console.log(res.length);
-          this.hasMore = false;
-        }
-      })
+      this.loading = true;
+      if(this.hasMore){
+        this.page++;
+        this.getRanks(this.page)
+        .then(res => {
+          if(res.length < 10){
+            // console.log(res.length);
+            this.hasMore = false;
+          }
+          this.loading = false;
+
+        })
+      }
     },
   },
 };

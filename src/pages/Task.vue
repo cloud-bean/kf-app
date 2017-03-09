@@ -18,18 +18,22 @@
     <p v-if="tasks.length==0" class="no-task">
       暂无任务
     </p>
-    <div v-for="(task, index) in tasks">
-      <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
+    <div
+      v-infinite-scroll="loadMoreTask"
+      infinite-scroll-disabled="loading"
+      infinite-scroll-distance="0">
+      <div v-for="(task, index) in tasks">
+        <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
+      </div>
     </div>
-  </div>
-  <div v-show="hasMore" class="load-more">
-    <mt-button @click="loadMoreTask" size="large" type="primary" icon="more" plain>加载更多</mt-button>
 
-      <!-- <a v-on:click="loadMoreTask" class="button button-big">加载更多...</a> -->
+  </div>
+  <!-- <div v-show="hasMore" class="load-more">
+    <mt-button @click="loadMoreTask" size="large" type="primary" icon="more" plain>加载更多</mt-button>
   </div>
   <div v-show="!hasMore" class="load-more">
     <mt-button  size="large" type="primary" plain disabled>没有更多任务</mt-button>
-  </div>
+  </div> -->
 </div>
 </div>
 
@@ -51,7 +55,8 @@
       },
       data(){
           return {
-            page:1,
+            page:0,
+            loading:false,
             hasMore:true,
           };
       },
@@ -69,9 +74,9 @@
           'taskDetail',
         ]),
         async init(){
-          if(this.tasks.length==0){
-           await this.getTaskList(this.page)
-          }
+          // if(this.tasks.length==0){
+          //  await this.getTaskList(this.page)
+          // }
         },
         handleClick(index){
           console.log(index);
@@ -92,15 +97,17 @@
         //   });
         // },
         loadMoreTask(){
-          this.page++;
-          this.getTaskList(this.page)
-          .then(res => {
-            if(res.length < 10){
-              // console.log(res.length);
-              this.hasMore = false;
-            }
-          })
-        },
+            this.loading = true;
+            this.page++;
+            this.getTaskList(this.page)
+            .then(res => {
+              if(res.length < 10){
+                // console.log(res.length);
+                this.hasMore = false;
+              }
+              this.loading = false;
+            });
+          },
       },
       computed: {
         ...mapState({
