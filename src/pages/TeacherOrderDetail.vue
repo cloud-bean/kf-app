@@ -5,7 +5,6 @@
       <div>学生姓名：{{activeOrder.student.displayName}}</div>
       <div>提交时间：{{activeOrder.created | dateFormat}}</div>
     </div>
-
     <div class="inputarea">
       <!-- <input v-model="score" class="input" type="number" name="" value="" placeholder="分数" /> -->
       <mt-field placeholder="评分" type="number" v-model="score" ></mt-field>
@@ -18,9 +17,8 @@
 
     </div>
     <div class="pic">
-      <img :src="localId" alt="" width="100%">
+      <img :src="localData" width="100%" style="display:block;">
     </div>
-
 
   </div>
 
@@ -31,11 +29,11 @@
 // const wx = require('weixin-js-sdk');
 import { setScore } from '../vuex/actions';
 import { mapState, mapActions } from 'vuex';
-
+import { MessageBox } from 'mint-ui';
 export default {
   data(){
     return {
-      localId:'',
+      localData:'',
       score:'',
       comments:'',
     }
@@ -66,9 +64,20 @@ export default {
         serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
         isShowProgressTips: 1, // 默认为1，显示进度提示
         success: function (res) {
-          console.log('localId',res.localId);
-          that.localId = res.localId;
-           // 返回图片下载后的本地ID
+          const localId = res.localId;
+          if(window.__wxjs_is_wkwebview){
+            // MessageBox('Notice', localId);
+            wx.getLocalImgData({
+              localId, // 图片的localID
+              success: function (res) {
+                // MessageBox('Notice', res.localData);
+                that.localData = res.localData; // localData是图片的base64数据，可以用img标签显示
+              }
+            });
+          } else {
+            that.localData = localId;
+          }
+
         },
         fail: function(res) {
           console.log('无资源');
@@ -96,30 +105,30 @@ export default {
   border: 1px solid #eef;
   margin-top: 1rem;
 }
-.input{
-  width:100%;
-  font-size: 16px;
-  margin-bottom: 0.4rem;
-}
+
 .info{
-  font-size: 14px;
+  /*font-size: 14px;
   padding: 0rem 0.5rem;
   background: #eef;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height:6rem;
+  height:6rem;*/
 }
 .score{
+  height:auto;
+  /*height: auto;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
   /*background: #eee;*/
 }
 .inputarea{
   padding: 0.5rem 0.5rem;
-  display: flex;
+  /*display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /*align-items: center;*/
-  height:16rem;
+  /*height:16rem;*/
   background: #eef;
 }
 </style>
