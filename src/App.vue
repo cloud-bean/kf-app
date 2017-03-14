@@ -115,6 +115,8 @@ nav i{
   font-size: 1.5rem;
 }
 .pad-bottom{
+  padding: 0;
+  margin:0;
   padding-bottom: 4rem;
 
 }
@@ -131,7 +133,7 @@ nav i{
   /*border-radius: 10px;*/
 
 }
-.content {
+/*.content {
     position: absolute;
     top: 0;
     right: 0;
@@ -139,8 +141,8 @@ nav i{
     left: 0;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    /*background-color: #eee;*/
-}
+    background-color: #eee;
+}*/
 .mask{
   height:100%;
   width:100%;

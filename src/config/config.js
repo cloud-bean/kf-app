@@ -17,12 +17,12 @@ export default {
   },
   secret: {
 
-    accessToken: 'e90d446b76c9988b607ae37c03cab1d1fd7f49c5bcc67fc036ea195f7f8fe849',
+    accessToken: 'b48c6036e81e3dd7276d004d487c7135b878c7be884ed1d698f9d1870e6fd84a',
 
   //  userid: '58306c044238e8014a52ce05',
   // userid:'583a8905bb1a619b3b2b1d34',//张彦云
 //  userid:'581717002a2d3adc2032206e',//崔
-    userid: '58c29e0ca54b57d41c1beec3',
+    userid: '5817407d2a2d3adc2032290e',
   },
   task: {
     limit: 10,

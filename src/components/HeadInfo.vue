@@ -6,8 +6,8 @@
           <!-- <div class="slogan"> {{user.option.slogan || 'Learning with joy, achieving with will.'}} </div> -->
 
     </div>
-    <div class="info">
-      <div class="item">
+    <div class="info Grid">
+      <div class="item Cell -4of12">
         <div class="detailInfo">
           <div>经验</div>
           <div class="number">
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="item">
+      <div class="item Cell -4of12">
         <div class="detailInfo">
           <div>悦币</div>
           <div class="number">
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="item">
+      <div class="item Cell -4of12">
         <div class="detailInfo">
           <div>等级</div>
           <div class="number">
@@ -84,10 +84,10 @@ import util from '../config/util';
   text-align: center;
   font-size: 0.8rem;
   padding: 0.5rem 0.3rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: space-around;*/
+  /*align-items: center;*/
   background-color: #eef;
   color: #000;
   margin: 0 auto;
@@ -141,6 +141,8 @@ import util from '../config/util';
 }
 .blue-bg{
   height: 10rem;
+}
+.item{
 }
 .userhead{
   background-color: #26a2ff;

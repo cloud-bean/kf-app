@@ -7,6 +7,8 @@ import { dateFormat1, dateFormat, level } from './filter';
 import store from './vuex/store';
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
+// import 'grd/dist/grd.css';
+
 
 Vue.use(MintUI);
 
