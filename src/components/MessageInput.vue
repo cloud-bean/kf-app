@@ -37,7 +37,7 @@ export default {
       //   $.alert('话那么多，哼')
       // }
       else{
-        this.handleClick(this.comment, this.task._id)
+        this.handleClick({content:this.comment, taskId:this.task._id})
         .then(()=>{
           this.comment = '';
           this.$router.push('/taskDetail');

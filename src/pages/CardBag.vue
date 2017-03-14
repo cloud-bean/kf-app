@@ -1,29 +1,12 @@
 <template>
-    <!-- <info></info>
-    <expbar></expbar>
-    <chart></chart> -->
 <div class="">
-  <info :user="user"></info>
-  <tips :tip="tip"></tips>
-  <my-chart :my-chart-data="userRecords"></my-chart>
+
 </div>
-
-
 </template>
 
 <script>
-import Info from '../components/HeadInfo';
-import MyChart from '../components/MyChart';
-import Tips from '../components/Tips';
 
-// import { getMyRecords } from '../vuex/actions';
 import { mapState, mapActions } from 'vuex';
-
-// import Expbar from '../components/Expbar';
-// import Chart from '../components/Chart';
-// import config from '../config/config';
-// import util from '../config/util';
-// import mockdata from '../../test/mock';
 
 export default {
   data() {

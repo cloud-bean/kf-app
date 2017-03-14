@@ -48,15 +48,11 @@ export default {
             await this.auth({appid:config.appid,code:query.code});
             await this.getJsConfig(sendUrl);
         }else{
-          console.log('aaa');
           await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
-          console.log('bb');
         }
         wx.config(this.jsConfig);
         await this.getUserRecords()
-
         await this.getTip();
-
         await this.getUserInfo(this.userid)
 
         $.hidePreloader();

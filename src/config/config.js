@@ -17,11 +17,11 @@ export default {
   },
   secret: {
 
-    accessToken: 'b872e1ddd1f2f971fc8d28110bd22945ca2f2d4b29aa0a55d899dbb92dc35748',
+    accessToken: 'd9bef4da3f57a797aff6d966ba0c1facc91ed64b215d8ff15261e1cb8f8ae07e',
   //  userid: '58306c044238e8014a52ce05',
   // userid:'583a8905bb1a619b3b2b1d34',//张彦云
 //  userid:'581717002a2d3adc2032206e',//崔
-    userid: '5817407d2a2d3adc2032290e',
+    userid: '58aaea1339e76a9969df2573',
   },
   task: {
     limit: 10,
