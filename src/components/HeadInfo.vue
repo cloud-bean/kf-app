@@ -72,7 +72,10 @@ import util from '../config/util';
 </script>
 
 
-<style scoped>
+<style lang="less"scoped>
+@import '../style/color.less';
+
+
 .title {
   text-align: left;
   padding-left: 12px;
@@ -145,7 +148,7 @@ import util from '../config/util';
 .item{
 }
 .userhead{
-  background-color: #26a2ff;
+  background-color: @light-background;
   padding: 0.8rem 0;
   width: 100%;
   height: 8rem;

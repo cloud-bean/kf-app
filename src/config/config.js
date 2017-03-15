@@ -17,7 +17,7 @@ export default {
   },
   secret: {
 
-    accessToken: 'b48c6036e81e3dd7276d004d487c7135b878c7be884ed1d698f9d1870e6fd84a',
+    accessToken: '308c73d9627bec2cfdf05825fa35c4f01679c8d597e0d1dacb4d31435a9f1634',
 
   //  userid: '58306c044238e8014a52ce05',
   // userid:'583a8905bb1a619b3b2b1d34',//张彦云
