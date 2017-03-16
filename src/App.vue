@@ -44,6 +44,20 @@
       <router-view></router-view>
   </div>
 
+  <transition name="fade">
+  <div class="init" v-if="!login" >
+     <div class="time">
+       {{loginDate}}
+    </div>
+    <div  class="slogan">
+      遇见你，真好
+    </div>
+    <div  class="logo">
+      <img src="./assets/logoko.png" width="30%"></img>
+    </div> 
+  </div>
+  </transition>
+
   <div class="mask opacity" v-if="loading">
     <div class="background">
       JOYBOX
@@ -69,6 +83,8 @@
 // const co = require('co');
 //
 import { mapState } from 'vuex';
+const moment = require('momentjs');
+
  export default {
   //  store,
    data(){
@@ -76,11 +92,17 @@ import { mapState } from 'vuex';
        selected:'主页'
      }
    },
-   computed: mapState({
-     login: state => state.login,
-     user: state => state.profile.user,
-     loading: state => state.loading,
-   }),
+   computed:{
+      ...mapState({
+      login: state => state.login,
+      user: state => state.profile.user,
+      loading: state => state.loading,
+    }),
+    loginDate(){
+      return moment().format('YYYY年MM月DD日');
+    }
+
+   },
    watch: {
 
    },
@@ -106,7 +128,8 @@ import { mapState } from 'vuex';
  }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+@import './style/color.less';
 nav{
   color:#cccccc;
   font-size: 0.7rem;
@@ -143,6 +166,18 @@ nav i{
     -webkit-overflow-scrolling: touch;
     background-color: #eee;
 }*/
+.init{
+  height:100%;
+  width:100%;
+  position:fixed;
+  _position:absolute;
+  top:0;
+  left:0;
+  z-index:1000;
+  text-align: center;
+  background-color:#eee;
+  padding: 12rem 5rem;
+}
 .mask{
   height:100%;
   width:100%;
@@ -158,9 +193,32 @@ nav i{
   text-align: center;
   width: 100%;
   font-size: 2rem;
-  margin-top: 12rem;
-  color: transparent;
-  -webkit-text-stroke: 2px #26a2ff;
+  margin-top: 14rem;
+  font-weight:700  ;
+  color: #26a2ff;
+
+}
+.time{
+  color:  @important-font;
+  font-family:  微软雅黑;
+  font-size: 1.2rem;
+
+}
+.slogan{
+  color: #26a2ff;
+  font-family: 幼圆;
+  font-size: 2rem;
+  margin-top: 1rem;
+  font-weight:700  ;
+}
+.logo{
+  margin-top: 16rem;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }
 
 </style>
