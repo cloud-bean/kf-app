@@ -53,8 +53,8 @@
       遇见你，真好
     </div>
     <div  class="logo">
-      <img src="./assets/logoko.png" width="30%"></img>
-    </div> 
+      <!-- <img src="./assets/logoko.png" width="30%"></img> -->
+    </div>
   </div>
   </transition>
 

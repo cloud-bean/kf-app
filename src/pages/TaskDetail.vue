@@ -9,9 +9,15 @@
        <div>过期 {{task.expireTime | dateFormat}}</div>
        <div>类型 {{task.type}}</div>
     </div>
-       <div class="task-content">
-          <div v-html="tansMarkdown(task.description)"></div>
+       <div id="task-desc">
+          <div v-html="tansMarkdown(task.description)">
+
+          </div>
+          <div v-html="tansMarkdown(task.summary)" v-if="task.isDone">
+
+          </div>
        </div>
+       {{task.cardPool.description}}
        <div class="button-area">
          <mt-button @click="photo" type="default" size="large" plain>
             <i class="fa fa-camera " slot="icon"></i>
@@ -49,6 +55,7 @@ import MessageItem from '../components/MessageItem';
 import MessageInput from '../components/MessageInput';
 import { mapState, mapActions } from 'vuex';
 import { Toast } from 'mint-ui';
+// import VueMarkdown from 'vue-markdown'
 
 const markdown = require('markdown').markdown;
 
@@ -64,10 +71,13 @@ export default {
     HeadList,
     Toast,
   },
-  computed: mapState({
-    task : state => state.task.activeTask,
-    comments: state => state.task.activeComments,
-  }),
+  computed: {
+      ...mapState({
+        task : state => state.task.activeTask,
+        comments: state => state.task.activeComments,
+    }),
+
+  },
   //
   // vuex: {
   //   getters: {
@@ -151,9 +161,11 @@ export default {
   padding: 1rem 1rem;
   background-color: #eef;
   font-size: 0.8rem;
-
+/*color: blue;*/
 }
-
+.task-content h1 {
+  color: red;
+}
 .button-area{
   display: flex;
   flex-direction: column;

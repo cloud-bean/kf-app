@@ -55,8 +55,8 @@ const typeLogo = ['speak','write','test','behavior','market'];
           this.showM = true;
         },
         transType(type){
-          const taskType = ['语音','书写','测验','行为','市场'];
-          const typeLogo = ['speak','write','test','behavior','market'];
+          const taskType = ['口语','写作','测验','阅读','听力'];
+          const typeLogo = ['speak','write','test','read','listen'];
           const index = taskType.indexOf(this.taskdata.type);
           return typeLogo[index];
         }
@@ -118,6 +118,9 @@ h1{
 }
 .write{
   background-color: #4FC1E9;
+}
+.listen{
+  background-color: #ccc;
 }
 .right{
   width:99%;
