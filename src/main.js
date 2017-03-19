@@ -5,13 +5,12 @@ import App from './App';
 import router from './router';
 import { dateFormat1, dateFormat, level } from './filter';
 import store from './vuex/store';
-import VueMarkdown from 'vue-markdown';
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 
 
 Vue.use(MintUI);
-Vue.use(VueMarkdown);
+
 
 
 Vue.filter('dateFormat', dateFormat);

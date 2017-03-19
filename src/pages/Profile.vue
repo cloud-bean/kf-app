@@ -54,8 +54,7 @@ export default {
   //     tip: state => state.tip,
   //   },
   // },
-  created() {
-
+  mounted() {
   },
   methods: {
 

@@ -11,6 +11,9 @@ import CommentInputPage from '../pages/CommentInput';
 import TeacherOrderListPage from '../pages/TeacherOrderList';
 import TeacherOrderDetailPage from '../pages/TeacherOrderDetail';
 import SuccessPage from '../pages/Success';
+import CardBagPage from '../pages/cardBag';
+// import CardBagPage from '../components/Card';
+
 
 
 Vue.use(VueRouter);
@@ -35,5 +38,7 @@ export default new VueRouter({
     { path: '/teacherOrderList', component: TeacherOrderListPage },
     { path: '/orderDetail', component: TeacherOrderDetailPage },
     { path: '/success', component: SuccessPage },
+    { path: '/cardBag', component: CardBagPage },
+
   ],
 });

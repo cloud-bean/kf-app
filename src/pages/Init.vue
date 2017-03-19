@@ -38,6 +38,7 @@ export default {
       'getUserRecords',
       'getTip',
       'setLogin',
+      'setUserLevel',
     ]),
     async init(){
       const urlObj = url.parse(window.location.href,true);
@@ -53,14 +54,14 @@ export default {
           }else{
             await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
           }
-        wx.config(this.jsConfig);
-        await this.getUserRecords()
 
+        wx.config(this.jsConfig);
+        await this.getUserRecords();
         await this.getTip();
 
         await this.getUserInfo(this.userid)
 
-        // this.$store.commit(types.GOT_STH);
+
         if(this.user.option.phone){
           this.setLogin(true);
           this.$router.push('/profile');

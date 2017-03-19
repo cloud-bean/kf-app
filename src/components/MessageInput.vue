@@ -33,7 +33,6 @@ export default {
       if(this.comment === ''){
         Toast('说点啥呢？');
       }else{
-
         await this.handleClick({ content:this.comment, taskId:this.task._id });
         this.comment = '';
         this.$router.push('/taskDetail');
