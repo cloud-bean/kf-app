@@ -30,7 +30,7 @@
         <div class="detailInfo">
           <div>等级</div>
           <div >
-            {{user.option.exp | level}}
+            {{user.option.level}}
           </div>
         </div>
       </div>

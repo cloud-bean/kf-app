@@ -36,6 +36,7 @@ export default {
       'getUserRecords',
       'getTip',
       'setLogin',
+      'setUserLevel',
     ]),
     async init(){
       const query = wurl('?');
@@ -51,10 +52,10 @@ export default {
           await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
         }
         wx.config(this.jsConfig);
-        await this.getUserRecords()
+        await this.getUserRecords();
         await this.getTip();
-        await this.getUserInfo(this.userid)
-
+        await this.getUserInfo(this.userid);
+        this.setUserLevel(this.user.option.exp);
         $.hidePreloader();
         if(this.user.option.phone){
           this.setLogin(true);

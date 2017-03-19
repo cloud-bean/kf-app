@@ -5,6 +5,7 @@ import App from './App';
 import router from './router';
 import { dateFormat1, dateFormat, level } from './filter';
 import store from './vuex/store';
+import 'grd/dist/grd.css';
 
 Vue.filter('dateFormat', dateFormat);
 Vue.filter('dateFormat1', dateFormat1);

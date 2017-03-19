@@ -247,3 +247,45 @@ new Promise((resolve, reject) => {
     reject(err);
   });
 });
+
+export const getCardBag = () =>
+new Promise((resolve, reject) => {
+  request.get(`${bigServer}/bags`)
+    // .withCredentials()
+    .set('Authorization', `Bearer ${store.state.accessToken}`)
+    .then((result) => {
+      const cardBag = result.body.data;
+      resolve(cardBag);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
+export const getLotterys = () =>
+new Promise((resolve, reject) => {
+  request.get(`${bigServer}/lotterys`)
+    // .withCredentials()
+    .set('Authorization', `Bearer ${store.state.accessToken}`)
+    .then((result) => {
+      const lotterys = result.body.data;
+      resolve(lotterys);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
+export const getLotteryCard = (lotteryId) =>
+new Promise((resolve, reject) => {
+  request.get(`${bigServer}/drawLottery/${lotteryId}`)
+    // .withCredentials()
+    .set('Authorization', `Bearer ${store.state.accessToken}`)
+    .then((result) => {
+      const card = result.body.data;
+      resolve(card);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});

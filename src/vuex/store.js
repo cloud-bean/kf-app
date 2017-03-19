@@ -6,6 +6,8 @@ import profile from './modules/profile';
 import task from './modules/task';
 import rank from './modules/rank';
 import score from './modules/score';
+import cardBag from './modules/cardBag';
+
 
 Vue.use(Vuex);
 
@@ -138,5 +140,6 @@ export default new Vuex.Store({
     task,
     rank,
     score,
+    cardBag,
   },
 });

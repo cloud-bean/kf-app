@@ -2,7 +2,6 @@
   <div class="">
   <div class="card no-margin">
       <div class="card-content">
-
         <div v-for="(rank, index) in ranks" class="rank-list">
           <rank-item :user='rank' :rank-index='index+1' :like='friendLike' class="rank-item"></rank-item>
         </div>
