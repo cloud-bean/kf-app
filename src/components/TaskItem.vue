@@ -30,8 +30,8 @@
 <script>
 
 const moment = require('momentjs');
-const taskType = ['语音','书写','测验','行为','市场'];
-const typeLogo = ['speak','write','test','behavior','market'];
+// const taskType = ['语音','书写','测验','行为','市场'];
+// const typeLogo = ['speak','write','test','behavior','market'];
     export default{
       props:['taskdata'],
       components: {

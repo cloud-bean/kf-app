@@ -1,7 +1,5 @@
 <template lang="html">
   <div class="">
-
-
   <div class="task-detail">
     <div class="task-title">{{task.name}}</div>
      <div class="task-head">
@@ -16,26 +14,31 @@
           <div v-html="tansMarkdown(task.summary)" v-if="task.isDone">
 
           </div>
+          <div class="task-footer">
+            <head-list :user-list="task.taskDoneUsers"></head-list>
+          </div>
+
        </div>
-       {{task.cardPool.description}}
-       <div class="button-area">
-         <mt-button @click="photo" type="default" size="large" plain>
-            <i class="fa fa-camera " slot="icon"></i>
-             拍照提交
-         </mt-button>
-          <mt-button @click="handleComment" type="default" size="large" plain>
-            <i class="fa fa-commenting" slot="icon"></i>
-            讨论任务</mt-button>
+       <!-- {{task.cardPool.description}} -->
+
+       <div class="button-area Grid -around -middle">
+         <div class="Cell -5of12">
+           <mt-button @click="handleComment" type="primary" size="large" >
+             <i class="fa fa-commenting" slot="icon"></i>
+             讨论任务</mt-button>
+         </div>
+         <div class="Cell -5of12">
+           <mt-button @click="photo" type="primary" size="large" >
+              <i class="fa fa-camera " slot="icon"></i>
+               拍照提交
+           </mt-button>
+         </div>
+
+
        </div>
 
 
-     <div class="task-footer">
-       <!-- <span>难度:{{task.difficult}}</span>
-       <span>经验:{{task.exp}}</span>
-       <span>金币:{{task.goldToken}}</span> -->
-         <head-list :user-list="task.taskDoneUsers"></head-list>
 
-     </div>
  </div>
 
  <div v-for="comment in comments" class="message-item">
@@ -71,13 +74,10 @@ export default {
     HeadList,
     Toast,
   },
-  computed: {
-      ...mapState({
-        task : state => state.task.activeTask,
-        comments: state => state.task.activeComments,
-    }),
-
-  },
+  computed: mapState({
+      task : state => state.task.activeTask,
+      comments: state => state.task.activeComments,
+  }),
   //
   // vuex: {
   //   getters: {
@@ -163,21 +163,22 @@ export default {
   font-size: 0.8rem;
 /*color: blue;*/
 }
-.task-content h1 {
-  color: red;
-}
+
 .button-area{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 1rem 1rem;
-  height: 6rem;
-  font-size: 1rem;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: space-around;*/
+  padding: .5rem 0.5rem;
+  font-size: .8rem;
   background-color: #eef;
+  margin-bottom: .5rem;
 }
 .task-footer{
-  padding: 1rem 1rem;
-  margin-bottom: 0.2rem;
+  /*padding: 1rem 1rem;*/
+  /*margin-bottom: 0.2rem;*/
+  margin-top: .3rem;
+  padding-top: .2rem;
+  border-top: 1px solid #ccc;
 }
 .message-item{
 }

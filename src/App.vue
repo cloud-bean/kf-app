@@ -38,10 +38,14 @@
             <i class="fa fa-users" slot="icon" aria-hidden="true"></i>
               排行
           </mt-tab-item>
-          <mt-tab-item id="评分">
+          <mt-tab-item id="卡包" >
+            <i class="fa fa-users" slot="icon" aria-hidden="true"></i>
+              卡包
+          </mt-tab-item>
+          <!-- <mt-tab-item id="评分" v-if="user.roleType=='teacher'">
             <i class="fa fa-pencil-square-o" slot="icon" aria-hidden="true"></i>
               评分
-          </mt-tab-item>
+          </mt-tab-item> -->
         </mt-tabbar>
       </nav>
   </div>
@@ -122,6 +126,9 @@ const moment = require('momentjs');
          break;
          case '排行':
          this.$router.push('/rank')
+         break;
+         case '卡包':
+         this.$router.push('/cardBag')
          break;
          case '评分':
          this.$router.push('/teacherOrderList')

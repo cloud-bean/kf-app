@@ -6,6 +6,7 @@ const state = {
   tasks: [],
   activeTask: {},
   activeComments: [],
+  page: 1,
 };
 
 const mutations = {
@@ -25,6 +26,7 @@ const mutations = {
     state.activeTask = task;
   },
   [types.SET_TASKS](state, tasks) {
+    state.page++;
     state.tasks =  state.tasks.concat(tasks);
     state.tasks.sort((a, b) => {
       if (new Date(a.expireTime) > new Date(b.expireTime)) {

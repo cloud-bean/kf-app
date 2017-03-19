@@ -3,11 +3,15 @@ import * as api from '../../api';
 
 const state = {
   cards: [],
+  lottery: [],
 };
 
 const mutations = {
   [types.SET_USER_CARDS](state, cards) {
     state.cards = cards;
+  },
+  [types.SET_USER_LOTTERY](state, lottery) {
+    state.lottery = lottery;
   },
 };
 
@@ -15,6 +19,13 @@ const actions = {
   async getUserCards({ commit }) {
     try {
       commit(types.SET_USER_CARDS, await api.getCardBag());
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async getUserLottery({ commit }) {
+    try {
+      commit(types.SET_USER_LOTTERY, await api.getLotteryCard());
     } catch (err) {
       console.log(err);
     }

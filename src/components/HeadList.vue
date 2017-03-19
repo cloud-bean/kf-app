@@ -6,10 +6,7 @@
   </div>
 
 </div>
-<div class="">
-  {{userList.length}}人完成任务
-</div>
-
+  <span class="info">{{userList.length}}人完成任务</span>
 </div>
 
 </template>
@@ -35,5 +32,9 @@ export default {
   border-radius: 50%;
   width: 2rem;
   padding: 0.2rem 0.1rem;
+}
+.info{
+  font-size: 0.8rem;
+  color: #ccc;
 }
 </style>

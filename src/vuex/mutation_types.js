@@ -25,3 +25,4 @@ export const FETCH_STH = 'FETCH_STH';
 export const GOT_STH = 'GOT_STH';
 
 export const SET_USER_CARDS = 'SET_USER_CARDS';
+export const SET_USER_LOTTERY = 'SET_USER_LOTTERY';

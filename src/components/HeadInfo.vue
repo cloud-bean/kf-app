@@ -1,9 +1,9 @@
 <template>
-  <div class=".blue-bg">
+  <div class="" >
     <div class="userhead">
           <img :src="user.profileImageURL" alt="" class="avatar"/>
           <div class="name">{{user.displayName}}</div>
-          <!-- <div class="slogan"> {{user.option.slogan || 'Learning with joy, achieving with will.'}} </div> -->
+          <div class="slogan"> {{user.option.slogan || 'Learning with joy, achieving with will.'}} </div>
 
     </div>
     <div class="info Grid">
@@ -83,7 +83,7 @@ import util from '../config/util';
   font-size: 12px;
 }
 .info{
-  width:80%;
+  width:100%;
   text-align: center;
   font-size: 0.8rem;
   padding: 0.5rem 0.3rem;
@@ -94,9 +94,9 @@ import util from '../config/util';
   background-color: #eef;
   color: #000;
   margin: 0 auto;
-  margin-top:-0.8rem;
-  box-shadow:0px 0px 5px #555555;
-  border-radius: 5px;
+  // margin-top:-0.8rem;
+  // box-shadow:0px 0px 5px #555555;
+  // border-radius: 5px;
 
   /*border-top: 1px solid white;*/
 }
@@ -148,10 +148,13 @@ import util from '../config/util';
 .item{
 }
 .userhead{
-  background-color: @light-background;
+  // background-size:cover;
+  // filter: blur(10px);
+
+  background-color:#26a2ff;
   padding: 0.8rem 0;
   width: 100%;
-  height: 8rem;
+  height: 12rem;
   text-align: center;
   display: flex;
   flex-direction: column;

@@ -56,7 +56,6 @@
       },
       data(){
           return {
-            page:0,
             loading:false,
             hasMore:true,
           };
@@ -98,16 +97,12 @@
         //   });
         // },
         loadMoreTask(){
-            this.loading = true;
-
-            this.page++;
             this.getTaskList(this.page)
             .then(res => {
               if(res.length < 10){
                 // console.log(res.length);
                 this.hasMore = false;
               }
-              this.loading = false;
             });
           },
       },
@@ -115,6 +110,7 @@
         ...mapState({
           tasks: state => state.task.tasks,
           taskQuantityInfo: state => state.task.taskQuantityInfo,
+          page: state => state.task.page,
         }),
         progress(){
           return 100*this.taskQuantityInfo.totalDone/this.taskQuantityInfo.totalCount;

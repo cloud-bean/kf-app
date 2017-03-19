@@ -7,7 +7,7 @@
                 <div class="">
                   {{user.displayName }} Lv.{{user.exp|level}}
                 </div>
-                <div class="grey-small">
+                <div class="grey-small" v-if="!this.isMe">
                   收获{{user.totalVoteCount}}赞
                 </div>
               </span>
@@ -17,11 +17,11 @@
                 <div class="exp">
                   {{user.exp}}
                 </div>
-              <div class="like">
+              <div class="like" v-if="!this.isMe">
                 <div class="likenum">
                     {{user.upCount}}
                 </div>
-                <div class="likeicon" v-on:click="like({user, index: rankIndex})">
+                <div class="likeicon" v-on:click="like({user, index: rankIndex})" >
                   <i class="fa fa-heart fa-lg " v-bind:class="{active:user.isUpVoted,inactive:!user.isUpVoted}"></i>
                 </div>
               </div>
@@ -34,7 +34,7 @@
 <script>
 
     export default{
-      props:['user','rankIndex','like'],
+      props:['user','rankIndex','like','isMe'],
       data(){
         return {
         }

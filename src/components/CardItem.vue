@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="Cell">
-      <img :src="cardData.card.file.URL" alt="" class="card-img" v-bind:class="{lock}"></img>
+      <img :src="cardData.card.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img" v-bind:class="{lock}"></img>
     </div>
   </div>
 
@@ -53,7 +53,7 @@
 
 }
 .card-img{
-  height: 8rem;
+  /*height: 8rem;*/
   border: 4px solid #aaa;
 }
 .card-name{

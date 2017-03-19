@@ -3,11 +3,15 @@ import * as api from '../../api';
 
 const state = {
   ranks: [],
+  myRank: {},
+  page: 1,
 };
 
 const mutations = {
   [types.SET_RANK](state, ranks) {
-    state.ranks = state.ranks.concat(ranks);
+    state.page++;
+    state.ranks = state.ranks.concat(ranks.rankList);
+    state.myRank = ranks.me;
   },
   [types.LIKE_FRIEND](state, index) {
     state.ranks[index].isUpVoted = true;

@@ -1,5 +1,13 @@
 <template>
   <div class="">
+    <!-- {{myRank.rankIndex}} -->
+    <div class="my-rank">
+      <rank-item :user='myRank' :rank-index='myRank.rankIndex'  class="rank-item" :is-me="true"></rank-item>
+
+    </div>
+<div class="divide">
+
+</div>
   <div class="card no-margin">
       <div
         v-infinite-scroll="loadMoreRank"
@@ -36,13 +44,14 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       loading:false,
-      page:0,
       hasMore:true,
     }
 
   },
   computed: mapState({
     ranks: state => state.rank.ranks,
+    myRank: state => state.rank.myRank,
+    page: state => state.rank.page,
   }),
 
   // vuex: {
@@ -69,7 +78,6 @@ export default {
     loadMoreRank(){
       this.loading = true;
       if(this.hasMore){
-        this.page++;
         this.getRanks(this.page)
         .then(res => {
           if(res.length < 10){
@@ -157,5 +165,12 @@ export default {
     width: 300px;
     /*padding-left: 0.5rem;*/
     /*padding-right: 0.5rem;*/
+  }
+  .divide{
+    height: .3rem;
+    background-color: #eee;
+  }
+  .my-rank{
+    background-color: #eeeeff;
   }
 </style>
