@@ -3,7 +3,7 @@
     <div class="userhead">
           <img :src="user.profileImageURL" alt="" class="avatar"/>
           <div class="name">{{user.displayName}}</div>
-          <div class="slogan"> {{user.option.slogan || 'Learning with joy, achieving with will.'}} </div>
+          <div class="slogan">{{user.option.slogan || 'Learning with joy, achieving with will.'}}</div>
 
     </div>
     <div class="info Grid">
@@ -106,13 +106,14 @@ import util from '../config/util';
   flex-direction: column;
   justify-content: space-between;
   font-size: 1rem;
-  color: #000;
+  color: #999;
   /*padding-top: 5px;*/
 }
 .number{
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-top: 0.3rem;
-  color: #999;
+  color: #000;
+
 
 }
 /*.headimg{
@@ -140,7 +141,8 @@ import util from '../config/util';
   display: inline-block;
 }
 .slogan{
-  color:#ddd;
+  color:#eee;
+  font-size: .8rem;
 }
 .blue-bg{
   height: 10rem;

@@ -6,7 +6,7 @@
       {{tip.content}}
     </p> -->
     <i class="fa fa-remove close" v-on:click="close" ></i>
-    <img v-bind:src="tip.file.URL" alt="" class="back-img"/>
+    <img v-bind:src="tip.file.URL+'?imageView2/2/w/414/h/190/q/75|imageslim'" alt="" class="back-img"/>
   </div>
 
 
