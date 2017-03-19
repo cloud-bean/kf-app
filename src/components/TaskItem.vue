@@ -6,7 +6,7 @@
     <div class="right">
       <div class="task-content">
         <!-- <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div> -->
-        <h1 >{{taskdata.name}}</h1>
+        <div class="title">{{taskdata.name}}</div>
         <div class="gery">{{taskdata.expireTime | dateFormat1}} # <span class="gery">{{taskdata.type}}</span></div>
 
 
@@ -100,9 +100,9 @@ p{
     background-color: #EEEEFF;
 
 }
-h1{
-  margin: 0;
+.title{
   padding:0.3rem 0;
+  font-size: 1rem;
 }
 .left{
   width: 1%;
