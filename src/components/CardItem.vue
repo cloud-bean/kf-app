@@ -3,17 +3,13 @@
   <div class="card-color">
   </div>
   <div class="card-desc Grid -center -middle">
-    <div class="Cell ">
-      <div class="card-name">
+      <div class=" Cell card-name -12of12">
         {{cardData.card.name}}
       </div>
-      <div class="card-content">
+      <div class="Cell card-content -12of12">
         {{cardData.card.playScript}}
       </div>
-    </div>
-    <div class="Cell">
-      <img :src="cardData.card.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img" v-bind:class="{lock}"></img>
-    </div>
+      <img :src="cardData.card.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12" v-bind:class="{lock}"></img>
   </div>
 
   <!-- <div class="tip" v-if="lock"> 等级不够无法使用 </div> -->
@@ -23,9 +19,12 @@
 .jw-card{
   height: auto;
   overflow:auto;
-  margin: 0;
+  margin: .3rem;
   position: relative;
-  background-color: #eef;
+  background-color: #eee;
+  box-shadow:0px 0px 5px #555555;
+  padding: 0rem 1rem;
+
 }
 .tip{
   text-align: center;
@@ -47,9 +46,10 @@
 }
 .card-desc{
   width: 95%;
-  padding: .5rem .5rem;
+  /*padding: .5rem .5rem;*/
   margin: .5rem .5rem;
-  background-color: #fff;
+  /*background-color: #fff;*/
+  height:18rem;
 
 
 }
@@ -63,7 +63,7 @@
 }
 .card-content{
   font-size: 0.5rem;
-  color: #ccc;
+  color: #666;
 }
 </style>
 <script>

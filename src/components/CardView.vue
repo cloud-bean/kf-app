@@ -1,13 +1,17 @@
 <template>
-<div class="jw-card" @click.native="exit">
-      <img :src="cardData.card.file.URL" alt="" class="card-img" v-bind:class="{lock}" width="100%"></img>
+<div class="jw-card">
+    <img :src="cardData.card.file.URL" alt="" width="100%"></img>
 </div>
 </template>
 <style scoped>
-.jw-card{
+/*.jw-card{
   height: auto;
   overflow:auto;
   margin: 0;
+  position: absolute;
+  z-index: 100;
+  top:0;
+  left:0;
 }
 
 image[lazy=loading] {
@@ -15,14 +19,19 @@ image[lazy=loading] {
   height: 300px;
   margin: auto;
 }
+.close{
+  top:0.3rem;
+  right:0.3rem;
+  color: #cccccc;
+  position: absolute;
+}*/
 </style>
 <script>
-
-import { mapState, mapActions } from 'vuex';
 
 export default {
   data() {
     return {
+      // display:false,
       // lock:false,
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
@@ -37,12 +46,6 @@ export default {
 
   },
   computed:{
-    ...mapState({
-      user: state => state.profile.user
-    }),
-    lock(){
-      if(this.cardData.card.level<this.user.option.level)return true;
-    }
 
   },
   components: {
