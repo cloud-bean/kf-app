@@ -38,10 +38,10 @@
             <i class="fa fa-users" slot="icon" aria-hidden="true"></i>
               排行
           </mt-tab-item>
-          <!-- <mt-tab-item id="卡包" >
-            <i class="fa fa-users" slot="icon" aria-hidden="true"></i>
+           <mt-tab-item id="卡包" >
+            <i class="fa fa-clone" slot="icon" aria-hidden="true"></i>
               卡包
-          </mt-tab-item> -->
+          </mt-tab-item> 
           <mt-tab-item id="评分" v-if="user.roleType=='teacher'">
             <i class="fa fa-pencil-square-o" slot="icon" aria-hidden="true"></i>
               评分

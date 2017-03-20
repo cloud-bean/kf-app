@@ -11,9 +11,12 @@
           <div v-html="tansMarkdown(task.description)">
 
           </div>
+          <div class="summary">
           <div v-html="tansMarkdown(task.summary)" v-if="task.isDone">
 
           </div>
+          </div>
+
           <div class="task-footer">
             <head-list :user-list="task.taskDoneUsers"></head-list>
           </div>
@@ -180,8 +183,10 @@ export default {
   padding-top: .2rem;
   border-top: 1px solid #ccc;
 }
-.message-item{
+.summary{
+  background-color: #eee;
 }
+
 /*.image-content{
 position: absolute;
 z-index: 1;

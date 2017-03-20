@@ -32,7 +32,7 @@ export default {
     };
   },
   computed: mapState({
-    cards: state => state.cardBag.cards,
+    cards: state => state.card.cards,
     // userRecords: state => state.profile.userRecords,
     // tip: state => state.profile.tip,
   }),

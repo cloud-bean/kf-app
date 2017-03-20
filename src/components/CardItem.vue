@@ -1,8 +1,8 @@
 <template>
-<div class="jw-card Grid -left">
+<div class="jw-card Grid -middle -center">
   <div class="card-color">
   </div>
-  <div class="card-desc Grid -left ">
+  <div class="card-desc Grid -center -middle">
     <div class="Cell ">
       <div class="card-name">
         {{cardData.card.name}}
@@ -25,6 +25,7 @@
   overflow:auto;
   margin: 0;
   position: relative;
+  background-color: #eef;
 }
 .tip{
   text-align: center;
