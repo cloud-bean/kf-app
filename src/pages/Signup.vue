@@ -1,23 +1,31 @@
 <template>
   <!-- <div class="login"> -->
     <!-- <img :src="mockdata.user.profileImageURL" alt="" class="avatar"/> -->
-    <div class="">
+    <div class="signup">
 
-    <header class="bar bar-nav">
-  <h1 class='title'>补充你的信息</h1>
-</header>
-  <div class="content" novalidate>
-    <div class="headimg">
-
-        <img :src="user.profileImageURL" alt="" class="avatar"/>
+  <header class="header">
+ 
+  <mt-header title="请补全信息"></mt-header>
+  <div class="headimg">
+        <img :src="user.profileImageURL" alt="" class="avatar" />
       <p>
         <span class="name">{{displayName}}</span>
       </p>
     </div>
+</header>
+<div class="field">
+<mt-field label="用户名" placeholder="请输入用户名"  v-model="displayName"></mt-field>
+<mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone"></mt-field>
+<mt-field label="我的宣言" placeholder="我的宣言"  v-model="slogan"></mt-field>
+<div class="submit">
+<mt-button size="large" type="primary" @click="submit">提交</mt-button>
+</div>
+</div>
+  <!--<div class="content" novalidate>
+    
 
     <div class="list-block">
       <ul>
-        <!-- Text inputs -->
         <li>
           <div class="item-content">
             <div class="item-media"><i class="icon icon-form-name"></i></div>
@@ -60,7 +68,7 @@
         <div class="col-50"><a  class="button button-big button-fill button-success" v-on:click="submit()">提交</a></div>
       </div>
     </div>
-  </div>
+  </div>-->
 
 </div>
 
@@ -129,22 +137,29 @@ export default {
 h3 {
   color: #42b983;
 }
+.signup{
+  position:relative;
+  z-index: 10000;
+  background-color:#fff;
+  height:100%;
+}
 
 .headimg {
   width: 100%;
-  margin: 1rem auto;
+  margin: 2rem auto;
   text-align: center;
-  font-size: 0.5rem;
+  font-size: 1rem;
 }
 .label{
   width: auto !important;
 }
 
 .avatar {
-  width: 3rem;
-  height: 3rem;
-  margin: 0 auto;
-  border: 1px solid white;
+   width: 5rem;
+  height: 5rem;
+  /*border: 2px solid white;*/
+  border-radius:50%;
+  box-shadow:0px 0px 5px #555555;
 }
 .name{
   height: 0.7rem;
@@ -154,5 +169,10 @@ h3 {
   width: 95%;
   padding: 0 10px;
   border: 1px solid black;
+}
+.submit{
+  margin-top:2rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 </style>

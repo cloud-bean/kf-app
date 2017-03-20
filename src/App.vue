@@ -1,7 +1,7 @@
 <template>
 
 <div class="">
-  <div v-if="login">
+  <div v-if="login&&user">
       <nav >
         <!-- <router-link  class="tab-item" active-class="active" to="/profile">
           <span class="icon icon-me"></span>
@@ -185,7 +185,7 @@ nav i{
   _position:absolute;
   top:0;
   left:0;
-  z-index:1000;
+  z-index:999;
   text-align: center;
   background-color:#eee;
   padding: 12rem 5rem;
@@ -197,7 +197,7 @@ nav i{
   _position:absolute;
   top:0;
   left:0;
-  z-index:999;
+  z-index:998;
   text-align: center;
 }
 .opacity{background:rgba(255,255,255,.5); }
