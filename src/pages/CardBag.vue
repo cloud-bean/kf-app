@@ -3,7 +3,11 @@
   <div class="bag-title">
     我的卡包
   </div>
-
+<div class="Grid -left">
+  <div v-if="cards.length==0">
+    你的卡包是空的
+  </div>
+</div>
 <div class="Grid -left">
   <div class="Cell -6of12 card-item" v-for="(card,index) in cards" >
         <card :card-data="card" @click.native="openCard(index)"></card>
