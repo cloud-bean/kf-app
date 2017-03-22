@@ -1,16 +1,16 @@
 <template>
 <div class="jw-card Grid -middle -center">
-  <div class="card-color">
+  <!--<div class="card-color">
   </div>
-  <div class="card-desc Grid -center -middle">
-      <div class=" Cell card-name -12of12">
+  <div class="card-desc Grid -center -middle">-->
+      <!--<div class=" Cell card-name -12of12">
         {{cardData.card.name}}
       </div>
       <div class="Cell card-content -12of12">
         {{cardData.card.playScript}}
-      </div>
+      </div>-->
       <img :src="cardData.card.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12" v-bind:class="{lock}"></img>
-  </div>
+  <!--</div>-->
 
   <!-- <div class="tip" v-if="lock"> 等级不够无法使用 </div> -->
 </div>
@@ -21,9 +21,9 @@
   overflow:auto;
   margin: .3rem;
   position: relative;
-  background-color: #eee;
-  box-shadow:0px 0px 5px #555555;
-  padding: 0rem 1rem;
+  /*background-color: #eee;*/
+  box-shadow:0px 0px 10px #555555;
+  /*padding: 0rem 1rem;*/
 
 }
 .tip{
@@ -35,7 +35,7 @@
   padding: 0.3rem 0.2rem;
   text-align: center;
   width: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   /*margin-top: -3rem;*/
 }
 .lock{
@@ -55,7 +55,7 @@
 }
 .card-img{
   /*height: 8rem;*/
-  border: 4px solid #aaa;
+  /*border: 4px solid #aaa;*/
 }
 .card-name{
   font-size: 1rem;

@@ -28,13 +28,14 @@ const actions = {
     async getUserLottery({ commit }) {
         commit(types.FETCH_STH);
         try {
-            commit(types.SET_USER_LOTTERY, await api.getLotteryCard());
+            commit(types.SET_USER_LOTTERY, await api.getLotterys());
         } catch (err) {
             console.log(err);
         }
         commit(types.GOT_STH);
 
     },
+
 };
 export default {
     state,

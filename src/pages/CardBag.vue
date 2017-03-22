@@ -1,21 +1,23 @@
 <template>
 <div class="">
   <div class="bag-title">
-    我的卡包
+    我的卡包-近期上线
   </div>
-<div class="Grid -left">
+<!--<div class="button-area">
+  <mt-button @click="handleClick" type="danger" size="large">抽卡({{lottery.length}})</mt-button>
+</div>
+
+<div class="Grid -left bag-content">
   <div v-if="cards.length==0">
     你的卡包是空的
   </div>
-</div>
-<div class="Grid -left">
-  <div class="Cell -6of12 card-item" v-for="(card,index) in cards" >
+  <div class="Cell -4of12 card-item" v-for="(card,index) in cards" >
         <card :card-data="card" @click.native="openCard(index)"></card>
   </div>
 </div>
 <div class="mask opacity" v-if="display" @click="closeCard">
   <card-view :card-data="activeCard"></card-view>
-</div>
+</div>-->
 <!-- <div class="">
   <button  @click="lottery" class="button button-big">抽奖</button>
 
@@ -29,7 +31,9 @@
 import { mapState, mapActions } from 'vuex';
 import Card from '../components/CardItem';
 import CardView from '../components/CardView';
-import {getLotterys, getLotteryCard} from '../api';
+import { Toast } from 'mint-ui';
+import { getLotteryCard} from '../api';
+
 export default {
   data() {
     return {
@@ -43,6 +47,7 @@ export default {
   },
   computed: mapState({
     cards: state => state.card.cards,
+    lottery: state => state.card.lottery,
     // userRecords: state => state.profile.userRecords,
     // tip: state => state.profile.tip,
   }),
@@ -56,15 +61,31 @@ export default {
   // },
   mounted() {
     this.$nextTick(()=> {
-        this.getUserCards();
+         this.getUserLottery();
+         this.getUserCards();
+        
     })
   },
   methods: {
-    ...mapActions(['getUserCards']),
-    async lottery(){
-      const lotterys = await getLotterys();
-      const card = await getLotteryCard(lotterys[0]._id);
-      console.log(card);
+    ...mapActions(['getUserCards','getUserLottery']),
+    async handleClick(){
+      console.log('test');
+      if(this.lottery.length>0){
+        const data = await getLotteryCard(this.lottery[0]._id);
+        await this.getUserCards();
+        await this.getUserLottery();
+         Toast({
+          message: `${data.user.displayName}-获得-${data.card.name}`,
+          position: 'middle',
+          duration: 2000
+         });
+      }else{
+        Toast({
+          message: '您用完了抽奖机会，快去做任务吧',
+          position: 'middle',
+          duration: 2000
+       });
+      }
     },
     openCard(index){
       if(this.display==false){
@@ -73,12 +94,11 @@ export default {
       }else{
         this.display= false;
       }
-
     },
     closeCard(){
-      console.log('ddd');
       this.display= false;
-    }
+    },
+   
   },
   components: {
     Card,
@@ -101,6 +121,7 @@ export default {
 .bag-content{
   padding: 0.5rem;
   height: auto;
+  margin-top:.5rem;
 }
 .card-item{
   padding: 0.1rem 0.3rem;
@@ -116,6 +137,12 @@ export default {
   text-align: center;
   padding: 4rem 2rem;
 }
+.content{
+
+}
 .opacity{background:rgba(0,0,0,.5); }
+.button-area{
+  margin: .5rem 1rem 0rem 1rem;
+}
 
 </style>

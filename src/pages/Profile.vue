@@ -13,9 +13,9 @@
 
     </div>
     
-    <mt-cell title="我的排名" label="完成任务越高，排行越靠前" is-link></mt-cell>
+    <!--<mt-cell title="我的排名" label="完成任务越高，排行越靠前" is-link></mt-cell>
     <mt-cell title="我的宝箱" label="完成任务获取抽奖机会" is-link></mt-cell>
-    <mt-cell title="我的卡包" label="我拥有的所有卡牌" is-link></mt-cell>
+    <mt-cell title="我的卡包" label="我拥有的所有卡牌" is-link></mt-cell>-->
 
 </div>
 
