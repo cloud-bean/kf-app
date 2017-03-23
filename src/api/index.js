@@ -293,7 +293,7 @@ export const getLotteryCard = (lotteryId) =>
 
 export const getNews = () =>
     new Promise((resolve, reject) => {
-        request.get(`${bigServer}/documents?name=news`)
+        request.get(`${bigServer}/documents?type=news`)
             // .withCredentials()
             .set('Authorization', `Bearer ${store.state.accessToken}`)
             .then((result) => {

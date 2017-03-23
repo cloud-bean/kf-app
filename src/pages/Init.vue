@@ -39,6 +39,7 @@ export default {
       'getTip',
       'setLogin',
       'setUserLevel',
+      'getNews',
     ]),
     async init(){
       const urlObj = url.parse(window.location.href,true);
@@ -58,7 +59,7 @@ export default {
         wx.config(this.jsConfig);
         await this.getUserRecords();
         await this.getTip();
-
+        await this.getNews();
         await this.getUserInfo(this.userid)
 
 

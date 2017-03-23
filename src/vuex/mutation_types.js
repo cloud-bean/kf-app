@@ -26,3 +26,6 @@ export const GOT_STH = 'GOT_STH';
 
 export const SET_USER_CARDS = 'SET_USER_CARDS';
 export const SET_USER_LOTTERY = 'SET_USER_LOTTERY';
+
+export const SET_ACTIVR_NEWS = 'SET_ACTIVR_NEWS';
+export const SET_NEWS = 'SET_NEWS';

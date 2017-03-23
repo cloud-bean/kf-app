@@ -1,10 +1,16 @@
 <template lang="html">
   <div class="news-detail">
   <div class="news-image">
-    <img v-bind:src="newsData.file.URL+'?imageView2/2/w/414/h/190/q/75|imageslim'" alt="" class="back-img"/>
+    <img :src="news.file.URL+'?imageView2/2/w/400/h/200/q/75|imageslim'" alt="" class="back-img"/>
+  </div>
+  <div class="title">
+    {{news.name}}
+  </div>
+  <div class="date">
+    {{news.created | dateFormat}}
   </div>
   <div class="news-content markdown-desc">
-          <div v-html="tansMarkdown(task.description)">
+          <div v-html="tansMarkdown(news.content)">
 
           </div>
   </div>
@@ -86,7 +92,17 @@ export default {
 
 <style lang="css" scoped>
 
+.title{
+  font-size: 2rem;
+  color: #ccc;
+  padding: 0rem 2rem;
+}
+.date{
+  color: #ccc;
+  padding: .3rem 2rem;
+  font-size: .8rem;
 
+}
 .back-img{
   width: 100%;
   height:180px;
