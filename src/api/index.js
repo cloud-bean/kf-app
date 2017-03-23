@@ -283,8 +283,22 @@ export const getLotteryCard = (lotteryId) =>
             // .withCredentials()
             .set('Authorization', `Bearer ${store.state.accessToken}`)
             .then((result) => {
-                const card = result.body.data;
-                resolve(card);
+                const data = result.body.data;
+                resolve(data);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+
+export const getNews = () =>
+    new Promise((resolve, reject) => {
+        request.get(`${bigServer}/documents?name=news`)
+            // .withCredentials()
+            .set('Authorization', `Bearer ${store.state.accessToken}`)
+            .then((result) => {
+                const news = result.body.data;
+                resolve(news);
             })
             .catch((err) => {
                 reject(err);

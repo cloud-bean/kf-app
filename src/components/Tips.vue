@@ -1,11 +1,11 @@
 <template lang="html">
 
-  <div class="cite"  v-bind:class="{'shut':display}">
+  <div class="cite"  v-if="display">
     <!-- <h3 class="grey">{{tip.title}}</h3>
     <p class="tip">
       {{tip.content}}
     </p> -->
-    <i class="fa fa-remove close" v-on:click="close" ></i>
+    <i class="fa fa-remove close" @click.native="close" ></i>
     <img v-bind:src="tip.file.URL+'?imageView2/2/w/414/h/190/q/75|imageslim'" alt="" class="back-img"/>
   </div>
 
@@ -19,14 +19,15 @@ export default {
   props:['tip'],
   data(){
     return {
-      display:false,
+      display:true,
     }
   },
   components: {
   },
   methods:{
     close(){
-      this.display=true;
+      console.log('111');
+      this.display=false;
     }
   }
 }

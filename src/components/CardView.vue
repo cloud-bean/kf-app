@@ -1,6 +1,7 @@
 <template>
 <div class="jw-card">
-    <img :src="cardData.card.file.URL" alt="" width="100%"></img>
+    <img :src="cardData.card.file.URL+'?imageView2/2/w/350/h/540/q/75|imageslim'" alt="" width="100%"></img>
+    <qrcanvas :options="{data:cardData.card._id}"></qrcanvas>
 </div>
 </template>
 <style scoped>
@@ -27,6 +28,7 @@ image[lazy=loading] {
 }*/
 </style>
 <script>
+import Qrcanvas from 'qrcanvas-vue'; 
 
 export default {
   data() {
@@ -49,7 +51,7 @@ export default {
 
   },
   components: {
-
+    Qrcanvas,
   }
 }
 </script>

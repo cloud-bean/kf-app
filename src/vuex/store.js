@@ -7,6 +7,7 @@ import task from './modules/task';
 import rank from './modules/rank';
 import score from './modules/score';
 import card from './modules/card';
+import news from './modules/news';
 
 
 Vue.use(Vuex);
@@ -133,14 +134,15 @@ const mutations = {
 };
 
 export default new Vuex.Store({
-  state,
-  mutations,
-  actions,
-  modules: {
-    profile,
-    task,
-    rank,
-    score,
-    card,
-  },
+    state,
+    mutations,
+    actions,
+    modules: {
+        profile,
+        task,
+        rank,
+        score,
+        card,
+        news,
+    },
 });

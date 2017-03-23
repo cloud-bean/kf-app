@@ -7,7 +7,7 @@
        <div>过期 {{task.expireTime | dateFormat}}</div>
        <div>类型 {{task.type}}</div>
     </div>
-       <div id="task-desc">
+       <div class="markdown-desc">
           <div v-html="tansMarkdown(task.description)">
 
           </div>

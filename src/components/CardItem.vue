@@ -1,5 +1,5 @@
 <template>
-<div class="jw-card Grid -middle -center">
+<div class="jw-card Grid -middle -center" >
   <!--<div class="card-color">
   </div>
   <div class="card-desc Grid -center -middle">-->

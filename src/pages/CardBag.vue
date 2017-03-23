@@ -1,27 +1,26 @@
 <template>
 <div class="">
   <div class="bag-title">
-    我的卡包-近期上线
+    我的卡包
   </div>
-<!--<div class="button-area">
+<div class="button-area">
   <mt-button @click="handleClick" type="danger" size="large">抽卡({{lottery.length}})</mt-button>
 </div>
+<!--<div class="button-area">
+  <mt-button @click="handleBuy" type="danger" size="large">买宝箱(1悦维币买1次)</mt-button>
+</div>-->
 
 <div class="Grid -left bag-content">
   <div v-if="cards.length==0">
     你的卡包是空的
   </div>
-  <div class="Cell -4of12 card-item" v-for="(card,index) in cards" >
+  <div class="Cell -4of12 card-item" v-for="(card,index) in cards" v-if="card.status==0">
         <card :card-data="card" @click.native="openCard(index)"></card>
   </div>
 </div>
 <div class="mask opacity" v-if="display" @click="closeCard">
   <card-view :card-data="activeCard"></card-view>
-</div>-->
-<!-- <div class="">
-  <button  @click="lottery" class="button button-big">抽奖</button>
-
-</div> -->
+</div>
 
 </div>
 </template>
@@ -69,9 +68,17 @@ export default {
   methods: {
     ...mapActions(['getUserCards','getUserLottery']),
     async handleClick(){
-      console.log('test');
       if(this.lottery.length>0){
         const data = await getLotteryCard(this.lottery[0]._id);
+        if(!data){
+           Toast({
+             message: `很遗憾没有抽到`,
+             position: 'middle',
+             duration: 2000
+           });
+          await this.getUserLottery();
+           return;
+        }
         await this.getUserCards();
         await this.getUserLottery();
          Toast({
@@ -86,6 +93,9 @@ export default {
           duration: 2000
        });
       }
+    },
+    handleBuy(){
+
     },
     openCard(index){
       if(this.display==false){
@@ -135,7 +145,7 @@ export default {
   left:0;
   z-index:998;
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
 }
 .content{
 
