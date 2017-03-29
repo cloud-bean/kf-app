@@ -21,7 +21,7 @@
     <div
       v-infinite-scroll="loadMoreTask"
       infinite-scroll-disabled="loading"
-      infinite-scroll-distance="10"
+      infinite-scroll-distance="0"
       >
       <div v-for="(task, index) in tasks">
         <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
@@ -97,14 +97,18 @@
         //   });
         // },
         loadMoreTask(){
+          if(this.hasMore){
+            this.loading = true;
             this.getTaskList(this.page)
             .then(res => {
               if(res.length < 10){
-                // console.log(res.length);
                 this.hasMore = false;
               }
+              this.loading = false;
             });
-          },
+          }
+           
+        },
       },
       computed: {
         ...mapState({
