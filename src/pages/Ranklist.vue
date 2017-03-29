@@ -34,6 +34,7 @@ import util from '../config/util';
 // import {getRanks} from '../vuex/actions';
 import mockdata from '../../test/mock';
 import { mapState, mapActions } from 'vuex';
+import config from '../config/config';
 
 export default {
   components:{ rankItem },
@@ -75,20 +76,20 @@ export default {
       'getRanks',
       'friendLike',
     ]),
-    loadMoreRank(){
+    async loadMoreRank(){
       if(this.hasMore){
         this.loading = true;
-        this.getRanks(this.page)
-        .then(res => {
-          if(res.length < 10){
-            // console.log(res.length);
+        const res = await this.getRanks(this.page)
+        console.log(res.length);
+          if(res.length < config.rank.limit){
             this.hasMore = false;
+            this.loading = true;
+          }else{
+            this.loading = false;
           }
-          this.loading = false;
-
-        })
+        }
       }
-    },
+
   },
 };
 </script>
