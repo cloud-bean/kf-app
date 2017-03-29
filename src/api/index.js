@@ -214,8 +214,14 @@ const chooseUploadImage = () =>
                         const serverId = result.serverId;
                         resolve(serverId);
                     },
+                    cancel() {
+                        reject();
+                    }
                 });
             },
+            cancel() {
+                reject();
+            }
         });
     });
 

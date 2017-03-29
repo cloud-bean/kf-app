@@ -5,9 +5,9 @@
 <div class="">
   <div class="profile">
     <info :user="user"></info>
-    <div class="tip">
+    <!--<div class="tip">
       <tips :tip="tip"></tips>
-    </div>
+    </div>-->
     <!-- <div class="chart">
       <my-chart :my-chart-data="userRecords"></my-chart>
     </div> -->

@@ -121,13 +121,19 @@ export default {
     //   return this.submitOrder(data);
     // },
     async photo(){
-      await this.submitOrder(this.task._id)
-      await this.leaveComment({content:'我上传了作业', taskId:this.task._id})
-      Toast({
+      try{
+        await this.submitOrder(this.task._id)
+        await this.leaveComment({content:'我上传了作业', taskId:this.task._id})
+         Toast({
         message: '作业提交成功',
         position: 'middle',
         duration: 3000
-      });
+       });
+      }catch(err){
+        console.log(err);
+      }
+      
+     
     },
     record(){
       wx.startRecord();
