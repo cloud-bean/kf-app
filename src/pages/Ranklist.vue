@@ -76,8 +76,8 @@ export default {
       'friendLike',
     ]),
     loadMoreRank(){
-      this.loading = true;
       if(this.hasMore){
+        this.loading = true;
         this.getRanks(this.page)
         .then(res => {
           if(res.length < 10){
