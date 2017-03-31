@@ -12,7 +12,7 @@
       <img :src="cardData.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12" v-bind:class="{lock}"></img>
   <!--</div>-->
 
-     <div class="tip"> {{cardData.name}} </div> 
+     <div class="tip"> {{cardData.name}} </div>
 </div>
 </template>
 <style scoped>
@@ -24,7 +24,7 @@
   /*background-color: #eee;*/
   /*box-shadow:0px 0px 10px #555555;*/
   /*padding: 0rem 1rem;*/
-  
+
 
 }
 .tip{
@@ -36,11 +36,11 @@
   padding: 0.3rem 0.2rem;
   text-align: center;
   width: 100%;
-  background: #26a2ff;
+  background: #555555;
   /*margin-top: -3rem;*/
 }
 img{
-  border: 2px solid #26a2ff;
+  border: 2px solid #aaaaaa;
 }
 </style>
 <script>

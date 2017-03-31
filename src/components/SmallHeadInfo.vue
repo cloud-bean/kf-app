@@ -9,13 +9,13 @@
                 <div> 悦币 {{user.option.goldToken}}</div>
             </div>
         </div>
-        <div class="Cell -4of12">
+        <!-- <div class="Cell -4of12">
           <div class="detailInfo">
                 <div> 背包容量 </div>
             </div>
-        </div>
+        </div> -->
     </div>
-   
+
 
   </div>
 

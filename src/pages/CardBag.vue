@@ -4,12 +4,9 @@
     背包系统
   </div>
 
-<div class="title">我的宝箱</div>
+<div class="title" v-if="lotterys.length!=0">我的宝箱</div>
 <div class="Grid -left bag-content">
-  
-  <div v-if="lotterys.length==0">
-    你的没有宝箱
-  </div>
+
   <div class="Cell -4of12 card-item" v-for="(lottery,index) in lotterys">
         <lottery-item :lottery-data="lottery" :open-box="openLotteryBox" :index="index"></lottery-item>
   </div>
@@ -18,11 +15,8 @@
 <!--<div class="button-area">
   <mt-button @click="handleBuy" type="danger" size="large">买宝箱(1悦维币买1次)</mt-button>
 </div>-->
-<div class="title">我的卡牌</div>
+<div class="title" v-if="cards.length!=0">我的卡牌</div>
 <div class="Grid -left bag-content">
-  <div v-if="cards.length==0">
-    你的卡包是空的
-  </div>
   <div class="Cell -4of12 card-item" v-for="(card,index) in cards" v-if="card.status==0">
         <card :card-data="card" @click.native="openCard(index)"></card>
   </div>
@@ -69,13 +63,18 @@ export default {
   // },
   mounted() {
     this.$nextTick(()=> {
-         
-        
+
+      this.getUserCards();
+      this.getUserLottery();
     })
   },
   methods: {
-    ...mapActions(['openLotteryBox']),
-   
+    ...mapActions([
+      'openLotteryBox',
+      'getUserCards',
+      'getUserLottery',
+    ]),
+
     openCard(index){
       if(this.display==false){
         this.activeCard = this.cards[index];
@@ -87,7 +86,7 @@ export default {
     closeCard(){
       this.display= false;
     },
-   
+
   },
   components: {
     Card,
@@ -101,8 +100,8 @@ export default {
 <style scoped>
 .title{
   padding-left:1rem;
-  border-bottom: 1px solid #eeeeff;
-  background-color: #eee;
+  /*border-bottom: 1px solid #eeeeff;*/
+  /*background-color: #eee;*/
 
 }
 .info-card{
@@ -113,12 +112,12 @@ export default {
   text-align: center;
   color: #fff;
   padding: 0.8rem;
-   
+
 }
 .bag-content{
   padding: 0.5rem;
   height: auto;
-  background-color: #eee;
+  /*background-color: #eee;*/
 }
 .card-item{
   padding: 0.1rem 0.3rem;

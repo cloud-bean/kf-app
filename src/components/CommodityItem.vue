@@ -6,7 +6,7 @@
     </div>
     <div class="Cell -6of12 Grid">
         <div class="title Cell -12of12">
-        {{commodityData.name}} 
+        {{commodityData.name}}
          </div>
          <div class="subtitle Cell -12of12">
         {{commodityData.description}}
@@ -15,7 +15,7 @@
         价值{{commodityData.ticketPrice}}悦币
         </div>
     </div>
-    
+
     <div class="icon Cell -2of12">
         <mt-button type="primary" size="small" plain @click="handleBuy">购买</mt-button>
     </div>
@@ -31,6 +31,7 @@
 <script>
 import boximg from '../assets/box.jpg';
 import { MessageBox,Toast } from 'mint-ui';
+import { mapState, mapActions } from 'vuex';
 
     export default{
       props:['commodityData','buy'],
@@ -41,19 +42,26 @@ import { MessageBox,Toast } from 'mint-ui';
          boximg,
         }
       },
+      computed:mapState({
+        money:state => state.profile.user.option.goldToken,
+      }),
       created(){
-       
+
       },
       methods: {
        async handleBuy(){
+          if(this.money<this.commodityData.ticketPrice){
+            Toast('没有足够的悦维币，快去完成任务吧');
+            return;
+          }
            MessageBox.confirm(`确定购买吗，将花费${this.commodityData.ticketPrice}悦币`).then(action => {
-                this.buy({cardPoolId:this.commodityData._id})
+                this.buy({cardPoolId:this.commodityData._id,money:this.commodityData.ticketPrice})
                 .then(value => {
-                    console.log(value);
                     Toast({
-                         message: '购买成功',
-                         iconClass: 'fa fa-success'
-                        });
+                         message: '购买成功,快去背包中打开它！',
+                         iconClass: 'fa fa-check',
+                         duration: 2000,
+                    });
                 });
            });
        }
@@ -69,7 +77,7 @@ import { MessageBox,Toast } from 'mint-ui';
     width: 95%;
     margin: 0 auto;
     padding: .5rem .2rem;
-    box-shadow:0 0 2px rgba(0, 0, 0, .5); 
+    box-shadow:0 0 2px rgba(0, 0, 0, .5);
 }
 .img{
   width: 3rem;

@@ -12,7 +12,7 @@ const mutations = {
         state.cards = cards.cards;
     },
     [types.ADD_USER_CARD](state, card) {
-        state.cards.concat(card);
+        state.cards.splice(0, 0, card);
     },
     [types.SET_USER_LOTTERY](state, lottery) {
         state.lottery = lottery;
@@ -21,7 +21,7 @@ const mutations = {
         state.lottery.splice(index, 1);
     },
     [types.ADD_USER_LOTTERY](state, lottery) {
-        state.lottery.concat(lottery);
+        state.lottery.splice(0, 0, lottery);
     },
     [types.SET_CARD_POOL](state, cardPool) {
         state.cardPool = cardPool;
@@ -48,10 +48,11 @@ const actions = {
         commit(types.GOT_STH);
 
     },
-    async buyLottery({ commit }, { cardPoolId }) {
+    async buyLottery({ commit }, { cardPoolId, money }) {
         commit(types.FETCH_STH);
         try {
             commit(types.ADD_USER_LOTTERY, await api.buyLottery(cardPoolId));
+            commit(types.BUY_GOODS, money);
         } catch (err) {
             console.log(err);
         }

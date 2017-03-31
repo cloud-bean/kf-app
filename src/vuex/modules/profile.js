@@ -25,6 +25,9 @@ const mutations = {
   [types.USER_SIGNUP](state, user) {
     state.user = user;
   },
+  [types.BUY_GOODS](state, money) {
+    state.user.option.goldToken -= money;
+  },
 };
 
 const actions = {

@@ -5,10 +5,7 @@
         <img :src="boximg" alt="" class=""/>
     </div>
     <div class="title Cell -12of12 ">
-        {{lotteryData.cardPool.name}}
-    </div>
-    <div class="icon Cell -12of12">
-        <!--<mt-button plain size="small">打开</mt-button>-->
+        <!-- {{lotteryData.cardPool.name}} -->
     </div>
 </div>
 </template>
@@ -16,6 +13,7 @@
 <script>
 import boximg from '../assets/box.jpg';
 import { Toast } from 'mint-ui';
+import { mapState, mapActions } from 'vuex';
 
     export default{
       props:['lotteryData','openBox','index'],
@@ -24,14 +22,18 @@ import { Toast } from 'mint-ui';
       data(){
         return {
          boximg,
-          
+
         }
       },
       created(){
-       
+
       },
       methods: {
-    async handleClick(){ 
+        ...mapActions([
+          'getUserCards',
+          'getUserLottery'
+        ]),
+    async handleClick(){
         const data = await this.openBox({lotteryId:this.lotteryData._id,index:this.index});
         if(!data){
            Toast({
@@ -39,15 +41,19 @@ import { Toast } from 'mint-ui';
              position: 'middle',
              duration: 2000
            });
-           return;
+           await this.getUserLottery();
+
         }else{
-            Toast({
-          message: `${data.user.displayName}-获得-${data.card.name}`,
+          Toast({
+          message: `获得-${data.card.name}`,
           position: 'middle',
           duration: 2000
          });
+         await this.getUserCards();
+         await this.getUserLottery();
+
         }
-         
+
     },
       },
     }
