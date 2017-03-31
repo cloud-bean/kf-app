@@ -257,7 +257,7 @@ export const submitOrder = (taskId) =>
 
 export const getCardBag = () =>
     new Promise((resolve, reject) => {
-        request.get(`${bigServer}/bags`)
+        request.get(`${bigServer}/myBag`)
             // .withCredentials()
             .set('Authorization', `Bearer ${store.state.accessToken}`)
             .then((result) => {
@@ -277,6 +277,34 @@ export const getLotterys = () =>
             .then((result) => {
                 const lotterys = result.body.data;
                 resolve(lotterys);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+export const getCardPool = (type) =>
+    new Promise((resolve, reject) => {
+        request.get(`${bigServer}/cardPools?ticketType=${type}`)
+            // .withCredentials()
+            .set('Authorization', `Bearer ${store.state.accessToken}`)
+            .then((result) => {
+                const cardPool = result.body.data;
+                resolve(cardPool);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+
+export const buyLottery = (cardPoolId) =>
+    new Promise((resolve, reject) => {
+        request.post(`${bigServer}/buyLottery`)
+            // .withCredentials()
+            .set('Authorization', `Bearer ${store.state.accessToken}`)
+            .send({ cardPoolId, amount: 1 })
+            .then((result) => {
+                const data = result.body.data;
+                resolve(data);
             })
             .catch((err) => {
                 reject(err);

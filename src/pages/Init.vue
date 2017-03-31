@@ -40,6 +40,9 @@ export default {
       'setLogin',
       'setUserLevel',
       'getNews',
+      'getRanks',
+      'getUserLottery',
+      'getUserCards',
     ]),
     async init(){
       const urlObj = url.parse(window.location.href,true);
@@ -61,7 +64,9 @@ export default {
         await this.getTip();
         await this.getNews();
         await this.getUserInfo(this.userid)
-
+        await this.getRanks(1);
+        await this.getUserLottery();
+        await this.getUserCards();
 
         if(this.user.option.phone){
           this.setLogin(true);

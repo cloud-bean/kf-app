@@ -8,7 +8,6 @@ import store from './vuex/store';
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 
-
 Vue.use(MintUI);
 
 

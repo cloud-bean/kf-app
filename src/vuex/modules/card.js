@@ -4,14 +4,27 @@ import * as api from '../../api';
 const state = {
     cards: [],
     lottery: [],
+    cardPool: [],
 };
 
 const mutations = {
     [types.SET_USER_CARDS](state, cards) {
-        state.cards = cards;
+        state.cards = cards.cards;
+    },
+    [types.ADD_USER_CARD](state, card) {
+        state.cards.concat(card);
     },
     [types.SET_USER_LOTTERY](state, lottery) {
         state.lottery = lottery;
+    },
+    [types.MINUS_USER_LOTTERY](state, index) {
+        state.lottery.splice(index, 1);
+    },
+    [types.ADD_USER_LOTTERY](state, lottery) {
+        state.lottery.concat(lottery);
+    },
+    [types.SET_CARD_POOL](state, cardPool) {
+        state.cardPool = cardPool;
     },
 };
 
@@ -35,6 +48,39 @@ const actions = {
         commit(types.GOT_STH);
 
     },
+    async buyLottery({ commit }, { cardPoolId }) {
+        commit(types.FETCH_STH);
+        try {
+            commit(types.ADD_USER_LOTTERY, await api.buyLottery(cardPoolId));
+        } catch (err) {
+            console.log(err);
+        }
+        commit(types.GOT_STH);
+    },
+    async getCardPool({ commit }, { type }) {
+        commit(types.FETCH_STH);
+        try {
+            commit(types.SET_CARD_POOL, await api.getCardPool(type));
+        } catch (err) {
+            console.log(err);
+        }
+        commit(types.GOT_STH);
+
+    },
+    async openLotteryBox({ commit }, { lotteryId, index }) {
+        commit(types.FETCH_STH);
+        let data = {};
+        try {
+            data = await api.getLotteryCard(lotteryId)
+            commit(types.ADD_USER_CARD, data.card);
+            commit(types.MINUS_USER_LOTTERY, index);
+        } catch (err) {
+            console.log(err);
+        }
+        commit(types.GOT_STH);
+        return data;
+    },
+
 
 };
 export default {

@@ -12,7 +12,8 @@ import TeacherOrderListPage from '../pages/TeacherOrderList';
 import TeacherOrderDetailPage from '../pages/TeacherOrderDetail';
 import SuccessPage from '../pages/Success';
 import CardBagPage from '../pages/cardBag';
-import newsDetailPage from '../pages/News';
+import newsDetailPage from '../pages/NewsDetail';
+import marketPage from '../pages/Market';
 
 // import CardBagPage from '../components/Card';
 
@@ -21,7 +22,7 @@ import newsDetailPage from '../pages/News';
 Vue.use(VueRouter);
 // Vue.directive('echarts', require('./directives/echarts'));
 
- // {
+// {
 //     history: true,
 //     hashbang: false,
 //     linkActiveClass: 'active'
@@ -29,20 +30,21 @@ Vue.use(VueRouter);
 // router.mode = 'html5'
 
 export default new VueRouter({
-  routes: [
-    { path: '/', component: InitPage },
-    { path: '/rank', component: RankPage },
-    { path: '/task', component: TaskPage },
-    { path: '/signup', component: SignUpPage },
-    { path: '/profile', component: ProfilePage },
-    { path: '/taskDetail', component: TaskDetailPage },
-    { path: '/taskComment', component: CommentInputPage },
-    { path: '/teacherOrderList', component: TeacherOrderListPage },
-    { path: '/orderDetail', component: TeacherOrderDetailPage },
-    { path: '/success', component: SuccessPage },
-    { path: '/cardBag', component: CardBagPage },
-    { path: '/newsDetail', component: newsDetailPage },
+    routes: [
+        { path: '/', component: InitPage },
+        { path: '/rank', component: RankPage },
+        { path: '/task', component: TaskPage },
+        { path: '/signup', component: SignUpPage },
+        { path: '/profile', component: ProfilePage },
+        { path: '/taskDetail', component: TaskDetailPage },
+        { path: '/taskComment', component: CommentInputPage },
+        { path: '/teacherOrderList', component: TeacherOrderListPage },
+        { path: '/orderDetail', component: TeacherOrderDetailPage },
+        { path: '/success', component: SuccessPage },
+        { path: '/cardBag', component: CardBagPage },
+        { path: '/newsDetail', component: newsDetailPage },
+        { path: '/market', component: marketPage },
 
 
-  ],
+    ],
 });

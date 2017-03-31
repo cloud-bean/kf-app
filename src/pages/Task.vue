@@ -9,11 +9,32 @@
 
     </div>
   </div>
-  <mt-progress :value="progress" :barHeight='2'>
+  <!--<mt-progress :value="progress" :barHeight='2'>
 
-  </mt-progress>
+  </mt-progress>-->
+
   <!-- <p><a v-on:click="scan" class="button">scan</a></p> -->
-
+  <!--<div class="Grid -around -middle button-area">
+    <div class="Cell -5of12">
+      <mt-button size="large" type="primary" plain>进行中</mt-button>
+    </div>
+    <div class="Cell -5of12">
+      <mt-button size="large" type="primary" plain>已完成</mt-button>
+    </div>
+  </div>-->
+  <div class="button-area">
+  <mt-navbar v-model="selected">
+    <mt-tab-item id="1">
+     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      进行中
+    </mt-tab-item>
+    <mt-tab-item id="2">
+      <i class="fa fa-check-circle" aria-hidden="true"></i>
+      已完成
+      </mt-tab-item>
+    </mt-navbar>
+  </div>
+ 
   <div class="tasklist" >
     <p v-if="tasks.length==0" class="no-task">
       暂无任务
@@ -21,14 +42,15 @@
     <div
       v-infinite-scroll="loadMoreTask"
       infinite-scroll-disabled="loading"
-      infinite-scroll-distance="0"
+      infinite-scroll-distance="10"
       >
       <div v-for="(task, index) in tasks">
         <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
       </div>
     </div>
-
   </div>
+
+
   <!-- <div v-show="hasMore" class="load-more">
     <mt-button @click="loadMoreTask" size="large" type="primary" icon="more" plain>加载更多</mt-button>
   </div>
@@ -58,6 +80,7 @@
           return {
             loading:false,
             hasMore:true,
+            selected:'1',
           };
       },
       created(){
@@ -168,4 +191,5 @@
 .grey-small{
   font-size: 0.3rem;
 }
+
 </style>

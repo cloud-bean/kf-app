@@ -9,10 +9,10 @@
       <div class="Cell card-content -12of12">
         {{cardData.card.playScript}}
       </div>-->
-      <img :src="cardData.card.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12" v-bind:class="{lock}"></img>
+      <img :src="cardData.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12" v-bind:class="{lock}"></img>
   <!--</div>-->
 
-  <!-- <div class="tip" v-if="lock"> 等级不够无法使用 </div> -->
+     <div class="tip"> {{cardData.name}} </div> 
 </div>
 </template>
 <style scoped>
@@ -22,48 +22,25 @@
   margin: .3rem;
   position: relative;
   /*background-color: #eee;*/
-  box-shadow:0px 0px 10px #555555;
+  /*box-shadow:0px 0px 10px #555555;*/
   /*padding: 0rem 1rem;*/
+  
 
 }
 .tip{
   text-align: center;
-  position: absolute;
+  /*position: absolute;*/
   top: 3rem;
-  color: #ccc;
+  color: #fff;
   font-size: 0.5rem;
   padding: 0.3rem 0.2rem;
   text-align: center;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: #26a2ff;
   /*margin-top: -3rem;*/
 }
-.lock{
-}
-.card-color{
-  width: 5%;
-  background-color: #abc;
-}
-.card-desc{
-  width: 95%;
-  /*padding: .5rem .5rem;*/
-  margin: .5rem .5rem;
-  /*background-color: #fff;*/
-  height:18rem;
-
-
-}
-.card-img{
-  /*height: 8rem;*/
-  /*border: 4px solid #aaa;*/
-}
-.card-name{
-  font-size: 1rem;
-
-}
-.card-content{
-  font-size: 0.5rem;
-  color: #666;
+img{
+  border: 2px solid #26a2ff;
 }
 </style>
 <script>
@@ -87,12 +64,12 @@ export default {
 
   },
   computed:{
-    ...mapState({
-      user: state => state.profile.user
-    }),
-    lock(){
-      if(this.cardData.card.level<this.user.option.level)return true;
-    }
+    // ...mapState({
+    //   user: state => state.profile.user
+    // }),
+    // lock(){
+    //   if(this.cardData.card.level<this.user.option.level)return true;
+    // }
 
   },
   components: {

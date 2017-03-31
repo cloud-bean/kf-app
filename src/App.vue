@@ -25,18 +25,19 @@
           <span class="tab-label">评分</span>
 <<<<<<< HEAD
         </router-link> -->
+        
         <mt-tabbar @click.native="handleClick" v-model="selected" fixed>
-          <mt-tab-item id="主页">
+          <mt-tab-item id="我的">
               <i class="fa fa-user-circle-o" slot="icon" aria-hidden="true"></i>
-              主页
+              我的
           </mt-tab-item>
           <mt-tab-item id="任务">
             <i class="fa fa-calendar-check-o" slot="icon" aria-hidden="true"></i>
               任务
           </mt-tab-item>
-          <mt-tab-item id="排行">
-            <i class="fa fa-users" slot="icon" aria-hidden="true"></i>
-              排行
+          <mt-tab-item id="集市">
+            <i class="fa fa-superpowers" slot="icon" aria-hidden="true"></i>
+              集市
           </mt-tab-item>
            <!-- <mt-tab-item id="卡包" >
             <i class="fa fa-clone" slot="icon" aria-hidden="true"></i>
@@ -98,7 +99,7 @@ const moment = require('momentjs');
   //  store,
    data(){
      return {
-       selected:'主页'
+       selected:'我的'
      }
    },
    computed:{
@@ -118,14 +119,14 @@ const moment = require('momentjs');
    methods:{
      handleClick(){
        switch (this.selected) {
-         case '主页':
+         case '我的':
          this.$router.push('/profile')
          break;
          case '任务':
          this.$router.push('/task')
          break;
-         case '排行':
-         this.$router.push('/rank')
+         case '集市':
+         this.$router.push('/market')
          break;
          case '卡包':
          this.$router.push('/cardBag')
@@ -178,6 +179,9 @@ nav i{
     -webkit-overflow-scrolling: touch;
     background-color: #eee;
 }*/
+nav{
+  text-align: center;
+}
 .init{
   height:100%;
   width:100%;

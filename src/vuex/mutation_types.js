@@ -26,6 +26,12 @@ export const GOT_STH = 'GOT_STH';
 
 export const SET_USER_CARDS = 'SET_USER_CARDS';
 export const SET_USER_LOTTERY = 'SET_USER_LOTTERY';
+export const SET_CARD_POOL = 'SET_CARD_POOL';
+export const ADD_USER_LOTTERY = 'ADD_USER_LOTTERY';
+export const ADD_USER_CARD = 'ADD_USER_CARD';
+export const MINUS_USER_LOTTERY = 'MINUS_USER_LOTTERY';
+
+
 
 export const SET_ACTIVR_NEWS = 'SET_ACTIVR_NEWS';
 export const SET_NEWS = 'SET_NEWS';

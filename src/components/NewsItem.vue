@@ -36,7 +36,7 @@
 
 <style scoped>
 .news-item {
-  padding: 1.2rem 2rem;
+  padding: 1.5rem 2rem;
   font-size: 1rem;
   border-radius:5px;
   color: #fff;

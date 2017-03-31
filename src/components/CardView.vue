@@ -1,7 +1,7 @@
 <template>
 <div class="jw-card">
-    <img :src="cardData.card.file.URL+'?imageView2/2/w/350/h/540/q/75|imageslim'" alt="" width="100%"></img>
-    <qrcanvas :options="{data:cardData.card._id}"></qrcanvas>
+    <img :src="cardData.file.URL+'?imageView2/2/w/350/h/540/q/75|imageslim'" alt="" width="100%"></img>
+    <qrcanvas :options="{data:cardData._id}"></qrcanvas>
 </div>
 </template>
 <style scoped>

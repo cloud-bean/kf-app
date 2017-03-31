@@ -6,6 +6,7 @@
           <div class="slogan">{{user.option.slogan || 'Learning with joy, achieving with will.'}}</div>
 
     </div>
+   
     <div class="info Grid">
       <div class="item Cell -4of12">
         <div class="detailInfo">
@@ -32,6 +33,9 @@
         </div>
       </div>
     </div>
+   
+
+
   </div>
 
 
@@ -39,34 +43,14 @@
 </template>
 
 <script>
-// import Exp from './Expbar';
-import util from '../config/util';
-// const wx = require('weixin-js-sdk');
 
     export default{
-      props:['user'],
+      props:['user','rank'],
       components:{
-        // Exp
+
       },
       methods:{
-        level(exp){
-           const lvl = util.getLevel(exp);
-           console.log(lvl);
-           return lvl;
-        },
-        // share(){
-        //   wx.onMenuShareTimeline({
-        //     title: '哈哈', // 分享标题
-        //     link: 'http://baidu.com', // 分享链接
-        //     imgUrl: '../../static/background.jpg', // 分享图标
-        //     success: function () {
-        //       // 用户确认分享后执行的回调函数
-        //       alert('already share');
-        //     },
-        //     cancel: function () {
-        //       // 用户取消分享后执行的回调函数
-        //     }
-        //   });
+
       },
     }
 </script>
@@ -156,11 +140,15 @@ import util from '../config/util';
   background-color:#26a2ff;
   padding: 0.8rem 0;
   width: 100%;
-  height: 12rem;
+  height: 10rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+.rank{
+  background-color: #eeeeff;
+  color: #555555;
 }
 </style>
