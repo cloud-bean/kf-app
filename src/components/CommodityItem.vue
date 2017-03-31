@@ -2,7 +2,7 @@
 
   <div class="img-cell Grid -middle -around">
     <div class="img Cell -1of12 Grid -center -middle">
-        <img :src="boximg" alt="" class=""/>
+        <img :src="img" alt="" class=""/>
     </div>
     <div class="Cell -6of12 Grid">
         <div class="title Cell -12of12">
@@ -39,14 +39,14 @@ import { mapState, mapActions } from 'vuex';
       },
       data(){
         return {
-         boximg,
+         img:boximg,
         }
       },
       computed:mapState({
         money:state => state.profile.user.option.goldToken,
       }),
-      created(){
-
+      mounted(){
+        this.img = this.commodityData.file.URL||boximg;
       },
       methods: {
        async handleBuy(){

@@ -9,7 +9,7 @@
       <div class="Cell card-content -12of12">
         {{cardData.card.playScript}}
       </div>-->
-      <img :src="cardData.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12" v-bind:class="{lock}"></img>
+      <img v-lazy="cardData.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12 image" v-bind:class="{lock}"></img>
   <!--</div>-->
 
      <div class="tip"> {{cardData.name}} </div>
@@ -32,7 +32,7 @@
   /*position: absolute;*/
   top: 3rem;
   color: #fff;
-  font-size: 0.5rem;
+  font-size: 1rem;
   padding: 0.3rem 0.2rem;
   text-align: center;
   width: 100%;
@@ -41,6 +41,15 @@
 }
 img{
   border: 2px solid #aaaaaa;
+}
+image {
+  display: block;
+  width: 100%;
+}
+image[lazy=loading] {
+  width: 100px;
+  height: 152px;
+  margin: auto;
 }
 </style>
 <script>

@@ -73,8 +73,8 @@ const actions = {
         let data = {};
         try {
             data = await api.getLotteryCard(lotteryId)
-            commit(types.ADD_USER_CARD, data.card);
-            commit(types.MINUS_USER_LOTTERY, index);
+            // commit(types.ADD_USER_CARD, data.card);
+            // commit(types.MINUS_USER_LOTTERY, index);
         } catch (err) {
             console.log(err);
         }

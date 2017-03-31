@@ -13,8 +13,6 @@
     <div class="icon Cell -1of12">
     <i class="fa fa-caret-right"/>
     </div>
-
-
 </div>
 
 
@@ -30,12 +28,12 @@
       },
       data(){
         return {
-         
-          
+
+
         }
       },
       created(){
-       
+
       },
       methods: {
        handleClick(){
@@ -52,12 +50,12 @@
     background-color: #eeeeee;
     width: 95%;
     margin: 0 auto;
-    /*padding: .2rem .2rem;*/
-    box-shadow:0 0 2px rgba(0, 0, 0, .5); 
+    padding: .3rem .8rem;
+    box-shadow:0 0 2px rgba(0, 0, 0, .5);
 }
 .img{
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   /*box-shadow:0px 0px 2px #555555;*/
 }
 .title{

@@ -5,7 +5,7 @@
         <img :src="boximg" alt="" class=""/>
     </div>
     <div class="title Cell -12of12 ">
-        <!-- {{lotteryData.cardPool.name}} -->
+        {{lotteryData.cardPool.name}}
     </div>
 </div>
 </template>
@@ -21,12 +21,13 @@ import { mapState, mapActions } from 'vuex';
       },
       data(){
         return {
-         boximg,
-
+          boximg
         }
       },
-      created(){
-
+      computed:{
+        lotteryImg(){
+          return this.lotteryData.cardPool.file.URL||boximg;
+        }
       },
       methods: {
         ...mapActions([
@@ -37,7 +38,7 @@ import { mapState, mapActions } from 'vuex';
         const data = await this.openBox({lotteryId:this.lotteryData._id,index:this.index});
         if(!data){
            Toast({
-             message: `很遗憾没有抽到`,
+             message: `您的宝箱里没有卡`,
              position: 'middle',
              duration: 2000
            });
