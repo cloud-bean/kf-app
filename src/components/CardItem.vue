@@ -11,7 +11,7 @@
       </div>-->
       <!-- <div class="type"> {{cardData.name}} </div> -->
 
-      <img v-lazy="cardData.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12 image" v-bind:class="{lock}"></img>
+      <img v-lazy="cardData.file.URL+'?imageView2/2/w/160/h/200/q/100|imageslim'" alt="" class="card-img Cell -12of12 image" v-bind:class="{lock}"></img>
   <!--</div>-->
       <!-- <div class="cata"> {{cardData.name}} </div> -->
      <!-- <div class="tip"> {{cardData.name}} </div> -->
