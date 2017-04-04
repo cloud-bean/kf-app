@@ -2,7 +2,7 @@
 
   <div class="img-cell Grid -middle -around">
     <div class="img Cell -1of12 Grid -center -middle">
-        <img :src="img" alt="" class=""/>
+        <img :src="!!(this.commodityData.file)?this.commodityData.file.URL:boximg" alt="" class=""/>
     </div>
     <div class="Cell -6of12 Grid">
         <div class="title Cell -12of12">
@@ -39,14 +39,14 @@ import { mapState, mapActions } from 'vuex';
       },
       data(){
         return {
-         img:boximg,
+         boximg,
         }
       },
       computed:mapState({
         money:state => state.profile.user.option.goldToken,
       }),
       mounted(){
-        this.img = this.commodityData.file.URL||boximg;
+        // this.img = this.commodityData.file.URL||boximg;
       },
       methods: {
        async handleBuy(){
@@ -77,7 +77,8 @@ import { mapState, mapActions } from 'vuex';
     width: 95%;
     margin: 0 auto;
     padding: .5rem .2rem;
-    box-shadow:0 0 2px rgba(0, 0, 0, .5);
+    border: 1px solid #ccc;
+    /*box-shadow:0 0 2px rgba(0, 0, 0, .5);*/
 }
 .img{
   width: 3rem;

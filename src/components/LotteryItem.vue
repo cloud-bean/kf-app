@@ -2,7 +2,7 @@
 
 <div class="img-cell Grid -middle -center"  @click="handleClick">
     <div class="img Cell -12of12">
-        <img :src="boximg" alt="" class=""/>
+        <img :src="lotteryData.cardPool.file?lotteryData.cardPool.file.URL:boximg" alt="" class=""/>
     </div>
     <div class="title Cell -12of12 ">
         {{lotteryData.cardPool.name}}
@@ -25,9 +25,6 @@ import { mapState, mapActions } from 'vuex';
         }
       },
       computed:{
-        lotteryImg(){
-          return this.lotteryData.cardPool.file.URL||boximg;
-        }
       },
       methods: {
         ...mapActions([

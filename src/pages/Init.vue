@@ -61,12 +61,12 @@ export default {
 
         wx.config(this.jsConfig);
         await this.getUserRecords();
-        await this.getTip();
+        // await this.getTip();
         await this.getNews();
         await this.getUserInfo(this.userid)
         await this.getRanks(1);
-        await this.getUserLottery();
-        await this.getUserCards();
+        // await this.getUserLottery();
+        // await this.getUserCards();
 
         if(this.user.option.phone){
           this.setLogin(true);

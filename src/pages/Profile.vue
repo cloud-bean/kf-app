@@ -5,7 +5,7 @@
 <div class="">
   <div class="profile">
     <info :user="user"></info>
-    
+
     <!--<div class="tip">
       <tips :tip="tip"></tips>
     </div>-->
@@ -14,7 +14,7 @@
     </div> -->
 
     <news-slider :news="news" :news-detail="newsDetail"></news-slider>
-<!--  
+<!--
       <mt-cell title="王者排行" label="快追上你的对手吧" is-link to="/rank">
        <mt-badge size="normal">第{{myRank.rankIndex}}名</mt-badge>
         <i class="fa fa-users" slot="icon" aria-hidden="true" ></i>
@@ -22,12 +22,12 @@
       <mt-cell title="背包系统" label="拥有的所有物品" is-link to="/cardBag">
         <i class="fa fa-eercast" slot="icon" aria-hidden="true" ></i>
      </mt-cell>-->
-     
+
      <div class="subItem">
      <img-cell :title-img="rankImg" title="王者排行" :subtitle="`排在第 ${myRank.rankIndex} 名`" to="/rank"></img-cell>
      </div>
      <div class="subItem">
-     <img-cell :title-img="bagImg" title="背包系统" :subtitle="`拥有 ${cards.length} 张卡牌`" to="/cardBag"></img-cell>
+     <img-cell :title-img="bagImg" title="背包系统" subtitle="宝箱、卡牌" to="/cardBag"></img-cell>
      </div>
 </div>
 

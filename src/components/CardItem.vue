@@ -9,46 +9,43 @@
       <div class="Cell card-content -12of12">
         {{cardData.card.playScript}}
       </div>-->
+      <!-- <div class="type"> {{cardData.name}} </div> -->
+
       <img v-lazy="cardData.file.URL+'?imageView2/2/w/157/h/200/q/75|imageslim'" alt="" class="card-img Cell -12of12 image" v-bind:class="{lock}"></img>
   <!--</div>-->
-
-     <div class="tip"> {{cardData.name}} </div>
+      <!-- <div class="cata"> {{cardData.name}} </div> -->
+     <!-- <div class="tip"> {{cardData.name}} </div> -->
 </div>
 </template>
 <style scoped>
 .jw-card{
-  height: auto;
-  overflow:auto;
   margin: .3rem;
-  position: relative;
   /*background-color: #eee;*/
   /*box-shadow:0px 0px 10px #555555;*/
   /*padding: 0rem 1rem;*/
-
-
+  box-shadow:0px 0px 8px rgba(0,0,255,.5);
 }
+
 .tip{
   text-align: center;
   /*position: absolute;*/
-  top: 3rem;
-  color: #fff;
+  /*top: 3rem;*/
+  color: #000;
   font-size: 1rem;
-  padding: 0.3rem 0.2rem;
+  padding: 0.2rem 0.2rem;
   text-align: center;
   width: 100%;
-  background: #555555;
+  background: #ccc;
   /*margin-top: -3rem;*/
 }
 img{
-  border: 2px solid #aaaaaa;
+  /*border: 2px solid #aaaaaa;*/
 }
-image {
-  display: block;
-  width: 100%;
-}
-image[lazy=loading] {
+
+img[lazy=loading] {
   width: 100px;
-  height: 152px;
+  height: 154px;
+  background-image: url('../assets/cardLoading.png');
   margin: auto;
 }
 </style>

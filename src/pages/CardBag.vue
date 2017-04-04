@@ -7,7 +7,7 @@
 <div class="title" v-if="lotterys.length!=0">我的宝箱</div>
 <div class="Grid -left bag-content">
 
-  <div class="Cell -4of12 card-item" v-for="(lottery,index) in lotterys">
+  <div class="Cell -4of12 card-item" v-for="(lottery,index) in lotterys" if="lotterys">
         <lottery-item :lottery-data="lottery" :open-box="openLotteryBox" :index="index"></lottery-item>
   </div>
 </div>
@@ -99,9 +99,13 @@ export default {
 
 <style scoped>
 .title{
-  padding-left:1rem;
+  margin: 0.5rem 1.2rem;
+  padding:.3rem;
   /*border-bottom: 1px solid #eeeeff;*/
-  /*background-color: #eee;*/
+  background-color: #eee;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid #ccc;
 
 }
 .info-card{
@@ -115,7 +119,7 @@ export default {
 
 }
 .bag-content{
-  padding: 0.5rem;
+  margin: 0 0.5rem;
   height: auto;
   /*background-color: #eee;*/
 }
