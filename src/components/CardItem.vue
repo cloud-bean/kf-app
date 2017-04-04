@@ -11,7 +11,7 @@
       </div>-->
       <!-- <div class="type"> {{cardData.name}} </div> -->
 
-      <img v-lazy="cardData.file.URL+'?imageView2/2/w/160/h/200/q/100|imageslim'" alt="" class="card-img Cell -12of12 image" v-bind:class="{lock}"></img>
+      <img v-lazy="cardData.file.URL+'?imageView2/2/h/150/q/100|imageslim'" alt="" class="card-img Cell -12of12 image" v-bind:class="{lock}"></img>
   <!--</div>-->
       <!-- <div class="cata"> {{cardData.name}} </div> -->
      <!-- <div class="tip"> {{cardData.name}} </div> -->
@@ -43,8 +43,8 @@ img{
 }
 
 img[lazy=loading] {
-  width: 100px;
-  height: 154px;
+  /*width: 100px;*/
+  height: 150px;
   background-image: url('../assets/cardLoading.png');
   margin: auto;
 }

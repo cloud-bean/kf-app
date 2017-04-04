@@ -1,15 +1,15 @@
 <template>
 <div class="jw-card">
-    <img v-lazy="cardData.file.URL+'?imageView2/2/w/350/h/540/q/100|imageslim'" alt="" width="100%"></img>
+    <img v-lazy="cardData.file.URL+'?imageView2/2/h/540/q/100|imageslim'" alt="" width="100%"></img>
     <qrcanvas :options="{data:cardData._id}"></qrcanvas>
 </div>
 </template>
 <style scoped>
 img[lazy=loading] {
-  width: 350px;
+  /*width: 350px;*/
   height: 540px;
   background-image: url('../assets/cardLoading.png');
-  background-size: cover;
+  background-size:contain;
   margin: auto;
 }
 /*.jw-card{
