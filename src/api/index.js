@@ -32,10 +32,10 @@ export const getUserInfo = (userid) =>
                 reject(err);
             });
     });
-
-export const getTaskList = (page) =>
+// page=${page}&limit=${config.task.limit}
+export const getTaskList = (state) =>
     new Promise((resolve, reject) => {
-        request.get(`${bigServer}/tasks?page=${page}&limit=${config.task.limit}`)
+        request.get(`${bigServer}/tasks?filter=${state}`)
             .set('Authorization', `Bearer ${store.state.accessToken}`)
             .then((result) => {
                 const tasks = result.body.data.tasks;

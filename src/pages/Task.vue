@@ -3,9 +3,9 @@
 
   <!-- <info :user="user"></info> -->
   <div class="blue-bg">
-    已完成
+    本周完成
     <div class="task-info">
-      {{taskQuantityInfo.totalDone}} / {{taskQuantityInfo.totalCount}}<span class="grey-small"></span>
+      {{taskQuantityInfo.totalDone}} <span class="grey-small">个任务</span>
 
     </div>
   </div>
@@ -24,11 +24,11 @@
   </div>-->
   <div class="button-area">
   <mt-navbar v-model="selected">
-    <mt-tab-item id="1">
+    <mt-tab-item id="1" @click.native="showTaskProcess">
      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
       进行中
     </mt-tab-item>
-    <mt-tab-item id="2">
+    <mt-tab-item id="2" @click.native="showTaskDone">
       <i class="fa fa-check-circle" aria-hidden="true"></i>
       已完成
       </mt-tab-item>
@@ -39,11 +39,12 @@
     <p v-if="tasks.length==0" class="no-task">
       暂无任务
     </p>
-    <div
+    <!--<div
       v-infinite-scroll="loadMoreTask"
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="10"
-      >
+      >-->
+      <div>
       <div v-for="(task, index) in tasks">
         <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
       </div>
@@ -98,7 +99,7 @@
         ]),
         async init(){
           // if(this.tasks.length==0){
-          //  await this.getTaskList(this.page)
+           await this.getTaskList();
           // }
         },
         handleClick(index){
@@ -106,6 +107,12 @@
           this.taskDetail(index);
           this.$router.push('/taskDetail');
         },
+        async showTaskProcess(){
+           await this.getTaskList('process')
+        },
+        async showTaskDone(){
+           await this.getTaskList('done')
+        }
         // scan(){
         //   wx.onMenuShareTimeline({
         //     title: 'joywill', // 分享标题
@@ -119,25 +126,25 @@
         //     }
         //   });
         // },
-        loadMoreTask(){
-          if(this.hasMore){
-            this.loading = true;
-            this.getTaskList(this.page)
-            .then(res => {
-              if(res.length < 10){
-                this.hasMore = false;
-              }
-              this.loading = false;
-            });
-          }
+        // loadMoreTask(){
+        //   if(this.hasMore){
+        //     this.loading = true;
+        //     this.getTaskList(this.page)
+        //     .then(res => {
+        //       if(res.length < 10){
+        //         this.hasMore = false;
+        //       }
+        //       this.loading = false;
+        //     });
+        //   }
            
-        },
+        // },
       },
       computed: {
         ...mapState({
           tasks: state => state.task.tasks,
           taskQuantityInfo: state => state.task.taskQuantityInfo,
-          page: state => state.task.page,
+          // page: state => state.task.page,
         }),
         progress(){
           return 100*this.taskQuantityInfo.totalDone/this.taskQuantityInfo.totalCount;

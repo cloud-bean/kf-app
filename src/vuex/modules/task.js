@@ -6,7 +6,7 @@ const state = {
     tasks: [],
     activeTask: {},
     activeComments: [],
-    page: 1,
+    // page: 1,
 };
 
 const mutations = {
@@ -26,22 +26,22 @@ const mutations = {
         state.activeTask = task;
     },
     [types.SET_TASKS](state, tasks) {
-        state.page++;
-        state.tasks = state.tasks.concat(tasks);
-        state.tasks.sort((a, b) => {
-            if (new Date(a.expireTime) > new Date(b.expireTime)) {
-                return -1;
-            } else {
-                return 1;
-            }
-        });
+        // state.page++;
+        state.tasks = tasks;
+        // state.tasks.sort((a, b) => {
+        //     if (new Date(a.expireTime) > new Date(b.expireTime)) {
+        //         return -1;
+        //     } else {
+        //         return 1;
+        //     }
+        // });
     },
 };
 
 const actions = {
-    async getTaskList({ commit }, page) {
+    async getTaskList({ commit }, state = "process") {
         commit(types.FETCH_STH);
-        const { tasks, taskQuantity } = await api.getTaskList(page);
+        const { tasks, taskQuantity } = await api.getTaskList(state);
         const { taskDoneQuantity } = await api.getTaskDoneQuantity();
         const taskinfo = {
             totalDone: taskDoneQuantity,
@@ -52,6 +52,32 @@ const actions = {
         commit(types.GOT_STH);
         return tasks;
     },
+    // async getTaskListDone({ commit }, state = "done") {
+    //     commit(types.FETCH_STH);
+    //     const { tasks, taskQuantity } = await api.getTaskList(state);
+    //     const { taskDoneQuantity } = await api.getTaskDoneQuantity();
+    //     const taskinfo = {
+    //         totalDone: taskDoneQuantity,
+    //         totalCount: taskQuantity,
+    //     };
+    //     commit(types.SET_TASK_QUANTITY_INFO, taskinfo);
+    //     commit(types.SET_TASKS, tasks);
+    //     commit(types.GOT_STH);
+    //     return tasks;
+    // },
+    // async getTaskList({ commit }, page) {
+    //     commit(types.FETCH_STH);
+    //     const { tasks, taskQuantity } = await api.getTaskList(page);
+    //     const { taskDoneQuantity } = await api.getTaskDoneQuantity();
+    //     const taskinfo = {
+    //         totalDone: taskDoneQuantity,
+    //         totalCount: taskQuantity,
+    //     };
+    //     commit(types.SET_TASK_QUANTITY_INFO, taskinfo);
+    //     commit(types.SET_TASKS, tasks);
+    //     commit(types.GOT_STH);
+    //     return tasks;
+    // },
     taskDetail({ commit, state }, index) {
         commit(types.FETCH_STH);
         const tasks = state.tasks;

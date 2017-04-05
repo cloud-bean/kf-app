@@ -154,6 +154,8 @@ nav i{
   padding: 0;
   margin:0;
   padding-bottom: 4rem;
+  height: 100%;
+
 
 }
 
@@ -179,6 +181,9 @@ nav i{
     -webkit-overflow-scrolling: touch;
     background-color: #eee;
 }*/
+.content{
+  height: 100%;
+}
 nav{
   text-align: center;
 }

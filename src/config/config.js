@@ -15,7 +15,7 @@ export default {
         testRedirect: 'http://localhost:8080?code=123',
     },
     secret: {
-        accessToken: 'd5fbea377d103676f4710104f525ee90bf53e9cebfc1029cc1b8857e3b7c99dc',
+        accessToken: 'f1dbf847ddedb710f39419799c2048f82769794f8c829b129182f7ecd3b23d0c',
         //  userid: '58306c044238e8014a52ce05',
         // userid:'583a8905bb1a619b3b2b1d34',//张彦云
         //  userid:'581717002a2d3adc2032206e',//崔

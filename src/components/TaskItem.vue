@@ -7,7 +7,7 @@
       <div class="task-content">
         <!-- <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div> -->
         <div class="title">{{taskdata.name}}</div>
-        <div class="gery">{{taskdata.expireTime | dateFormat1}} # <span class="gery">{{taskdata.type}}</span></div>
+        <div class="gery">{{taskdata.expireTime | dateFormat}} # <span class="gery">{{taskdata.type}}</span></div>
 
 
       </div>
