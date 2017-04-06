@@ -11,11 +11,25 @@
           <div v-html="tansMarkdown(task.description)">
 
           </div>
-          <div class="summary">
-          <div v-html="tansMarkdown(task.summary)" v-if="task.isDone">
+          <div v-if="task.audioFile || task.videoFile">
+          <h1>任务素材</h1>
+          <div class="play-video" v-if="task.videoFile">
+          <video  :src="task.videoFile.URL" controls="controls" >
+            您的浏览器不支持 video 标签。
+          </video>
+          </div>
+          <div class="play-audio"  v-if="task.audioFile">
+           <audio :src="task.audioFile.URL" controls="controls">
+             您的浏览器不支持 audio 标签。
+           </audio>
+          </div>
+          </div>
+          <div class="summary" v-if="task.isDone">
+          <div v-html="tansMarkdown(task.summary)" >
 
           </div>
           </div>
+          
 
           <div class="task-footer">
             <head-list :user-list="task.taskDoneUsers"></head-list>
@@ -191,8 +205,29 @@ export default {
 }
 .summary{
   background-color: #eee;
+  padding: .5rem;
+  border: 1px solid #ccc;
+}
+.play-audio{
+  /*border: 1px solid #ccc;*/
+  margin-bottom: .5rem;
+  height: 2rem;
+}
+.play-audio audio{
+  height:100%;
+  width: 100%;
 }
 
+.play-video{
+  height:10rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  margin-bottom: .5rem;
+}
+.play-video video{
+  height:100%;
+  width: 100%;
+}
 /*.image-content{
 position: absolute;
 z-index: 1;
@@ -231,8 +266,5 @@ overflow: hidden;
   text-align: center;
   padding: 0.1rem 0;
 }*/
-h1 {
-  color: red;
-/*margin: 0 auto;*/
-}
+
 </style>

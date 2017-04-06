@@ -1,12 +1,10 @@
 <template>
   <div class="" >
     <div class="userhead Grid -between">
-        <div class="Cell -4of12">
-          <img :src="user.profileImageURL" alt="" class="avatar"/>
-        </div>
+       
         <div class="Cell -4of12">
             <div class="detailInfo">
-                <div> 悦币 {{user.option.goldToken}}</div>
+                <div> 剩余悦币 {{user.option.goldToken}}</div>
             </div>
         </div>
         <!-- <div class="Cell -4of12">
@@ -58,7 +56,10 @@
   color: #fff;
 }
 
+.detailInfo{
+  font-size: 1.2rem;
 
+}
 .avatar {
   width: 3rem;
   height: 3rem;

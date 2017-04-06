@@ -1,6 +1,6 @@
 <template>
-
-  <div class="task-item" v-bind:class="{mask:expire}">
+<!--v-bind:class="{mask:expire}"-->
+  <div class="task-item" >
     <div class="left"  v-bind:class="[type]">
     </div>
     <div class="right">

@@ -29,13 +29,20 @@ const mutations = {
     [types.SET_TASKS](state, tasks) {
         state.page++;
         state.tasks = state.tasks.concat(tasks);
-        // state.tasks.sort((a, b) => {
-        //     if (new Date(a.expireTime) > new Date(b.expireTime)) {
-        //         return -1;
-        //     } else {
-        //         return 1;
-        //     }
-        // });
+        if (state.selected == '1') {
+            state.tasks.sort((a, b) => {
+                if (new Date(a.expireTime) > new Date(b.expireTime)) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            });
+        } else {
+            state.tasks = state.tasks.filter((item) => {
+                if (item.isDone) return item;
+            });
+        }
+
     },
     [types.RESET_TASKS](state) {
         state.page = 1;

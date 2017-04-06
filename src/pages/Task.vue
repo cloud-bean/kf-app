@@ -30,7 +30,7 @@
     </mt-tab-item>
     <mt-tab-item id="2" @click.native="showAllTask">
       <i class="fa fa-check-circle" aria-hidden="true"></i>
-      已完成
+      近期完成
       </mt-tab-item>
     </mt-navbar>
   </div>
@@ -133,7 +133,6 @@
         //   });
         // },
         loadMoreTask(){
-          console.log('loadmore');
           if(this.selected=='1'){
           
           }else if(this.selected=='2'){
@@ -185,7 +184,7 @@
   margin-top: 1rem;
 }
 .tasklist{
-  font-size: 0.5rem;
+  font-size: 1rem;
 }
 .no-task{
   margin-top: 1rem;
