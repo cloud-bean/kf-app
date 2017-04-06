@@ -39,12 +39,12 @@
     <p v-if="tasks.length==0" class="no-task">
       暂无任务
     </p>
-    <div
+    <!--<div
       v-infinite-scroll="loadMoreTask"
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="10"
-      >
-      <!--<div>-->
+      >-->
+      <div>
       <div v-for="(task, index) in tasks">
         <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
       </div>
