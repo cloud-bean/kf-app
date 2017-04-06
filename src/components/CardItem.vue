@@ -1,5 +1,5 @@
 <template>
-<div class="jw-card Grid -middle -center" >
+<div class="jw-card Grid -middle -center"  v-bind:class="[transType]">
   <!--<div class="card-color">
   </div>
   <div class="card-desc Grid -center -middle">-->
@@ -9,9 +9,9 @@
       <div class="Cell card-content -12of12">
         {{cardData.card.playScript}}
       </div>-->
-      <!-- <div class="type"> {{cardData.name}} </div> -->
+      <!--<div class="type"> {{cardData.name}} </div> -->
 
-      <img v-lazy="cardData.file.URL+'?imageView2/2/h/150/q/100|imageslim'" alt="" class="card-img Cell -12of12 image" v-bind:class="{lock}"></img>
+      <img v-lazy="cardData.file.URL+'?imageView2/2/h/200/q/100|imageslim'" alt="" class="card-img Cell -12of12 image" v-bind:class="{lock}"></img>
   <!--</div>-->
       <!-- <div class="cata"> {{cardData.name}} </div> -->
      <!-- <div class="tip"> {{cardData.name}} </div> -->
@@ -23,8 +23,10 @@
   /*background-color: #eee;*/
   /*box-shadow:0px 0px 10px #555555;*/
   /*padding: 0rem 1rem;*/
-  box-shadow:0px 0px 8px rgba(0,0,255,.5);
+  position:relative;
+  /*box-shadow:0px 0px 8px rgba(0,0,255,.5);*/
 }
+
 
 .tip{
   text-align: center;
@@ -48,6 +50,28 @@ img[lazy=loading] {
   background-image: url('../assets/cardLoading.png');
   margin: auto;
 }
+
+.spcial{
+  box-shadow:0px 0px 10px rgba(0,0,255,.8);
+}
+.forge{
+  box-shadow:0px 0px 10px rgba(0,255,255,.8);
+}
+.addon{
+  box-shadow:0px 0px 10px rgba(255,0,255,.8);
+}
+.tech{
+  box-shadow:0px 0px 10px rgba(0,255,0,.8);
+}
+.assist{
+  box-shadow:0px 0px 10px rgba(255,255,0,.8);
+}
+.def{
+  box-shadow:0px 0px 10px rgba(100,255,0,.8);
+}
+.kill{
+  box-shadow:0px 0px 10px rgba(0,0,100,.8);
+}
 </style>
 <script>
 
@@ -61,15 +85,23 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
+      type:'tech',
     };
   },
   props:['cardData'],
-  mounted() {
-  },
   methods: {
-
+ 
+  },
+  created(){
+    // this.type = this.transType(this.cardData.category);
   },
   computed:{
+     transType(){
+          const taskType = ['特殊类','熔炉类','技能类','增益类','辅助类','防御类','伤害类'];
+          const typeLogo = ['spcial','forge','tech','addon','assist','def','kill'];
+          const index = taskType.indexOf(this.cardData.category);
+          return  typeLogo[index];
+      }
     // ...mapState({
     //   user: state => state.profile.user
     // }),

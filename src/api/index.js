@@ -46,6 +46,19 @@ export const getTaskList = (state) =>
                 reject(err);
             });
     });
+export const getAllTaskList = (page) =>
+    new Promise((resolve, reject) => {
+        request.get(`${bigServer}/allTasks?page=${page}&limit=${config.task.limit}`)
+            .set('Authorization', `Bearer ${store.state.accessToken}`)
+            .then((result) => {
+                const tasks = result.body.data;
+                // const taskQuantity = result.body.data.totalCount;
+                resolve(tasks);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
 
 export const getTaskDoneQuantity = () =>
     new Promise((resolve, reject) => {

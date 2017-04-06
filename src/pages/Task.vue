@@ -3,11 +3,11 @@
 
   <!-- <info :user="user"></info> -->
   <div class="blue-bg">
-    本周完成
-    <div class="task-info">
+    任务列表
+    <!--<div class="task-info">
       {{taskQuantityInfo.totalDone}} <span class="grey-small">个任务</span>
 
-    </div>
+    </div>-->
   </div>
   <!--<mt-progress :value="progress" :barHeight='2'>
 
@@ -28,7 +28,7 @@
      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
       进行中
     </mt-tab-item>
-    <mt-tab-item id="2" @click.native="showTaskDone">
+    <mt-tab-item id="2" @click.native="showAllTask">
       <i class="fa fa-check-circle" aria-hidden="true"></i>
       已完成
       </mt-tab-item>
@@ -39,12 +39,12 @@
     <p v-if="tasks.length==0" class="no-task">
       暂无任务
     </p>
-    <!--<div
+    <div
       v-infinite-scroll="loadMoreTask"
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="10"
-      >-->
-      <div>
+      >
+      <!--<div>-->
       <div v-for="(task, index) in tasks">
         <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
       </div>
@@ -81,7 +81,7 @@
           return {
             loading:false,
             hasMore:true,
-            selected:'1',
+            // selected:'1',
           };
       },
       created(){
@@ -96,23 +96,29 @@
         ...mapActions([
           'getTaskList',
           'taskDetail',
+          'getAllTaskList',
+          'cleanTaskList',
+          'changeNavbar',
         ]),
         async init(){
-          // if(this.tasks.length==0){
+          if(this.tasks.length==0){
            await this.getTaskList();
-          // }
+          }
         },
         handleClick(index){
-          console.log(index);
           this.taskDetail(index);
           this.$router.push('/taskDetail');
         },
         async showTaskProcess(){
-           await this.getTaskList('process')
+          this.changeNavbar('1')
+          this.cleanTaskList();
+          await this.getTaskList('process');
         },
-        async showTaskDone(){
-           await this.getTaskList('done')
-        }
+        async showAllTask(){
+          this.changeNavbar('2')
+          this.cleanTaskList();
+          await this.getAllTaskList(this.page);
+        },
         // scan(){
         //   wx.onMenuShareTimeline({
         //     title: 'joywill', // 分享标题
@@ -126,29 +132,38 @@
         //     }
         //   });
         // },
-        // loadMoreTask(){
-        //   if(this.hasMore){
-        //     this.loading = true;
-        //     this.getTaskList(this.page)
-        //     .then(res => {
-        //       if(res.length < 10){
-        //         this.hasMore = false;
-        //       }
-        //       this.loading = false;
-        //     });
-        //   }
+        loadMoreTask(){
+          console.log('loadmore');
+          if(this.selected=='1'){
+          
+          }else if(this.selected=='2'){
+
+             if(this.hasMore){
+            this.loading = true;
+            this.getAllTaskList(this.page)
+            .then(res => {
+              if(res.length < 20){
+                this.hasMore = false;
+              }
+              this.loading = false;
+            });
+          }
+
+          }
+         
            
-        // },
+        },
       },
       computed: {
         ...mapState({
           tasks: state => state.task.tasks,
           taskQuantityInfo: state => state.task.taskQuantityInfo,
-          // page: state => state.task.page,
+          page: state => state.task.page,
+          selected: state => state.task.selected,
         }),
-        progress(){
-          return 100*this.taskQuantityInfo.totalDone/this.taskQuantityInfo.totalCount;
-        }
+        // progress(){
+        //   return 100*this.taskQuantityInfo.totalDone/this.taskQuantityInfo.totalCount;
+        // }
       }
       // vuex: {
       //   getters: {
@@ -189,7 +204,7 @@
   color: #ffffff;
   background-color: #26a2ff;
   padding: 1rem;
-  font-size: 0.5rem;
+  font-size: 1rem;
 }
 .task-info{
   text-align: center;

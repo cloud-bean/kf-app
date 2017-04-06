@@ -1,6 +1,6 @@
 <template>
 
-<div class="img-cell Grid -middle -center"  @click="handleClick">
+<div class="img-cell Grid -middle -center" @click="handleClick">
     <div class="img Cell -12of12">
         <img :src="lotteryData.cardPool.file?lotteryData.cardPool.file.URL:boximg" alt="" class=""/>
     </div>
@@ -67,13 +67,11 @@ import { mapState, mapActions } from 'vuex';
     /*padding: .2rem .2rem;*/
     /*box-shadow:0 0 2px rgba(0, 0, 0, .5); */
 }
-.img{
-  /*width: 5rem;
-  height: 5rem;*/
-  /*box-shadow:0px 0px 2px #555555;*/
-}
+
 .title{
-    font-size:.8rem;
+    font-size:.6rem;
+    text-align: center;
+
 }
 
 </style>

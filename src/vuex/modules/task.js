@@ -4,9 +4,10 @@ import * as api from '../../api';
 const state = {
     taskQuantityInfo: {},
     tasks: [],
+    selected: '1',
     activeTask: {},
     activeComments: [],
-    // page: 1,
+    page: 1,
 };
 
 const mutations = {
@@ -26,8 +27,8 @@ const mutations = {
         state.activeTask = task;
     },
     [types.SET_TASKS](state, tasks) {
-        // state.page++;
-        state.tasks = tasks;
+        state.page++;
+        state.tasks = state.tasks.concat(tasks);
         // state.tasks.sort((a, b) => {
         //     if (new Date(a.expireTime) > new Date(b.expireTime)) {
         //         return -1;
@@ -36,6 +37,16 @@ const mutations = {
         //     }
         // });
     },
+    [types.RESET_TASKS](state) {
+        state.page = 1;
+        state.tasks = [];
+    },
+    [types.CHANGE_NAVBAR](state, selected) {
+        state.selected = selected;
+    },
+    // [types.SET_PROCESS_TASKS](state, tasks) {
+    //     state.tasksProcess = tasks;
+    // },
 };
 
 const actions = {
@@ -51,6 +62,19 @@ const actions = {
         commit(types.SET_TASKS, tasks);
         commit(types.GOT_STH);
         return tasks;
+    },
+    async getAllTaskList({ commit }, page) {
+        commit(types.FETCH_STH);
+        const tasks = await api.getAllTaskList(page);
+        commit(types.SET_TASKS, tasks);
+        commit(types.GOT_STH);
+        return tasks;
+    },
+    cleanTaskList({ commit }) {
+        commit(types.RESET_TASKS);
+    },
+    changeNavbar({ commit }, selected) {
+        commit(types.CHANGE_NAVBAR, selected);
     },
     // async getTaskListDone({ commit }, state = "done") {
     //     commit(types.FETCH_STH);

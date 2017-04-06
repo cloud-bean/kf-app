@@ -15,7 +15,7 @@ export default {
         testRedirect: 'http://localhost:8080?code=123',
     },
     secret: {
-        accessToken: 'f1dbf847ddedb710f39419799c2048f82769794f8c829b129182f7ecd3b23d0c',
+        accessToken: 'c07d69b213fc33938eb16bb7442e528cde617ab873ebcea1e3345ce2b7006b4a',
         //  userid: '58306c044238e8014a52ce05',
         // userid:'583a8905bb1a619b3b2b1d34',//张彦云
         //  userid:'581717002a2d3adc2032206e',//崔
@@ -23,7 +23,7 @@ export default {
         userid: '5817407d2a2d3adc2032290e',
     },
     task: {
-        limit: 10,
+        limit: 20,
     },
     rank: {
         limit: 20,

@@ -12,6 +12,9 @@ export const SET_RANK = 'SET_RANK';
 export const LIKE_FRIEND = 'LIKE_FRIEND';
 
 export const SET_TASKS = 'SET_TASKS';
+export const RESET_TASKS = 'RESET_TASKS';
+export const CHANGE_NAVBAR = 'CHANGE_NAVBAR';
+
 export const SET_TASK_QUANTITY_INFO = 'SET_TASK_QUANTITY_INFO';
 export const SET_ACTIVE_TASK = 'SET_ACTIVE_TASK';
 export const ADD_TASK_COMMENT = 'ADD_TASK_COMMENT';
