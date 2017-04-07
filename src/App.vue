@@ -32,7 +32,7 @@
               我的
           </mt-tab-item>
           <mt-tab-item id="任务">
-            <i class="fa fa-calendar-check-o" slot="icon" aria-hidden="true"></i>
+            <i class="fa fa-tasks" slot="icon" aria-hidden="true"></i>
               任务
           </mt-tab-item>
           <mt-tab-item id="集市">
@@ -146,6 +146,7 @@ const moment = require('momentjs');
 nav{
   color:#cccccc;
   font-size: 0.7rem;
+  text-align: center;
 }
 nav i{
   font-size: 1.5rem;
@@ -181,6 +182,7 @@ nav i{
     -webkit-overflow-scrolling: touch;
     background-color: #eee;
 }*/
+
 .content{
   height: 100%;
 }

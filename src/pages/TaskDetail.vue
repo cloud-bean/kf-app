@@ -44,7 +44,7 @@
              <i class="fa fa-commenting" slot="icon"></i>
              讨论任务</mt-button>
          </div>
-         <div class="Cell -5of12">
+         <div class="Cell -5of12" v-if="!task.isDone">
            <mt-button @click="photo" type="primary" size="large" >
               <i class="fa fa-camera " slot="icon"></i>
                拍照提交

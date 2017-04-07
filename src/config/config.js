@@ -15,11 +15,12 @@ export default {
         testRedirect: 'http://localhost:8080?code=123',
     },
     secret: {
-        accessToken: 'c07d69b213fc33938eb16bb7442e528cde617ab873ebcea1e3345ce2b7006b4a',
+        accessToken: '40569602fd214376fccc542dcbdb5e4dd3d788607fe673abeabaef94c44e063c',
         //  userid: '58306c044238e8014a52ce05',
         // userid:'583a8905bb1a619b3b2b1d34',//张彦云
         //  userid:'581717002a2d3adc2032206e',//崔
         // userid: '58cf339913a9ca10230e1d25',
+        // userid: '58306c044238e8014a52ce05',
         userid: '5817407d2a2d3adc2032290e',
     },
     task: {

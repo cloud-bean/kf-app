@@ -73,5 +73,9 @@ import { mapState, mapActions } from 'vuex';
     text-align: center;
 
 }
+.img-cell img {
+    width: 64px;
+    height: 64px;
+}
 
 </style>
