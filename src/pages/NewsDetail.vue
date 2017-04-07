@@ -95,11 +95,11 @@ export default {
 .title{
   font-size: 2rem;
   color: #ccc;
-  padding: 0rem 2rem;
+  padding: 0rem 1.5rem;
 }
 .date{
   color: #ccc;
-  padding: .3rem 2rem;
+  padding: .3rem 1.5rem;
   font-size: .8rem;
 
 }
