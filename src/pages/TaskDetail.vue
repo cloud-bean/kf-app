@@ -38,7 +38,7 @@
        </div>
        <!-- {{task.cardPool.description}} -->
 
-       <div class="button-area Grid -around -middle">
+       <!--<div class="button-area Grid -around -middle">
          <div class="Cell -5of12">
            <mt-button @click="handleComment" type="primary" size="large" >
              <i class="fa fa-commenting" slot="icon"></i>
@@ -52,7 +52,7 @@
          </div>
 
 
-       </div>
+       </div>-->
 
 
 
@@ -61,7 +61,14 @@
  <div v-for="comment in comments" class="message-item">
    <message-item :data="comment"></message-item>
  </div>
+ <div class="mulbutton">
+  <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button>
+ </div>
 
+ <!--<div class="record-panel">
+  <record-panel></record-panel>
+ </div>-->
+ 
 
 </div>
 
@@ -73,6 +80,9 @@
 import HeadList from '../components/HeadList';
 import MessageItem from '../components/MessageItem';
 import MessageInput from '../components/MessageInput';
+import MultiFucButton from '../components/MultiFucButton';
+import RecordPanel from '../components/RecordPanel';
+
 import { mapState, mapActions } from 'vuex';
 import { Toast } from 'mint-ui';
 // import VueMarkdown from 'vue-markdown'
@@ -90,6 +100,8 @@ export default {
     MessageItem,
     HeadList,
     Toast,
+    MultiFucButton,
+    RecordPanel,
   },
   computed: mapState({
       task : state => state.task.activeTask,
@@ -122,6 +134,9 @@ export default {
     handleComment(){
       this.$router.push('/taskComment');
     },
+    handleRecord(){
+      this.$router.push('/recordVoice');
+    },
     // postOrder(serverId){
     //   const data = {
     //     task:this.task._id,
@@ -149,9 +164,9 @@ export default {
       
      
     },
-    record(){
-      wx.startRecord();
-    },
+    // record(){
+    //   wx.startRecord();
+    // },
   },
 }
 </script>
@@ -266,5 +281,20 @@ overflow: hidden;
   text-align: center;
   padding: 0.1rem 0;
 }*/
-
+.mulbutton{
+  position: fixed;
+  right: 3rem;
+  bottom: 5rem;
+}
+.record-panel{
+  position:fixed;
+  margin:auto;
+  left:0; 
+  right:0; 
+  top:8rem; 
+  bottom:0;
+  width:90%;
+  /*height:10rem;*/
+  /*padding: 1rem;*/
+}
 </style>

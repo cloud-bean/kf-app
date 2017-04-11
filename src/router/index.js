@@ -14,6 +14,8 @@ import SuccessPage from '../pages/Success';
 import CardBagPage from '../pages/cardBag';
 import newsDetailPage from '../pages/NewsDetail';
 import marketPage from '../pages/Market';
+import recordVoicePage from '../pages/RecordVoice';
+
 
 // import CardBagPage from '../components/Card';
 
@@ -44,6 +46,7 @@ export default new VueRouter({
         { path: '/cardBag', component: CardBagPage },
         { path: '/newsDetail', component: newsDetailPage },
         { path: '/market', component: marketPage },
+        { path: '/recordVoice', component: recordVoicePage },
 
 
     ],
