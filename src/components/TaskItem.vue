@@ -29,7 +29,7 @@
 
 <script>
 
-const moment = require('momentjs');
+const moment = require('moment');
 // const taskType = ['语音','书写','测验','行为','市场'];
 // const typeLogo = ['speak','write','test','behavior','market'];
     export default{

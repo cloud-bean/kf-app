@@ -126,10 +126,10 @@ const actions = {
         commit(types.SET_ACTIVE_TASK_COMMENTS, await api.getTaskComment(taskId));
         commit(types.GOT_STH);
     },
-    async submitOrder({ commit }, taskId) {
+    async submitOrder({ commit }, { taskId, serverId, type }) {
         commit(types.FETCH_STH);
         try {
-            await api.submitOrder(taskId);
+            await api.submitOrder(taskId, serverId, type);
 
         } finally {
             commit(types.GOT_STH);

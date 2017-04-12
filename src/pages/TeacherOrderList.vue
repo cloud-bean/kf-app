@@ -11,10 +11,9 @@
 </template>
 
 <script>
-// import vs from '../components/Vs';
+
 import orderItem from '../components/OrderItem';
 import util from '../config/util';
-// import {getOrders,orderDetail} from '../vuex/actions';
 import mockdata from '../../test/mock';
 import { mapState, mapActions } from 'vuex';
 

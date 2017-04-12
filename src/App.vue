@@ -93,7 +93,7 @@
 // const co = require('co');
 //
 import { mapState } from 'vuex';
-const moment = require('momentjs');
+const moment = require('moment');
 
  export default {
   //  store,

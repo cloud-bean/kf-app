@@ -81,7 +81,6 @@ import HeadList from '../components/HeadList';
 import MessageItem from '../components/MessageItem';
 import MessageInput from '../components/MessageInput';
 import MultiFucButton from '../components/MultiFucButton';
-import RecordPanel from '../components/RecordPanel';
 
 import { mapState, mapActions } from 'vuex';
 import { Toast } from 'mint-ui';
@@ -101,7 +100,6 @@ export default {
     HeadList,
     Toast,
     MultiFucButton,
-    RecordPanel,
   },
   computed: mapState({
       task : state => state.task.activeTask,
@@ -151,19 +149,44 @@ export default {
     // },
     async photo(){
       try{
-        await this.submitOrder(this.task._id)
-        await this.leaveComment({content:'我上传了作业', taskId:this.task._id})
+        const serverId = await this.chooseUploadImage();
+        await this.submitOrder({taskId:this.task._id, serverId, type:0})
+        await this.leaveComment({content:'我提交了图片答案', taskId:this.task._id})
          Toast({
-        message: '作业提交成功',
-        position: 'middle',
-        duration: 3000
+          message: '作业提交成功',
+          position: 'middle',
+          duration: 3000
        });
       }catch(err){
         console.log(err);
       }
-      
-     
     },
+    chooseUploadImage(){ 
+    return new Promise((resolve, reject) => {
+        wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success(res) {
+                const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                wx.uploadImage({
+                    localId: localIds[0],
+                    isShowProgressTips: 1,
+                    success(result) {
+                        const serverId = result.serverId;
+                        resolve(serverId);
+                    },
+                    cancel() {
+                        reject();
+                    }
+                });
+            },
+            cancel() {
+                reject();
+            }
+        });
+    });
+    }
     // record(){
     //   wx.startRecord();
     // },

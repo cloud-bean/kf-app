@@ -4,7 +4,7 @@
 
 <script>
 const GM = require('g2-mobile');
-const moment = require('momentjs');
+const moment = require('moment');
 
 export default {
   props: ['lineData'],

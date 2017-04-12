@@ -16,8 +16,11 @@
       <mt-button @click="handleClick" type="primary" size="large">提交</mt-button>
 
     </div>
-    <div class="pic">
+    <div class="pic" v-if="activeOrder.files[0].type==0">
       <img :src="localData" width="100%" style="display:block;">
+    </div>
+    <div class="voice" v-if="activeOrder.files[0].type==1" >
+      <i class="fa fa-play-circle-o" @click="playVoice"></i> 
     </div>
 
   </div>
@@ -50,7 +53,12 @@ export default {
   //   }
   // },
   created(){
-    this.getImageFromWechat();
+    if(this.activeOrder.files[0].type==0){
+      this.getImageFromWechat();
+    }else if(this.activeOrder.files[0].type==1){
+      this.getVoicefromWechat();
+    }
+    
   },
   methods:{
     ...mapActions([
@@ -58,7 +66,6 @@ export default {
     ]),
     getImageFromWechat(){
       const serverId = this.activeOrder.files[0].URL;
-      console.log('serverId:',serverId);
       const that = this;
       wx.downloadImage({
         serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
@@ -83,6 +90,26 @@ export default {
           console.log('无资源');
         },
       });
+    },
+    getVoicefromWechat(){
+      const serverId = this.activeOrder.files[0].URL;
+      const that = this;
+      wx.downloadVoice({
+        serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+        isShowProgressTips: 1, // 默认为1，显示进度提示
+        success: function (res) {
+          const localId = res.localId;
+          that.localData = localId;
+        },
+        fail: function(res) {
+          console.log('无资源');
+        },
+      });
+    },
+    playVoice(){
+      wx.playVoice({
+          localId: this.localData, // 需要播放的音频的本地ID，由stopRecord接口获得
+      });   
     },
     handleClick(){
       const orderId = this.activeOrder._id;
@@ -130,5 +157,11 @@ export default {
   justify-content: space-around;
   /*height:16rem;*/
   background: #eef;
+}
+.voice{
+  text-align: center;
+  margin: 0 auto;
+  margin-top:1rem;
+  font-size: 5rem;
 }
 </style>

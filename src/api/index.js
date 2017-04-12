@@ -160,7 +160,7 @@ export const leaveComment = (content, taskId) =>
 
 export const getTaskComment = (taskId) =>
     new Promise((resolve, reject) => {
-        request.get(`${bigServer}/tasks/${taskId}/commits`)
+        request.get(`${bigServer}/tasks/${taskId}/commits?limit=30`)
             // .withCredentials()
             .set('Authorization', `Bearer ${store.state.accessToken}`)
             .then((result) => {
@@ -212,56 +212,51 @@ export const getJsConfig = (url) =>
             });
     });
 
-const chooseUploadImage = () =>
+// const chooseUploadImage = () =>
+//     new Promise((resolve, reject) => {
+//         wx.chooseImage({
+//             count: 1, // 默认9
+//             sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+//             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+//             success(res) {
+//                 const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+//                 wx.uploadImage({
+//                     localId: localIds[0],
+//                     isShowProgressTips: 1,
+//                     success(result) {
+//                         const serverId = result.serverId;
+//                         resolve(serverId);
+//                     },
+//                     cancel() {
+//                         reject();
+//                     }
+//                 });
+//             },
+//             cancel() {
+//                 reject();
+//             }
+//         });
+//     });
+
+
+export const submitOrder = (taskId, serverId, type) =>
     new Promise((resolve, reject) => {
-        wx.chooseImage({
-            count: 1, // 默认9
-            sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-            success(res) {
-                const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                wx.uploadImage({
-                    localId: localIds[0],
-                    isShowProgressTips: 1,
-                    success(result) {
-                        const serverId = result.serverId;
-                        resolve(serverId);
-                    },
-                    cancel() {
-                        reject();
-                    }
-                });
+        const data = {
+            task: taskId,
+            file: {
+                filename: serverId,
+                URL: serverId,
+                type: type,
+                created: Date.now(),
             },
-            cancel() {
-                reject();
-            }
-        });
-    });
+        };
+        console.log(data);
 
-
-export const submitOrder = (taskId) =>
-    new Promise((resolve, reject) => {
-        chooseUploadImage()
-            .then((serverId) => {
-                const data = {
-                    task: taskId,
-                    file: {
-                        filename: serverId,
-                        URL: serverId,
-                        type: 0,
-                        created: Date.now(),
-                    },
-                };
-                console.log(data);
-                request.post(`${bigServer}/orders`)
-                    .send(data)
-                    .set('Authorization', `Bearer ${store.state.accessToken}`)
-                    .then((result) => {
-                        resolve(result.body.data);
-                    })
-                    .catch((err) => {
-                        reject(err);
-                    });
+        request.post(`${bigServer}/orders`)
+            .send(data)
+            .set('Authorization', `Bearer ${store.state.accessToken}`)
+            .then((result) => {
+                resolve(result.body.data);
             })
             .catch((err) => {
                 reject(err);
