@@ -61,7 +61,7 @@
  <div v-for="comment in comments" class="message-item">
    <message-item :data="comment"></message-item>
  </div>
- <div class="mulbutton">
+ <div class="mulbutton" v-if="!task.isDone">
   <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button>
  </div>
 
