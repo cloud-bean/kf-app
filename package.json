@@ -19,7 +19,7 @@
         "g2": "^2.1.5",
         "js-url": "^2.3.0",
         "markdown": "^0.5.0",
-        "mint-ui": "^2.2.0",
+        "mint-ui": "^2.2.5",
         "moment-timezone": "^0.5.7",
         "moment": "^2.10.0",
         "qrcanvas-vue": "^1.0.1",
