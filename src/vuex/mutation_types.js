@@ -1,6 +1,8 @@
 export const AUTH_CLIENT = 'AUTH_CLIENT';
 export const SET_LOGIN = 'SET_LOGIN';
 export const SET_JS_CONFIG = 'SET_JS_CONFIG';
+export const SET_PROGRESS = 'SET_PROGRESS';
+
 
 export const SET_USER_INFO = 'SET_USER_INFO';
 export const SET_USER_RECORDS = 'SET_USER_RECORDS';

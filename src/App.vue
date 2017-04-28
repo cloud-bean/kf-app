@@ -62,8 +62,9 @@
     <div  class="slogan">
       遇见你，真好
     </div>
-    <div  class="logo">
-      <!-- <img src="./assets/logoko.png" width="30%"></img> -->
+    <div class="logo">
+          <mt-progress :value="progress" :bar-height="5"></mt-progress>
+          <div>已加载{{progress}}%</div>
     </div>
   </div>
   </transition>
@@ -107,6 +108,7 @@ const moment = require('moment');
       login: state => state.login,
       user: state => state.profile.user,
       loading: state => state.loading,
+      progress: state => state.progress,
     }),
     loginDate(){
       return moment().format('YYYY年MM月DD日');
@@ -199,7 +201,7 @@ nav{
   z-index:999;
   text-align: center;
   background-color:#eee;
-  padding: 12rem 5rem;
+  padding: 10rem 5rem;
 }
 .mask{
   height:100%;
@@ -235,7 +237,7 @@ nav{
   font-weight:700  ;
 }
 .logo{
-  margin-top: 16rem;
+  margin-top: 5rem;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s

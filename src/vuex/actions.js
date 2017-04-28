@@ -16,6 +16,10 @@ export function setLogin({ commit }, login) {
   commit(types.SET_LOGIN, login);
   commit(types.GOT_STH);
 }
+export function setProgress({ commit }, progress) {
+  commit(types.SET_PROGRESS, progress);
+}
+
 export async function getJsConfig({ commit }, url) {
   commit(types.FETCH_STH);
   commit(types.SET_JS_CONFIG, await api.getJsConfig(url));

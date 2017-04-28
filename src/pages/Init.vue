@@ -43,6 +43,7 @@ export default {
       'getRanks',
       'getUserLottery',
       'getUserCards',
+      'setProgress',
     ]),
     async init(){
       const urlObj = url.parse(window.location.href,true);
@@ -54,20 +55,23 @@ export default {
           // $.showPreloader('加载中...');
           if(process.env.NODE_ENV == 'production'){
             await this.auth({appid:config.appid,code});
+            this.setProgress(20);
             await this.getJsConfig(sendUrl);
+            this.setProgress(40);
           }else{
             await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
           }
 
         wx.config(this.jsConfig);
-        await this.getUserRecords();
-        // await this.getTip();
-        await this.getNews();
-        await this.getUserInfo(this.userid)
-        await this.getRanks(1);
-        // await this.getUserLottery();
-        // await this.getUserCards();
+        this.setProgress(60);
 
+        // await this.getUserRecords();
+        await this.getNews();
+        this.setProgress(90);
+        await this.getUserInfo(this.userid);
+        this.setProgress(100);
+        // await this.getRanks(1);
+        
         if(this.user.option.phone){
           this.setLogin(true);
           this.$router.push('/profile');

@@ -30,6 +30,7 @@ const state = {
     // myRecords:{},
     // tip:{},
     login: false,
+    progress: 0,
 
     // orders:[],
     // activeOrder:{},
@@ -51,6 +52,9 @@ const mutations = {
     },
     [types.SET_JS_CONFIG](state, config) {
         state.jsConfig = config;
+    },
+    [types.SET_PROGRESS](state, progress) {
+        state.progress = progress;
     },
     // GOT_USER(state, user) {
     //   state.user = user;
