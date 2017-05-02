@@ -21,6 +21,23 @@ export const auth = (appid, code) =>
             });
     });
 
+export const authL = (appid, openid) =>
+    new Promise((resolve, reject) => {
+      request.get(`${midServer}/admin/authLocal/`)
+      .query({
+        appid,
+        openid,
+      })
+      .then((result) => {
+        const userid = result.body.userid;
+        const accessToken = result.body.accessToken;
+        resolve({ userid, accessToken });
+      })
+      .catch((err) => {
+        reject(err);
+      });
+    });
+
 export const getUserInfo = (userid) =>
     new Promise((resolve, reject) => {
         request.get(`${bigServer}/users/${userid}`)

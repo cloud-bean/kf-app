@@ -32,6 +32,7 @@ export default {
   methods: {
     ...mapActions([
       'auth',
+      'authL',
       'getUserInfo',
       'authLocal',
       'getJsConfig',
@@ -59,7 +60,8 @@ export default {
             await this.getJsConfig(sendUrl);
             this.setProgress(40);
           }else{
-            await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
+            await this.authL({appid:config.appid,openid:config.openid});
+            // await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
           }
 
         wx.config(this.jsConfig);
@@ -71,7 +73,7 @@ export default {
         await this.getUserInfo(this.userid);
         this.setProgress(100);
         // await this.getRanks(1);
-        
+
         if(this.user.option.phone){
           this.setLogin(true);
           this.$router.push('/profile');

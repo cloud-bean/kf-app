@@ -24,7 +24,7 @@
      </mt-cell>-->
 
      <div class="subItem">
-     <img-cell :title-img="rankImg" title="王者排行" :subtitle="`排在第 ${myRank.rankIndex} 名`" to="/rank"></img-cell>
+     <img-cell :title-img="rankImg" title="王者排行" subtitle="查看您的排名" to="/rank"></img-cell>
      </div>
      <div class="subItem">
      <img-cell :title-img="bagImg" title="背包系统" subtitle="宝箱、卡牌" to="/cardBag"></img-cell>

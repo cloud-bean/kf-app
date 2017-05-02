@@ -2,6 +2,7 @@ export default {
     appid: 'wxb3762a929cf9e070',
     // appid: 'wxf8e294c011cd47e1',//dev
     // appsecret: '0a607b7dc2ff4fa027b8594a99f9e086',
+    openid:'oBSpWs7ryxkxXsJrTXVZBLiBaKtY',
     server: {
         // midServer: 'http://dev.joywill.cc',
         midServer: 'http://joywill.cc',
@@ -17,13 +18,13 @@ export default {
         testRedirect: 'http://localhost:8080?code=123',
     },
     secret: {
-        accessToken: '72757dbd37df3de9f99a54f61f3d7b304c42588de56612a55599d99cbff24b12',
+        accessToken: 'b8a94cfea5924d9650d4a72e8b10137f8a609c87d477f11ebe04b006ba427672',
         //  userid: '58306c044238e8014a52ce05',
         // userid:'583a8905bb1a619b3b2b1d34',//张彦云
         //  userid:'581717002a2d3adc2032206e',//崔
         // userid: '58cf339913a9ca10230e1d25',
         // userid: '58306c044238e8014a52ce05',
-        userid: '5817407d2a2d3adc2032290e',
+        userid: '581c96e5a5c363bc28af1a69',
     },
     task: {
         limit: 30,
