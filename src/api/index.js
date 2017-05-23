@@ -1,6 +1,7 @@
 const request = require('superagent');
 import config from '../config/config';
 import store from '../vuex/store';
+import service from './service';
 const bigServer = config.server.bigServer;
 const midServer = config.server.midServer;
 
@@ -38,17 +39,21 @@ export const authL = (appid, openid) =>
       });
     });
 
-export const getUserInfo = (userid) =>
-    new Promise((resolve, reject) => {
-        request.get(`${bigServer}/users/${userid}`)
-            .set('Authorization', `Bearer ${store.state.accessToken}`)
-            .then((result) => {
-                resolve(result.body.data);
-            })
-            .catch((err) => {
-                reject(err);
-            });
-    });
+
+
+  export const getUserInfo = (userid) =>
+      new Promise((resolve, reject) => {
+          service.get(`${bigServer}/users/${userid}`)
+              .then((result) => {
+                console.log(result);
+                  resolve(result.data.data);
+              })
+              .catch((err) => {
+                  reject(err);
+              });
+  });
+
+
 // page=${page}&limit=${config.task.limit}
 export const getTaskList = (state) =>
     new Promise((resolve, reject) => {
