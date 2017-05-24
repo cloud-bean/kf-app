@@ -1,5 +1,5 @@
 import * as types from '../mutation_types';
-import * as api from '../../api';
+import { api } from '../../api';
 
 const state = {
     cards: [],

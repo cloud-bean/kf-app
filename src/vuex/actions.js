@@ -1,4 +1,4 @@
-import * as api from '../api';
+import { api } from '../api';
 import * as types from './mutation_types';
 
 export async function auth({ commit }, { appid, code }) {

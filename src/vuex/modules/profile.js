@@ -1,12 +1,12 @@
 import * as types from '../mutation_types';
-import * as api from '../../api';
+import { api } from '../../api';
 import { level } from '../../filter';
 
 const state = {
   user: {},
   userRecords: {},
   tip: {},
-  lotterys:[],
+  lotterys: [],
 };
 
 const mutations = {
@@ -66,7 +66,7 @@ const actions = {
   },
   setUserLevel({ commit }, exp) {
     commit(types.SET_USER_LEVEL, level(exp));
-  }
+  },
 };
 export default {
   state,
