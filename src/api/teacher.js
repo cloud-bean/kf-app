@@ -18,8 +18,7 @@ export const getOrders = () =>
 export const setScore = (score, comments, orderId) =>
   new Promise((resolve, reject) => {
     service
-      .post(`${bigServer}/orders/${orderId}/record`)
-      .send({ score, comments })
+      .post(`${bigServer}/orders/${orderId}/record`, { score, comments })
       .then(result => {
         resolve(result);
       })
