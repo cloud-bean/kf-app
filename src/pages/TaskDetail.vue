@@ -29,7 +29,7 @@
 
           </div>
           </div>
-          
+
 
           <div class="task-footer">
             <head-list :user-list="task.taskDoneUsers"></head-list>
@@ -62,13 +62,18 @@
    <message-item :data="comment"></message-item>
  </div>
  <div class="mulbutton" v-if="!task.isDone">
-  <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button>
- </div>
+   <mt-button type="primary" size="large" plain @click="showActionSheet">提交作业</mt-button>
+  <!-- <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button> -->
 
+ </div>
+ <mt-actionsheet
+ :actions="actions"
+ v-model="sheetVisible">
+</mt-actionsheet>
  <!--<div class="record-panel">
   <record-panel></record-panel>
  </div>-->
- 
+
 
 </div>
 
@@ -93,6 +98,12 @@ const markdown = require('markdown').markdown;
 export default {
   data: function () {
     return {
+      actions:[
+        {name:'文本' , method:this.handleComment},
+        {name:'语音' , method:this.handleRecord},
+        {name:'图片' , method:this.photo}
+      ],
+      sheetVisible:false,
     }
   },
   components: {
@@ -126,6 +137,9 @@ export default {
       'leaveComment',
       'submitOrder',
     ]),
+    showActionSheet(){
+      this.sheetVisible = !this.sheetVisible;
+    },
     tansMarkdown(content){
       return markdown.toHTML(content);
     },
@@ -161,7 +175,7 @@ export default {
         console.log(err);
       }
     },
-    chooseUploadImage(){ 
+    chooseUploadImage(){
     return new Promise((resolve, reject) => {
         wx.chooseImage({
             count: 1, // 默认9
@@ -306,15 +320,17 @@ overflow: hidden;
 }*/
 .mulbutton{
   position: fixed;
-  right: 3rem;
-  bottom: 5rem;
+  /*right: 3rem;*/
+  bottom: 3.5rem;
+  width:100%;
+  padding: .2rem .5rem;
 }
 .record-panel{
   position:fixed;
   margin:auto;
-  left:0; 
-  right:0; 
-  top:8rem; 
+  left:0;
+  right:0;
+  top:8rem;
   bottom:0;
   width:90%;
   /*height:10rem;*/
