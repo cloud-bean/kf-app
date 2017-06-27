@@ -18,8 +18,7 @@ export const getUserInfo = userid =>
 export const signUp = (userid, userInfo) =>
   new Promise((resolve, reject) => {
     service
-      .put(`${bigServer}/users/${userid}`)
-      .send(userInfo)
+      .put(`${bigServer}/users/${userid}`, userInfo)
       .then(result => {
         resolve(result.data);
       })
