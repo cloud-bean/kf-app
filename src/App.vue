@@ -25,7 +25,7 @@
           <span class="tab-label">评分</span>
 <<<<<<< HEAD
         </router-link> -->
-        
+
         <mt-tabbar @click.native="handleClick" v-model="selected" fixed>
           <mt-tab-item id="我的">
               <i class="fa fa-user-circle-o" slot="icon" aria-hidden="true"></i>
@@ -54,7 +54,7 @@
       <router-view></router-view>
   </div>
 
-  <transition name="fade">
+  <!-- <transition name="fade">
   <div class="init" v-if="!login" >
      <div class="time">
        {{loginDate}}
@@ -67,7 +67,7 @@
           <div>已加载{{progress}}%</div>
     </div>
   </div>
-  </transition>
+  </transition> -->
 
   <div class="mask opacity" v-if="loading">
     <div class="background">
@@ -94,7 +94,6 @@
 // const co = require('co');
 //
 import { mapState } from 'vuex';
-const moment = require('moment');
 
  export default {
   //  store,
@@ -108,11 +107,10 @@ const moment = require('moment');
       login: state => state.login,
       user: state => state.profile.user,
       loading: state => state.loading,
-      progress: state => state.progress,
     }),
-    loginDate(){
-      return moment().format('YYYY年MM月DD日');
-    }
+    // loginDate(){
+    //   return moment().format('YYYY年MM月DD日');
+    // }
 
    },
    watch: {
@@ -191,18 +189,18 @@ nav i{
 nav{
   text-align: center;
 }
-.init{
-  height:100%;
-  width:100%;
-  position:fixed;
-  _position:absolute;
-  top:0;
-  left:0;
-  z-index:999;
-  text-align: center;
-  background-color:#eee;
-  padding: 10rem 5rem;
-}
+// .init{
+//   height:100%;
+//   width:100%;
+//   position:fixed;
+//   _position:absolute;
+//   top:0;
+//   left:0;
+//   z-index:999;
+//   text-align: center;
+//   background-color:#eee;
+//   padding: 10rem 5rem;
+// }
 .mask{
   height:100%;
   width:100%;
@@ -223,27 +221,27 @@ nav{
   color: #26a2ff;
 
 }
-.time{
-  color:  @important-font;
-  font-family:  微软雅黑;
-  font-size: 1.2rem;
-
-}
-.slogan{
-  color: #26a2ff;
-  font-family: 幼圆;
-  font-size: 2rem;
-  margin-top: 1rem;
-  font-weight:700  ;
-}
-.logo{
-  margin-top: 5rem;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0
-}
+// .time{
+//   color:  @important-font;
+//   font-family:  微软雅黑;
+//   font-size: 1.2rem;
+//
+// }
+// .slogan{
+//   color: #26a2ff;
+//   font-family: 幼圆;
+//   font-size: 2rem;
+//   margin-top: 1rem;
+//   font-weight:700  ;
+// }
+// .logo{
+//   margin-top: 5rem;
+// }
+// .fade-enter-active, .fade-leave-active {
+//   transition: opacity .5s
+// }
+// .fade-enter, .fade-leave-active {
+//   opacity: 0
+// }
 
 </style>
