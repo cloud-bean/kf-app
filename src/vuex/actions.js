@@ -11,9 +11,9 @@ export async function authL({ commit }, { appid, openid }) {
   commit(types.AUTH_CLIENT, await api.authL(appid, openid));
   commit(types.GOT_STH);
 }
-export function authLocal({ commit }, { userid, accessToken }) {
+export function authLocal({ commit }, { userid, accessToken, unionid }) {
   commit(types.FETCH_STH);
-  commit(types.AUTH_CLIENT, { userid, accessToken });
+  commit(types.AUTH_CLIENT, { userid, accessToken, unionid });
   commit(types.GOT_STH);
 }
 export function setLogin({ commit }, login) {

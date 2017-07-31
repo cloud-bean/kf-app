@@ -62,7 +62,7 @@
    <message-item :data="comment"></message-item>
  </div>
  <div class="mulbutton" v-if="!task.isDone">
-   <mt-button type="primary" size="large" plain @click="showActionSheet">提交作业</mt-button>
+   <mt-button type="primary" size="large"  @click="showActionSheet">提交作业</mt-button>
   <!-- <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button> -->
 
  </div>

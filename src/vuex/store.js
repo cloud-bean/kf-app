@@ -24,6 +24,7 @@ const state = {
     loading: false,
     accessToken: '',
     userid: '',
+    unionid: '',
     // currentRoute: '',
     // feedbacks: [],
     jsConfig: {},
@@ -37,9 +38,12 @@ const state = {
 };
 
 const mutations = {
-    [types.AUTH_CLIENT](state, { userid, accessToken }) {
+    [types.AUTH_CLIENT](state, { userid, accessToken, unionid }) {
         state.userid = userid;
         state.accessToken = accessToken;
+        state.unionid = unionid;
+        console.log(unionid);
+        console.log('AUTH_CLIENT done ');
     },
     [types.FETCH_STH](state) {
         state.loading = true;

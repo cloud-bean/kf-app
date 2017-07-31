@@ -4,6 +4,7 @@
     <chart></chart> -->
 <div class="">
   <div class="profile">
+
     <info :user="user"></info>
 
     <!--<div class="tip">
@@ -23,12 +24,23 @@
         <i class="fa fa-eercast" slot="icon" aria-hidden="true" ></i>
      </mt-cell>-->
 
+    <div class="mask opacity" v-if="!user.providerData.unionid && display" @click="closeCard">
+      <div class="info">
+        为了给用户更好的使用体验，解决部分苹果用户的兼容问题，JoyBox团队加班设计及开发了悦盒的微信小程序
+        ，需要大家对现有数据进行迁移，迁移完毕后可以继续使用公众号也可以使用悦盒小程序，感谢您对悦盒的支持和鼓励。
+      </div>
+      <div class="move-button">
+          <mt-button type="default" size="large" class="move" @click="handleMove">迁移用户数据到小程序</mt-button>
+      </div>
+    </div>
+
      <div class="subItem">
      <img-cell :title-img="rankImg" title="王者排行" subtitle="查看您的排名" to="/rank"></img-cell>
      </div>
      <div class="subItem">
      <img-cell :title-img="bagImg" title="背包系统" subtitle="宝箱、卡牌" to="/cardBag"></img-cell>
      </div>
+
 </div>
 
 </div>
@@ -45,8 +57,8 @@ import imgCell from '../components/ImgCell';
 // import { getMyRecords } from '../vuex/actions';
 import rankImg from '../assets/rank.jpg';
 import bagImg from '../assets/bag.jpg';
-
-
+import { api } from '../api';
+import { MessageBox,Toast } from 'mint-ui';
 import { mapState, mapActions } from 'vuex';
 
 // import Expbar from '../components/Expbar';
@@ -63,12 +75,14 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       rankImg,
-      bagImg
+      bagImg,
+      display: true,
     };
   },
   computed: mapState({
     user: state => state.profile.user,
     userRecords: state => state.profile.userRecords,
+    unionid: state => state.unionid,
     tip: state => state.profile.tip,
     news: state => state.news.news,
     myRank: state => state.rank.myRank,
@@ -82,8 +96,27 @@ export default {
   //   },
   // },
   mounted() {
+
   },
-  methods: mapActions(['newsDetail']),
+  methods: {
+    ...mapActions(['newsDetail']),
+    async handleMove(){
+      const user = this.user;
+      const unionid = this.unionid;
+      const providerData = Object.assign({}, user.providerData, { unionid });
+      const newuser = Object.assign({}, user, { providerData });
+      await api.updateUserInfo(user._id, newuser);
+      Toast({
+           message: '迁移成功！',
+           iconClass: 'fa fa-check',
+           duration: 1000,
+      });
+      this.display = false;
+    },
+    closeCard(){
+      this.display = false;
+    }
+  },
   components: {
       Info,
       MyChart,
@@ -96,6 +129,17 @@ export default {
 
 
 <style scoped>
+.move-button{
+  padding: .5rem 1rem;
+  margin-top: 2rem;
+}
+.info{
+  color: #eee;
+  margin-top: 10rem;
+}
+.move{
+  margin: 0 auto;
+}
 .profile{
   /*background-color: #eef;*/
 }
@@ -119,5 +163,17 @@ export default {
 .subItem{
   margin-top: .5rem;
 }
+.mask{
+  height:100%;
+  width:100%;
+  position:fixed;
+  _position:absolute;
+  top:0;
+  left:0;
+  z-index:998;
+  text-align: center;
+  padding: 2rem 2rem;
+}
 
+.opacity{background:rgba(0,0,0,.5); }
 </style>

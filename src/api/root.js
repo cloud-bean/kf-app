@@ -14,7 +14,8 @@ export const auth = (appid, code) =>
       .then(result => {
         const userid = result.data.userid;
         const accessToken = result.data.accessToken;
-        resolve({ userid, accessToken });
+        const unionid = result.data.unionid;
+        resolve({ userid, accessToken, unionid });
       })
       .catch(err => {
         reject(err);
@@ -33,7 +34,8 @@ export const authL = (appid, openid) =>
       .then(result => {
         const userid = result.data.userid;
         const accessToken = result.data.accessToken;
-        resolve({ userid, accessToken });
+        const unionid = result.data.unionid;
+        resolve({ userid, accessToken, unionid });
       })
       .catch(err => {
         reject(err);

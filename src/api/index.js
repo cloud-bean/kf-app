@@ -409,6 +409,7 @@ export const api = {
   getRanks: rankApi.getRanks,
   friendLike: rankApi.friendLike,
   signUp: userApi.signUp,
+  updateUserInfo: userApi.updateUserInfo,
   getOrders: teacherApi.getOrders,
   setScore: teacherApi.setScore,
   leaveComment: taskApi.leaveComment,

@@ -16,16 +16,27 @@ export const getUserInfo = userid =>
   });
 
 export const signUp = (userid, userInfo) =>
-  new Promise((resolve, reject) => {
-    service
-      .put(`${bigServer}/users/${userid}`, userInfo)
-      .then(result => {
-        resolve(result.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
+new Promise((resolve, reject) => {
+  service
+  .put(`${bigServer}/users/${userid}`, userInfo)
+  .then(result => {
+    resolve(result.data);
+  })
+  .catch(err => {
+    reject(err);
   });
+});
+export const updateUserInfo = (userid, userInfo) =>
+new Promise((resolve, reject) => {
+  service
+  .put(`${bigServer}/users/${userid}`, userInfo)
+  .then(result => {
+    resolve(result.data);
+  })
+  .catch(err => {
+    reject(err);
+  });
+});
 export const getUserRecords = () =>
   new Promise((resolve, reject) => {
     service
