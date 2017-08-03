@@ -58,7 +58,7 @@ import imgCell from '../components/ImgCell';
 import rankImg from '../assets/rank.jpg';
 import bagImg from '../assets/bag.jpg';
 import { api } from '../api';
-import { MessageBox,Toast } from 'mint-ui';
+import { MessageBox,Toast, Indicator } from 'mint-ui';
 import { mapState, mapActions } from 'vuex';
 
 // import Expbar from '../components/Expbar';
@@ -106,12 +106,20 @@ export default {
       const providerData = Object.assign({}, user.providerData, { unionid });
       const newuser = Object.assign({}, user, { providerData });
       await api.updateUserInfo(user._id, newuser);
-      Toast({
-           message: '迁移成功！',
-           iconClass: 'fa fa-check',
-           duration: 1000,
+      Indicator.open({
+        text: '迁移中...',
+        spinnerType: 'fading-circle'
       });
-      this.display = false;
+      await setTimeout(()=>{
+        Indicator.close()
+        Toast({
+          message: '迁移成功！',
+          iconClass: 'fa fa-check',
+          duration: 1000,
+        });
+        this.display = false;
+      },5000);
+
     },
     closeCard(){
       this.display = false;
