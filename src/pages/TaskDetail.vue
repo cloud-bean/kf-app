@@ -9,15 +9,17 @@
     </div>
        <div class="markdown-desc">
           <div v-html="tansMarkdown(task.description)">
-
           </div>
-          <div v-if="task.audioFile || task.videoFile">
           <h1>任务素材</h1>
-          <div class="play-video" v-if="task.videoFile">
+          <div v-html="task.txVid">
+          </div>
+
+          <div v-if="task.audioFile">
+          <!-- <div class="play-video" v-if="task.videoFile">
           <video  :src="task.videoFile.URL" controls="controls" >
             您的浏览器不支持 video 标签。
           </video>
-          </div>
+          </div> -->
           <div class="play-audio"  v-if="task.audioFile">
            <audio :src="task.audioFile.URL" controls="controls">
              您的浏览器不支持 audio 标签。
