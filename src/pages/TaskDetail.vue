@@ -7,18 +7,22 @@
        <div>过期 {{task.expireTime | dateFormat}}</div>
        <div>类型 {{task.type}}</div>
     </div>
+    <!-- <img :src="task.titleImage.URL" alt="" width="100%" v-if="task.titleImage"/> -->
+
+
        <div class="markdown-desc">
-          <div v-html="tansMarkdown(task.description)">
+
+          <div v-html="tansMarkdown(task.description)" v-if="task.description">
           </div>
-          <h1>任务素材</h1>
+          <img :src="task.contentImage.URL" alt="" width="100%" v-if="task.contentImage"/>
           <div v-html="task.txVideoFrame">
           </div>
-          <div v-if="task.audioFile">
-          <!-- <div class="play-video" v-if="task.videoFile">
-          <video  :src="task.videoFile.URL" controls="controls" >
-            您的浏览器不支持 video 标签。
-          </video>
-          </div> -->
+          <div v-if="task.videoFile || task.audioFile">
+            <div class="play-video"  v-if="task.videoFile">
+             <video :src="task.videoFile.URL" controls="controls">
+               您的浏览器不支持 video 标签。
+             </video>
+            </div>
           <div class="play-audio"  v-if="task.audioFile">
            <audio :src="task.audioFile.URL" controls="controls">
              您的浏览器不支持 audio 标签。
@@ -26,8 +30,9 @@
           </div>
           </div>
           <div class="summary" v-if="task.isDone">
-          <div v-html="tansMarkdown(task.summary)" >
-          </div>
+            <img :src="task.summaryImage.URL" alt="" width="100%" v-if="task.summaryImage"/>
+            <div v-html="tansMarkdown(task.summary)"  v-if="task.summary">
+            </div>
           </div>
           <div class="task-footer">
             <head-list :user-list="task.taskDoneUsers"></head-list>
@@ -317,9 +322,9 @@ overflow: hidden;
   padding: 0.1rem 0;
 }*/
 .mulbutton{
-  position: fixed;
+  /*position: fixed;*/
   /*right: 3rem;*/
-  bottom: 3.5rem;
+  /*bottom: 3.5rem;*/
   width:100%;
   padding: .2rem .5rem;
 }
