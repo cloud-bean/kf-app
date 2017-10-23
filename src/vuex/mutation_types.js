@@ -37,7 +37,5 @@ export const ADD_USER_LOTTERY = 'ADD_USER_LOTTERY';
 export const ADD_USER_CARD = 'ADD_USER_CARD';
 export const MINUS_USER_LOTTERY = 'MINUS_USER_LOTTERY';
 
-
-
 export const SET_ACTIVR_NEWS = 'SET_ACTIVR_NEWS';
 export const SET_NEWS = 'SET_NEWS';

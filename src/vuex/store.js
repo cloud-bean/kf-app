@@ -9,7 +9,6 @@ import score from './modules/score';
 import card from './modules/card';
 import news from './modules/news';
 
-
 Vue.use(Vuex);
 
 const state = {
