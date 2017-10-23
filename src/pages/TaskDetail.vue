@@ -11,9 +11,8 @@
           <div v-html="tansMarkdown(task.description)">
           </div>
           <h1>任务素材</h1>
-          <div v-html="task.txVid">
+          <div v-html="task.txVideoFrame">
           </div>
-
           <div v-if="task.audioFile">
           <!-- <div class="play-video" v-if="task.videoFile">
           <video  :src="task.videoFile.URL" controls="controls" >
@@ -28,11 +27,8 @@
           </div>
           <div class="summary" v-if="task.isDone">
           <div v-html="tansMarkdown(task.summary)" >
-
           </div>
           </div>
-
-
           <div class="task-footer">
             <head-list :user-list="task.taskDoneUsers"></head-list>
           </div>
