@@ -113,7 +113,7 @@ export default {
         await this.getUserInfo(this.userid);
         this.setProgress(100);
         // await this.getRanks(1);
-
+        console.log('user',this.user);
         if(this.user.option.phone){
           this.setLogin(true);
           this.$router.push('/profile');
