@@ -19,7 +19,7 @@ export const getTaskList = state =>
 export const getAllTaskList = page =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/allTasks?page=${page}&limit=${config.task.limit}`)
+      .get(`${bigServer}/allTasks?page=${page}&limit=${config.task.limit}&filter=done`)
       .then(result => {
         const tasks = result.data.data;
         // const taskQuantity = result.body.data.totalCount;
