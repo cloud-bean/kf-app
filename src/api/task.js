@@ -5,11 +5,15 @@ const bigServer = config.server.bigServer;
 // page=${page}&limit=${config.task.limit}
 export const getTaskList = state =>
   new Promise((resolve, reject) => {
+    let tasks = [];
+    let taskQuantity = {};
     service
       .get(`${bigServer}/tasks?filter=${state}`)
       .then(result => {
-        const tasks = result.data.data.tasks;
-        const taskQuantity = result.data.data.totalCount;
+        if (result.data.data) {
+          tasks = result.data.data.tasks;
+          taskQuantity = result.data.data.totalCount;
+        }
         resolve({ tasks, taskQuantity });
       })
       .catch(err => {
