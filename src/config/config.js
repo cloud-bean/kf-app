@@ -3,13 +3,15 @@ export default {
     // appid: 'wxf8e294c011cd47e1',//dev
     // appsecret: '0a607b7dc2ff4fa027b8594a99f9e086',
     // openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w',
-  openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w',
+  openid: 'oBSpWs3Y5RffJ-Z0VnhB6SM0j5Nc',
   server: {
         // midServer: 'http://dev.joywill.cc',
     midServer: 'https://joywill.cc',
 
         // midServer:'http://sab4h63cag.proxy.qqbrowser.cc',
     bigServer: 'https://joywill.cc/api',
+    gameBoardServer: 'http://127.0.0.1:3000',
+
         //bigServer:'http://192.168.0.153:7000/api/base',
         //midServer:'http://sab4h63cag.proxy.qqbrowser.cc',
   },

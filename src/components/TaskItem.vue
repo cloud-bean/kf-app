@@ -45,10 +45,13 @@ const moment = require('moment');
         }
       },
       created(){
-        this.type = this.transType(this.taskdata.type)
-        const now = new Date();
-        const expireTime = new Date(this.taskdata.expireTime);
-        this.expire = !((expireTime - now) > 0);
+        if(this.taskdata){
+          this.type = this.transType(this.taskdata.type)
+          const now = new Date();
+          const expireTime = new Date(this.taskdata.expireTime);
+          this.expire = !((expireTime - now) > 0);
+        }
+
       },
       methods: {
         show(){

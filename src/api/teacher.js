@@ -5,7 +5,7 @@ const bigServer = config.server.bigServer;
 export const getOrders = () =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/orders?limit=200`) // 默认20，不够用
+      .get(`${bigServer}/orders?limit=100`) // 默认20，不够用
       .then(result => {
         const orders = result.data.data;
         resolve(orders);

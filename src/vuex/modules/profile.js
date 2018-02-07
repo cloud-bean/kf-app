@@ -29,6 +29,9 @@ const mutations = {
     state.user.option.goldToken -= money;
   },
 };
+const getters = {
+  userInfo: state.user,
+};
 
 const actions = {
   async getUserInfo({ commit }, userid) {
@@ -72,4 +75,5 @@ export default {
   state,
   mutations,
   actions,
+  getters,
 };

@@ -1,5 +1,4 @@
 <template>
-
 <div class="">
   <div v-if="login&&user">
       <nav >
@@ -39,6 +38,10 @@
             <i class="fa fa-superpowers" slot="icon" aria-hidden="true"></i>
               集市
           </mt-tab-item>
+          <!-- <mt-tab-item id="冲顶">
+            <i class="fa fa-trophy" slot="icon" aria-hidden="true"></i>
+              冲顶
+          </mt-tab-item> -->
            <!-- <mt-tab-item id="卡包" >
             <i class="fa fa-clone" slot="icon" aria-hidden="true"></i>
               卡包
@@ -130,6 +133,9 @@ import { mapState } from 'vuex';
          break;
          case '卡包':
          this.$router.push('/cardBag')
+         break;
+         case '冲顶':
+         this.$router.push('/match')
          break;
          case '评分':
          this.$router.push('/teacherOrderList')

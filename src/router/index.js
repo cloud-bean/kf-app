@@ -15,10 +15,10 @@ import newsDetailPage from '../pages/NewsDetail';
 import marketPage from '../pages/Market';
 import recordVoicePage from '../pages/RecordVoice';
 import introPage from '../pages/Intro';
+import gameBoardPage from '../pages/gameBoardPage';
 
 
 // import CardBagPage from '../components/Card';
-
 
 
 Vue.use(VueRouter);
@@ -48,5 +48,7 @@ export default new VueRouter({
     { path: '/market', component: marketPage },
     { path: '/recordVoice', component: recordVoicePage },
     { path: '/intro', component: introPage },
+    { path: '/match', component: gameBoardPage },
+
   ],
 });

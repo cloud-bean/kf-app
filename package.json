@@ -39,7 +39,9 @@
     "vuex": "^2.2.1",
     "wechat-oauth": "^1.1.1",
     "weixin-js-sdk": "^1.2.0",
-    "wurl": "^2.1.0"
+    "wurl": "^2.1.0",
+    "wilddog": "^2.5.2",
+    "wildvue": "^1.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
