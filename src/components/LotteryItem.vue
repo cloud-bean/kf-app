@@ -2,7 +2,7 @@
 
 <div class="img-cell Grid -middle -center" @click="handleClick">
     <div class="img Cell -12of12">
-        <img :src="lotteryData.cardPool.file?lotteryData.cardPool.file.URL:boximg" alt="" class=""/>
+        <img :src="!!lotteryData.cardPool.file?lotteryData.cardPool.file.URL:boximg" alt="" class=""/>
     </div>
     <div class="title Cell -12of12 ">
         {{lotteryData.cardPool.name}}
@@ -33,25 +33,22 @@ import { mapState, mapActions } from 'vuex';
         ]),
     async handleClick(){
         const data = await this.openBox({lotteryId:this.lotteryData._id,index:this.index});
-        if(!data){
-           Toast({
+        if(!data.card){
+          Toast({
              message: `您的宝箱里没有卡`,
              position: 'middle',
              duration: 2000
            });
-           await this.getUserLottery();
-
-        }else{
+        }
+        else if(data.card){
           Toast({
           message: `获得-${data.card.name}`,
           position: 'middle',
           duration: 2000
          });
-         await this.getUserCards();
-         await this.getUserLottery();
-
         }
-
+        await this.getUserLottery();
+        await this.getUserCards();
     },
       },
     }

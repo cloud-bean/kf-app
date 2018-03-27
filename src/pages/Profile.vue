@@ -5,7 +5,7 @@
 <div class="">
   <div class="profile">
 
-    <info :user="user"></info>
+    <info :user="user" :rank="myRank.rankIndex"></info>
 
     <!--<div class="tip">
       <tips :tip="tip"></tips>

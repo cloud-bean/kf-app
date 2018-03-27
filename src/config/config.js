@@ -3,7 +3,7 @@ export default {
     // appid: 'wxf8e294c011cd47e1',//dev
     // appsecret: '0a607b7dc2ff4fa027b8594a99f9e086',
     // openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w',
-  openid: 'oBSpWs3Y5RffJ-Z0VnhB6SM0j5Nc',
+  openid: 'oBSpWs-AHmzYJqiP94L6wE9qxX4k',
   server: {
         // midServer: 'http://dev.joywill.cc',
     midServer: 'https://joywill.cc',

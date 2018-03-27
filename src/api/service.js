@@ -4,7 +4,7 @@ import store from '../vuex/store';
 
 const service = axios.create({
   baseURL: config.server.bigServer, // api的base_url
-  timeout: 10000, // 请求超时时间
+  timeout: 30000, // 请求超时时间
 });
 
 // request拦截器
