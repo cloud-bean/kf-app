@@ -1,15 +1,14 @@
 <template>
   <div class="" >
-    <div class="userhead">
-      <div class="center-info">
-        <span class="avatar-wrapper">
+    <div class="userhead Grid">
+        <div class="avatar-wrapper Grid Cell -3of12 -center -middle">
           <img :src="user.profileImageURL" alt="" class="avatar"/>
-        </span>
-        <span class="exp-wrapper">
+        </div>
+        <div class="exp-wrapper Grid Cell -9of12 -left -middle">
           <div class="title-bar">
             <span class="name">{{user.displayName}}</span>
             <span class="level"> Lv.{{user.option.exp | level}}</span>
-            <span><mt-badge size="small">x1.3</mt-badge></span>
+            <span><mt-badge size="small" type="success">x1.0</mt-badge></span>
           </div>
           <div class="exp">
             <span class=""> 成长值 {{user.option.exp}}</span> .
@@ -17,46 +16,13 @@
             <span class=""> 排位 {{rank}}</span>
           </div>
           <div class="">
-            <span class="exp-bar"><mt-progress :value="expPercent" :barHeight="8">
-              <!-- <div slot="start">0%</div>
-              <div slot="end">100%</div> -->
-            </mt-progress></span>
-
+            <mt-progress :value="expPercent" :barHeight="8">
+            </mt-progress>
           </div>
           <!-- <div class="slogan">{{user.option.slogan || 'Learning with joy, achieving with will.'}}</div> -->
-
-
-        </span>
-      </div>
-
+        </div>
     </div>
-
     <div class="info">
-
-      <!-- <div class="item Cell -4of12">
-        <div class="detailInfo">
-          <div>经验</div>
-          <div class="number">
-            {{user.option.exp}}
-          </div>
-        </div>
-      </div>
-      <div class="item Cell -4of12">
-        <div class="detailInfo">
-          <div>悦币</div>
-          <div class="number">
-            {{user.option.goldToken}}
-          </div>
-        </div>
-      </div>
-      <div class="item Cell -4of12">
-        <div class="detailInfo">
-          <div>等级</div>
-          <div class="number">
-            {{user.option.exp | level}}
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 
@@ -103,7 +69,7 @@ export default{
   padding:.2rem 0rem;
 }
 .name{
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #fff;
 }
 .title {
@@ -116,13 +82,12 @@ export default{
   width:100%;
   text-align: center;
   // font-size: 0.8rem;
-  padding: 0.2rem 0.3rem;
+  padding: 0.1rem;
   /*display: flex;*/
   /*flex-direction: row;*/
   /*justify-content: space-around;*/
   /*align-items: center;*/
   background-color: #B9CDDA;
-  color: #fff;
   margin: 0 auto;
   // margin-top:-0.8rem;
   // box-shadow:0px 0px 5px #555555;
@@ -164,8 +129,8 @@ export default{
 }
 
 .avatar {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   border: 2px solid white;
   border-radius:5px;
   // box-shadow:0px 0px 5px #555555;
@@ -207,7 +172,7 @@ export default{
   /* Rectangle: */
   // background-image: linear-gradient(-180deg, #FFFFFF 0%, #C9C9C9 100%);
   // border: 1px solid #979797;
-  background-color:#5DA9E9;
+  background-color:#6F2DBD;
   padding: 1rem 1rem;
   width: 100%;
   // height: 8rem;

@@ -3,11 +3,16 @@
     <expbar></expbar>
     <chart></chart> -->
     <div class="">
-    <small-head-info :user="user"></small-head-info>
+      <div class="user-info">
+        <info :user="user" :rank="myRank.rankIndex"></info>
 
-    <div class="commodity" v-for="(item,index) in cardPool">
-        <commodity-item :commodityData='item' :buy='buyLottery'></commodity-item>
-    </div>
+      </div>
+      <div class="commodity-list">
+        <div class="commodity" v-for="(item,index) in cardPool">
+            <commodity-item :commodityData='item' :buy='buyLottery' :openLotteryBox='openLotteryBox'></commodity-item>
+        </div>
+      </div>
+
 </div>
 
 </div>
@@ -18,7 +23,7 @@
 <script>
 
 import CommodityItem from '../components/CommodityItem';
-import SmallHeadInfo from '../components/SmallHeadInfo';
+import Info from '../components/HeadInfo';
 
 // import { getMyRecords } from '../vuex/actions';
 import { mapState, mapActions } from 'vuex';
@@ -45,6 +50,8 @@ export default {
     // news: state => state.news.news,
     cardPool: state => state.card.cardPool,
     user: state => state.profile.user,
+    myRank: state => state.rank.myRank,
+
   }),
   // vuex: {
   //   getters: {
@@ -58,11 +65,12 @@ export default {
   },
   methods: mapActions([
     'getCardPool',
-    'buyLottery'
+    'buyLottery',
+    'openLotteryBox',
   ]),
   components: {
    CommodityItem,
-   SmallHeadInfo,
+   Info,
   },
 }
 </script>
@@ -71,6 +79,15 @@ export default {
 <style scoped>
 .commodity{
     margin-top: .5rem;
+}
+.commodity-list{
+    margin-top: 8rem;
+}
+.user-info{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index:2;
 }
 
 </style>

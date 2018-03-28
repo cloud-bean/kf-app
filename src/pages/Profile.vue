@@ -24,7 +24,7 @@
         <i class="fa fa-eercast" slot="icon" aria-hidden="true" ></i>
      </mt-cell>-->
 
-    <div class="mask opacity" v-if="!user.providerData.unionid && display" @click="closeCard">
+    <!-- <div class="mask opacity" v-if="!user.providerData.unionid && display" @click="closeCard">
       <div class="info">
         为了给用户更好的使用体验，解决部分苹果用户的兼容问题，JoyBox团队加班设计及开发了悦盒的微信小程序
         ，需要大家对现有数据进行迁移，迁移完毕后可以继续使用公众号也可以使用悦盒小程序，感谢您对悦盒的支持和鼓励。
@@ -32,16 +32,69 @@
       <div class="move-button">
           <mt-button type="default" size="large" class="move" @click="handleMove">迁移用户数据到小程序</mt-button>
       </div>
-    </div>
+    </div> -->
 
-     <div class="subItem">
+     <!-- <div class="subItem">
      <img-cell :title-img="rankImg" title="王者排行" subtitle="查看您的排名" to="/rank"></img-cell>
      </div>
      <div class="subItem">
      <img-cell :title-img="bagImg" title="背包系统" subtitle="宝箱、卡牌" to="/cardBag"></img-cell>
+     </div> -->
+   </div>
+   <div class="">
+
+
+     <!-- <div class="button-area"> -->
+     <!-- <mt-navbar v-model="selected">
+       <mt-tab-item id="1" @click.native="showTaskProcess">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+         进行中
+       </mt-tab-item>
+       <mt-tab-item id="2" @click.native="showAllTask">
+         <i class="fa fa-check-circle" aria-hidden="true"></i>
+         近期完成
+         </mt-tab-item>
+       </mt-navbar>
+     </div> -->
+
+
+     <div class="tasklist" >
+       <p v-if="tasks.length==0" class="no-task">
+         暂无任务
+       </p>
+       <!--<div
+         v-infinite-scroll="loadMoreTask"
+         infinite-scroll-disabled="loading"
+         infinite-scroll-distance="10"
+         >-->
+         <div  v-infinite-scroll="loadMore"
+               infinite-scroll-disabled="loading"
+               infinite-scroll-distance="10">
+
+         <div v-for="(task, index) in tasks">
+           <div class="timeline-icon" v-if="index==0">
+              <i class="fa fa-circle"aria-hidden="true" ></i>
+              <span>{{new Date()|dateFormat}}</span>
+            </div>
+            <!-- <transition enter-active-class="fadeInRight" leave-active-class="fadeOutRight"> -->
+
+             <task-item class="task-item" :taskdata="task" @click.native="handleClick(index)"></task-item>
+           <!-- </transition> -->
+
+         </div>
+       </div>
+
      </div>
 
-</div>
+
+     <!-- <div v-show="hasMore" class="load-more">
+       <mt-button @click="loadMoreTask" size="large" type="primary" icon="more" plain>加载更多</mt-button>
+     </div>
+     <div v-show="!hasMore" class="load-more">
+       <mt-button  size="large" type="primary" plain disabled>没有更多任务</mt-button>
+     </div> -->
+   </div>
+   </div>
 
 </div>
 
@@ -54,6 +107,8 @@ import MyChart from '../components/MyChart';
 import Tips from '../components/Tips';
 import NewsSlider from '../components/NewsSlider';
 import imgCell from '../components/ImgCell';
+import TaskItem from '../components/TaskItem';
+
 // import { getMyRecords } from '../vuex/actions';
 import rankImg from '../assets/rank.jpg';
 import bagImg from '../assets/bag.jpg';
@@ -87,6 +142,10 @@ export default {
     news: state => state.news.news,
     myRank: state => state.rank.myRank,
     cards: state => state.card.cards,
+    tasks: state => state.task.tasks,
+    taskQuantityInfo: state => state.task.taskQuantityInfo,
+    page: state => state.task.page,
+    selected: state => state.task.selected,
   }),
   // vuex: {
   //   getters: {
@@ -96,41 +155,101 @@ export default {
   //   },
   // },
   mounted() {
-
+    this.$nextTick(() => {
+      this.init();
+    });
   },
   methods: {
-    ...mapActions(['newsDetail']),
-    async handleMove(){
-      const user = this.user;
-      const unionid = this.unionid;
-      const providerData = Object.assign({}, user.providerData, { unionid });
-      const newuser = Object.assign({}, user, { providerData });
-      await api.updateUserInfo(user._id, newuser);
-      Indicator.open({
-        text: '迁移中...',
-        spinnerType: 'fading-circle'
-      });
-      await setTimeout(()=>{
-        Indicator.close()
-        Toast({
-          message: '迁移成功！',
-          iconClass: 'fa fa-check',
-          duration: 1000,
-        });
-        this.display = false;
-      },5000);
-
+    ...mapActions([
+      'newsDetail',
+      'getTaskList',
+      'taskDetail',
+      'getAllTaskList',
+      'cleanTaskList',
+      'changeNavbar',
+    ]),
+    async init(){
+      if(this.tasks.length==0){
+       await this.getTaskList();
+      }
     },
-    closeCard(){
-      this.display = false;
-    }
+    handleClick(index){
+      this.taskDetail(index);
+      this.$router.push('/taskDetail');
+    },
+    async showTaskProcess(){
+      this.changeNavbar('1')
+      this.cleanTaskList();
+      await this.getTaskList('process');
+    },
+    async showAllTask(){
+      this.changeNavbar('2')
+      this.cleanTaskList();
+      await this.getAllTaskList(this.page);
+    },
+    // scan(){
+    //   wx.onMenuShareTimeline({
+    //     title: 'joywill', // 分享标题
+    //     link: 'joywill.cc', // 分享链接
+    //     imgUrl: '', // 分享图标
+    //     success: function () {
+    //       // 用户确认分享后执行的回调函数
+    //     },
+    //     cancel: function () {
+    //       // 用户取消分享后执行的回调函数
+    //     }
+    //   });
+    // },
+    loadMoreTask(){
+      if(this.selected=='1'){
+
+      }else if(this.selected=='2'){
+
+         if(this.hasMore){
+        this.loading = true;
+        this.getAllTaskList(this.page)
+        .then(res => {
+          if(res.length < 20){
+            this.hasMore = false;
+          }
+          this.loading = false;
+        });
+      }
+      }
+    },
   },
+  //   async handleMove(){
+  //     const user = this.user;
+  //     const unionid = this.unionid;
+  //     const providerData = Object.assign({}, user.providerData, { unionid });
+  //     const newuser = Object.assign({}, user, { providerData });
+  //     await api.updateUserInfo(user._id, newuser);
+  //     Indicator.open({
+  //       text: '迁移中...',
+  //       spinnerType: 'fading-circle'
+  //     });
+  //     await setTimeout(()=>{
+  //       Indicator.close()
+  //       Toast({
+  //         message: '迁移成功！',
+  //         iconClass: 'fa fa-check',
+  //         duration: 1000,
+  //       });
+  //       this.display = false;
+  //     },5000);
+  //
+  //   },
+  //   closeCard(){
+  //     this.display = false;
+  //   }
+  // },
   components: {
       Info,
       MyChart,
       Tips,
       NewsSlider,
-      imgCell
+      imgCell,
+      TaskItem,
   }
 }
 </script>
@@ -182,6 +301,35 @@ export default {
   text-align: center;
   padding: 2rem 2rem;
 }
+.tasklist{
+  position: relative;
+padding:  0 .5rem 0 2rem;
 
+margin-top: 1rem;
+}
+.tasklist::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  height: 100%;
+  width: 4px;
+  background: #d7e4ed;
+}
+.timeline-icon{
+  position: relative;
+  font-size: .8rem;
+  margin-left: -1.2rem;
+  /* margin-top: -0.5rem; */
+
+  color: #888;
+}
+.timeline-icon i{
+  font-size: 0.8rem;
+  color: #6F2DBD;
+}
+.task-item{
+  margin-top: 0.3rem;
+}
 .opacity{background:rgba(0,0,0,.5); }
 </style>

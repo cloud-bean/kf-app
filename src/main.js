@@ -7,11 +7,9 @@ import { dateFormat1, dateFormat, level } from './filter';
 import store from './vuex/store';
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
-// import Wilddog from 'wilddog';
-// import WildVue from 'wildvue';
+import animate from 'animate.css';
 
-// Vue.use(Wilddog);
-// Vue.use(WildVue);
+Vue.use(animate);
 Vue.use(MintUI);
 
 

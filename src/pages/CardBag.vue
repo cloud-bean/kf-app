@@ -1,35 +1,36 @@
 <template>
-<div class="">
-  <div class="bag-title">
-    背包系统
-  </div>
+<div class="card-bag">
+  <transition enter-active-class=" animated zoomIn" leave-active-class=" animated zoomOut">
+      <card-view class="card-view" v-if="display" :card-data="activeCard" @click.native="closeCard"></card-view>
+  </transition>
+  <info :user="user" :rank="myRank.rankIndex"></info>
 
-<div class="title" v-if="lotterys.length!=0">我的宝箱</div>
+
+<!-- <div class="title" v-if="lotterys.length!=0">我的宝箱</div>
 <div class="Grid -left bag-content">
 
   <div class="Cell -3of12 card-item" v-for="(lottery,index) in lotterys" if="lotterys">
         <lottery-item :lottery-data="lottery" :open-box="openLotteryBox" :index="index"></lottery-item>
   </div>
-</div>
+</div> -->
 
 <!--<div class="button-area">
   <mt-button @click="handleBuy" type="danger" size="large">买宝箱(1悦维币买1次)</mt-button>
 </div>-->
-<div class="title" v-if="cards.length!=0">我的卡牌</div>
+<!-- <div class="title" v-if="cards.length!=0">我的卡牌</div> -->
+
 <div class="Grid -left bag-content">
-  <div class="Cell -4of12 card-item" v-for="(card,index) in cards" v-if="card.status==0">
-        <card :card-data="card" @click.native="openCard(index)"></card>
+  <div class="Cell -3of12 card-item" v-for="(card,index) in cards" v-if="card.status==0">
+        <card class="card" :card-data="card" @click.native="openCard(index)"></card>
   </div>
 </div>
-<div class="mask opacity" v-if="display" @click="closeCard">
-  <card-view :card-data="activeCard"></card-view>
-</div>
 
+<div class="mask opacity" v-if="display" @click="closeCard"></div>
 </div>
 </template>
 
 <script>
-
+import Info from '../components/HeadInfo';
 import { mapState, mapActions } from 'vuex';
 import Card from '../components/CardItem';
 import LotteryItem from '../components/LotteryItem';
@@ -50,6 +51,8 @@ export default {
   computed: mapState({
     cards: state => state.card.cards,
     lotterys: state => state.card.lottery,
+    user: state => state.profile.user,
+    myRank: state => state.rank.myRank,
     // userRecords: state => state.profile.userRecords,
     // tip: state => state.profile.tip,
   }),
@@ -63,7 +66,6 @@ export default {
   // },
   mounted() {
     this.$nextTick(()=> {
-
       this.getUserCards();
       this.getUserLottery();
     })
@@ -92,33 +94,18 @@ export default {
     Card,
     CardView,
     LotteryItem,
+    Info,
   }
 }
 </script>
 
 
 <style scoped>
-.title{
-  margin: 0.5rem 1.2rem;
-  /*padding:.3rem;*/
-  padding-bottom: .5rem;
-  /*border-bottom: 1px solid #eeeeff;*/
-  /*background-color: #eee;*/
-  text-align: left;
-  font-size: 1rem;
-  border-bottom: 1px solid #eee;
-  color: #aaa;
-
+.card-bag{
+  /* position: relative; */
 }
-.info-card{
-  background-color: #3C6DF9;
-}
-.bag-title{
-  background-color: #4b4b4b;
-  text-align: center;
-  color: #fff;
-  padding: 0.8rem;
-
+.card{
+  margin-top: .5rem;
 }
 .bag-content{
   margin: 0 0.5rem;
@@ -131,16 +118,25 @@ export default {
 .mask{
   height:100%;
   width:100%;
-  position:fixed;
-  _position:absolute;
+  position:absolute;
+  /* _position:absolute; */
   top:0;
   left:0;
-  z-index:998;
+  z-index:1;
+  background:rgba(0,0,0,.8);
+}
+.card-view{
+  position: absolute;
+  left:0px;
+  right: 0px;
+  top:2rem;
+  /* bottom: 0px; */
+  margin: auto;
   text-align: center;
-  padding: 2rem 2rem;
+  z-index: 999;
+  width:70%;
 }
 
-.opacity{background:rgba(0,0,0,.5); }
 .button-area{
   margin: .5rem 1rem 0rem 1rem;
 }

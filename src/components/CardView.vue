@@ -1,37 +1,51 @@
 <template>
 <div class="jw-card">
-    
+
+<div>
     <img v-lazy="cardData.file.URL+'?imageView2/2/h/540/q/100|imageslim'" alt="" width="100%"></img>
-    <mt-badge size="large"  type="primary">{{cardData.name}}</mt-badge>
-    <mt-badge size="large" type="success">{{cardData.category}}</mt-badge>
+      <div class="name">{{cardData.name}}</div>
+      <div class="desc">{{cardData.description}}</div>
+      <mt-button v-if="product==true" type="primary" size="normal" @click="sale">出  售</mt-button>
+
+
+    <!-- <mt-badge size="large"  type="primary">{{cardData.name}}</mt-badge>
+    <mt-badge size="large" type="success">{{cardData.category}}</mt-badge> -->
+  </div>
     <!--<qrcanvas :options="{data:cardData._id}"></qrcanvas>-->
 </div>
 </template>
 <style scoped>
 img[lazy=loading] {
   /*width: 350px;*/
-  height: 480px;
+  height: 443px;
   background-image: url('../assets/cardLoading.png');
   background-size:contain;
   margin: auto;
 }
 .jw-card{
   height: auto;
-  overflow:auto;
-  margin: 0;
+  /* overflow:auto; */
   /*position: relative;*/
-  z-index: 100;
+  /* z-index: 100; */
 }
-.type{
+.name{
+  color:#ccc;
+  font-size: 1.2rem;
+}
+.desc{
+  color: #fff;
+  font-size: 1rem;
+}
+/* .type{
   width: 50%;
   margin: 0 auto;
   margin-bottom: .4rem;
   padding: .4rem .5rem;
   color: #fff;
   background-color:#00f;
-  font-size:1rem; 
-  border-radius: 2px; 
-}
+  font-size:1rem;
+  border-radius: 2px;
+} */
 
 /*image[lazy=loading] {
   width: 40px;
@@ -47,6 +61,7 @@ img[lazy=loading] {
 </style>
 <script>
 import Qrcanvas from 'qrcanvas-vue';
+import { MessageBox } from 'mint-ui';
 
 export default {
   data() {
@@ -60,12 +75,20 @@ export default {
       type:'tech',
     };
   },
-  props:['cardData'],
+  props:['cardData','product'],
   mounted() {
-    
+
   },
   methods: {
-  
+    sale(){
+      MessageBox.prompt('请输入出售金额，确认后生效')
+      .then(({ value, action }) => {
+        console.log(value);
+      })
+      .catch(e=>{
+        console.log(e);
+      })
+    }
 
   },
   computed:{

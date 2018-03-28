@@ -19,9 +19,26 @@
     <div class="icon Cell -2of12">
         <mt-button type="primary" size="small" plain @click="handleBuy">购买</mt-button>
     </div>
+    <div class="mask" v-if="popupVisible" @click="closeCard"></div>
+    <transition enter-active-class=" animated flipInY" leave-active-class=" animated flipOutY">
+        <card-view class="card-view" v-if="popupVisible" :card-data="card" @click.native="closeCard" :product="false"></card-view>
+    </transition>
+  </div>
 
 
-</div>
+  <!-- <transition enter-active-class="fadeInRight" leave-active-class="fadeOutRight">
+    <div>
+       <img v-lazy="cardData.file.URL+'?imageView2/2/h/540/q/100|imageslim'" alt="" width="100%"></img>
+         <div class="name">{{cardData.name}}</div>
+         <div class="desc">{{cardData.description}}</div>
+         <mt-button type="primary" size="normal" @click="sale">出  售</mt-button>
+
+
+     </div>
+   </transition> -->
+
+
+
 
 
 
@@ -32,14 +49,18 @@
 import boximg from '../assets/box.jpg';
 import { MessageBox,Toast } from 'mint-ui';
 import { mapState, mapActions } from 'vuex';
+import CardView from '../components/CardView';
 
     export default{
-      props:['commodityData','buy'],
+      props:['commodityData','buy','openLotteryBox'],
       components: {
+        CardView,
       },
       data(){
         return {
          boximg,
+         popupVisible:false,
+         card:{},
         }
       },
       computed:mapState({
@@ -49,21 +70,45 @@ import { mapState, mapActions } from 'vuex';
         // this.img = this.commodityData.file.URL||boximg;
       },
       methods: {
+        closeCard(){
+          this.popupVisible= false;
+        },
        async handleBuy(){
           if(this.money<this.commodityData.ticketPrice){
-            Toast('没有足够的悦维币，快去完成任务吧');
+            Toast({
+                message:'没有足够的悦维币，快去完成任务吧',
+                position:'bottom',
+              });
             return;
           }
-           MessageBox.confirm(`确定购买吗，将花费${this.commodityData.ticketPrice}悦币`).then(action => {
-                this.buy({cardPoolId:this.commodityData._id,money:this.commodityData.ticketPrice})
-                .then(value => {
-                    Toast({
-                         message: '购买成功,快去背包中打开它！',
-                         iconClass: 'fa fa-check',
-                         duration: 2000,
-                    });
-                });
-           });
+
+          try{
+            await MessageBox.confirm(`确定购买吗，将花费${this.commodityData.ticketPrice}悦币`);
+            const data = await this.buy({cardPoolId:this.commodityData._id, money:this.commodityData.ticketPrice});
+            console.log(data);
+            if(!data.card){
+              Toast({
+                iconClass:' fa-hand-peace-o fa',
+                 message: `很不幸我的朋友，你没有获得卡牌!`,
+                 position: 'middle',
+                 duration: 1000
+               });
+            }
+            else if(data.card){
+              this.card = data.card;
+              this.popupVisible = true;
+             //  Toast({
+             //  iconClass:'fa-bolt fa',
+             //  message: `上帝眷顾勤奋的人，您获得${data.card.name}一张`,
+             //  position: 'middle',
+             //  duration: 2000
+             // });
+            }
+          }catch(e){
+            console.log(e);
+          }
+
+
        }
       },
     }
@@ -95,5 +140,41 @@ import { mapState, mapActions } from 'vuex';
 .money{
     color: #aaaaaa;
     font-size: .8rem;
+}
+img[lazy=loading] {
+  /*width: 350px;*/
+  height: 443px;
+  background-image: url('../assets/cardLoading.png');
+  background-size:contain;
+  margin: auto;
+}
+.name{
+  color:#ccc;
+  font-size: 1.2rem;
+}
+.desc{
+  color: #fff;
+  font-size: 1rem;
+}
+.mask{
+  position:fixed;
+  height:100%;
+  width:100%;
+  _position:absolute;
+  top:0;
+  left:0;
+  z-index:998;
+  background:rgba(0,0,0,.8);
+}
+.card-view{
+  position: fixed;
+  left:0px;
+  right: 0px;
+  top:2rem;
+  /* bottom: 0px; */
+  margin: auto;
+  text-align: center;
+  z-index: 999;
+  width:70%;
 }
 </style>

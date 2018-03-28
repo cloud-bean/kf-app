@@ -27,16 +27,20 @@
 
         <mt-tabbar @click.native="handleClick" v-model="selected" fixed>
           <mt-tab-item id="我的">
-              <i class="fa fa-user-circle-o" slot="icon" aria-hidden="true"></i>
-              我的
-          </mt-tab-item>
-          <mt-tab-item id="任务">
-            <i class="fa fa-tasks" slot="icon" aria-hidden="true"></i>
+              <i class="fa fa-calendar" slot="icon" aria-hidden="true"></i>
               任务
           </mt-tab-item>
+          <mt-tab-item id="卡牌">
+            <i class="fa fa-map" slot="icon" aria-hidden="true"></i>
+              卡牌
+          </mt-tab-item>
           <mt-tab-item id="集市">
-            <i class="fa fa-superpowers" slot="icon" aria-hidden="true"></i>
+            <i class="fa fa-bars" slot="icon" aria-hidden="true"></i>
               集市
+          </mt-tab-item>
+          <mt-tab-item id="战绩">
+            <i class="fa fa-sitemap" slot="icon" aria-hidden="true"></i>
+              战绩
           </mt-tab-item>
           <!-- <mt-tab-item id="冲顶">
             <i class="fa fa-trophy" slot="icon" aria-hidden="true"></i>
@@ -131,7 +135,7 @@ import { mapState } from 'vuex';
          case '集市':
          this.$router.push('/market')
          break;
-         case '卡包':
+         case '卡牌':
          this.$router.push('/cardBag')
          break;
          case '冲顶':

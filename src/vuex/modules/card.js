@@ -9,7 +9,25 @@ const state = {
 
 const mutations = {
   [types.SET_USER_CARDS](state, cards) {
-    state.cards = cards.cards;
+    const orgCards = cards.cards;
+    const allArr = [];
+    // 检测每种卡牌数量
+    for (let i = 0; i < orgCards.length; i++) {
+      let flag = true;
+      let count = 1;
+      for (let j = 0; j < allArr.length; j++) {
+        if (orgCards[i].cardId == allArr[j].cardId) {
+          flag = false;
+          allArr[j].count++;
+        }
+      }
+      if (flag) {
+        orgCards[i].count = 1;
+        allArr.push(orgCards[i]);
+      }
+    }
+
+    state.cards = allArr;
   },
   [types.ADD_USER_CARD](state, card) {
     state.cards.splice(0, 0, card);
@@ -49,13 +67,18 @@ const actions = {
   },
   async buyLottery({ commit }, { cardPoolId, money }) {
     commit(types.FETCH_STH);
+    let data = {};
     try {
-      commit(types.ADD_USER_LOTTERY, await api.buyLottery(cardPoolId));
+      const lottery = await api.buyLottery(cardPoolId);
+      data = await api.getLotteryCard(lottery[0]._id);
+
+      // commit(types.ADD_USER_LOTTERY, await api.buyLottery(cardPoolId));
       commit(types.BUY_GOODS, money);
     } catch (err) {
       console.log(err);
     }
     commit(types.GOT_STH);
+    return data;
   },
   async getCardPool({ commit }, { type }) {
     commit(types.FETCH_STH);
@@ -66,7 +89,7 @@ const actions = {
     }
     commit(types.GOT_STH);
   },
-  async openLotteryBox({ commit }, { lotteryId, index }) {
+  async openLotteryBox({ commit }, { lotteryId }) {
     commit(types.FETCH_STH);
     let data = {};
     try {

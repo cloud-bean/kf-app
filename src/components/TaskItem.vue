@@ -92,7 +92,7 @@ p{
   border-radius: 0;
 }
 .task-item{
-  margin-top: 5px;
+  /* margin-top: 5px; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -100,7 +100,7 @@ p{
 }
 .task-content{
     padding: 0 1rem;
-    background-color: #EEEEFF;
+    background-color: #e8f0f6;
 
 }
 .title{
@@ -135,7 +135,7 @@ p{
   justify-content: space-between;
   align-items: baseline;
   padding: 0.5rem 1rem;
-  background-color: #EEEEFF;
+  background-color: #e8f0f6;
   font-size: 0.8rem;
 }
 
