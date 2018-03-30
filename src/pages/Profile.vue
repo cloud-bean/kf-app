@@ -3,9 +3,9 @@
     <expbar></expbar>
     <chart></chart> -->
 <div class="">
-  <div class="profile">
+  <div class="user-info">
 
-    <info :user="user" :rank="myRank.rankIndex"></info>
+      <info :user="user" :rank="myRank.rankIndex"></info>
 
     <!--<div class="tip">
       <tips :tip="tip"></tips>
@@ -13,8 +13,6 @@
     <!-- <div class="chart">
       <my-chart :my-chart-data="userRecords"></my-chart>
     </div> -->
-
-    <news-slider :news="news" :news-detail="newsDetail"></news-slider>
 <!--
       <mt-cell title="王者排行" label="快追上你的对手吧" is-link to="/rank">
        <mt-badge size="normal">第{{myRank.rankIndex}}名</mt-badge>
@@ -41,8 +39,9 @@
      <img-cell :title-img="bagImg" title="背包系统" subtitle="宝箱、卡牌" to="/cardBag"></img-cell>
      </div> -->
    </div>
-   <div class="">
+   <div class="profile-content">
 
+     <news-slider :news="news" :news-detail="newsDetail"></news-slider>
 
      <!-- <div class="button-area"> -->
      <!-- <mt-navbar v-model="selected">
@@ -67,18 +66,18 @@
          infinite-scroll-disabled="loading"
          infinite-scroll-distance="10"
          >-->
-         <div  v-infinite-scroll="loadMore"
+         <div  v-infinite-scroll="loadMoreTask"
                infinite-scroll-disabled="loading"
                infinite-scroll-distance="10">
 
-         <div v-for="(task, index) in tasks">
-           <div class="timeline-icon" v-if="index==0">
+         <div class="task-date" v-for="data in taskByDate">
+           <div class="timeline-icon">
               <i class="fa fa-circle"aria-hidden="true" ></i>
-              <span>{{new Date()|dateFormat}}</span>
+              <span>{{data.date|dateFormat}}</span>
             </div>
             <!-- <transition enter-active-class="fadeInRight" leave-active-class="fadeOutRight"> -->
 
-             <task-item class="task-item" :taskdata="task" @click.native="handleClick(index)"></task-item>
+             <task-item v-for="(task,index) in data.tasks" class="task-item" :taskdata="task" @click.native="handleClick(index)"></task-item>
            <!-- </transition> -->
 
          </div>
@@ -110,15 +109,15 @@ import imgCell from '../components/ImgCell';
 import TaskItem from '../components/TaskItem';
 
 // import { getMyRecords } from '../vuex/actions';
-import rankImg from '../assets/rank.jpg';
-import bagImg from '../assets/bag.jpg';
+// import rankImg from '../assets/rank.jpg';
+// import bagImg from '../assets/bag.jpg';
 import { api } from '../api';
 import { MessageBox,Toast, Indicator } from 'mint-ui';
 import { mapState, mapActions } from 'vuex';
 
 // import Expbar from '../components/Expbar';
 // import Chart from '../components/Chart';
-// import config from '../config/config';
+import config from '../config/config';
 // import util from '../config/util';
 // import mockdata from '../../test/mock';
 
@@ -129,9 +128,11 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      rankImg,
-      bagImg,
+      // rankImg,
+      // bagImg,
       display: true,
+      loading:false,
+      hasMore:true,
     };
   },
   computed: mapState({
@@ -143,6 +144,7 @@ export default {
     myRank: state => state.rank.myRank,
     cards: state => state.card.cards,
     tasks: state => state.task.tasks,
+    taskByDate: state => state.task.taskByDate,
     taskQuantityInfo: state => state.task.taskQuantityInfo,
     page: state => state.task.page,
     selected: state => state.task.selected,
@@ -155,9 +157,10 @@ export default {
   //   },
   // },
   mounted() {
-    this.$nextTick(() => {
-      this.init();
-    });
+    // console.log('mount');
+    // this.$nextTick(() => {
+    //   this.init();
+    // });
   },
   methods: {
     ...mapActions([
@@ -167,26 +170,27 @@ export default {
       'getAllTaskList',
       'cleanTaskList',
       'changeNavbar',
+      'getAllTaskList',
     ]),
     async init(){
-      if(this.tasks.length==0){
-       await this.getTaskList();
-      }
+      // if(this.tasks.length == 0){
+      //  await this.getAllTaskList(this.page);
+      // }
     },
     handleClick(index){
       this.taskDetail(index);
       this.$router.push('/taskDetail');
     },
-    async showTaskProcess(){
-      this.changeNavbar('1')
-      this.cleanTaskList();
-      await this.getTaskList('process');
-    },
-    async showAllTask(){
-      this.changeNavbar('2')
-      this.cleanTaskList();
-      await this.getAllTaskList(this.page);
-    },
+    // async showTaskProcess(){
+    //   this.changeNavbar('1')
+    //   this.cleanTaskList();
+    //   await this.getTaskList('process');
+    // },
+    // async showAllTask(){
+    //   this.changeNavbar('2')
+    //   this.cleanTaskList();
+    //   await this.getAllTaskList(this.page);
+    // },
     // scan(){
     //   wx.onMenuShareTimeline({
     //     title: 'joywill', // 分享标题
@@ -201,20 +205,16 @@ export default {
     //   });
     // },
     loadMoreTask(){
-      if(this.selected=='1'){
 
-      }else if(this.selected=='2'){
-
-         if(this.hasMore){
+      if(this.hasMore){
         this.loading = true;
         this.getAllTaskList(this.page)
         .then(res => {
-          if(res.length < 20){
+          if(res.length < config.task.limit){
             this.hasMore = false;
           }
           this.loading = false;
         });
-      }
       }
     },
   },
@@ -330,6 +330,18 @@ margin-top: 1rem;
 }
 .task-item{
   margin-top: 0.3rem;
+}
+.user-info{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index:2;
+}
+.profile-content{
+  margin-top: 7.5rem;
+}
+.task-date{
+  margin-bottom: .5rem;
 }
 .opacity{background:rgba(0,0,0,.5); }
 </style>

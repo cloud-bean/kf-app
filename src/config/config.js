@@ -25,7 +25,7 @@ export default {
     userid: '581c96e5a5c363bc28af1a69',
   },
   task: {
-    limit: 30,
+    limit: 5,
   },
   rank: {
     limit: 20,

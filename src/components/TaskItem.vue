@@ -1,25 +1,25 @@
 <template>
 <!--v-bind:class="{mask:expire}"-->
-  <div class="task-item" >
-    <div class="left"  v-bind:class="[type]">
-    </div>
-    <div class="right">
-      <div class="task-content">
+  <div class="task-item Grid" v-bind:class="[type]">
+    <div class="task-content Cell -10of12">
+      <div class=" ">
         <!-- <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div> -->
         <div class="title">{{taskdata.name}}</div>
-        <div class="gery">{{taskdata.expireTime | dateFormat}} # <span class="gery">{{taskdata.type}}</span></div>
-
-
+        <!-- <div class="gery">{{taskdata.expireTime | dateFormat}} -->
+        <div class="Grid">
+          <!-- <mt-badge class="" size="small" color="#888">{{taskdata.type}}</mt-badge> -->
+          <mt-badge class="" size="small" type="success">经验:{{taskdata.exp}}</mt-badge>
+          <mt-badge class="" size="small" style="margin-left:.3rem;" type="warning">悦币:{{taskdata.goldToken}}</mt-badge>
+        </div>
       </div>
-      <div class="task-footer">
-        <span>难度:{{taskdata.difficult}}</span>
-        <span>经验:{{taskdata.exp}}</span>
-        <span>悦币:{{taskdata.goldToken}}</span>
-        <span v-if="taskdata.isDone">完成</span>
-        <span style="color:red;" v-else>未完成</span>
-      </div>
+
     </div>
-
+    <div class="task-right Cell -1of12">
+      <span style="color:green;" v-if="taskdata.isDone"><i class="fa fa-check-circle"></i></span>
+      <span style="color:red;" v-else><i class="fa fa-times-circle"></i></span>
+    </div>
+    <div class="mask" v-if="taskdata.expireTime | expire">
+    </div>
     </div>
 
 
@@ -73,17 +73,32 @@ const moment = require('moment');
 p{
   margin-bottom: 2px;
 }
+
 .mask {
-  /*height: 100%;*/
-  /*width:100%;*/
-  /*background: rgba(255, 255, 255, 0.5);*/
+  top: 0;
+  left: 0;
+  height:100%;
+  width:100%;
+  text-align: center;
+  vertical-align: middle;
+  color: #fff;
+  /* background: rgba(255, 255, 255, 0.8); */
   /*z-index: -1;*/
-  filter:opacity(50%);
+  position: absolute;
+  background-color: rgba(0,0,0,.5);
+  /* border: 2px solid #ccc; */
+  border-left:none;
+  border-radius: 2px;
+
 
 }
-.gery {
-  color:#999;
-  font-size: 0.8rem;
+.task-right {
+
+  font-size: 1.2rem;
+  text-align: center;
+  vertical-align: bottom;
+  padding: 1.5rem 0;
+  /* vertical-align:middle; */
 
 }
 .no-margin{
@@ -93,49 +108,55 @@ p{
 }
 .task-item{
   /* margin-top: 5px; */
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #ccc;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  border-left:none;
+  background-color: #eee;
+  /* padding: 0.5rem 0rem; */
 }
 .task-content{
-    padding: 0 1rem;
-    background-color: #e8f0f6;
+    /* padding: 0 1rem; */
+    /* background-color: #e8f0f6; */
+    margin: .5rem .5rem;
 
 }
 .title{
   padding:0.3rem 0;
   font-size: 1rem;
+  color: #333;
 }
-.left{
-  width: 1%;
-}
+/* .left{
+  width: 2%;
+} */
 .read{
-  background-color: #ED5565;
+  border: 3px solid #ED5565;
 }
 .test{
-  background-color: #FFCE54;
+  border: 3px solid  #FFCE54;
 }
 .speak{
-  background-color: #48CFAD;
+  border: 3px solid #48CFAD;
 }
 .write{
-  background-color: #4FC1E9;
+  border: 3px solid #4FC1E9;
 }
 .listen{
-  background-color: #ccc;
+  border: 3px solid #ccc;
 }
-.right{
-  width:99%;
+/* .right{
+  width:98%;
   /*font-size: 0.8rem;*/
-}
 .task-footer{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
   padding: 0.5rem 1rem;
-  background-color: #e8f0f6;
+  /* background-color: #e8f0f6; */
   font-size: 0.8rem;
 }
 

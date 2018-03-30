@@ -4,10 +4,10 @@ export const dateFormat = (expireTime) => {
   const result = moment(expireTime).format('YYYY-MM-DD');
   return result;
 };
-export const dateFormat1 = (expireTime) => {
+export const expire = (expireTime) => {
   const expireTimel = new Date(expireTime);
   const now = new Date();
-  const result = (expireTimel - now) > 0 ? moment(expireTime).format('YYYY-MM-DD HH:mm') : '已过期';
+  const result = (expireTimel - now) > 0 ? false : true;
   return result;
 };
 

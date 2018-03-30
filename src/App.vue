@@ -26,7 +26,7 @@
         </router-link> -->
 
         <mt-tabbar @click.native="handleClick" v-model="selected" fixed>
-          <mt-tab-item id="我的">
+          <mt-tab-item id="任务">
               <i class="fa fa-calendar" slot="icon" aria-hidden="true"></i>
               任务
           </mt-tab-item>
@@ -126,11 +126,8 @@ import { mapState } from 'vuex';
    methods:{
      handleClick(){
        switch (this.selected) {
-         case '我的':
-         this.$router.push('/profile')
-         break;
          case '任务':
-         this.$router.push('/task')
+         this.$router.push('/profile')
          break;
          case '集市':
          this.$router.push('/market')
@@ -138,8 +135,8 @@ import { mapState } from 'vuex';
          case '卡牌':
          this.$router.push('/cardBag')
          break;
-         case '冲顶':
-         this.$router.push('/match')
+         case '战绩':
+         this.$router.push('/battleresault')
          break;
          case '评分':
          this.$router.push('/teacherOrderList')

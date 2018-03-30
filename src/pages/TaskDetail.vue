@@ -64,11 +64,17 @@
  <div v-for="comment in comments" class="message-item">
    <message-item :data="comment"></message-item>
  </div>
- <div class="mulbutton" v-if="!task.isDone">
-   <mt-button type="primary" size="large"  @click="showActionSheet">提交作业</mt-button>
-  <!-- <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button> -->
+ <div class="" v-if="new Date(task.expireTime) > new Date()">
+   <div class="mulbutton" v-if="!task.isDone">
+     <mt-button  type="primary" size="large"  @click="showActionSheet">提交作业</mt-button>
+    <!-- <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button> -->
 
+   </div>
  </div>
+ <div v-else class="expire">
+   已超期
+ </div>
+
  <mt-actionsheet
  :actions="actions"
  v-model="sheetVisible">
@@ -282,6 +288,11 @@ export default {
 .play-video video{
   height:100%;
   width: 100%;
+}
+.expire{
+  text-align: center;
+  color: #fff;
+  background-color: rgba(255,0,0,.5);
 }
 /*.image-content{
 position: absolute;
