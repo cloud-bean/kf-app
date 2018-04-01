@@ -77,7 +77,7 @@
             </div>
             <!-- <transition enter-active-class="fadeInRight" leave-active-class="fadeOutRight"> -->
 
-             <task-item v-for="(task,index) in data.tasks" class="task-item" :taskdata="task" @click.native="handleClick(index)"></task-item>
+             <task-item v-for="(task,index) in data.tasks" class="task-item" :taskdata="task" @click.native="handleClick(task._id)"></task-item>
            <!-- </transition> -->
 
          </div>
@@ -176,8 +176,8 @@ export default {
       //  await this.getAllTaskList(this.page);
       // }
     },
-    handleClick(index){
-      this.taskDetail(index);
+    handleClick(id){
+      this.taskDetail(id);
       this.$router.push('/taskDetail');
     },
     // async showTaskProcess(){

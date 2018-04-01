@@ -135,11 +135,13 @@ const actions = {
     //     commit(types.GOT_STH);
     //     return tasks;
     // },
-  taskDetail({ commit, state }, index) {
+  taskDetail({ commit, state }, id) {
     commit(types.FETCH_STH);
     const tasks = state.tasks;
-    const current = tasks[index];
-    commit(types.SET_ACTIVE_TASK, current);
+    const current = tasks.filter(item => {
+      return (item._id == id);
+    });
+    commit(types.SET_ACTIVE_TASK, current[0]);
   },
   async leaveComment({ commit }, { content, taskId }) {
     commit(types.FETCH_STH);
