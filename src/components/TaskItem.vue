@@ -1,6 +1,6 @@
 <template>
 <!--v-bind:class="{mask:expire}"-->
-  <div class="task-item Grid" v-bind:class="[expire?'expire':'',type]">
+  <div class="task-item Grid" v-bind:class="[expire?'expire':'']">
     <div class="task-content Cell -10of12">
       <div class=" ">
         <!-- <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div> -->
@@ -121,8 +121,8 @@ p{
   flex-direction: row;
   justify-content: space-between;
   border-radius: 5px;
-  border: 2px solid #ccc;
-  border-left:none;
+  border: 3px solid #4FC1E9;
+  /* border-left:none; */
   background-color: #eee;
   /* padding: 0.5rem 0rem; */
 }
