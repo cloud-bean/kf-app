@@ -1,6 +1,6 @@
 <template>
 <!--v-bind:class="{mask:expire}"-->
-  <div class="task-item Grid" v-bind:class="[type]">
+  <div class="task-item Grid" v-bind:class="[expire?'expire':'',type]">
     <div class="task-content Cell -10of12">
       <div class=" ">
         <!-- <div class="facebook-avatar"><img :src="logo" width="40" height="40"></div> -->
@@ -10,6 +10,8 @@
           <!-- <mt-badge class="" size="small" color="#888">{{taskdata.type}}</mt-badge> -->
           <mt-badge class="" size="small" type="success">经验:{{taskdata.exp}}</mt-badge>
           <mt-badge class="" size="small" style="margin-left:.3rem;" type="warning">悦币:{{taskdata.goldToken}}</mt-badge>
+          <mt-badge v-if="expire" class="" size="small" style="margin-left:.3rem;" type="success">已超期</mt-badge>
+
         </div>
       </div>
 
@@ -18,8 +20,8 @@
       <span style="color:green;" v-if="taskdata.isDone"><i class="fa fa-check-circle"></i></span>
       <span style="color:red;" v-else><i class="fa fa-times-circle"></i></span>
     </div>
-    <div class="mask" v-if="taskdata.expireTime | expire">
-    </div>
+    <!-- <div class="mask" v-if="expire">
+    </div> -->
     </div>
 
 
@@ -41,7 +43,7 @@ const moment = require('moment');
           logo: null,
           showM: false,
           expire: false,
-          type:'read'
+          type:'read',
         }
       },
       created(){
@@ -72,6 +74,10 @@ const moment = require('moment');
 <style scoped>
 p{
   margin-bottom: 2px;
+}
+.expire{
+  -webkit-filter: grayscale(99%); /* Chrome, Safari, Opera */
+  filter: grayscale(99%);
 }
 
 .mask {
