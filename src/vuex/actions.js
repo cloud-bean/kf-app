@@ -30,6 +30,21 @@ export async function getJsConfig({ commit }, url) {
   commit(types.SET_JS_CONFIG, await api.getJsConfig(url));
   commit(types.GOT_STH);
 }
+
+export async function getAllMemberAvatars({ commit }) {
+  commit(types.FETCH_STH);
+  const res = await api.getAllMemberAvatars();
+  if (res.data.data && res.data.data[0].images) {
+    commit(types.SET_MEMBER_AVATARS, { memberAvatars: res.data.data[0].images });
+  }
+  commit(types.GOT_STH);
+}
+export async function setMemberAvatar({ commit }, payload) {
+  commit(types.FETCH_STH);
+  const res = await api.setMemberAvatar(payload.id, payload.data);
+  console.log('post result', res.data.data);
+  commit(types.GOT_STH);
+}
 // export async function getUserInfo({ dispatch, state }, userid) {
 //   dispatch('GOT_USER', await api.getUserInfo(userid));
 // }

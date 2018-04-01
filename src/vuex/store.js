@@ -20,50 +20,53 @@ const state = {
     // myRank: null,
     // activeTask: {},
     // activeComments:[],
-    loading: false,
-    accessToken: '',
-    userid: '',
-    unionid: '',
+  loading: false,
+  accessToken: '',
+  userid: '',
+  unionid: '',
     // currentRoute: '',
     // feedbacks: [],
-    jsConfig: {},
+  jsConfig: {},
     // myRecords:{},
     // tip:{},
-    login: false,
-    progress: 0,
+  login: false,
+  progress: 0,
+  memberAvatars: [],
 
     // orders:[],
     // activeOrder:{},
 };
 
 const mutations = {
-    [types.AUTH_CLIENT](state, { userid, accessToken, unionid }) {
-        state.userid = userid;
-        state.accessToken = accessToken;
-        state.unionid = unionid;
-        console.log(unionid);
-        console.log('AUTH_CLIENT done ');
-    },
-    [types.FETCH_STH](state) {
-        state.loading = true;
-    },
-    [types.GOT_STH](state) {
-        state.loading = false;
-    },
-    [types.SET_LOGIN](state, login) {
-        state.login = login;
-    },
-    [types.SET_JS_CONFIG](state, config) {
-        state.jsConfig = config;
-    },
-    [types.SET_PROGRESS](state, progress) {
-        state.progress = progress;
-    },
+  [types.AUTH_CLIENT](state, { userid, accessToken, unionid }) {
+    state.userid = userid;
+    state.accessToken = accessToken;
+    state.unionid = unionid;
+    console.log(unionid);
+    console.log('AUTH_CLIENT done ');
+  },
+  [types.FETCH_STH](state) {
+    state.loading = true;
+  },
+  [types.GOT_STH](state) {
+    state.loading = false;
+  },
+  [types.SET_LOGIN](state, login) {
+    state.login = login;
+  },
+  [types.SET_JS_CONFIG](state, config) {
+    state.jsConfig = config;
+  },
+  [types.SET_PROGRESS](state, progress) {
+    state.progress = progress;
+  },
+  [types.SET_MEMBER_AVATARS](state, payload) {
+    state.memberAvatars = payload.memberAvatars;
+  },
     // GOT_USER(state, user) {
     //   state.user = user;
     //   state.loading = false;
     // },
-
 
 
     // GOT_TASKS(state, tasks) {
@@ -141,15 +144,15 @@ const mutations = {
 };
 
 export default new Vuex.Store({
-    state,
-    mutations,
-    actions,
-    modules: {
-        profile,
-        task,
-        rank,
-        score,
-        card,
-        news,
-    },
+  state,
+  mutations,
+  actions,
+  modules: {
+    profile,
+    task,
+    rank,
+    score,
+    card,
+    news,
+  },
 });

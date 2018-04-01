@@ -1,20 +1,24 @@
 
 <template>
-  <div class="">
-    <transition name="fade">
-    <div class="init" v-if="!login" >
-       <div class="time">
+  <div class="init">
+    <!-- <transition name="fade"> -->
+    <div class="init" v-if="!login">
+       <!-- <div class="time">
          {{loginDate}}
-      </div>
+      </div> -->
       <div  class="slogan">
-        遇见你，真好
+        v0.6.20180331
       </div>
-      <div class="logo">
-            <mt-progress :value="progress" :bar-height="5"></mt-progress>
-            <div>已加载{{progress}}%</div>
-      </div>
+            <!-- <mt-progress :value="progress" :bar-height="5"></mt-progress>
+            <div>已加载{{progress}}%</div> -->
+            <div class="logo">
+              <square-loader :loading="true" color="#fff" ></square-loader>
+
+              <!-- <mt-spinner style="margin:0 auto;" type="triple-bounce" color="#fff" :size="40"></mt-spinner> -->
+            </div>
+
     </div>
-    </transition>
+    <!-- </transition> -->
   </div>
 
 </template>
@@ -24,7 +28,9 @@ import config from '../config/config';
 import util from '../config/util';
 import mockdata from '../../test/mock';
 import * as types from '../vuex/mutation_types';
-import logo from '../assets/logo.jpg';
+import index from '../assets/index.jpg';
+import SquareLoader from 'vue-spinner/src/SquareLoader.vue'
+
 const moment = require('moment');
 
 // import { auth, getUserInfo, authLocal, getJsConfig, getMyRecords, getTip, setLogin } from '../vuex/actions';
@@ -41,6 +47,9 @@ export default {
     return {
       mockdata,
     };
+  },
+  components:{
+    SquareLoader,
   },
   computed: {
     ...mapState({
@@ -76,7 +85,7 @@ export default {
       wx.onMenuShareTimeline({
         title: '我在悦维用Joybox学习，你也来吧', // 分享标题
         link: 'joywill.cc/#/intro', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: logo, // 分享图标
+        // imgUrl: logo, // 分享图标
         success: function () {
           // 用户确认分享后执行的回调函数
         },
@@ -113,7 +122,6 @@ export default {
         await this.getUserInfo(this.userid);
         this.setProgress(100);
         await this.getRanks(1);
-        console.log('user',this.user);
         if(this.user.option.phone){
           this.setLogin(true);
           this.$router.push('/profile');
@@ -163,38 +171,39 @@ export default {
 }
 </script>
 <style scoped>
-.time{
+/* .time{
   color:  @important-font;
   font-family:  微软雅黑;
   font-size: 1.2rem;
 
-}
+}*/
 .slogan{
-  color: #26a2ff;
+  color: #fff;
   font-family: 幼圆;
-  font-size: 2rem;
+  font-size: 1rem;
   margin-top: 1rem;
-  font-weight:700  ;
+  /* font-weight:700  ; */
 }
 .logo{
-  margin-top: 5rem;
+  position:absolute;
+  right: 0;
+  left:0;
+  margin: auto;
+  bottom:5rem;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0
-}
+
 .init{
   height:100%;
   width:100%;
-  position:fixed;
-  _position:absolute;
+  position:absolute;
+  /* _position:absolute; */
   top:0;
   left:0;
   z-index:999;
   text-align: center;
+  background-image: url('../assets/index.jpg');
+  background-size: contain;
   background-color:#eee;
-  padding: 10rem 5rem;
+  /* padding: 0rem 8rem; */
 }
 </style>

@@ -42,6 +42,10 @@
             <i class="fa fa-sitemap" slot="icon" aria-hidden="true"></i>
               战绩
           </mt-tab-item>
+          <!-- <mt-tab-item id="注册">
+            <i class="fa fa-sitemap" slot="icon" aria-hidden="true"></i>
+              注册
+          </mt-tab-item> -->
           <!-- <mt-tab-item id="冲顶">
             <i class="fa fa-trophy" slot="icon" aria-hidden="true"></i>
               冲顶
@@ -77,13 +81,15 @@
   </transition> -->
 
   <div class="mask opacity" v-if="loading">
-    <div class="background">
-      JOYBOX
-    </div>
-    <div class="spinner">
-      <mt-spinner type="triple-bounce" color="#26a2ff" :size="40" ></mt-spinner>
-      <!-- <p>加载中...</p> -->
-    </div>
+      <!-- JoyBox -->
+      <div class="spinner">
+        <div class="" style="margin-bottom:1rem;font-size:1.2rem">
+        悦盒 Joybox
+        </div>
+        <scale-loader :loading="loading" color="#fff"></scale-loader>
+      </div>
+
+
   </div>
 
   <!-- <span class="tab-label"><a v-link="{ path: '/task'}" href="#">TASK</a></span> -->
@@ -101,6 +107,7 @@
 // const co = require('co');
 //
 import { mapState } from 'vuex';
+import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
 
  export default {
   //  store,
@@ -108,6 +115,9 @@ import { mapState } from 'vuex';
      return {
        selected:'我的'
      }
+   },
+   components:{
+     ScaleLoader,
    },
    computed:{
       ...mapState({
@@ -137,6 +147,9 @@ import { mapState } from 'vuex';
          break;
          case '战绩':
          this.$router.push('/battleresault')
+         break;
+         case '注册':
+         this.$router.push('/signup')
          break;
          case '评分':
          this.$router.push('/teacherOrderList')
@@ -168,10 +181,17 @@ nav i{
 }
 
 .spinner{
-  margin:0 auto;
-  margin-top: 0.5rem;
-  width: 12rem;
-  padding:0.8rem;
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin: auto;
+height:5rem;
+width:10rem;
+padding: 1rem;
+  // width: 12rem;
+  // padding:0.8rem;
   /*background-color: white;*/
   /*color: #555555;*/
   /*font-size: 0.7rem;*/
@@ -196,38 +216,37 @@ nav i{
 nav{
   text-align: center;
 }
-// .init{
-//   height:100%;
-//   width:100%;
-//   position:fixed;
-//   _position:absolute;
-//   top:0;
-//   left:0;
-//   z-index:999;
-//   text-align: center;
-//   background-color:#eee;
-//   padding: 10rem 5rem;
-// }
+
 .mask{
-  height:100%;
-  width:100%;
   position:fixed;
   _position:absolute;
   top:0;
+  bottom: 0;
+  right: 0;
   left:0;
-  z-index:998;
+  margin: auto;
+  z-index:10;
   text-align: center;
-}
-.opacity{background:rgba(255,255,255,.5); }
-.background{
-  text-align: center;
-  width: 100%;
-  font-size: 2rem;
-  margin-top: 14rem;
-  font-weight:700  ;
-  color: #26a2ff;
+  background:rgba(0,0,0,.8);
+  color: #fff;
 
 }
+// .background{
+//   position: fixed;
+//   text-align: center;
+//   left: 0;
+//   right: 0;
+//   top: 0;
+//   bottom: 0;
+//   margin: auto;
+//   // height:5rem;
+//   // width: 10rem;
+//   font-size: 2rem;
+//   // margin-top: 14rem;
+//   // font-weight:100  ;
+//   color: #fff;
+//
+// }
 // .time{
 //   color:  @important-font;
 //   font-family:  微软雅黑;

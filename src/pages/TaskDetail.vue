@@ -29,7 +29,7 @@
            </audio>
           </div>
           </div>
-          <div class="summary" v-if="task.isDone">
+          <div class="summary" v-if="task.isDone || (new Date(task.expireTime) < new Date())">
             <img :src="task.summaryImage.URL" alt="" width="100%" v-if="task.summaryImage"/>
             <div v-html="tansMarkdown(task.summary)"  v-if="task.summary">
             </div>

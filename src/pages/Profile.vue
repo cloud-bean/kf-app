@@ -170,7 +170,6 @@ export default {
       'getAllTaskList',
       'cleanTaskList',
       'changeNavbar',
-      'getAllTaskList',
     ]),
     async init(){
       // if(this.tasks.length == 0){
@@ -210,10 +209,12 @@ export default {
         this.loading = true;
         this.getAllTaskList(this.page)
         .then(res => {
-          if(res.length < config.task.limit){
-            this.hasMore = false;
+          if(res.type!='error'){
+            if(res.length < config.task.limit){
+              this.hasMore = false;
+            }
+            this.loading = false;
           }
-          this.loading = false;
         });
       }
     },

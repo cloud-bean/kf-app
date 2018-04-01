@@ -49,3 +49,5 @@ export const getUserRecords = () =>
         reject(err);
       });
   });
+export const setMemberAvatar = (id, data) => service.put(`/users/${id}/change/avatar`, data);
+export const getAllMemberAvatars = () => service.get('/imageGallerys?name=avatarForMember');

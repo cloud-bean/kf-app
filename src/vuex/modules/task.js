@@ -38,20 +38,21 @@ const mutations = {
         return 1;
       }
     });
-    const orgTasks = state.tasks;
     const taskByDate = [];
-    let flag = true;
-    console.log(orgTasks);
-    for (let i = 0; i < orgTasks.length; i++) {
-      flag = true;
-      for (let j = 0; j < taskByDate.length; j++) {
-        if (taskByDate[j].date.isSame(moment(orgTasks[i].startTime), 'day')) {
-          taskByDate[j].tasks.push(orgTasks[i]);
-          flag = false;
+    const orgTasks = state.tasks;
+    if (state.tasks[0]) {
+      let flag = true;
+      for (let i = 0; i < orgTasks.length; i++) {
+        flag = true;
+        for (let j = 0; j < taskByDate.length; j++) {
+          if (taskByDate[j].date.isSame(moment(orgTasks[i].startTime), 'day')) {
+            taskByDate[j].tasks.push(orgTasks[i]);
+            flag = false;
+          }
         }
-      }
-      if (flag == true) {
-        taskByDate.push({ date: moment(orgTasks[i].startTime), tasks: [orgTasks[i]] });
+        if (flag == true) {
+          taskByDate.push({ date: moment(orgTasks[i].startTime), tasks: [orgTasks[i]] });
+        }
       }
     }
     state.taskByDate = taskByDate;

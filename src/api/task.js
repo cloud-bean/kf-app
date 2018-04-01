@@ -25,9 +25,12 @@ export const getAllTaskList = page =>
     service
       .get(`${bigServer}/allTasks?page=${page}&limit=${config.task.limit}`)
       .then(result => {
-        const tasks = result.data.data;
-        // const taskQuantity = result.body.data.totalCount;
-        resolve(tasks);
+        if (result.data.code == 'success') {
+          const tasks = result.data.data;
+          // const taskQuantity = result.body.data.totalCount;
+          resolve(tasks);
+        }
+        resolve([]);
       })
       .catch(err => {
         reject(err);
