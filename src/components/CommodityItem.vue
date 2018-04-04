@@ -1,6 +1,7 @@
 <template>
 
   <div class="img-cell Grid -middle -around">
+    <float-message-bar desc="很不幸我的朋友，你没有获得卡牌" :show.sync="showMsgBar"></float-message-bar>
     <div class="img Cell -1of12 Grid -center -middle">
         <img :src="!!(this.commodityData.file)?this.commodityData.file.URL:boximg" alt="" class=""/>
     </div>
@@ -50,17 +51,21 @@ import boximg from '../assets/box.jpg';
 import { MessageBox,Toast } from 'mint-ui';
 import { mapState, mapActions } from 'vuex';
 import CardView from '../components/CardView';
+import FloatMessageBar from '../components/floatMessageBar';
+
 
     export default{
       props:['commodityData','buy','openLotteryBox'],
       components: {
         CardView,
+        FloatMessageBar,
       },
       data(){
         return {
          boximg,
          popupVisible:false,
          card:{},
+         showMsgBar:false,
         }
       },
       computed:mapState({
@@ -87,12 +92,16 @@ import CardView from '../components/CardView';
             const data = await this.buy({cardPoolId:this.commodityData._id, money:this.commodityData.ticketPrice});
             console.log(data);
             if(!data.card){
-              Toast({
-                iconClass:' fa-hand-peace-o fa',
-                 message: `很不幸我的朋友，你没有获得卡牌!`,
-                 position: 'middle',
-                 duration: 1000
-               });
+              // Toast({
+              //   iconClass:' fa-hand-peace-o fa',
+              //    message: `很不幸我的朋友，你没有获得卡牌!`,
+              //    position: 'middle',
+              //    duration: 1000
+              //  });
+              this.showMsgBar=true;
+              // setTimeout(()=>{
+              //   this.showMsgBar = false;
+              // },1000);
             }
             else if(data.card){
               this.card = data.card;

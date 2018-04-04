@@ -8,6 +8,9 @@ import rank from './modules/rank';
 import score from './modules/score';
 import card from './modules/card';
 import news from './modules/news';
+import course from './modules/course';
+import activity from './modules/activity';
+
 
 Vue.use(Vuex);
 
@@ -154,5 +157,7 @@ export default new Vuex.Store({
     score,
     card,
     news,
+    activity,
+    course,
   },
 });

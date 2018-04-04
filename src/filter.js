@@ -1,9 +1,16 @@
 const moment = require('moment');
+moment.lang('zh-cn');
 
 export const dateFormat = (expireTime) => {
   const result = moment(expireTime).format('YYYY-MM-DD');
   return result;
 };
+
+export const timefromNow = (dateTime) => {
+  const result = moment(dateTime).fromNow();
+  return result;
+};
+
 export const expire = (expireTime) => {
   const expireTimel = new Date(expireTime);
   const now = new Date();

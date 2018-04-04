@@ -17,6 +17,7 @@ import recordVoicePage from '../pages/RecordVoice';
 import introPage from '../pages/Intro';
 import gameBoardPage from '../pages/gameBoardPage';
 import BattleResault from '../pages/BattleResault';
+import Activity from '../pages/Activity';
 
 
 // import CardBagPage from '../components/Card';
@@ -51,6 +52,8 @@ export default new VueRouter({
     { path: '/intro', component: introPage },
     { path: '/match', component: gameBoardPage },
     { path: '/battleresault', component: BattleResault },
+    { path: '/activity', component: Activity },
+
 
   ],
 });

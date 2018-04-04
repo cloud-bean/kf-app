@@ -16,23 +16,33 @@
         <div class="name">{{displayName}}</div>
   </div>
 </header>
-<div class="field Grid">
+<div class="field">
 <mt-field label="姓名" placeholder="请输入用户名"  v-model="displayName"></mt-field>
 <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone"></mt-field>
-<div class="Cell -3of12" style="padding:10px;">所在学校</div>
-<select class="Cell -9of12"  v-model="school">
-  <option value ="西工大附中">西工大附中</option>
-  <option value ="西安铁一中">西安铁一中</option>
-  <option value ="陕师大附中">陕师大附中</option>
-  <option value ="西安高新一中">西安高新一中</option>
-  <option value ="西安交大附中">西安交大附中</option>
-  <option value ="西安爱知中学">西安爱知中学</option>
-  <option value ="西北大学附中">西北大学附中</option>
-  <option value ="西电附中">西电附中</option>
-  <option value ="西安市第一中学">西安市第一中学</option>
-  <option value ="西安市第七十中学">西安市第七十中学</option>
-  <option value ="西安市第七十中学">其他学校</option>
-</select>
+<div class="Grid">
+  <div class="Cell -3of12" style="padding:10px;">所在学校</div>
+  <select class="Cell -9of12"  v-model="school">
+    <option value ="西工大附中">西工大附中</option>
+    <option value ="西安铁一中">西安铁一中</option>
+    <option value ="陕师大附中">陕师大附中</option>
+    <option value ="西安高新一中">西安高新一中</option>
+    <option value ="西安交大附中">西安交大附中</option>
+    <option value ="西安爱知中学">西安爱知中学</option>
+    <option value ="西北大学附中">西北大学附中</option>
+    <option value ="西电附中">西电附中</option>
+    <option value ="西安市第一中学">西安市第一中学</option>
+    <option value ="西安市第七十中学">西安市第七十中学</option>
+    <option value ="西安市第七十中学">其他学校</option>
+  </select>
+</div>
+
+<div class="Grid">
+  <div class="Cell -3of12" style="padding:10px;">起点</div>
+  <select class="Cell -9of12"  v-model="initCourse">
+    <option v-for="course in freeCourses" :value="course._id">{{course.name}}</option>
+  </select>
+</div>
+
 <!-- <mt-field label="我的宣言" placeholder="我的宣言"  v-model="slogan"></mt-field>
 <div class="submit"> -->
 <mt-button style="margin-top:2rem;" size="large" type="primary" @click="submit">提交</mt-button>
@@ -105,6 +115,7 @@ export default {
       slogan: 'Learning with Joy',
       school:'西工大附中',
       avatarPanel:false,
+      initCourse:'',
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
@@ -114,6 +125,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.getAllMemberAvatars();
+      this.getFreeCourses();
     });
   },
   // vuex: {
@@ -128,6 +140,7 @@ export default {
   computed: mapState({
     user: state => state.profile.user,
     memberAvatars: state => state.memberAvatars,
+    freeCourses: state => state.course.freeCourses,
   }),
   methods: {
     ...mapActions([
@@ -135,6 +148,8 @@ export default {
       'setLogin',
       'getAllMemberAvatars',
       'setMemberAvatar',
+      'getFreeCourses',
+      'bindFreeCourse',
     ]),
     setAvatar(profileImageURL) {
         this.setMemberAvatar({
@@ -158,6 +173,7 @@ export default {
       const slogan = this.slogan;
       try {
         await this.signUp({displayName, phone, slogan,school});
+        // await this.bindFreeCourse(this.initCourse)
       } catch (err) {
         console.log(err);
       }
@@ -171,6 +187,7 @@ export default {
       console.log('lll');
       this.avatarPanel = true;
     },
+
   }
 }
 </script>

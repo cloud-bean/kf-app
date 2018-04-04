@@ -10,6 +10,7 @@ export default {
 
         // midServer:'http://sab4h63cag.proxy.qqbrowser.cc',
     bigServer: 'https://joywill.cc/api',
+    bigServerV2: 'https://joywill.cc/v2',
     gameBoardServer: 'http://127.0.0.1:3000',
 
         //bigServer:'http://192.168.0.153:7000/api/base',
@@ -26,6 +27,9 @@ export default {
   },
   task: {
     limit: 5,
+  },
+  activity: {
+    limit: 20,
   },
   rank: {
     limit: 20,

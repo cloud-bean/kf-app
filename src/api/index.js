@@ -10,6 +10,8 @@ import * as articleApi from './article';
 import * as taskApi from './task';
 import * as teacherApi from './teacher';
 import * as userApi from './user';
+import * as courseApi from './course';
+import * as activityApi from './activity';
 
 
 export const api = {
@@ -39,4 +41,8 @@ export const api = {
   leaveComment: taskApi.leaveComment,
   getTaskComment: taskApi.getTaskComment,
   getUserRecords: userApi.getUserRecords,
+  getFreeCourses: courseApi.getFreeCourses,
+  bindFreeCourse: courseApi.bindFreeCourse,
+  getActivities: activityApi.getActivities,
+
 };

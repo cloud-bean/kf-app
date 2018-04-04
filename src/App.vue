@@ -38,10 +38,14 @@
             <i class="fa fa-bars" slot="icon" aria-hidden="true"></i>
               集市
           </mt-tab-item>
-          <mt-tab-item id="战绩">
+          <mt-tab-item id="动态">
+            <i class="fa fa-sitemap" slot="icon" aria-hidden="true"></i>
+              动态
+          </mt-tab-item>
+          <!-- <mt-tab-item id="战绩">
             <i class="fa fa-sitemap" slot="icon" aria-hidden="true"></i>
               战绩
-          </mt-tab-item>
+          </mt-tab-item> -->
           <!-- <mt-tab-item id="注册">
             <i class="fa fa-sitemap" slot="icon" aria-hidden="true"></i>
               注册
@@ -144,6 +148,9 @@ import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
          break;
          case '卡牌':
          this.$router.push('/cardBag')
+         break;
+         case '动态':
+         this.$router.push('/activity')
          break;
          case '战绩':
          this.$router.push('/battleresault')

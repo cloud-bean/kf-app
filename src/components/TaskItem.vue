@@ -8,12 +8,10 @@
         <!-- <div class="gery">{{taskdata.expireTime | dateFormat}} -->
         <div class="Grid">
           <!-- <mt-badge class="" size="small" color="#888">{{taskdata.type}}</mt-badge> -->
-          <mt-badge class="" size="small" type="primary">经验:{{taskdata.exp}}</mt-badge>
-          <mt-badge class="" size="small" style="margin-left:.3rem;" type="success">悦币:{{taskdata.goldToken}}</mt-badge>
+          <mt-badge v-if="!expire" class="" size="small" type="primary">经验:{{taskdata.exp}}</mt-badge>
+          <mt-badge v-if="!expire" class="" size="small" style="margin-left:.3rem;" type="success">悦币:{{taskdata.goldToken}}</mt-badge>
           <mt-badge v-if="!taskdata.isDone" class="" size="small" style="margin-left:.3rem;" type="warning">未完成</mt-badge>
           <mt-badge v-if="expire"  size="small" style="margin-left:.3rem;" type="error">已超期</mt-badge>
-
-
         </div>
       </div>
 

@@ -39,3 +39,6 @@ export const MINUS_USER_LOTTERY = 'MINUS_USER_LOTTERY';
 
 export const SET_ACTIVR_NEWS = 'SET_ACTIVR_NEWS';
 export const SET_NEWS = 'SET_NEWS';
+
+export const SET_FREE_COURSES = 'SET_FREE_COURSES';
+export const SET_ACTIVITIES = 'SET_ACTIVITIES';
