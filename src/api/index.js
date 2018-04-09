@@ -12,6 +12,7 @@ import * as teacherApi from './teacher';
 import * as userApi from './user';
 import * as courseApi from './course';
 import * as activityApi from './activity';
+import * as marketApi from './market';
 
 
 export const api = {
@@ -44,5 +45,7 @@ export const api = {
   getFreeCourses: courseApi.getFreeCourses,
   bindFreeCourse: courseApi.bindFreeCourse,
   getActivities: activityApi.getActivities,
-
+  sellCard: cardApi.sellCard,
+  getAllGoods: marketApi.getAllGoods,
+  buyGood: marketApi.buyGood,
 };

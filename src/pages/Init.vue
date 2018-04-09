@@ -102,6 +102,7 @@ export default {
         if(code){
           // this.$store.commit(types.FETCH_STH);
           // $.showPreloader('加载中...');
+
           if(process.env.NODE_ENV == 'production'){
             await this.auth({appid:config.appid,code});
             this.setProgress(20);
@@ -115,7 +116,6 @@ export default {
         wx.config(this.jsConfig);
         this.configWx();
         this.setProgress(60);
-
         // await this.getUserRecords();
         await this.getNews();
         this.setProgress(90);

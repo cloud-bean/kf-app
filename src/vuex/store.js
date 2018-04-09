@@ -10,6 +10,7 @@ import card from './modules/card';
 import news from './modules/news';
 import course from './modules/course';
 import activity from './modules/activity';
+import market from './modules/market';
 
 
 Vue.use(Vuex);
@@ -159,5 +160,6 @@ export default new Vuex.Store({
     news,
     activity,
     course,
+    market,
   },
 });

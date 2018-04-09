@@ -16,8 +16,7 @@
 </template>
 <style scoped>
 img[lazy=loading] {
-  /*width: 350px;*/
-  height: 443px;
+  height: 405px;
   background-image: url('../assets/cardLoading.png');
   background-size:contain;
   margin: auto;
@@ -29,12 +28,13 @@ img[lazy=loading] {
   /* z-index: 100; */
 }
 .name{
-  color:#ccc;
+  color:#fff;
   font-size: 1.2rem;
 }
 .desc{
-  color: #fff;
-  font-size: 1rem;
+  color:#ccc ;
+  font-size: .9rem;
+  text-align: left;
 }
 /* .type{
   width: 50%;
@@ -60,7 +60,7 @@ img[lazy=loading] {
 }*/
 </style>
 <script>
-import Qrcanvas from 'qrcanvas-vue';
+// import Qrcanvas from 'qrcanvas-vue';
 import { MessageBox } from 'mint-ui';
 
 export default {
@@ -75,14 +75,19 @@ export default {
       type:'tech',
     };
   },
-  props:['cardData','product'],
+  props:['cardData','product','sellCard'],
   mounted() {
 
   },
   methods: {
     sale(){
+      const that = this;
       MessageBox.prompt('请输入出售金额，确认后生效')
       .then(({ value, action }) => {
+          that.sellCard({
+            cardId: that.cardData.cardId,
+            price: value,
+          })
         console.log(value);
       })
       .catch(e=>{
@@ -95,7 +100,7 @@ export default {
 
   },
   components: {
-    Qrcanvas,
+    // Qrcanvas,
   }
 }
 </script>

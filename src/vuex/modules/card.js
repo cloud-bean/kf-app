@@ -56,6 +56,16 @@ const actions = {
     }
     commit(types.GOT_STH);
   },
+  async sellCard({ commit }, data) {
+    commit(types.FETCH_STH);
+    try {
+      const res = await api.sellCard(data);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+    commit(types.GOT_STH);
+  },
   async getUserLottery({ commit }) {
     commit(types.FETCH_STH);
     try {

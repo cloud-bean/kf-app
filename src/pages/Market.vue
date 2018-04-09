@@ -12,6 +12,11 @@
             <commodity-item :commodityData='item' :buy='buyLottery' :openLotteryBox='openLotteryBox'></commodity-item>
         </div>
       </div>
+      <div class="good-list">
+        <div class="commodity" v-for="(item,index) in allGoods">
+            <good-item :goodData='item' :buy='buyTheGood'></good-item>
+        </div>
+      </div>
 
 </div>
 
@@ -23,6 +28,7 @@
 <script>
 
 import CommodityItem from '../components/CommodityItem';
+import goodItem from '../components/goodItem';
 import Info from '../components/HeadInfo';
 
 // import { getMyRecords } from '../vuex/actions';
@@ -49,6 +55,7 @@ export default {
     // tip: state => state.profile.tip,
     // news: state => state.news.news,
     cardPool: state => state.card.cardPool,
+    allGoods: state => state.market.allGoods,
     user: state => state.profile.user,
     myRank: state => state.rank.myRank,
 
@@ -62,14 +69,30 @@ export default {
   // },
   mounted() {
       this.getCardPool({type:1});
+      this.getAllGoods();
   },
-  methods: mapActions([
-    'getCardPool',
-    'buyLottery',
-    'openLotteryBox',
-  ]),
+  methods: {
+    ...mapActions([
+      'getCardPool',
+      'buyLottery',
+      'openLotteryBox',
+      'getAllGoods',
+      'buyGood',
+      'getUserInfo',
+
+    ]),
+    async buyTheGood(data){
+      await this.buyGood(data);
+      await this.getAllGoods();
+      await this.getCardPool();
+      await this.getUserInfo();
+    }
+
+  },
+
   components: {
    CommodityItem,
+   goodItem,
    Info,
   },
 }
@@ -82,6 +105,9 @@ export default {
 }
 .commodity-list{
     margin-top: 8rem;
+}
+.good-list{
+  margin-top: .5rem;
 }
 .user-info{
   position: fixed;

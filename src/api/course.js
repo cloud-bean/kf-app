@@ -1,6 +1,5 @@
 import config from '../config/config';
-import service from './service';
-const bigServerV2 = config.server.bigServerV2;
+import { service, serviceV2 } from './service';
 
 export const getFreeCourses = () =>
   new Promise((resolve, reject) => {
@@ -17,8 +16,8 @@ export const getFreeCourses = () =>
 
 export const bindFreeCourse = (courseId) =>
   new Promise((resolve, reject) => {
-    service
-      .post(`${bigServerV2}/bindFreeCourse`, { courseId })
+    serviceV2
+      .post('/bindFreeCourse', { courseId })
       .then(result => {
         resolve(result);
       })

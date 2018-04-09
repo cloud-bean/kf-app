@@ -39,7 +39,7 @@
               集市
           </mt-tab-item>
           <mt-tab-item id="动态">
-            <i class="fa fa-sitemap" slot="icon" aria-hidden="true"></i>
+            <i class="fa fa-wpexplorer" slot="icon" aria-hidden="true"></i>
               动态
           </mt-tab-item>
           <!-- <mt-tab-item id="战绩">

@@ -1,11 +1,10 @@
 import config from '../config/config';
-import service from './service';
-const bigServer = config.server.bigServer;
+import { service, serviceV2 } from './service';
 
 export const getCardBag = () =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/myBag`)
+      .get('/myBag')
       .then(result => {
         const cardBag = result.data.data;
         resolve(cardBag);
@@ -17,7 +16,7 @@ export const getCardBag = () =>
 export const getLotterys = () =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/lotterys`)
+      .get('/lotterys')
       .then(result => {
         const lotterys = result.data.data;
         resolve(lotterys);
@@ -29,7 +28,7 @@ export const getLotterys = () =>
 export const getCardPool = type =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/cardPools?ticketType=${type}`)
+      .get(`/cardPools?ticketType=${type}`)
       .then(result => {
         const cardPool = result.data.data;
         resolve(cardPool);
@@ -41,7 +40,7 @@ export const getCardPool = type =>
 export const buyLottery = cardPoolId =>
   new Promise((resolve, reject) => {
     service
-      .post(`${bigServer}/buyLottery`,
+      .post('/buyLottery',
       { cardPoolId, amount: 1 })
       .then(result => {
         const data = result.data.data;
@@ -54,7 +53,7 @@ export const buyLottery = cardPoolId =>
 export const getLotteryCard = lotteryId =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/drawLottery/${lotteryId}`)
+      .get(`/drawLottery/${lotteryId}`)
       .then(result => {
         const data = result.data.data;
         resolve(data);
@@ -63,3 +62,15 @@ export const getLotteryCard = lotteryId =>
         reject(err);
       });
   });
+
+export const sellCard = data =>
+      new Promise((resolve, reject) => {
+        serviceV2
+          .post('/sellCard', data) // sell card --- '/api/v2/saleCard'
+          .then((result) => {
+            resolve(result);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });

@@ -1,5 +1,5 @@
 import config from '../config/config';
-import service from './service';
+import { service } from './service';
 const bigServer = config.server.bigServer;
 
 export const getNews = () =>

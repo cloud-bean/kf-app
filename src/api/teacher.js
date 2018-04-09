@@ -1,11 +1,10 @@
 import config from '../config/config';
-import service from './service';
-const bigServer = config.server.bigServer;
+import { service } from './service';
 
 export const getOrders = () =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/orders?limit=100`) // 默认20，不够用
+      .get('/orders?limit=100') // 默认20，不够用
       .then(result => {
         const orders = result.data.data;
         resolve(orders);
@@ -18,7 +17,7 @@ export const getOrders = () =>
 export const setScore = (score, comments, orderId) =>
   new Promise((resolve, reject) => {
     service
-      .post(`${bigServer}/orders/${orderId}/record`, { score, comments })
+      .post(`/orders/${orderId}/record`, { score, comments })
       .then(result => {
         resolve(result);
       })

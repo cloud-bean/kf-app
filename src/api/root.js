@@ -1,5 +1,5 @@
 import config from '../config/config';
-import service from './service';
+import { service } from './service';
 const midServer = config.server.midServer;
 
 export const auth = (appid, code) =>

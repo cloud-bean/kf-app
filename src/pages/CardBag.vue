@@ -1,7 +1,7 @@
 <template>
 <div class="card-bag">
   <transition enter-active-class=" animated zoomIn" leave-active-class=" animated zoomOut">
-      <card-view class="card-view" v-if="display" :card-data="activeCard" @click.native="closeCard"></card-view>
+      <card-view class="card-view" v-if="display" :card-data="activeCard" @click.native="closeCard" :product="true" :sellCard="sellMyCard"></card-view>
   </transition>
   <info :user="user" :rank="myRank.rankIndex"></info>
 
@@ -25,7 +25,7 @@
   </div>
 </div>
 
-<div class="mask opacity" v-if="display" @click="closeCard"></div>
+<div class="mask opacity" v-if="display" @click="closeCard" @touchmove.prevent></div>
 </div>
 </template>
 
@@ -34,6 +34,7 @@ import Info from '../components/HeadInfo';
 import { mapState, mapActions } from 'vuex';
 import Card from '../components/CardItem';
 import LotteryItem from '../components/LotteryItem';
+import { Toast } from 'mint-ui';
 
 import CardView from '../components/CardView';
 
@@ -67,7 +68,7 @@ export default {
   mounted() {
     this.$nextTick(()=> {
       this.getUserCards();
-      this.getUserLottery();
+      // this.getUserLottery();
     })
   },
   methods: {
@@ -75,7 +76,17 @@ export default {
       'openLotteryBox',
       'getUserCards',
       'getUserLottery',
+      'sellCard',
     ]),
+    async sellMyCard(cardData){
+      await this.sellCard(cardData);
+      await this.getUserCards();
+      await Toast({
+         message: `出售卡牌成功，在市场中查看，坐等收钱`,
+         position: 'middle',
+         duration: 2000
+       });
+    },
 
     openCard(index){
       if(this.display==false){
@@ -118,11 +129,11 @@ export default {
 .mask{
   height:100%;
   width:100%;
-  position:absolute;
+  position:fixed;
   /* _position:absolute; */
   top:0;
   left:0;
-  z-index:1;
+  z-index:998;
   background:rgba(0,0,0,.8);
 }
 .card-view{

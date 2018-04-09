@@ -1,5 +1,5 @@
 import config from '../config/config';
-import service from './service';
+import { service } from './service';
 const bigServer = config.server.bigServer;
 
 // page=${page}&limit=${config.task.limit}
@@ -8,7 +8,7 @@ export const getTaskList = state =>
     let tasks = [];
     let taskQuantity = {};
     service
-      .get(`${bigServer}/tasks?filter=${state}`)
+      .get(`/tasks?filter=${state}`)
       .then(result => {
         if (result.data.data) {
           tasks = result.data.data.tasks;
@@ -23,7 +23,7 @@ export const getTaskList = state =>
 export const getAllTaskList = page =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/allTasks?page=${page}&limit=${config.task.limit}&sort=-startTime`)
+      .get(`/allTasks?page=${page}&limit=${config.task.limit}&sort=-startTime`)
       .then(result => {
         if (result.data.code == 'success') {
           const tasks = result.data.data;
@@ -40,7 +40,7 @@ export const getAllTaskList = page =>
 export const getTaskDoneQuantity = () =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/records/doneCount`)
+      .get('/records/doneCount')
       .then(result => {
         const taskDoneQuantity = result.data.data.doneCount;
         resolve({ taskDoneQuantity });
@@ -52,7 +52,7 @@ export const getTaskDoneQuantity = () =>
 export const getTaskComment = taskId =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/tasks/${taskId}/commits?limit=30`)
+      .get(`/tasks/${taskId}/commits?limit=30`)
       .then(result => {
         const comments = result.data.data;
         resolve(comments);
@@ -74,7 +74,7 @@ export const submitOrder = (taskId, serverId, type) =>
       },
     };
     service
-      .post(`${bigServer}/orders`, data)
+      .post('/orders', data)
       .then(result => {
         resolve(result.data.data);
       })
@@ -85,7 +85,7 @@ export const submitOrder = (taskId, serverId, type) =>
 export const leaveComment = (content, taskId) =>
   new Promise((resolve, reject) => {
     service
-      .post(`${bigServer}/tasks/${taskId}/commits`, {
+      .post(`/tasks/${taskId}/commits`, {
         content,
       })
       .then(result => {

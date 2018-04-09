@@ -1,11 +1,10 @@
 import config from '../config/config';
-import service from './service';
-const bigServer = config.server.bigServer;
+import { service } from './service';
 
 export const getUserInfo = userid =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/users/${userid}`)
+      .get(`/users/${userid}`)
       .then(result => {
         console.log(result);
         resolve(result.data.data);
@@ -18,7 +17,7 @@ export const getUserInfo = userid =>
 export const signUp = (userid, userInfo) =>
 new Promise((resolve, reject) => {
   service
-  .put(`${bigServer}/users/${userid}`, userInfo)
+  .put(`/users/${userid}`, userInfo)
   .then(result => {
     resolve(result.data);
   })
@@ -29,7 +28,7 @@ new Promise((resolve, reject) => {
 export const updateUserInfo = (userid, userInfo) =>
 new Promise((resolve, reject) => {
   service
-  .put(`${bigServer}/users/${userid}`, userInfo)
+  .put(`/users/${userid}`, userInfo)
   .then(result => {
     resolve(result.data);
   })
@@ -40,7 +39,7 @@ new Promise((resolve, reject) => {
 export const getUserRecords = () =>
   new Promise((resolve, reject) => {
     service
-      .get(`${bigServer}/records/me`)
+      .get('/records/me')
       .then(result => {
         const myRecords = result.data.data;
         resolve(myRecords);

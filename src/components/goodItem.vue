@@ -1,20 +1,22 @@
 <template>
 
   <div class="img-cell Grid -middle -around">
-    <!-- <float-message-bar desc="很不幸我的朋友，你没有获得卡牌" :show.sync="showMsgBar"></float-message-bar> -->
     <div class="img Cell -1of12 Grid -center -middle">
-        <img :src="!!(this.commodityData.file)?this.commodityData.file.URL:boximg" alt="" class=""/>
+        <img :src="!!(this.goodData.detail.file)?this.goodData.detail.file.URL:boximg" alt="" class=""/>
     </div>
     <div class="Cell -6of12 Grid">
         <div class="title Cell -12of12">
-        {{commodityData.name}}
+        {{goodData.name}}
          </div>
          <div class="desc Cell -12of12">
-        {{commodityData.description}}
+        {{goodData.description}}
         </div>
          <div class="subtitle Cell -12of12">
-        价值{{commodityData.ticketPrice}}悦币
+        售价{{goodData.price}}悦币 <span style="color:#26a2ff;">来自{{goodData.owner.displayName}}</span>
         </div>
+          <div class="desc">
+            发布于 {{goodData.created | timefromNow}}
+          </div>
     </div>
 
     <div class="icon Cell -2of12">
@@ -25,25 +27,6 @@
         <card-view class="card-view" v-if="popupVisible" :card-data="card" @click.native="closeCard" :product="false"></card-view>
     </transition>
   </div>
-
-
-  <!-- <transition enter-active-class="fadeInRight" leave-active-class="fadeOutRight">
-    <div>
-       <img v-lazy="cardData.file.URL+'?imageView2/2/h/540/q/100|imageslim'" alt="" width="100%"></img>
-         <div class="name">{{cardData.name}}</div>
-         <div class="desc">{{cardData.description}}</div>
-         <mt-button type="primary" size="normal" @click="sale">出  售</mt-button>
-
-
-     </div>
-   </transition> -->
-
-
-
-
-
-
-
 </template>
 
 <script>
@@ -55,10 +38,9 @@ import FloatMessageBar from '../components/floatMessageBar';
 
 
     export default{
-      props:['commodityData','buy','openLotteryBox'],
+      props:['goodData','buy'],
       components: {
         CardView,
-        FloatMessageBar,
       },
       data(){
         return {
@@ -72,14 +54,14 @@ import FloatMessageBar from '../components/floatMessageBar';
         money:state => state.profile.user.option.goldToken,
       }),
       mounted(){
-        // this.img = this.commodityData.file.URL||boximg;
+        // this.img = this.goodData.file.URL||boximg;
       },
       methods: {
         closeCard(){
           this.popupVisible= false;
         },
        async handleBuy(){
-          if(this.money<this.commodityData.ticketPrice){
+          if(this.money<this.goodData.price){
             Toast({
                 message:'没有足够的悦维币，快去完成任务吧',
                 position:'bottom',
@@ -88,13 +70,13 @@ import FloatMessageBar from '../components/floatMessageBar';
           }
 
           try{
-            await MessageBox.confirm(`确定购买吗，将花费${this.commodityData.ticketPrice}悦币`);
-            const data = await this.buy({cardPoolId:this.commodityData._id, money:this.commodityData.ticketPrice});
-            console.log(data);
-            if(!data.card){
+            await MessageBox.confirm(`确定购买吗，将花费${this.goodData.price}悦币`);
+            const res = await this.buy({ goodId: this.goodData._id });
+            console.log(res);
+            if(res.code=="success"){
               Toast({
                 iconClass:' fa-hand-peace-o fa',
-                 message: `很不幸我的朋友，你没有获得卡牌!`,
+                 message: `购买成功！`,
                  position: 'middle',
                  duration: 1000
                });
@@ -103,15 +85,13 @@ import FloatMessageBar from '../components/floatMessageBar';
               //   this.showMsgBar = false;
               // },1000);
             }
-            else if(data.card){
-              this.card = data.card;
-              this.popupVisible = true;
-             //  Toast({
-             //  iconClass:'fa-bolt fa',
-             //  message: `上帝眷顾勤奋的人，您获得${data.card.name}一张`,
-             //  position: 'middle',
-             //  duration: 2000
-             // });
+            else{
+              Toast({
+                iconClass:' fa-hand-peace-o fa',
+                 message: `购买失败！`,
+                 position: 'middle',
+                 duration: 1000
+               });
             }
           }catch(e){
             console.log(e);
@@ -127,7 +107,7 @@ import FloatMessageBar from '../components/floatMessageBar';
 
 <style scoped>
 .img-cell{
-    background-color: #eeeeff;
+    background-color: #eeeebb;
     width: 95%;
     margin: 0 auto;
     padding: .5rem .2rem;
@@ -143,14 +123,14 @@ import FloatMessageBar from '../components/floatMessageBar';
     font-size:1.2rem;
 }
 .desc{
-  font-size:.8rem;
   color: #888;
+  font-size: .8rem;
   margin-top: .3rem;
 }
 .subtitle{
-  font-size:.9rem;
-  color: #6F2DBD;
-  margin-top: .3rem;
+    font-size:.8rem;
+    color: #6F2DBD;
+    margin-top: .3rem;
 }
 .money{
     color: #aaaaaa;
