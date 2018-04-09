@@ -61,7 +61,7 @@ img[lazy=loading] {
 </style>
 <script>
 // import Qrcanvas from 'qrcanvas-vue';
-import { MessageBox } from 'mint-ui';
+import { MessageBox,Toast } from 'mint-ui';
 
 export default {
   data() {
@@ -80,14 +80,29 @@ export default {
 
   },
   methods: {
-    sale(){
+    async sale(){
       const that = this;
       MessageBox.prompt('请输入出售金额，确认后生效')
       .then(({ value, action }) => {
+        var re = /^[0-9]+$/ ;
+        if(re.test(value)){
           that.sellCard({
             cardId: that.cardData.cardId,
             price: value,
           })
+          Toast({
+             message: `出售卡牌成功，在市场中查看，坐等收钱`,
+             position: 'middle',
+             duration: 2000
+           });
+        }else{
+          Toast({
+             message: `输入金额有误，请重新输入`,
+             position: 'middle',
+             duration: 2000
+           });
+        }
+
         console.log(value);
       })
       .catch(e=>{
