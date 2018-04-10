@@ -30,7 +30,7 @@ const mutations = {
   },
 };
 const getters = {
-  userInfo: state.user,
+  userInfo: state => state.user,
 };
 
 const actions = {
