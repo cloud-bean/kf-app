@@ -117,7 +117,7 @@ import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
   //  store,
    data(){
      return {
-       selected:'我的'
+       selected: '任务'
      }
    },
    components:{
