@@ -5,20 +5,20 @@
     <div class="img Cell -1of12 Grid -center -middle">
         <img :src="!!(this.commodityData.file)?this.commodityData.file.URL:boximg" alt="" class=""/>
     </div>
-    <div class="Cell -6of12 Grid">
-        <div class="title Cell -12of12">
-        {{commodityData.name}}
+    <div class="Cell -6of12 Grid good-item" style="">
+        <div class="title Cell -12of12" @click="showDetails">
+          {{commodityData.name}}
          </div>
-         <div class="desc Cell -12of12">
-        {{commodityData.description}}
-        </div>
          <div class="subtitle Cell -12of12">
-        价值{{commodityData.ticketPrice}}悦币
+        售价{{commodityData.ticketPrice}}悦币 <span style="color:#26a2ff;">来自悦盒官方</span>
         </div>
+      <div class="desc">
+        获奖概率 {{commodityData.threshold + '%'}}
+      </div>
     </div>
 
     <div class="icon Cell -2of12">
-        <mt-button type="primary" size="small" plain @click="handleBuy">购买</mt-button>
+      <mt-button type="primary" size="small" plain @click="handleBuy">购买</mt-button>
     </div>
     <div class="mask" v-if="popupVisible" @click="closeCard"></div>
     <transition enter-active-class=" animated flipInY" leave-active-class=" animated flipOutY">
@@ -78,6 +78,9 @@ import FloatMessageBar from '../components/floatMessageBar';
         closeCard(){
           this.popupVisible= false;
         },
+        showDetails() {
+          MessageBox(this.commodityData.name, this.commodityData.description);
+        },
        async handleBuy(){
           if(this.money<this.commodityData.ticketPrice){
             Toast({
@@ -127,12 +130,14 @@ import FloatMessageBar from '../components/floatMessageBar';
 
 <style scoped>
 .img-cell{
-    background-color: #eeeeff;
+    background-color: rgba(238, 238, 255, 0.45);
     width: 95%;
     margin: 0 auto;
     padding: .5rem .2rem;
-    border: 1px solid #ccc;
-    /*box-shadow:0 0 2px rgba(0, 0, 0, .5);*/
+    /*border: 1px solid #ccc;*/
+    box-shadow:0 0 1px rgba(0, 0, 0, .2);
+  -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;
+
 }
 .img{
   width: 3rem;
@@ -189,4 +194,7 @@ img[lazy=loading] {
   z-index: 999;
   width:70%;
 }
+
+  .good-item {
+  }
 </style>

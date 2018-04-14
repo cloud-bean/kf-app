@@ -12,11 +12,21 @@ const mutations = {
     state.page++;
     state.activities = state.activities.concat(activities);
   },
-
+  [types.RESET_ACTIVITIES](state, activities) {
+    state.activities = [];
+    state.page = 1;
+  },
 };
 
 const actions = {
-
+  async refreshActivities({ commit }) {
+    commit(types.RESET_ACTIVITIES);
+    commit(types.FETCH_STH);
+    const activities = await api.getActivities(1);
+    commit(types.SET_ACTIVITIES, activities);
+    commit(types.GOT_STH);
+    return activities;
+  },
   async getActivities({ commit }, page) {
     commit(types.FETCH_STH);
     const activities = await api.getActivities(page);
@@ -24,7 +34,12 @@ const actions = {
     commit(types.GOT_STH);
     return activities;
   },
-
+  async upVote({ commit }, id) {
+    commit(types.FETCH_STH);
+    const activity = await api.upvoteActivity(id);
+    commit(types.GOT_STH);
+    return activity;
+  },
 };
 
 export default {

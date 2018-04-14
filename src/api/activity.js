@@ -8,7 +8,6 @@ export const getActivities = page =>
       .then(result => {
         if (result.data.code == 'success') {
           const activities = result.data.data;
-          console.log(activities);
           resolve(activities);
         }
         resolve([]);
@@ -17,3 +16,21 @@ export const getActivities = page =>
         reject(err);
       });
   });
+
+
+export const upvoteActivity = id =>
+  new Promise((resolve, reject) => {
+    service
+      .post(`/timelines/${id}/addUpVote`)
+      .then(result => {
+        if (result.data.code == 'success') {
+          const activity = result.data.data;
+          resolve(activity);
+        }
+        resolve({});
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+

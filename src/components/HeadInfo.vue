@@ -8,7 +8,7 @@
           <div class="title-bar">
             <span class="name">{{user.displayName}}</span>
             <span class="level"> Lv.{{user.option.exp | level}}</span>
-            <span><mt-badge size="small" type="success">x1.0</mt-badge></span>
+            <span @click="showAccRules"><mt-badge size="small" type="success">x1.0</mt-badge></span>
           </div>
           <div class="exp">
             <span class=""> 成长值 {{user.option.exp}}</span> .
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+  import { Toast } from 'mint-ui';
 
 export default{
   props: ['user', 'rank'],
@@ -38,7 +39,13 @@ export default{
 
   },
   methods: {
-
+    showAccRules() {
+      Toast({
+        message: '加速值规则说明',
+        position: 'middle',
+        duration: 1500,
+      });
+    },
   },
   computed: {
     expPercent() {

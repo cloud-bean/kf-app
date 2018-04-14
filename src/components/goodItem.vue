@@ -5,12 +5,12 @@
         <img :src="!!(this.goodData.detail.file)?this.goodData.detail.file.URL:boximg" alt="" class=""/>
     </div>
     <div class="Cell -6of12 Grid">
-        <div class="title Cell -12of12">
+        <div class="title Cell -12of12" @click="showDetails">
         {{goodData.name}}
          </div>
-         <div class="desc Cell -12of12">
-        {{goodData.description}}
-        </div>
+         <!--<div class="desc Cell -12of12">-->
+        <!--{{goodData.description}}-->
+        <!--</div>-->
          <div class="subtitle Cell -12of12">
         售价{{goodData.price}}悦币 <span style="color:#26a2ff;">来自{{goodData.owner.displayName}}</span>
         </div>
@@ -20,7 +20,7 @@
     </div>
 
     <div class="icon Cell -2of12">
-        <mt-button type="primary" size="small" plain @click="handleBuy">购买</mt-button>
+      <mt-button type="primary" size="small" plain @click="handleBuy">购买</mt-button>
     </div>
     <div class="mask" v-if="popupVisible" @click="closeCard"></div>
     <transition enter-active-class=" animated flipInY" leave-active-class=" animated flipOutY">
@@ -59,6 +59,9 @@ import FloatMessageBar from '../components/floatMessageBar';
       methods: {
         closeCard(){
           this.popupVisible= false;
+        },
+        showDetails() {
+          MessageBox(this.goodData.name, this.goodData.description);
         },
        async handleBuy(){
           if(this.money<this.goodData.price){
@@ -107,12 +110,14 @@ import FloatMessageBar from '../components/floatMessageBar';
 
 <style scoped>
 .img-cell{
-    background-color: #eeeebb;
+    background-color: rgba(238, 238, 187, 0.46);
     width: 95%;
     margin: 0 auto;
     padding: .5rem .2rem;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     /*box-shadow:0 0 2px rgba(0, 0, 0, .5);*/
+  box-shadow:0 0 1px rgba(0, 0, 0, .2);
+  -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;
 }
 .img{
   width: 3rem;

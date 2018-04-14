@@ -42,5 +42,5 @@ export const SET_NEWS = 'SET_NEWS';
 
 export const SET_FREE_COURSES = 'SET_FREE_COURSES';
 export const SET_ACTIVITIES = 'SET_ACTIVITIES';
-
+export const RESET_ACTIVITIES = 'RESET_ACTIVITIES';
 export const SET_ALL_GOODS = 'SET_ALL_GOODS';

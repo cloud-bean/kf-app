@@ -8,10 +8,9 @@
         <!-- <div class="gery">{{taskdata.expireTime | dateFormat}} -->
         <div class="Grid">
           <!-- <mt-badge class="" size="small" color="#888">{{taskdata.type}}</mt-badge> -->
-          <mt-badge v-if="!expire" class="" size="small" type="primary">经验:{{taskdata.exp}}</mt-badge>
-          <mt-badge v-if="!expire" class="" size="small" style="margin-left:.3rem;" type="success">悦币:{{taskdata.goldToken}}</mt-badge>
-          <mt-badge v-if="!taskdata.isDone" class="" size="small" style="margin-left:.3rem;" type="warning">未完成</mt-badge>
-          <mt-badge v-if="expire"  size="small" style="margin-left:.3rem;" type="error">已超期</mt-badge>
+          <mt-badge v-if="!expire" class="" size="small" color="#4fc1e97d">经验:{{taskdata.exp}}</mt-badge>
+          <mt-badge v-if="!expire" class="" size="small" style="margin-left:.3rem;" color="#ffc107c4">悦币:{{taskdata.goldToken}}</mt-badge>
+          <mt-badge v-if="expire"  size="small" style="margin-left:.3rem;" color="#8080806b">已超期</mt-badge>
         </div>
       </div>
 
@@ -78,6 +77,7 @@ p{
 .expire{
   -webkit-filter: grayscale(99%); /* Chrome, Safari, Opera */
   filter: grayscale(99%);
+  background-color: gray;
 }
 
 .mask {
@@ -119,10 +119,12 @@ p{
   flex-direction: row;
   justify-content: space-between;
   border-radius: 5px;
-  border: 3px solid #4FC1E9;
+  /*border: 3px solid #4FC1E9;*/
   /* border-left:none; */
-  background-color: #eee;
-  /* padding: 0.5rem 0rem; */
+  background-color: rgba(52, 177, 220, 0.12);
+  box-shadow:0 0 1px rgba(52, 177, 220, 0.4);
+   /*padding: 0.5rem 0;*/
+  margin: 5px;
 }
 .task-content{
     /* padding: 0 1rem; */

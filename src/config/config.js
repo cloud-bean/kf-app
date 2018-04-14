@@ -1,16 +1,16 @@
 export default {
   appid: 'wxb3762a929cf9e070',
-    // appid: 'wxf8e294c011cd47e1',//dev
+  // appid: 'wxf8e294c011cd47e1', // dev
     // appsecret: '0a607b7dc2ff4fa027b8594a99f9e086',
     // openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w',
-  openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w',
+  openid: 'oBSpWsx1zRDhDuDwptpV9ANkVdLM',
   server: {
-        // midServer: 'http://dev.joywill.cc',
+      // midServer: 'http://dev.joywill.cc',
     midServer: 'https://joywill.cc',
-
-        // midServer:'http://sab4h63cag.proxy.qqbrowser.cc',
+    // midServer:'http://sab4h63cag.proxy.qqbrowser.cc',
     bigServer: 'https://joywill.cc/api',
     bigServerV2: 'https://joywill.cc/v2',
+    // bigServerV2: 'http://localhost:7000/api/v2',
     gameBoardServer: 'http://127.0.0.1:3000',
 
         //bigServer:'http://192.168.0.153:7000/api/base',
@@ -23,7 +23,8 @@ export default {
   },
   secret: {
     accessToken: 'b8a94cfea5924d9650d4a72e8b10137f8a609c87d477f11ebe04b006ba427672',
-    userid: '581c96e5a5c363bc28af1a69',
+    // userid: '581c96e5a5c363bc28af1a69',
+    userid: '59ed737f3b601c873f41417a',
   },
   task: {
     limit: 5,

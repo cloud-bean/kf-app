@@ -45,6 +45,7 @@ export const api = {
   getFreeCourses: courseApi.getFreeCourses,
   bindFreeCourse: courseApi.bindFreeCourse,
   getActivities: activityApi.getActivities,
+  upvoteActivity: activityApi.upvoteActivity,
   sellCard: cardApi.sellCard,
   getAllGoods: marketApi.getAllGoods,
   buyGood: marketApi.buyGood,
