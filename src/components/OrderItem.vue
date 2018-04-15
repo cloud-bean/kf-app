@@ -1,19 +1,16 @@
 <template lang="html">
   <div>
-    <!-- <mt-cell :title="orderData.student.displayName" :label="orderData.task.name" is-link></mt-cell> -->
-
-    <div class="white-bg">
-        <p ><span class="name">[{{orderData.student.displayName}}]</span> 提交答案#{{type}}</p>
-        <p>{{orderData.created | dateFormat}}</p>
-        <p>{{orderData.task.name}}</p>
-
+    <div class="white-bg" v-if="orderData.task">
+      <p ><span class="name">[{{orderData.student.displayName}}]</span> 提交答案#{{type}}</p>
+      <p>{{orderData.created | dateFormat}}</p>
+      <p>{{orderData.task.name}}</p>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  props:['orderData'],
+  props:['orderData', 'handleClick'],
   data(){
     return {
     }
@@ -21,7 +18,7 @@ export default {
   computed:{
     type(){
       return (this.orderData.files[0].type == 0)?'图片':'语音';
-    }
+    },
   }
 }
 </script>
@@ -29,8 +26,11 @@ export default {
 <style lang="css" scoped>
 
 .white-bg{
-  padding: 0.5rem;
   font-size: 14px;
+  background-color: aliceblue;
+  margin: .5em;
+  padding: .5em;
+  /* border: 1px solid gray; */
 }
 p{
   margin: 0.2rem;

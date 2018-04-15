@@ -12,6 +12,7 @@
       <!-- <textarea v-model="comments" class="input" type="text" name="" value="" placeholder="评语" /> -->
       <mt-field placeholder="评语" type="textarea" v-model="comments" rows="4"></mt-field>
 
+      <br/>
       <!-- <button  type="button" name="button" class="button input" >提交</button> -->
       <mt-button @click="handleClick" type="primary" size="large">提交</mt-button>
 
@@ -20,7 +21,7 @@
       <img :src="localData" width="100%" style="display:block;">
     </div>
     <div class="voice" v-if="activeOrder.files[0].type==1" >
-      <i class="fa fa-play-circle-o" @click="playVoice"></i> 
+      <i class="fa fa-play-circle-o" @click="playVoice"></i>
     </div>
 
   </div>
@@ -58,7 +59,7 @@ export default {
     }else if(this.activeOrder.files[0].type==1){
       this.getVoicefromWechat();
     }
-    
+
   },
   methods:{
     ...mapActions([
@@ -109,7 +110,7 @@ export default {
     playVoice(){
       wx.playVoice({
           localId: this.localData, // 需要播放的音频的本地ID，由stopRecord接口获得
-      });   
+      });
     },
     handleClick(){
       const orderId = this.activeOrder._id;
@@ -134,13 +135,13 @@ export default {
 }
 
 .info{
-  /*font-size: 14px;
-  padding: 0rem 0.5rem;
+  font-size: 14px;
+  padding: .5rem 0.5rem;
   background: #eef;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height:6rem;*/
+  height:6rem;
 }
 .score{
   height:auto;
@@ -149,6 +150,8 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   /*background: #eee;*/
+  margin: .5em;
+  padding: .5em;
 }
 .inputarea{
   padding: 0.5rem 0.5rem;

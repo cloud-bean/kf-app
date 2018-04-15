@@ -2,7 +2,7 @@
   <div class="">
     <div class="card no-margin">
       <div class="card-content">
-        <div v-for="(item, index) in orders" class="rank-list">
+        <div v-for="(item, index) in orders" :key="index" class="rank-list">
           <order-item :orderData='item' class="rank-item" @click.native="handleClick(index)"></order-item>
         </div>
       </div>
@@ -35,7 +35,6 @@ export default {
       'orderDetail',
     ]),
     handleClick(index){
-      console.log(index);
       this.orderDetail(index);
       this.$router.push('/orderDetail');
     },
@@ -94,7 +93,7 @@ export default {
   .rank-item{
     box-shadow: none !important;
     border-radius: 0 !important;
-    border-bottom: 1px solid lightgray;
+    /* border-bottom: 1px solid lightgray; */
 
   }
   .line{
