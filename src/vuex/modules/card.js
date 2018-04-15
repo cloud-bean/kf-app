@@ -90,7 +90,7 @@ const actions = {
     commit(types.GOT_STH);
     return data;
   },
-  async getCardPool({ commit }, { type }) {
+  async getCardPool({ commit }, type) {
     commit(types.FETCH_STH);
     try {
       commit(types.SET_CARD_POOL, await api.getCardPool(type));

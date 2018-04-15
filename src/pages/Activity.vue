@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import activityItem from '../components/activityItem2';
+  import activityItem from '../components/activityItem';
   import {api} from '../api';
   import {MessageBox, Toast, Indicator} from 'mint-ui';
   import {mapState, mapActions} from 'vuex';

@@ -68,7 +68,7 @@ export default {
   //   },
   // },
   mounted() {
-      this.getCardPool({type:1});
+      this.getCardPool(1);
       this.getAllGoods();
   },
   methods: {
@@ -81,13 +81,12 @@ export default {
       'getUserInfo',
 
     ]),
-    async buyTheGood(data){
+    async buyTheGood(data) {
       await this.buyGood(data);
       await this.getAllGoods();
-      await this.getCardPool();
-      await this.getUserInfo();
-    }
-
+      await this.getCardPool(1);
+      await this.getUserInfo(this.user._id);
+    },
   },
 
   components: {

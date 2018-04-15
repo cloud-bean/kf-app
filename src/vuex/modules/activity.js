@@ -35,9 +35,7 @@ const actions = {
     return activities;
   },
   async upVote({ commit }, id) {
-    commit(types.FETCH_STH);
     const activity = await api.upvoteActivity(id);
-    commit(types.GOT_STH);
     return activity;
   },
 };

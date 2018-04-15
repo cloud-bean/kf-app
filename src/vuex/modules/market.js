@@ -21,7 +21,6 @@ const actions = {
     try {
       commit(types.FETCH_STH);
       const goods = await api.getAllGoods();
-      console.log(goods);
       commit(types.SET_ALL_GOODS, goods);
       commit(types.GOT_STH);
     } catch (e) {
