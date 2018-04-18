@@ -8,8 +8,8 @@
         <!-- <div class="gery">{{taskdata.expireTime | dateFormat}} -->
         <div class="Grid">
           <!-- <mt-badge class="" size="small" color="#888">{{taskdata.type}}</mt-badge> -->
-          <mt-badge v-if="!expire" class="" size="small" color="#4fc1e97d">经验:{{taskdata.exp}}</mt-badge>
-          <mt-badge v-if="!expire" class="" size="small" style="margin-left:.3rem;" color="#ffc107c4">悦币:{{taskdata.goldToken}}</mt-badge>
+          <mt-badge v-if="!expire" class="" size="small" color="#4fc1e9">经验:{{taskdata.exp}}</mt-badge>
+          <mt-badge v-if="!expire" class="" size="small" style="margin-left:.3rem;" color="#ffc107">悦币:{{taskdata.goldToken}}</mt-badge>
           <mt-badge v-if="expire"  size="small" style="margin-left:.3rem;" color="#8080806b">已超期</mt-badge>
         </div>
       </div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import {Badge} from 'mint-ui';
 
 const moment = require('moment');
 // const taskType = ['语音','书写','测验','行为','市场'];

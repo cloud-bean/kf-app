@@ -70,14 +70,16 @@
                infinite-scroll-disabled="loading"
                infinite-scroll-distance="10">
 
-         <div class="task-date" v-for="data in taskByDate">
+         <div class="task-date" v-for="(data, index) in taskByDate" :key="index">
            <div class="timeline-icon">
-              <i class="fa fa-circle"aria-hidden="true" ></i>
+              <i class="fa fa-circle" aria-hidden="true" ></i>
               <span>{{data.date|dateFormat}}</span>
             </div>
             <!-- <transition enter-active-class="fadeInRight" leave-active-class="fadeOutRight"> -->
 
-             <task-item v-for="(task,index) in data.tasks" class="task-item" :taskdata="task" @click.native="handleClick(task._id)"></task-item>
+             <task-item v-for="(task) in data.tasks" class="task-item" :taskdata="task"
+             :key="task._id"
+             @click.native="handleClick(task._id)"></task-item>
            <!-- </transition> -->
 
          </div>

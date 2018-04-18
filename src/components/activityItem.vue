@@ -26,7 +26,7 @@
     </div> -->
 
     <div class="icon Cell -2of12">
-       <mt-badge color="#eeef">
+       <mt-badge color="#eee">
           <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}" v-on:click="upVoteIt">
           </i>
           {{activityData.upVotes.length}}
@@ -34,8 +34,8 @@
     </div>
 
     <div class="icon Cell -2of12" @click="toggleShowMsgs">
-      <mt-badge color="#eeef"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
-      {{activityData.messages.length}}
+      <mt-badge color="#eee"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
+      {{activityData.messages ? activityData.messages.length : 0}}
       </mt-badge>
 
     </div>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-  import { Toast, MessageBox } from 'mint-ui';
+  import { Toast, MessageBox, Badge } from 'mint-ui';
   import {api} from '../api';
 
   export default {
@@ -71,7 +71,7 @@
         return this.activityData.upVotes.indexOf(this.user._id) !== -1;
       },
       hasMsgs() {
-        return this.activityData.messages.length > 0;
+        return this.activityData.messages ? this.activityData.messages.length > 0 : 0;
       }
     },
     created() {
