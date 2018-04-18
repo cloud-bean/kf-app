@@ -37,7 +37,7 @@ const actions = {
   async upVote({ commit }, id) {
     const activity = await api.upvoteActivity(id);
     return activity;
-  },
+  }
 };
 
 export default {

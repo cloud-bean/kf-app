@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="icon Cell -1of12">
+    <!-- <div class="icon Cell -1of12">
       <div class="like">
         <div class="likenum">
           {{activityData.upVotes.length }}
@@ -23,23 +23,56 @@
           <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}"></i>
         </div>
       </div>
+    </div> -->
+
+    <div class="icon Cell -2of12">
+       <mt-badge color="#eeef">
+          <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}" v-on:click="upVoteIt">
+          </i>
+          {{activityData.upVotes.length}}
+      </mt-badge>
+    </div>
+
+    <div class="icon Cell -2of12" @click="toggleShowMsgs">
+      <mt-badge color="#eeef"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
+      {{activityData.messages.length}}
+      </mt-badge>
+
+    </div>
+
+    <div v-if="showMsgs" style="display:block; width: 100%; padding: 10px; margin: 5px; border: 1px solid #ccc5;">
+      <mt-cell style="border: none;">
+        <mt-button size="small" plain @click="addMsg">评论</mt-button>
+      </mt-cell>
+
+      <mt-cell :title="message.user" :label="message.created | timefromNow"
+        style="border-bottom: 1px dashed #ccc5;"
+       v-for="message in activityData.messages" :key="message._id">
+        <span >{{ message.content}}</span>
+       </mt-cell>
     </div>
   </div>
 </template>
 
 <script>
-  import { Toast } from 'mint-ui';
+  import { Toast, MessageBox } from 'mint-ui';
+  import {api} from '../api';
 
   export default {
     props: ['activityData', 'user', 'upVote', 'loadTop'],
     components: {},
     data() {
-      return {};
+      return {
+        showMsgs: false,
+      };
     },
     computed: {
       hasVoted() {
         return this.activityData.upVotes.indexOf(this.user._id) !== -1;
       },
+      hasMsgs() {
+        return this.activityData.messages.length > 0;
+      }
     },
     created() {
     },
@@ -57,6 +90,22 @@
           this.activityData.upVotes.push(this.user._id);
           // this.loadTop();
         }
+      },
+      toggleShowMsgs() {
+        this.showMsgs = !this.showMsgs;
+      },
+      addMsg() {
+        MessageBox.prompt('说点什么?', '').then(({ value, action }) => {
+          console.log(value, action);
+          if (value.length > 0) {
+            // send msg to api
+            api.addMsgToActivity(this.activityData._id, value);
+            this.activityData.messages.unshift({
+              user: this.user.displayName,
+              content: value
+            });
+          }
+        }, () => {});
       },
     },
   };
@@ -113,7 +162,10 @@
     color: #7d7d7d;
   }
   .active {
-    color: red;
+    color: rgba(241, 55, 55, 0.753);
+  }
+  .active2 {
+    color: rgba(84, 84, 209, 0.671);
   }
   .inactive{
     color: #ccc;

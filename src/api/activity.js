@@ -34,3 +34,21 @@ export const upvoteActivity = id =>
       });
   });
 
+export const addMsgToActivity = (id, content) =>
+  new Promise((resolve, reject) => {
+    service
+      .post(`/timelines/${id}/addMessage`, {
+        content,
+      })
+      .then(result => {
+        if (result.data.code === 'success') {
+          const activity = result.data.data;
+          resolve(activity);
+        }
+        resolve({});
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+

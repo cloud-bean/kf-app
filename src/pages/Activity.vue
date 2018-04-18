@@ -14,8 +14,10 @@
         <div v-infinite-scroll="loadMoreTask"
              infinite-scroll-disabled="loading"
              infinite-scroll-distance="10">
-          <activity-item v-for="(activity,index) in activities" class="activity-item"
-                         :activityData="activity" :user="user" :upVote="upVote" :loadTop="loadTop"></activity-item>
+          <activity-item v-for="activity in activities" :key="activity._id"
+            class="activity-item" :activityData="activity" :user="user"
+            :upVote="upVote" :loadTop="loadTop">
+          </activity-item>
         </div>
       </mt-loadmore>
 

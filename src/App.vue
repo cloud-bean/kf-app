@@ -88,7 +88,7 @@
       <!-- JoyBox -->
       <div class="spinner">
         <div class="" style="margin-bottom:1rem;font-size:1.2rem">
-        悦盒 Joybox
+        悦盒 JOYBOX
         </div>
         <scale-loader :loading="loading" color="#fff"></scale-loader>
       </div>
