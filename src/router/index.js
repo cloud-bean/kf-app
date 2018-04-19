@@ -5,6 +5,7 @@ import TaskPage from '../pages/Task';
 import InitPage from '../pages/Init';
 import ProfilePage from '../pages/Profile';
 import SignUpPage from '../pages/Signup';
+import SettingPage from '../pages/setting';
 import TaskDetailPage from '../pages/TaskDetail';
 import CommentInputPage from '../pages/CommentInput';
 import TeacherOrderListPage from '../pages/TeacherOrderList';
@@ -39,6 +40,7 @@ export default new VueRouter({
     { path: '/rank', component: RankPage },
     { path: '/task', component: TaskPage },
     { path: '/signup', component: SignUpPage },
+    { path: '/setting', component: SettingPage },
     { path: '/profile', component: ProfilePage },
     { path: '/taskDetail', component: TaskDetailPage },
     { path: '/taskComment', component: CommentInputPage },

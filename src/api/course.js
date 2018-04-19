@@ -1,10 +1,9 @@
-import config from '../config/config';
-import { service, serviceV2 } from './service';
+import { serviceV2 } from './service';
 
 export const getFreeCourses = () =>
   new Promise((resolve, reject) => {
-    service
-      .get(`${bigServerV2}/freeCourses`) // 默认20，不够用
+    serviceV2
+      .get('/freeCourses') // 默认20，不够用
       .then(result => {
         const courses = result.data.data;
         resolve(courses);

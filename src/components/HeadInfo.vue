@@ -2,11 +2,11 @@
   <div class="" >
     <div class="userhead Grid">
         <div class="avatar-wrapper Grid Cell -3of12 -center -middle">
-          <img :src="user.profileImageURL" alt="" class="avatar"/>
+          <img :src="user.profileImageURL" alt="" class="avatar" @click="gotoSetting"/>
         </div>
         <div class="exp-wrapper Grid Cell -9of12 -left -middle">
           <div class="title-bar">
-            <span class="name">{{user.displayName}}</span>
+            <span class="name">{{user.displayName}}  </span>
             <span class="level"> Lv.{{user.option.exp | level}}</span>
             <span @click="showAccRules"><mt-badge size="small" type="success">x1.0</mt-badge></span>
           </div>
@@ -45,6 +45,9 @@ export default{
         position: 'middle',
         duration: 1500,
       });
+    },
+    gotoSetting() {
+      this.$router.push('/setting');
     },
   },
   computed: {

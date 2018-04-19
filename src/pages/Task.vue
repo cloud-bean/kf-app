@@ -47,7 +47,7 @@
       <div  v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10">
-      <div v-for="(task, index) in tasks">
+      <div v-for="(task, index) in tasks" :key="task._id">
         <task-item :taskdata="task" @click.native="handleClick(index)"></task-item>
       </div>
     </div>

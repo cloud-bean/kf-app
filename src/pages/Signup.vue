@@ -3,7 +3,7 @@
     <!-- <img :src="mockdata.user.profileImageURL" alt="" class="avatar"/> -->
     <div class="signup">
       <div class="Grid avatar-panel " v-if="avatarPanel">
-        <img  class="Cell -3of12"v-for="avatar in memberAvatars" :key="avatar._id" :src="avatar.URL" @click="setAvatar(avatar.URL)" style="margin:0 auto;padding:5px;max-width: 6rem; max-height: 6rem;">
+        <img  class="Cell -3of12" v-for="avatar in memberAvatars" :key="avatar._id" :src="avatar.URL" @click="setAvatar(avatar.URL)" style="margin:0 auto;padding:5px;max-width: 6rem; max-height: 6rem;">
       </div>
 
 
@@ -39,7 +39,7 @@
 <div class="Grid">
   <div class="Cell -3of12" style="padding:10px;">起点</div>
   <select class="Cell -9of12"  v-model="initCourse">
-    <option v-for="course in freeCourses" :value="course._id">{{course.name}}</option>
+    <option v-for="course in freeCourses" :value="course._id" :key="course._id">{{course.name}}</option>
   </select>
 </div>
 
