@@ -1,28 +1,36 @@
 <template>
-    <!-- <info></info>
-    <expbar></expbar>
-    <chart></chart> -->
-    <div class="">
-      <div class="user-info">
-        <info :user="user" :rank="myRank.rankIndex"></info>
+  <div>
+    <div class="user-info">
+      <info :user="user" :rank="myRank.rankIndex"></info>
+    </div>
 
-      </div>
-      <div class="commodity-list">
-        <div class="commodity" v-for="(item,index) in cardPool">
+    <div class="commodity-list">
+      <mt-button plain @click="setActive('commodity')">官方</mt-button>
+      <mt-button plain @click="setActive('good')">个人</mt-button>
+      <mt-button plain @click="setActive('erciyuan')">二次元</mt-button>
+      <mt-tab-container v-model="active">
+        <mt-tab-container-item id="commodity">
+          <div class="commodity" v-for="(item, index) in cardPool" :key="index">
             <commodity-item :commodityData='item' :buy='buyLottery' :openLotteryBox='openLotteryBox'></commodity-item>
-        </div>
-      </div>
-      <div class="good-list">
-        <div class="commodity" v-for="(item,index) in allGoods">
+          </div>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="good">
+          <!--<div class="good-list">-->
+            <div class="commodity" v-for="(item, index) in allGoods" :key="index">
+              <good-item :goodData='item' :buy='buyTheGood'></good-item>
+            </div>
+          <!--</div>-->
+        </mt-tab-container-item>
+        <mt-tab-container-item id="erciyuan">
+          <div class="commodity" v-for="(item, index) in allGoods" :key="index">
             <good-item :goodData='item' :buy='buyTheGood'></good-item>
-        </div>
-      </div>
-
-</div>
-
-</div>
+          </div>
+        </mt-tab-container-item>
+      </mt-tab-container>
+    </div>
 
 
+  </div>
 </template>
 
 <script>
@@ -33,7 +41,12 @@ import Info from '../components/HeadInfo';
 
 // import { getMyRecords } from '../vuex/actions';
 import { mapState, mapActions } from 'vuex';
+import { TabContainer, TabContainerItem, Button } from 'mint-ui';
+import Vue from 'vue';
 
+Vue.component(TabContainer.name, TabContainer);
+Vue.component(TabContainerItem.name, TabContainerItem);
+Vue.component(Button.name, Button);
 // import Expbar from '../components/Expbar';
 // import Chart from '../components/Chart';
 // import config from '../config/config';
@@ -47,6 +60,7 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
+      active: 'good',
     };
   },
   computed: mapState({
@@ -68,8 +82,8 @@ export default {
   //   },
   // },
   mounted() {
-      this.getCardPool(1);
-      this.getAllGoods();
+    this.getCardPool(1);
+    this.getAllGoods();
   },
   methods: {
     ...mapActions([
@@ -87,14 +101,17 @@ export default {
       await this.getCardPool(1);
       await this.getUserInfo(this.user._id);
     },
+    setActive(id) {
+      this.active = id;
+    },
   },
 
   components: {
-   CommodityItem,
-   goodItem,
-   Info,
+    CommodityItem,
+    goodItem,
+    Info,
   },
-}
+};
 </script>
 
 
