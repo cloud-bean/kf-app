@@ -122,14 +122,14 @@ export default {
         await this.getUserInfo(this.userid);
         this.setProgress(100);
         await this.getRanks(1);
-        this.setLogin(true);
+        // this.setLogin(true);
+          // this.$router.push('/profile');
+        if(this.user.phone){
+          this.setLogin(true);
           this.$router.push('/profile');
-        // if(this.user.option.phone){
-        //   this.setLogin(true);
-        //   this.$router.push('/profile');
-        // }else{
-        //   this.$router.push('/signup');
-        // }
+        }else{
+          this.$router.push('/signup');
+        }
       }
     else {
 

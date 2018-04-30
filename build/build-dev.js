@@ -1,5 +1,6 @@
 // https://github.com/shelljs/shelljs
 require('shelljs/global')
+require('dotenv').config()
 env.NODE_ENV = 'production'
 
 var path = require('path')
@@ -10,10 +11,15 @@ var webpackConfig = require('./webpack.prod.conf')
 var client = require('scp2')
 
 console.log(
-    '  Tip:\n' +
-    '  Built files are meant to be served over an HTTP server.\n' +
-    '  Opening index.html over file:// won\'t work.\n'
+    'build for dev-tiny server, for test only!'
 )
+
+var clientOption = {
+  host: process.env.TINY_DEV_SERVER_HOST,
+  username: process.env.TINY_DEV_SERVER_USER,
+  password: process.env.TINY_DEV_SERVER_PASSWD,
+  path: process.env.TINY_DEV_SERVER_PATH,
+};
 
 var spinner = ora('building for production...')
 spinner.start()
@@ -33,12 +39,7 @@ webpack(webpackConfig, function(err, stats) {
         chunks: false,
         chunkModules: false
     }) + '\n');
-    client.scp('./dist/', {
-        host: '120.25.227.156',
-        username: 'hygkui',
-        password: '998100',
-        path: '/home/hygkui/srv/dev-tinyServer/public/'
-    }, function(err) {
+    client.scp('./dist/', clientOption, function(err) {
         if (err) {
             console.log(err)
         } else {

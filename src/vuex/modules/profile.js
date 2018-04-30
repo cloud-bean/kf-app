@@ -60,8 +60,8 @@ const actions = {
   async signUp({ commit, state }, { displayName, phone, slogan, school }) {
     commit(types.FETCH_STH);
     const user = state.user;
-    const option = Object.assign({}, user.option, { phone }, { slogan }, { school });
-    const newuser = Object.assign({}, user, { option }, { displayName });
+    const option = Object.assign({}, user.option, { slogan }, { school });
+    const newuser = Object.assign({}, user, { option }, { phone }, { displayName });
     await api.signUp(user._id, newuser);
     commit(types.SET_USER_INFO, newuser);
     commit(types.SET_LOGIN, true);
