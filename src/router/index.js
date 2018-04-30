@@ -19,6 +19,7 @@ import introPage from '../pages/Intro';
 import gameBoardPage from '../pages/gameBoardPage';
 import BattleResault from '../pages/BattleResault';
 import Activity from '../pages/Activity';
+// import signinPage from '../pages/SignIn';
 
 
 // import CardBagPage from '../components/Card';
@@ -37,6 +38,7 @@ Vue.use(VueRouter);
 export default new VueRouter({
   routes: [
     { path: '/', component: InitPage },
+    // { path: '/signin', component: InitPage },
     { path: '/rank', component: RankPage },
     { path: '/task', component: TaskPage },
     { path: '/signup', component: SignUpPage },

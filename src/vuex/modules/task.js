@@ -19,6 +19,9 @@ const mutations = {
   [types.SET_ACTIVE_TASK_COMMENTS](state, comments) {
     state.activeComments = comments;
   },
+  [types.OPEN_TASK_LOTTERY](state, userId) {
+    state.activeTask.openLotteryUserIds.push(userId);
+  },
   [types.CLEAR_ACTIVE_TASK_COMMENTS](state) {
     state.activeComments = [];
   },
@@ -34,9 +37,8 @@ const mutations = {
     state.tasks.sort((a, b) => {
       if (new Date(a.startTime) > new Date(b.startTime)) {
         return -1;
-      } else {
-        return 1;
       }
+      return 1;
     });
     const taskByDate = [];
     const orgTasks = state.tasks;
@@ -138,9 +140,7 @@ const actions = {
   taskDetail({ commit, state }, id) {
     commit(types.FETCH_STH);
     const tasks = state.tasks;
-    const current = tasks.filter(item => {
-      return (item._id == id);
-    });
+    const current = tasks.filter(item => (item._id == id));
     commit(types.SET_ACTIVE_TASK, current[0]);
   },
   async leaveComment({ commit }, { content, taskId }) {

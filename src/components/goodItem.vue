@@ -2,7 +2,7 @@
 
   <div class="img-cell Grid -middle -around">
     <div class="img Cell -1of12 Grid -center -middle">
-      <img :src="!!(this.goodData.detail.file)?this.goodData.detail.file.URL:boximg" alt="" class=""/>
+      <img :src="!!(this.goodData.detail.file)?this.goodData.detail.file.URL+'-kf.app.market.card':boximg" alt="" class=""/>
     </div>
     <div class="Cell -6of12 Grid">
       <div class="title Cell -12of12" @click="showDetails">
@@ -20,7 +20,9 @@
     </div>
 
     <div class="icon Cell -2of12">
-      <mt-button type="primary" size="small" plain @click="handleBuy">购买</mt-button>
+      <mt-button type="danger" size="small" plain @click="handleCancel" v-if="user._id==goodData.owner._id">撤回</mt-button>
+      <mt-button type="primary" size="small" plain @click="handleBuy" v-else>购买</mt-button>
+
     </div>
     <div class="mask" v-if="popupVisible" @click="closeCard"></div>
     <transition enter-active-class=" animated flipInY" leave-active-class=" animated flipOutY">
@@ -32,13 +34,13 @@
 
 <script>
   import boximg from '../assets/box.jpg';
-  import {MessageBox, Toast} from 'mint-ui';
-  import {mapState, mapActions} from 'vuex';
+  import { MessageBox, Toast } from 'mint-ui';
+  import { mapState, mapActions } from 'vuex';
   import CardView from '../components/CardView';
   import FloatMessageBar from '../components/floatMessageBar';
 
   export default {
-    props: ['goodData', 'buy'],
+    props: ['goodData', 'buy', 'user'],
     components: {
       CardView,
     },
@@ -81,6 +83,22 @@
         } catch (e) {
           console.log(e);
         }
+      },
+      async handleCancel() {
+        Toast({
+          message: '工程师正玩命开发此功能',
+          position: 'middle',
+        });
+        // try {
+        //   await MessageBox.confirm(`确定购买吗，将花费${this.goodData.price}悦币`);
+        //   if (this.goodData.category === 'card') {
+        //     this.card = this.goodData.detail;
+        //     this.popupVisible = true;
+        //   }
+        //   await this.buy({ goodId: this.goodData._id });
+        // } catch (e) {
+        //   console.log(e);
+        // }
       },
     },
   };

@@ -7,7 +7,7 @@
     </div>
     <div class="Cell -6of12 Grid">
       <div class=" Cell -12of12">
-        <span class="title">{{activityData.title}}</span>
+        <span class="title">{{activityData.title}} {{activityData.detail.name}}</span>
       </div>
       <div class="desc">
         {{activityData.created | timefromNow}}
@@ -123,11 +123,11 @@
   }
 
   .desc {
-
+    color:#ccc;
   }
 
   .title {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #6f2dbd;
   }
 

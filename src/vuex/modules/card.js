@@ -14,7 +14,7 @@ const mutations = {
     // 检测每种卡牌数量
     for (let i = 0; i < orgCards.length; i++) {
       let flag = true;
-      let count = 1;
+      const count = 1;
       for (let j = 0; j < allArr.length; j++) {
         if (orgCards[i].cardId == allArr[j].cardId) {
           flag = false;
@@ -32,6 +32,7 @@ const mutations = {
   [types.ADD_USER_CARD](state, card) {
     state.cards.splice(0, 0, card);
   },
+
   [types.SET_USER_LOTTERY](state, lottery) {
     state.lottery = lottery;
   },
@@ -105,6 +106,19 @@ const actions = {
     try {
       data = await api.getLotteryCard(lotteryId);
             // commit(types.ADD_USER_CARD, data.card);
+            // commit(types.MINUS_USER_LOTTERY, index);
+    } catch (err) {
+      console.log(err);
+    }
+    commit(types.GOT_STH);
+    return data;
+  },
+  async openCardPool({ commit }, { taskId, userId }) {
+    commit(types.FETCH_STH);
+    let data = {};
+    try {
+      data = await api.openCardPool(taskId);
+      commit(types.OPEN_TASK_LOTTERY, userId);
             // commit(types.MINUS_USER_LOTTERY, index);
     } catch (err) {
       console.log(err);

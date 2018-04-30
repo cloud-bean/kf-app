@@ -25,6 +25,18 @@ export const getLotterys = () =>
         reject(err);
       });
   });
+export const openCardPool = (taskId) =>
+    new Promise((resolve, reject) => {
+      service
+        .get(`/tasks/${taskId}/openLottery`)
+        .then(result => {
+          const res = result.data.data;
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
 export const getCardPool = type =>
   new Promise((resolve, reject) => {
     service

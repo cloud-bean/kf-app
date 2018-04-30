@@ -5,9 +5,14 @@
     </div>
 
     <div class="commodity-list">
-      <mt-button plain @click="setActive('commodity')">官方</mt-button>
+      <mt-navbar v-model="active" class="selecter">
+        <mt-tab-item id="good">个人</mt-tab-item>
+        <mt-tab-item id="commodity">官方</mt-tab-item>
+        <mt-tab-item id="erciyuan">二次元</mt-tab-item>
+      </mt-navbar>
+      <!-- <mt-button plain @click="setActive('commodity')">官方</mt-button>
       <mt-button plain @click="setActive('good')">个人</mt-button>
-      <mt-button plain @click="setActive('erciyuan')">二次元</mt-button>
+      <mt-button plain @click="setActive('erciyuan')">二次元</mt-button> -->
       <mt-tab-container v-model="active">
         <mt-tab-container-item id="commodity">
           <div class="commodity" v-for="(item, index) in cardPool" :key="index">
@@ -17,13 +22,16 @@
         <mt-tab-container-item id="good">
           <!--<div class="good-list">-->
             <div class="commodity" v-for="(item, index) in allGoods" :key="index">
-              <good-item :goodData='item' :buy='buyTheGood'></good-item>
+              <good-item :goodData='item' :buy='buyTheGood' :user="user"></good-item>
             </div>
           <!--</div>-->
         </mt-tab-container-item>
         <mt-tab-container-item id="erciyuan">
-          <div class="commodity" v-for="(item, index) in allGoods" :key="index">
+          <!-- <div class="commodity" v-for="(item, index) in allGoods" :key="index">
             <good-item :goodData='item' :buy='buyTheGood'></good-item>
+          </div> -->
+          <div class="commodity" style="padding:1rem;">
+            二次元手办，等待上架
           </div>
         </mt-tab-container-item>
       </mt-tab-container>
@@ -130,6 +138,9 @@ export default {
   width: 100%;
   top: 0;
   z-index:2;
+}
+.selecter{
+  font-size: 1rem !important;
 }
 
 </style>
