@@ -50,4 +50,5 @@ export const api = {
   sellCard: cardApi.sellCard,
   getAllGoods: marketApi.getAllGoods,
   buyGood: marketApi.buyGood,
+  openCardPool: cardApi.openCardPool,
 };

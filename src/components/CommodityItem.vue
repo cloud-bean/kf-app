@@ -3,7 +3,7 @@
   <div class="img-cell Grid -middle -around">
     <!-- <float-message-bar desc="很不幸我的朋友，你没有获得卡牌" :show.sync="showMsgBar"></float-message-bar> -->
     <div class="img Cell -1of12 Grid -center -middle">
-      <img :src="!!(this.commodityData.file)?this.commodityData.file.URL:boximg" alt="" class=""/>
+      <img :src="!!(this.commodityData.file)?this.commodityData.file.URL+'?imageView2/2/h/100/q/100|imageslim':boximg" alt="" class=""/>
     </div>
     <div class="Cell -6of12 Grid good-item" style="">
       <div class="title Cell -12of12" @click="showDetails">

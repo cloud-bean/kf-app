@@ -59,7 +59,7 @@
 
      <div class="tasklist" >
        <p v-if="tasks.length==0" class="no-task">
-         暂无任务
+         已完成所有挑战
        </p>
        <!--<div
          v-infinite-scroll="loadMoreTask"
@@ -83,9 +83,17 @@
            <!-- </transition> -->
 
          </div>
+
        </div>
 
      </div>
+     <!-- <div class="more">
+       <mt-button  type="default" size="large" plain>
+         <i class="fa fa-caret-right" aria-hidden="true" slot="icon"></i>
+         加载更多...
+      </mt-button>
+     </div> -->
+
 
 
      <!-- <div v-show="hasMore" class="load-more">
@@ -109,12 +117,13 @@ import Tips from '../components/Tips';
 import NewsSlider from '../components/NewsSlider';
 import imgCell from '../components/ImgCell';
 import TaskItem from '../components/TaskItem';
-
+const moment = require('moment');
+moment.lang('zh-cn');
 // import { getMyRecords } from '../vuex/actions';
 // import rankImg from '../assets/rank.jpg';
 // import bagImg from '../assets/bag.jpg';
 import { api } from '../api';
-import { MessageBox,Toast, Indicator } from 'mint-ui';
+import { MessageBox, Toast, Indicator } from 'mint-ui';
 import { mapState, mapActions } from 'vuex';
 
 // import Expbar from '../components/Expbar';
@@ -133,24 +142,28 @@ export default {
       // rankImg,
       // bagImg,
       display: true,
-      loading:false,
-      hasMore:true,
+      loading: false,
+      hasMore: true,
+      selectedTasks: [],
     };
   },
-  computed: mapState({
-    user: state => state.profile.user,
-    userRecords: state => state.profile.userRecords,
-    unionid: state => state.unionid,
-    tip: state => state.profile.tip,
-    news: state => state.news.news,
-    myRank: state => state.rank.myRank,
-    cards: state => state.card.cards,
-    tasks: state => state.task.tasks,
-    taskByDate: state => state.task.taskByDate,
-    taskQuantityInfo: state => state.task.taskQuantityInfo,
-    page: state => state.task.page,
-    selected: state => state.task.selected,
-  }),
+  computed: {
+    ...mapState({
+      user: state => state.profile.user,
+      userRecords: state => state.profile.userRecords,
+      unionid: state => state.unionid,
+      tip: state => state.profile.tip,
+      news: state => state.news.news,
+      myRank: state => state.rank.myRank,
+      cards: state => state.card.cards,
+      tasks: state => state.task.tasks,
+      taskByDate: state => state.task.taskByDate,
+      taskQuantityInfo: state => state.task.taskQuantityInfo,
+      page: state => state.task.page,
+      selected: state => state.task.selected,
+    }),
+
+  },
   // vuex: {
   //   getters: {
   //     user: state => state.user,
@@ -159,10 +172,13 @@ export default {
   //   },
   // },
   mounted() {
-    // console.log('mount');
-    // this.$nextTick(() => {
-    //   this.init();
+    // this.getAllTaskList(this.page);
+    // this.selectedTasks = this.taskByDate.filter((data) => {
+    //   const today = moment().startOf('day');
+    //   // console.log(moment(data.date));
+    //   if (moment(data.date).isSame(today, 'd')) return data;
     // });
+    // console.log(this.selectedTasks);
   },
   methods: {
     ...mapActions([
@@ -173,12 +189,15 @@ export default {
       'cleanTaskList',
       'changeNavbar',
     ]),
-    async init(){
+    loadAllTasks() {
+      // this.selectedTasks = this.taskByDate;
+    },
+    async init() {
       // if(this.tasks.length == 0){
       //  await this.getAllTaskList(this.page);
       // }
     },
-    handleClick(id){
+    handleClick(id) {
       this.taskDetail(id);
       this.$router.push('/taskDetail');
     },
@@ -205,14 +224,13 @@ export default {
     //     }
     //   });
     // },
-    loadMoreTask(){
-
-      if(this.hasMore){
+    loadMoreTask() {
+      if (this.hasMore) {
         this.loading = true;
         this.getAllTaskList(this.page)
         .then(res => {
-          if(res.type!='error'){
-            if(res.length < config.task.limit){
+          if (res.type != 'error') {
+            if (res.length < config.task.limit) {
               this.hasMore = false;
             }
             this.loading = false;
@@ -247,14 +265,14 @@ export default {
   //   }
   // },
   components: {
-      Info,
-      MyChart,
-      Tips,
-      NewsSlider,
-      imgCell,
-      TaskItem,
-  }
-}
+    Info,
+    MyChart,
+    Tips,
+    NewsSlider,
+    imgCell,
+    TaskItem,
+  },
+};
 </script>
 
 
@@ -345,6 +363,10 @@ margin-top: 1rem;
 }
 .task-date{
   margin-bottom: .5rem;
+}
+.more{
+  width: 80%;
+  margin: 0 auto;
 }
 .opacity{background:rgba(0,0,0,.5); }
 </style>

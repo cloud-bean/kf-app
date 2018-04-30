@@ -3,13 +3,10 @@
   <div class="task-detail">
     <div class="task-title">{{task.name}}</div>
      <div class="task-head">
-       <div>发布 {{task.created | dateFormat}}</div>
+       <!-- <div>发布 {{task.created | dateFormat}}</div>
        <div>过期 {{task.expireTime | dateFormat}}</div>
-       <div>类型 {{task.type}}</div>
+       <div>类型 {{task.type}}</div> -->
     </div>
-    <!-- <img :src="task.titleImage.URL" alt="" width="100%" v-if="task.titleImage"/> -->
-
-
        <div class="markdown-desc">
 
           <div v-html="tansMarkdown(task.description)" v-if="task.description">
@@ -34,9 +31,19 @@
             <div v-html="tansMarkdown(task.summary)"  v-if="task.summary">
             </div>
           </div>
+          <div class="" style="border:1px solid #ccc;padding:.3rem;" v-if="task.cardPool && !hasOpen">
+            <div class="" style="color:#6F2DBD;text-align:center">
+              任务中包含通关密码，填写后开启宝箱
+            </div>
+            <mt-field label="通关密码" placeholder="ABCD" v-model="passCode"></mt-field>
+            <div v-if="passCode==task.passCode"  @click="handleOpenBox">
+              <card-pool-item :cardPoolData="task.cardPool"></card-pool-item>
+            </div>
+          </div>
           <div class="task-footer">
             <head-list :user-list="task.taskDoneUsers"></head-list>
           </div>
+
 
        </div>
        <!-- {{task.cardPool.description}} -->
@@ -60,20 +67,31 @@
 
 
  </div>
+ <div class="mask" v-if="popupVisible" @click="closeCard"></div>
+ <transition enter-active-class=" animated flipInY" leave-active-class=" animated flipOutY">
+   <card-view class="card-view" v-if="popupVisible" :card-data="card" @click.native="closeCard"
+              :product="false"></card-view>
+ </transition>
+ <div class="bottom-msg">
+   <div class="" v-if="new Date(task.expireTime) > new Date()">
+     <div class="mulbutton" v-if="!task.isDone">
+       <mt-button  type="default" size="large"  @click="showActionSheet" plain>
+         <i class="fa fa-caret-right" aria-hidden="true" slot="icon"></i>
+         提交作业
+       </mt-button>
+      <!-- <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button> -->
 
+     </div>
+   </div>
+   <div v-else class="expire">
+     已超期
+   </div>
+ </div>
  <div v-for="comment in comments" class="message-item">
    <message-item :data="comment"></message-item>
  </div>
- <div class="" v-if="new Date(task.expireTime) > new Date()">
-   <div class="mulbutton" v-if="!task.isDone">
-     <mt-button  type="primary" size="large"  @click="showActionSheet">提交作业</mt-button>
-    <!-- <multi-fuc-button :camera="photo" :text-input="handleComment" :voice="handleRecord"></multi-fuc-button> -->
 
-   </div>
- </div>
- <div v-else class="expire">
-   已超期
- </div>
+
 
  <mt-actionsheet
  :actions="actions"
@@ -95,6 +113,8 @@ import HeadList from '../components/HeadList';
 import MessageItem from '../components/MessageItem';
 import MessageInput from '../components/MessageInput';
 import MultiFucButton from '../components/MultiFucButton';
+import cardPoolItem from '../components/cardPoolItem';
+import CardView from '../components/CardView';
 
 import { mapState, mapActions } from 'vuex';
 import { Toast } from 'mint-ui';
@@ -105,26 +125,41 @@ const markdown = require('markdown').markdown;
 // import { getComments, leaveComment, submitOrder } from '../vuex/actions';
 
 export default {
-  data: function () {
+  data() {
     return {
-      actions:[
-        {name:'文本' , method:this.handleComment},
-        {name:'语音' , method:this.handleRecord},
-        {name:'图片' , method:this.photo}
+      actions: [
+        { name: '文本', method: this.handleComment },
+        { name: '语音', method: this.handleRecord },
+        { name: '图片', method: this.photo },
       ],
-      sheetVisible:false,
-    }
+      passCode: '',
+      sheetVisible: false,
+      card: {},
+      chance: true,
+      popupVisible: false,
+    };
   },
   components: {
     MessageItem,
     HeadList,
     Toast,
     MultiFucButton,
+    cardPoolItem,
+    CardView,
   },
-  computed: mapState({
-      task : state => state.task.activeTask,
+  computed: {
+    ...mapState({
+      task: state => state.task.activeTask,
       comments: state => state.task.activeComments,
-  }),
+      user: state => state.profile.user,
+    }),
+    hasOpen() {
+      const res = (this.task.openLotteryUserIds.indexOf(this.user._id) != -1);
+      console.log(res);
+      return res;
+    },
+  },
+
   //
   // vuex: {
   //   getters: {
@@ -145,22 +180,42 @@ export default {
       'getComments',
       'leaveComment',
       'submitOrder',
+      'openCardPool',
+      'getUserCards',
+      'getUserLottery',
     ]),
-    isExpired(){
+    isExpired() {
       if (new Date(this.task.expireTime) < new Date()) return true;
       return false;
     },
-    showActionSheet(){
+    showActionSheet() {
       this.sheetVisible = !this.sheetVisible;
     },
-    tansMarkdown(content){
+    tansMarkdown(content) {
       return markdown.toHTML(content);
     },
-    handleComment(){
+    handleComment() {
       this.$router.push('/taskComment');
     },
-    handleRecord(){
+    handleRecord() {
       this.$router.push('/recordVoice');
+    },
+    async handleOpenBox() {
+      this.chance = false;
+      const data = await this.openCardPool({ taskId: this.task._id, userId: this.user._id });
+      if (!data.card) {
+        Toast({
+          iconClass: ' fa-hand-peace-o fa',
+          message: '很不幸我的朋友，你没有获得卡牌!',
+          position: 'middle',
+          duration: 1000,
+        });
+      } else if (data.card) {
+        this.card = data.card;
+        this.popupVisible = true;
+      }
+      await this.getUserLottery();
+      await this.getUserCards();
     },
     // postOrder(serverId){
     //   const data = {
@@ -174,51 +229,54 @@ export default {
     //   };
     //   return this.submitOrder(data);
     // },
-    async photo(){
-      try{
+    async photo() {
+      try {
         const serverId = await this.chooseUploadImage();
-        await this.submitOrder({taskId:this.task._id, serverId, type:0})
-        await this.leaveComment({content:'我提交了图片答案', taskId:this.task._id})
-         Toast({
+        await this.submitOrder({ taskId: this.task._id, serverId, type: 0 });
+        await this.leaveComment({ content: '我提交了图片答案', taskId: this.task._id });
+        Toast({
           message: '作业提交成功',
           position: 'middle',
-          duration: 3000
-       });
-      }catch(err){
+          duration: 3000,
+        });
+      } catch (err) {
         console.log(err);
       }
     },
-    chooseUploadImage(){
-    return new Promise((resolve, reject) => {
+    closeCard() {
+      this.popupVisible = false;
+    },
+    chooseUploadImage() {
+      return new Promise((resolve, reject) => {
         wx.chooseImage({
-            count: 1, // 默认9
-            sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-            success(res) {
-                const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                wx.uploadImage({
-                    localId: localIds[0],
-                    isShowProgressTips: 1,
-                    success(result) {
-                        const serverId = result.serverId;
-                        resolve(serverId);
-                    },
-                    cancel() {
-                        reject();
-                    }
-                });
-            },
-            cancel() {
+          count: 1, // 默认9
+          sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+          success(res) {
+            const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+            wx.uploadImage({
+              localId: localIds[0],
+              isShowProgressTips: 1,
+              success(result) {
+                const serverId = result.serverId;
+                resolve(serverId);
+              },
+              cancel() {
                 reject();
-            }
+              },
+            });
+          },
+          cancel() {
+            reject();
+          },
         });
-    });
-    }
+      });
+    },
     // record(){
     //   wx.startRecord();
     // },
   },
-}
+};
 </script>
 
 <style lang="css" scoped>
@@ -230,20 +288,20 @@ export default {
 }
 .task-title{
   padding: 1rem 1rem;
-  font-size: 1.5rem;
-  background-color: #26a2ff;
+  font-size: 1.2rem;
+  background-color: #6F2DBD;
   opacity: 0.8;
   color: white;
 }
 .task-head{
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 1rem 1rem;
-  height: 5rem;
+  padding: 1rem 1rem; */
+  /* height: 5rem; */
   background-color: #26a2ff;
-  font-size: 0.8rem;
-  color: white;
+  /* font-size: 0.8rem; */
+  /* color: white; */
 }
 .task-content{
   padding: 1rem 1rem;
@@ -296,7 +354,9 @@ export default {
 .expire{
   text-align: center;
   color: #fff;
-  background-color: rgba(255,0,0,.5);
+  font-size: 1rem;
+  padding: .5rem;
+  background-color: rgba(255,0,0,.8);
 }
 /*.image-content{
 position: absolute;
@@ -340,8 +400,8 @@ overflow: hidden;
   /*position: fixed;*/
   /*right: 3rem;*/
   /*bottom: 3.5rem;*/
-  width:100%;
-  padding: .2rem .5rem;
+  /* width:100%; */
+  /* padding: .2rem .5rem; */
 }
 .record-panel{
   position:fixed;
@@ -353,5 +413,37 @@ overflow: hidden;
   width:90%;
   /*height:10rem;*/
   /*padding: 1rem;*/
+}
+.bottom-msg{
+  /* position: fixed; */
+  width: 90%;
+  /* bottom: 4rem;
+  right: 0;
+  left: 0; */
+  margin: 1rem auto;
+  margin-top: 0;
+
+}
+.mask {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  _position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  background: rgba(0, 0, 0, .8);
+}
+
+.card-view {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 2rem;
+  /* bottom: 0px; */
+  margin: auto;
+  text-align: center;
+  z-index: 999;
+  width: 70%;
 }
 </style>

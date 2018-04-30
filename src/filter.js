@@ -2,6 +2,8 @@ const moment = require('moment');
 moment.lang('zh-cn');
 
 export const dateFormat = (expireTime) => {
+  const today = moment().startOf('day');
+  if (moment(expireTime).isSame(today, 'd')) return '今日挑战';
   const result = moment(expireTime).format('YYYY-MM-DD');
   return result;
 };
@@ -14,7 +16,7 @@ export const timefromNow = (dateTime) => {
 export const expire = (expireTime) => {
   const expireTimel = new Date(expireTime);
   const now = new Date();
-  const result = (expireTimel - now) > 0 ? false : true;
+  const result = !((expireTimel - now) > 0);
   return result;
 };
 
