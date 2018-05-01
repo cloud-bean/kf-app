@@ -39,8 +39,22 @@ const actions = {
   },
 };
 
+// const getters = {
+//   allCards(state) {
+//     return state.allGoods.filter((item) => {
+//       if (item.category == 'card') return item;
+//     });
+//   },
+//   allErciyuan(state) {
+//     return state.allGoods.filter((item) => {
+//       if (item.category == 'erciyuan') return item;
+//     });
+//   },
+// };
+
 export default {
   state,
   mutations,
   actions,
+  // getters,
 };

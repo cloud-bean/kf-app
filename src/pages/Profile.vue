@@ -55,6 +55,9 @@
          </mt-tab-item>
        </mt-navbar>
      </div> -->
+     <div class="new-student-tasks">
+       <new-student-tasks :tasks="allNewStudentTasks"></new-student-tasks>
+     </div>
 
 
      <div class="tasklist" >
@@ -117,6 +120,8 @@ import Tips from '../components/Tips';
 import NewsSlider from '../components/NewsSlider';
 import imgCell from '../components/ImgCell';
 import TaskItem from '../components/TaskItem';
+import newStudentTasks from '../components/newStudentTasks';
+
 const moment = require('moment');
 moment.lang('zh-cn');
 // import { getMyRecords } from '../vuex/actions';
@@ -157,6 +162,8 @@ export default {
       myRank: state => state.rank.myRank,
       cards: state => state.card.cards,
       tasks: state => state.task.tasks,
+      allNewStudentTasks: state => state.task.allNewStudentTasks,
+
       taskByDate: state => state.task.taskByDate,
       taskQuantityInfo: state => state.task.taskQuantityInfo,
       page: state => state.task.page,
@@ -172,6 +179,7 @@ export default {
   //   },
   // },
   mounted() {
+      this.getAllNewStudentTasks();
     // this.getAllTaskList(this.page);
     // this.selectedTasks = this.taskByDate.filter((data) => {
     //   const today = moment().startOf('day');
@@ -188,6 +196,7 @@ export default {
       'getAllTaskList',
       'cleanTaskList',
       'changeNavbar',
+      'getAllNewStudentTasks',
     ]),
     loadAllTasks() {
       // this.selectedTasks = this.taskByDate;
@@ -271,6 +280,7 @@ export default {
     NewsSlider,
     imgCell,
     TaskItem,
+    newStudentTasks,
   },
 };
 </script>

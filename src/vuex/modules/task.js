@@ -5,6 +5,7 @@ const moment = require('moment');
 const state = {
   taskQuantityInfo: {},
   tasks: [],
+  allNewStudentTasks: [],
   taskByDate: [],
   selected: '1',
   activeTask: {},
@@ -18,6 +19,9 @@ const mutations = {
   },
   [types.SET_ACTIVE_TASK_COMMENTS](state, comments) {
     state.activeComments = comments;
+  },
+  [types.SET_NEW_STUDENT_TASKS](state, tasks) {
+    state.allNewStudentTasks = tasks;
   },
   [types.OPEN_TASK_LOTTERY](state, userId) {
     state.activeTask.openLotteryUserIds.push(userId);
@@ -102,6 +106,13 @@ const actions = {
     commit(types.FETCH_STH);
     const tasks = await api.getAllTaskList(page);
     commit(types.SET_TASKS, tasks);
+    commit(types.GOT_STH);
+    return tasks;
+  },
+  async getAllNewStudentTasks({ commit }, ) {
+    commit(types.FETCH_STH);
+    const tasks = await api.getAllNewStudentTasks();
+    commit(types.SET_NEW_STUDENT_TASKS, tasks);
     commit(types.GOT_STH);
     return tasks;
   },
