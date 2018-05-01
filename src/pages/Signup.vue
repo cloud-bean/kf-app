@@ -19,9 +19,10 @@
 <div class="field">
 <mt-field label="姓名" placeholder="请输入用户名"  v-model="displayName"></mt-field>
 <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone"></mt-field>
+<mt-field label="QQ号" placeholder="请输入您的QQ号" type="tel" v-model="qq"></mt-field>
 <div class="Grid">
   <div class="Cell -3of12" style="padding:10px;">所在学校</div>
-  <select class="Cell -9of12"  v-model="school">
+  <select class="Cell -9of12"  v-model="user.option.school">
     <option value ="西工大附中">西工大附中</option>
     <option value ="西安铁一中">西安铁一中</option>
     <option value ="陕师大附中">陕师大附中</option>
@@ -36,12 +37,12 @@
   </select>
 </div>
 
-<div class="Grid">
+<!-- <div class="Grid">
   <div class="Cell -3of12" style="padding:10px;">起点</div>
   <select class="Cell -9of12"  v-model="initCourse">
     <option v-for="course in freeCourses" :value="course._id" :key="course._id">{{course.name}}</option>
   </select>
-</div>
+</div> -->
 
 <!-- <mt-field label="我的宣言" placeholder="我的宣言"  v-model="slogan"></mt-field>
 <div class="submit"> -->
@@ -116,6 +117,7 @@ export default {
       school:'西工大附中',
       avatarPanel:false,
       initCourse:'',
+      qq:'',
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying

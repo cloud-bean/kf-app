@@ -36,6 +36,22 @@ export const getAllTaskList = page =>
         reject(err);
       });
   });
+export const getAllNewStudentTasks = () =>
+    new Promise((resolve, reject) => {
+      service
+        .get('/allNewStudentTasks')
+        .then(result => {
+          if (result.data.code == 'success') {
+            const tasks = result.data.data;
+            // const taskQuantity = result.body.data.totalCount;
+            resolve(tasks);
+          }
+          resolve([]);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
 
 export const getTaskDoneQuantity = () =>
   new Promise((resolve, reject) => {

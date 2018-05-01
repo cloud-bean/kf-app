@@ -22,7 +22,7 @@
     <mt-field label="江湖人称" placeholder="你的名号"  v-model="displayName"></mt-field>
     <div class="Grid">
       <div class="Cell -3of12" style="padding:10px;">英雄出处</div>
-      <select class="Cell -9of12"  v-model="school">
+      <select class="Cell -9of12"  v-model="user.option.school">
         <option value ="西工大附中">西工大附中</option>
         <option value ="西安铁一中">西安铁一中</option>
         <option value ="陕师大附中">陕师大附中</option>

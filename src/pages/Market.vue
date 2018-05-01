@@ -21,18 +21,18 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="good">
           <!--<div class="good-list">-->
-            <div class="commodity" v-for="(item, index) in allGoods" :key="index">
+            <div class="commodity" v-for="(item, index) in allCards" :key="index">
               <good-item :goodData='item' :buy='buyTheGood' :user="user"></good-item>
             </div>
           <!--</div>-->
         </mt-tab-container-item>
         <mt-tab-container-item id="erciyuan">
-          <!-- <div class="commodity" v-for="(item, index) in allGoods" :key="index">
+          <div class="commodity" v-for="(item, index) in allErciyuan" :key="index">
             <good-item :goodData='item' :buy='buyTheGood'></good-item>
-          </div> -->
-          <div class="commodity" style="padding:1rem;">
-            二次元手办，等待上架
           </div>
+          <!-- <div class="commodity" style="padding:1rem;">
+            二次元手办，等待上架
+          </div> -->
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
@@ -48,7 +48,7 @@ import goodItem from '../components/goodItem';
 import Info from '../components/HeadInfo';
 
 // import { getMyRecords } from '../vuex/actions';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { TabContainer, TabContainerItem, Button } from 'mint-ui';
 import Vue from 'vue';
 
@@ -71,17 +71,34 @@ export default {
       active: 'good',
     };
   },
-  computed: mapState({
+  computed: {
+    ...mapState({
     // user: state => state.profile.user,
     // userRecords: state => state.profile.userRecords,
     // tip: state => state.profile.tip,
     // news: state => state.news.news,
-    cardPool: state => state.card.cardPool,
-    allGoods: state => state.market.allGoods,
-    user: state => state.profile.user,
-    myRank: state => state.rank.myRank,
+      cardPool: state => state.card.cardPool,
+      allGoods: state => state.market.allGoods,
+      user: state => state.profile.user,
+      myRank: state => state.rank.myRank,
 
-  }),
+    }),
+    allCards() {
+      return this.allGoods.filter((item) => {
+        if (item.category == 'card') return item;
+      });
+    },
+    allErciyuan() {
+      return this.allGoods.filter((item) => {
+        if (item.category == 'erciyuan') return item;
+      });
+    },
+    // ...mapGetters('market',[
+    //   'allCards',
+    //   'allErciyuan',
+    // ]),
+  },
+
   // vuex: {
   //   getters: {
   //     user: state => state.user,

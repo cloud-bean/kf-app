@@ -20,7 +20,7 @@
     </div>
 
     <div class="icon Cell -2of12">
-      <mt-button type="danger" size="small" plain @click="handleCancel" v-if="user._id==goodData.owner._id">撤回</mt-button>
+      <mt-button type="danger" size="small" plain @click="handleCancel" v-if="user && (user._id==goodData.owner._id)">撤回</mt-button>
       <mt-button type="primary" size="small" plain @click="handleBuy" v-else>购买</mt-button>
 
     </div>
