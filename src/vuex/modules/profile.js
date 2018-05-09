@@ -57,13 +57,13 @@ const actions = {
     commit(types.SET_TIP, await api.getTips());
     commit(types.GOT_STH);
   },
-  async signUp({ commit, state }, { displayName, phone, slogan, school }) {
+  async signUp({ commit, state }, { displayName, phone, slogan, school, qq }) {
     commit(types.FETCH_STH);
     const user = state.user;
     const option = Object.assign({}, user.option, { slogan }, { school });
-    const newuser = Object.assign({}, user, { option }, { phone }, { displayName });
-    await api.signUp(user._id, newuser);
-    commit(types.SET_USER_INFO, newuser);
+    const newUser = Object.assign({}, user, { option }, { phone }, { displayName }, { qq });
+    await api.updateUserInfo(user._id, newUser);
+    commit(types.SET_USER_INFO, newUser);
     commit(types.SET_LOGIN, true);
     commit(types.GOT_STH);
   },

@@ -61,7 +61,7 @@
 
 
      <div class="tasklist" >
-       <p v-if="tasks.length==0" class="no-task">
+       <p v-if="taskByDate.length==0" class="no-task">
          已完成所有挑战
        </p>
        <!--<div

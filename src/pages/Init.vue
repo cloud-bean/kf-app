@@ -124,10 +124,10 @@ export default {
         await this.getRanks(1);
         // this.setLogin(true);
           // this.$router.push('/profile');
-        if(this.user.phone){
+        if(this.user.phone && this.user.qq) {
           this.setLogin(true);
           this.$router.push('/profile');
-        }else{
+        } else {
           this.$router.push('/signup');
         }
       }

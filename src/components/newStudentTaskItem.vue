@@ -1,53 +1,68 @@
 <template>
 <!--v-bind:class="{mask:expire}"-->
-  <div class="task-item Grid" v-bind:class="[taskdata.isDone?'done':'']">
+  <div class="task-item Grid" v-bind:class="[taskdata.isDone && hasOpen?'hide':'']">
     <div class="task-content Cell -10of12">
       <div class=" ">
-        <div class="title">{{taskdata.name}}</div>
+        <div class="title">
+          <span style="color:green;" v-if="taskdata.isDone"><i class="fa fa-check-circle"></i></span>
+          <span style="color:gray;" v-if="!taskdata.isDone"><i class="fa fa-circle"></i></span>
+          <span style="color:purple;" v-if="hasOpen"><i class="fa fa-check-circle"></i></span>
+          <span style="color:gray;" v-if="!hasOpen"><i class="fa fa-circle"></i></span>
+          {{taskdata.name}}
+        </div>
       </div>
     </div>
-    <!-- <div class="task-right Cell -1of12">
-      <span style="color:green;" v-if="taskdata.isDone"><i class="fa fa-check-circle"></i></span>
-    </div> -->
+    <!--<div class="task-right Cell -1of12">-->
+      <!--<span style="color:green;" v-if="taskdata.isDone"><i class="fa fa-check-circle"></i></span>-->
+    <!--</div>-->
     <!-- <div class="mask" v-if="expire">
     </div> -->
-    </div>
-
-
-
-
+  </div>
 </template>
 
 <script>
 const moment = require('moment');
 // const taskType = ['语音','书写','测验','行为','市场'];
 // const typeLogo = ['speak','write','test','behavior','market'];
-    export default{
-      props:['taskdata'],
-      components: {
-      },
-      data(){
-        return {
-          logo: null,
-          showM: false,
-          expire: false,
-          type:'read',
-        }
-      },
-      created(){
+import { mapState } from 'vuex';
 
-      },
-      methods: {
-        show(){
-          this.showM = true;
-        },
-      }
-    }
+export default{
+  props: ['taskdata'],
+  components: {
+  },
+  data() {
+    return {
+      logo: null,
+      showM: false,
+      expire: false,
+      type: 'read',
+    };
+  },
+  computed: {
+    ...mapState({
+      user: state => state.profile.user,
+    }),
+    hasOpen() {
+      return this.taskdata.openLotteryUserIds.indexOf(this.user._id) !== -1;
+    },
+  },
+  created() {
+
+  },
+  methods: {
+    show() {
+      this.showM = true;
+    },
+  },
+};
 
 </script>
 
 
 <style scoped>
+  .hide {
+    display: none !important;
+  }
 p{
   margin-bottom: 2px;
 }

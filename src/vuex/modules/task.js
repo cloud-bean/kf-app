@@ -50,14 +50,18 @@ const mutations = {
       let flag = true;
       for (let i = 0; i < orgTasks.length; i++) {
         flag = true;
-        for (let j = 0; j < taskByDate.length; j++) {
-          if (taskByDate[j].date.isSame(moment(orgTasks[i].startTime), 'day')) {
-            taskByDate[j].tasks.push(orgTasks[i]);
-            flag = false;
+        if (orgTasks[i].course.name === '新人训练营') {
+          // skip 新人训练营
+        } else {
+          for (let j = 0; j < taskByDate.length; j++) {
+            if (taskByDate[j].date.isSame(moment(orgTasks[i].startTime), 'day')) {
+              taskByDate[j].tasks.push(orgTasks[i]);
+              flag = false;
+            }
           }
-        }
-        if (flag == true) {
-          taskByDate.push({ date: moment(orgTasks[i].startTime), tasks: [orgTasks[i]] });
+          if (flag === true) {
+            taskByDate.push({ date: moment(orgTasks[i].startTime), tasks: [orgTasks[i]] });
+          }
         }
       }
     }
@@ -109,7 +113,7 @@ const actions = {
     commit(types.GOT_STH);
     return tasks;
   },
-  async getAllNewStudentTasks({ commit }, ) {
+  async getAllNewStudentTasks({ commit }) {
     commit(types.FETCH_STH);
     const tasks = await api.getAllNewStudentTasks();
     commit(types.SET_NEW_STUDENT_TASKS, tasks);
@@ -148,10 +152,16 @@ const actions = {
     //     commit(types.GOT_STH);
     //     return tasks;
     // },
-  taskDetail({ commit, state }, id) {
+  taskDetail({ commit }, id) {
     commit(types.FETCH_STH);
     const tasks = state.tasks;
-    const current = tasks.filter(item => (item._id == id));
+    const current = tasks.filter(item => (item._id === id));
+    commit(types.SET_ACTIVE_TASK, current[0]);
+  },
+  taskNewStudentDetail({ commit }, id) {
+    commit(types.FETCH_STH);
+    const tasks = state.allNewStudentTasks;
+    const current = tasks.filter(item => (item._id === id));
     commit(types.SET_ACTIVE_TASK, current[0]);
   },
   async leaveComment({ commit }, { content, taskId }) {
