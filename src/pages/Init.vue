@@ -7,7 +7,7 @@
          {{loginDate}}
       </div> -->
       <div  class="slogan">
-        v0.6.20180331
+        v0.6.20180509
       </div>
             <!-- <mt-progress :value="progress" :bar-height="5"></mt-progress>
             <div>已加载{{progress}}%</div> -->
