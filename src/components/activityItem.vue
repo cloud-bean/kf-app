@@ -1,6 +1,6 @@
 <template>
   <div v-if="activityData.module === 'battle'">
-    <div :style="{backgroundImage: 'url(' + activityData.detail.themeCoverImage.URL+ ')'}" class="battle-card">
+    <div :style="{backgroundImage: 'url(' + activityData.detail.themeCoverImage.URL+ '?imageView2/1/w/400/h/200/q/75|imageslim)'}" class="battle-card">
       <mt-badge color="#fff">
         <span style="color: gray; font-weight: lighter;">{{ activityData.detail.mode }}</span>
         &nbsp;
@@ -13,11 +13,10 @@
         <p v-for="(name, index) in activityData.detail.groupNames" :key="index">
           {{activityData.detail.scoreStr.split(':')[index]}} {{ name }}
         </p>
-
       </div>
 
     </div>
-    <div style="padding: 10px;">
+    <div style="padding: 5px;">
       <p>
         王者战队：<span style="color: #cb47ca; font-weight: bolder">{{activityData.detail.wonTeam.name}}</span>
       </p>
@@ -25,6 +24,8 @@
       <p>MVP: <span style="color: #cb47ca; font-weight: bolder">{{activityData.detail.mvp.displayName}}</span></p>
 
       <div style="display: block; margin-top: 5px;">
+        <span>{{activityData.created | timefromNow}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+
         <mt-badge color="#eee" @click.native="toggleBattleScore">
           <span style="color: gray;"> {{ battleScore ? '收起战队分数' : '显示战队分数'}}</span>
         </mt-badge>
