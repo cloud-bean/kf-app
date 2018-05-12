@@ -1,57 +1,110 @@
 <template>
-  <div class="img-cell Grid -middle -around">
-    <div class="img Cell -2of12 Grid -center -middle">
-      <img :src="!!(activityData.user.profileImageURL) ? activityData.user.profileImageURL : ''" alt=""
-           style=" -webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;"/>
-      <span>{{activityData.user.displayName}}</span>
-    </div>
-    <div class="Cell -6of12 Grid">
-      <div class=" Cell -12of12">
-        <span class="title">{{activityData.title}} {{activityData.detail.name}}</span>
+  <div v-if="activityData.module === 'battle'">
+    <div :style="{backgroundImage: 'url(' + activityData.detail.themeCoverImage.URL+ ')'}" class="battle-card">
+      <mt-badge color="#fff">
+        <span style="color: gray; font-weight: lighter;">{{ activityData.detail.mode }}</span>
+        &nbsp;
+        <span style="color: #cb47ca; font-weight: bolder">{{ activityData.detail.themeName }}</span>
+      </mt-badge>
+
+      <br>
+      <div style="background-color: rgba(203,71,202,0.55); color: #fff; padding: 10px; margin: 5px;" v-if="battleScore">
+        <p>分数 | 战队</p>
+        <p v-for="(name, index) in activityData.detail.groupNames" :key="index">
+          {{activityData.detail.scoreStr.split(':')[index]}} {{ name }}
+        </p>
+
       </div>
-      <div class="desc">
-        {{activityData.created | timefromNow}}
+
+    </div>
+    <div style="padding: 10px;">
+      <p>
+        王者战队：<span style="color: #cb47ca; font-weight: bolder">{{activityData.detail.wonTeam.name}}</span>
+      </p>
+
+      <p>MVP: <span style="color: #cb47ca; font-weight: bolder">{{activityData.detail.mvp.displayName}}</span></p>
+
+      <div style="display: block; margin-top: 5px;">
+        <mt-badge color="#eee" @click.native="toggleBattleScore">
+          <span style="color: gray;"> {{ battleScore ? '收起战队分数' : '显示战队分数'}}</span>
+        </mt-badge>
+
+        <mt-badge color="#eee" @click.native="upVoteIt">
+          <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}" > </i>
+          {{activityData.upVotes.length}}
+        </mt-badge>
+
+        <mt-badge @click.native="toggleShowMsgs" color="#eee">
+          <i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
+          {{activityData.messages ? activityData.messages.length : 0}}
+        </mt-badge>
+
+        <div v-if="showMsgs" style="display:block; width: 100%; padding: 10px; margin: 5px; border: 1px solid #ccc5;">
+          <mt-cell style="border: none;">
+            <mt-button size="small" plain @click="addMsg">评论</mt-button>
+          </mt-cell>
+
+          <mt-cell :title="message.user" :label="message.created | timefromNow"
+                   style="border-bottom: 1px dashed #ccc5;"
+                   v-for="message in activityData.messages" :key="message._id">
+            <span >{{ message.content}}</span>
+          </mt-cell>
+        </div>
       </div>
     </div>
 
-    <!-- <div class="icon Cell -1of12">
-      <div class="like">
-        <div class="likenum">
-          {{activityData.upVotes.length }}
+  </div>
+  <div v-else>
+    <div class="img-cell Grid -middle -around">
+
+      <div v-if="activityData.user" class="img Cell -2of12 Grid -center -middle">
+        <img :src="!!(activityData.user.profileImageURL) ? activityData.user.profileImageURL : ''" alt=""
+             style=" -webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;"/>
+        <span>{{activityData.user.displayName}}</span>
+      </div>
+
+      <div class="Cell -6of12 Grid">
+
+        <div v-if="activityData.module === 'battle'" :style="{backgroundImage: 'url(' + activityData.detail.themeCoverImage.URL + '?imageView2/2/w/400/h/200/q/75|imageslim' + ')'}">
+          <mt-badge>{{ activityData.mode }} - {{ activityData.themeName}}</mt-badge>
         </div>
-        <div class="likeicon" v-on:click="upVoteIt" >
-          <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}"></i>
+        <div v-else>
+          <div class=" Cell -12of12">
+            <span class="title">{{activityData.title}} {{activityData.detail.name}}</span>
+          </div>
+          <div class="desc">
+            {{activityData.created | timefromNow}}
+          </div>
         </div>
       </div>
-    </div> -->
-
-    <div class="icon Cell -2of12">
-       <mt-badge color="#eee">
+      <div class="icon Cell -2of12">
+        <mt-badge color="#eee">
           <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}" v-on:click="upVoteIt">
           </i>
           {{activityData.upVotes.length}}
-      </mt-badge>
-    </div>
+        </mt-badge>
+      </div>
 
-    <div class="icon Cell -2of12" @click="toggleShowMsgs">
-      <mt-badge color="#eee"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
-      {{activityData.messages ? activityData.messages.length : 0}}
-      </mt-badge>
+      <div class="icon Cell -2of12" @click="toggleShowMsgs">
+        <mt-badge color="#eee"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
+          {{activityData.messages ? activityData.messages.length : 0}}
+        </mt-badge>
 
-    </div>
+      </div>
 
-    <div v-if="showMsgs" style="display:block; width: 100%; padding: 10px; margin: 5px; border: 1px solid #ccc5;">
-      <mt-cell style="border: none;">
-        <mt-button size="small" plain @click="addMsg">评论</mt-button>
-      </mt-cell>
+      <div v-if="showMsgs" style="display:block; width: 100%; padding: 10px; margin: 5px; border: 1px solid #ccc5;">
+        <mt-cell style="border: none;">
+          <mt-button size="small" plain @click="addMsg">评论</mt-button>
+        </mt-cell>
 
-      <mt-cell :title="message.user" :label="message.created | timefromNow"
-        style="border-bottom: 1px dashed #ccc5;"
-       v-for="message in activityData.messages" :key="message._id">
-        <span >{{ message.content}}</span>
-       </mt-cell>
-    </div>
+        <mt-cell :title="message.user" :label="message.created | timefromNow"
+                 style="border-bottom: 1px dashed #ccc5;"
+                 v-for="message in activityData.messages" :key="message._id">
+          <span >{{ message.content}}</span>
+        </mt-cell>
+      </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -64,6 +117,7 @@
     data() {
       return {
         showMsgs: false,
+        battleScore: false,
       };
     },
     computed: {
@@ -72,7 +126,7 @@
       },
       hasMsgs() {
         return this.activityData.messages ? this.activityData.messages.length > 0 : 0;
-      }
+      },
     },
     created() {
     },
@@ -84,12 +138,14 @@
             position: 'middle',
             duration: 1000,
           });
-        }
-        else {
+        } else {
           this.upVote(this.activityData._id);
           this.activityData.upVotes.push(this.user._id);
           // this.loadTop();
         }
+      },
+      toggleBattleScore() {
+        this.battleScore = !this.battleScore;
       },
       toggleShowMsgs() {
         this.showMsgs = !this.showMsgs;
@@ -113,6 +169,14 @@
 
 
 <style scoped>
+  .battle-card {
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+  }
   .activity-item {
     padding: .5rem 1rem;
     background-color: #fff;
