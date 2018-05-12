@@ -19,25 +19,18 @@
         <mt-field label="QQ号" placeholder="请输入您的QQ号" type="number" v-model="qq"></mt-field>
         <mt-field label="我的宣言" placeholder="learning with joy"  v-model="slogan"></mt-field>
         <div class="Grid">
-          <div class="Cell -3of12" style="padding:10px;">所在学校</div>
+          <div class="Cell -3of12" style="padding:10px;">选择学校：</div>
           <select class="Cell -9of12" v-model="school">
-            <option value="西工大附中">西工大附中</option>
-            <option value="西安铁一中">西安铁一中</option>
-            <option value="陕师大附中">陕师大附中</option>
-            <option value="西安高新一中">西安高新一中</option>
-            <option value="西安交大附中">西安交大附中</option>
-            <option value="西安爱知中学">西安爱知中学</option>
-            <option value="西北大学附中">西北大学附中</option>
-            <option value="西电附中">西电附中</option>
-            <option value="西安市第一中学">西安市第一中学</option>
-            <option value="西安市第七十中学">西安市第七十中学</option>
-            <option value="西安市第七十中学">其他学校</option>
+            <option v-for="(schoolName, index) in optionSchools" :value="schoolName" :key="index">{{schoolName}}</option>
           </select>
         </div>
-        <mt-button style="margin-top:2rem; background-color: #cb47ca;" size="large" type="primary" @click="submit">提交</mt-button>
+        <mt-field label="学校名称：" placeholder="请输入您的学校名称" type="text" v-model="school"></mt-field>
+        <mt-button style="margin-top:2rem;" :class="{'valid': checkDataValid}"
+        size="large" @click="submit" :disabled="!checkDataValid">提交</mt-button>
       </div>
     </div>
 
+<!-- cb47ca -->
     <div v-if="!user.displayName">
       <div v-if="!hasSelected">
         <mt-button style="margin-top:2rem;" size="large" type="primary" @click="select('1')">已有QQ账号</mt-button>
@@ -83,22 +76,14 @@
             <mt-field label="QQ号" placeholder="请输入您的QQ号" type="number" v-model="qq"></mt-field>
             <mt-field label="我的宣言" placeholder="learning with joy"  v-model="slogan"></mt-field>
             <div class="Grid">
-              <div class="Cell -3of12" style="padding:10px;">所在学校</div>
-              <select class="Cell -9of12" v-model="school">
-                <option value="西工大附中">西工大附中</option>
-                <option value="西安铁一中">西安铁一中</option>
-                <option value="陕师大附中">陕师大附中</option>
-                <option value="西安高新一中">西安高新一中</option>
-                <option value="西安交大附中">西安交大附中</option>
-                <option value="西安爱知中学">西安爱知中学</option>
-                <option value="西北大学附中">西北大学附中</option>
-                <option value="西电附中">西电附中</option>
-                <option value="西安市第一中学">西安市第一中学</option>
-                <option value="西安市第七十中学">西安市第七十中学</option>
-                <option value="西安市第七十中学">其他学校</option>
-              </select>
+              <div class="Cell -3of12" style="padding:10px;">选择学校：</div>
+                <select class="Cell -9of12" v-model="school">
+                  <option v-for="(schoolName, index) in optionSchools" :value="schoolName" :key="index">{{schoolName}}</option>
+                </select>
             </div>
-            <mt-button style="margin-top:2rem; background-color: #cb47ca;" size="large" type="primary" @click="submit">注册新账号</mt-button>
+            <mt-field label="学校名称：" placeholder="请输入您的学校名称" type="text" v-model="school"></mt-field>
+            <mt-button style="margin-top:2rem;" :class="{'valid': checkDataValid}"
+              size="large" @click="submit" :disabled="!checkDataValid">注册新账号</mt-button>
           </div>
         </div>
       </div>
@@ -113,6 +98,7 @@
   Vue.component(Navbar.name, Navbar);
   Vue.component(TabItem.name, TabItem);
   import { mapState, mapActions } from 'vuex';
+import { throws } from 'assert';
 
   export default {
     data() {
@@ -124,8 +110,12 @@
         avatarPanel: false,
         initCourse: '',
         qq: '',
+        otherSchool: false,
         selected: '0',
         hasSelected: false,
+        optionSchools: ['西工大附中', '西安铁一中', '陕师大附中',
+          '西安高新一中', '西安交大附中', '西安爱知中学', '西北大学附中', '西电附中',
+          '西安市第一中学', '西安市第七十中学', '其他学校']
       };
     },
     mounted() {
@@ -143,6 +133,10 @@
       user: state => state.profile.user,
       memberAvatars: state => state.memberAvatars,
       // freeCourses: state => state.course.freeCourses,
+      checkDataValid() {
+        var res = this.qq && this.phone && this.school && this.slogan && this.displayName;
+        return res != null && res.length > 0;
+      },
     }),
     methods: {
       ...mapActions([
@@ -204,6 +198,11 @@
     margin: 0 .5rem;
   }
 
+  .valid {
+    background-color: #cb47ca !important;
+    color: #fff;
+    font-weight: 700;
+  }
   select {
     width: 100%;
     font-size: 1rem;
