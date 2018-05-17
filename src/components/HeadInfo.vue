@@ -47,7 +47,7 @@ export default{
       });
     },
     gotoSetting() {
-      this.$router.push('/setting');
+      this.$router.push('/signup');
     },
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <div v-for="(task, index) in tasks">
-      <new-student-task-item :taskdata="task" @click.native="handleClick(index)"></new-student-task-item>
+    <div v-for="task in tasks" :key="task._id">
+      <new-student-task-item :taskdata="task" @click.native="handleClick(task)"></new-student-task-item>
     </div>
   </div>
 
@@ -34,74 +34,20 @@
       methods: {
         ...mapActions([
           'getTaskList',
-          'taskDetail',
+          'taskNewStudentDetail',
           'getAllTaskList',
           'cleanTaskList',
           'changeNavbar',
         ]),
 
-        handleClick(index){
-          this.taskDetail(index);
+        handleClick(task) {
+          this.taskNewStudentDetail(task._id);
           this.$router.push('/taskDetail');
         },
-
-        // scan(){
-        //   wx.onMenuShareTimeline({
-        //     title: 'joywill', // 分享标题
-        //     link: 'joywill.cc', // 分享链接
-        //     imgUrl: '', // 分享图标
-        //     success: function () {
-        //       // 用户确认分享后执行的回调函数
-        //     },
-        //     cancel: function () {
-        //       // 用户取消分享后执行的回调函数
-        //     }
-        //   });
-        // },
-        // loadMoreTask(){
-        //   if(this.selected=='1'){
-        //
-        //   }else if(this.selected=='2'){
-        //
-        //      if(this.hasMore){
-        //     this.loading = true;
-        //     this.getAllTaskList(this.page)
-        //     .then(res => {
-        //       if(res.length < 20){
-        //         this.hasMore = false;
-        //       }
-        //       this.loading = false;
-        //     });
-        //   }
-        //
-        //   }
-        //
-        //
-        // },
       },
       computed: {
-        // ...mapState({
-        //   tasks: state => state.task.tasks,
-        //   taskQuantityInfo: state => state.task.taskQuantityInfo,
-        //   page: state => state.task.page,
-        //   selected: state => state.task.selected,
-        // }),
-        // progress(){
-        //   return 100*this.taskQuantityInfo.totalDone/this.taskQuantityInfo.totalCount;
-        // }
-      }
-      // vuex: {
-      //   getters: {
-      //     // user: state => state.user,
-      //     tasks: state => state.tasks,
-      //     taskInfo: state => state.taskInfo,
-      //   },
-      //   actions: {
-      //     getTaskList,
-      //     taskDetail,
-      //   }
-      // }
-    }
+      },
+    };
 </script>
 
 

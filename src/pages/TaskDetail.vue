@@ -162,8 +162,8 @@ export default {
       user: state => state.profile.user,
     }),
     hasOpen() {
-      const res = (this.task.openLotteryUserIds.indexOf(this.user._id) != -1);
-      console.log(res);
+      const res = (this.task.openLotteryUserIds.indexOf(this.user._id) !== -1);
+      console.log('hasOpen', res);
       return res;
     },
   },
