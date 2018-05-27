@@ -2,16 +2,11 @@
 <div class="jw-card">
 
 <div>
-    <img v-lazy="cardData.file.URL+'?imageView2/2/h/540/q/100|imageslim'" alt="" width="100%"></img>
-      <div class="name">{{cardData.name}}</div>
-      <div class="desc">{{cardData.description}}</div>
-      <mt-button v-if="product==true" type="primary" size="normal" @click="sale">出  售</mt-button>
-
-
-    <!-- <mt-badge size="large"  type="primary">{{cardData.name}}</mt-badge>
-    <mt-badge size="large" type="success">{{cardData.category}}</mt-badge> -->
+  <img v-lazy="cardData.file.URL+'?imageView2/2/h/540/q/100|imageslim'" alt="" width="100%">
+  <div class="name">{{cardData.name}}</div>
+  <div class="desc">{{cardData.description}}</div>
+    <mt-button v-if="product==true" type="primary" size="normal" @click="sale">出  售</mt-button>
   </div>
-    <!--<qrcanvas :options="{data:cardData._id}"></qrcanvas>-->
 </div>
 </template>
 <style scoped>

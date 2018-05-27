@@ -37,6 +37,16 @@ const actions = {
       console.log(e);
     }
   },
+  async revertGood({ commit }, data) {
+    try {
+      commit(types.FETCH_STH);
+      const res = await api.revertGood(data);
+      commit(types.GOT_STH);
+      return res;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 };
 
 // const getters = {

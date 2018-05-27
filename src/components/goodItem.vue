@@ -20,7 +20,7 @@
     </div>
 
     <div class="icon Cell -2of12">
-      <mt-button type="danger" size="small" plain @click="handleCancel" v-if="user && (user._id==goodData.owner._id)">撤回</mt-button>
+      <mt-button type="primary" size="small" @click="handleCancel" v-if="user && (user._id==goodData.owner._id)">撤回</mt-button>
       <mt-button type="primary" size="small" plain @click="handleBuy" v-else>购买</mt-button>
 
     </div>
@@ -40,7 +40,7 @@
   import FloatMessageBar from '../components/floatMessageBar';
 
   export default {
-    props: ['goodData', 'buy', 'user'],
+    props: ['goodData', 'buy', 'revert', 'user'],
     components: {
       CardView,
     },
@@ -66,39 +66,33 @@
         MessageBox(this.goodData.name, this.goodData.description);
       },
       async handleBuy() {
-        if (this.money < this.goodData.price) {
-          Toast({
-            message: '没有足够的悦维币，快去完成任务吧',
-            position: 'bottom',
-          });
-          return;
-        }
+        // if (this.money < this.goodData.price) {
+        //   Toast({
+        //     message: '没有足够的悦维币，快去完成任务吧',
+        //     position: 'bottom',
+        //   });
+        //   return;
+        // }
         try {
-          await MessageBox.confirm(`确定购买吗，将花费${this.goodData.price}悦币`);
+          await MessageBox.confirm(`将花费${this.goodData.price}悦币，确定购买吗？`);
           if (this.goodData.category === 'card') {
             this.card = this.goodData.detail;
             this.popupVisible = true;
           }
-          await this.buy({ goodId: this.goodData._id });
+          console.log('will buy');
+          // await this.buy({ goodId: this.goodData._id });
         } catch (e) {
+          console.log('not buy')
           console.log(e);
         }
       },
       async handleCancel() {
-        Toast({
-          message: '工程师正玩命开发此功能',
-          position: 'middle',
-        });
-        // try {
-        //   await MessageBox.confirm(`确定购买吗，将花费${this.goodData.price}悦币`);
-        //   if (this.goodData.category === 'card') {
-        //     this.card = this.goodData.detail;
-        //     this.popupVisible = true;
-        //   }
-        //   await this.buy({ goodId: this.goodData._id });
-        // } catch (e) {
-        //   console.log(e);
-        // }
+        try {
+          await MessageBox.confirm(`确定下架${this.goodData.name}吗？`);
+          await this.revert({ goodId: this.goodData._id });
+        } catch (e) {
+          console.log(e);
+        }
       },
     },
   };

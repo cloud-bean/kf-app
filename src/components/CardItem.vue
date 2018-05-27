@@ -11,7 +11,7 @@
       </div>-->
       <!--<div class="type"> {{cardData.name}} </div> -->
       <div class="jw-card" v-bind:class="[transType]"></div>
-      <mt-badge class="card-quantity" size="small" type="primary"" v-if="cardData.count>1">{{cardData.count}}</mt-badge>
+      <mt-badge class="card-quantity" size="small" type="primary" v-if="cardData.count>1">{{cardData.count}}</mt-badge>
       <img v-lazy="cardData.file.URL+'?imageView2/2/h/200/q/100|imageslim'" alt="" class="card-img image" v-bind:class="{lock}"></img>
   <!--</div>-->
       <div class="name"> {{cardData.name}} </div>

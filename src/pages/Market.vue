@@ -22,7 +22,7 @@
         <mt-tab-container-item id="good">
           <!--<div class="good-list">-->
             <div class="commodity" v-for="(item, index) in allCards" :key="index">
-              <good-item :goodData='item' :buy='buyTheGood' :user="user"></good-item>
+              <good-item :goodData='item' :buy='buyTheGood' :revert='revertTheGood' :user="user"></good-item>
             </div>
           <!--</div>-->
         </mt-tab-container-item>
@@ -30,9 +30,6 @@
           <div class="commodity" v-for="(item, index) in allErciyuan" :key="index">
             <good-item :goodData='item' :buy='buyTheGood'></good-item>
           </div>
-          <!-- <div class="commodity" style="padding:1rem;">
-            二次元手办，等待上架
-          </div> -->
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
@@ -54,19 +51,10 @@ import Vue from 'vue';
 Vue.component(TabContainer.name, TabContainer);
 Vue.component(TabContainerItem.name, TabContainerItem);
 Vue.component(Button.name, Button);
-// import Expbar from '../components/Expbar';
-// import Chart from '../components/Chart';
-// import config from '../config/config';
-// import util from '../config/util';
-// import mockdata from '../../test/mock';
 
 export default {
   data() {
     return {
-      // note: changing this line won't causes changes
-      // with hot-reload because the reloaded component
-      // preserves its current state and we are modifying
-      // its initial state.
       active: 'good',
     };
   },
@@ -76,7 +64,6 @@ export default {
       allGoods: state => state.market.allGoods,
       user: state => state.profile.user,
       myRank: state => state.rank.myRank,
-
     }),
     allCards() {
       return this.allGoods.filter((item) => item.category === 'card');
@@ -96,14 +83,19 @@ export default {
       'openLotteryBox',
       'getAllGoods',
       'buyGood',
+      'revertGood',
       'getUserInfo',
-
     ]),
     async buyTheGood(data) {
       await this.buyGood(data);
       await this.getAllGoods();
       await this.getCardPool(1);
       await this.getUserInfo(this.user._id);
+    },
+    async revertTheGood(data) {
+      await this.revertGood(data);
+      await this.getAllGoods();
+      await this.getCardPool(1);
     },
     setActive(id) {
       this.active = id;
