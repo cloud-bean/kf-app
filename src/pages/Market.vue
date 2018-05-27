@@ -44,7 +44,8 @@ import CommodityItem from '../components/CommodityItem';
 import goodItem from '../components/goodItem';
 import Info from '../components/HeadInfo';
 
-import { mapState, mapActions } from 'vuex';
+// import { getMyRecords } from '../vuex/actions';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { TabContainer, TabContainerItem, Button } from 'mint-ui';
 import Vue from 'vue';
 
@@ -60,18 +61,38 @@ export default {
   },
   computed: {
     ...mapState({
+    // user: state => state.profile.user,
+    // userRecords: state => state.profile.userRecords,
+    // tip: state => state.profile.tip,
+    // news: state => state.news.news,
       cardPool: state => state.card.cardPool,
       allGoods: state => state.market.allGoods,
       user: state => state.profile.user,
       myRank: state => state.rank.myRank,
     }),
     allCards() {
-      return this.allGoods.filter((item) => item.category === 'card');
+      return this.allGoods.filter((item) => {
+        if (item.category == 'card') return item;
+      });
     },
     allErciyuan() {
-      return this.allGoods.filter((item) => item.category === 'erciyuan');
+      return this.allGoods.filter((item) => {
+        if (item.category == 'erciyuan') return item;
+      });
     },
+    // ...mapGetters('market',[
+    //   'allCards',
+    //   'allErciyuan',
+    // ]),
   },
+
+  // vuex: {
+  //   getters: {
+  //     user: state => state.user,
+  //     myRecords: state => state.myRecords,
+  //     tip: state => state.tip,
+  //   },
+  // },
   mounted() {
     this.getCardPool(1);
     this.getAllGoods();

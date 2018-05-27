@@ -12,23 +12,23 @@
     import newStudentTaskItem from '../components/newStudentTaskItem';
     // import { getTaskList, taskDetail } from '../vuex/actions';
     // const wx = require('weixin-js-sdk');
-    import { mapActions } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
 
     export default{
-      props: ['tasks'],
+      props:['tasks'],
       components: {
         newStudentTaskItem,
       },
-      data() {
-        return {
-          // loading:false,
-          // hasMore:true,
-        };
+      data(){
+          return {
+            // loading:false,
+            // hasMore:true,
+          };
       },
-      created() {
+      created(){
 
       },
-      mounted() {
+      mounted(){
 
       },
       methods: {

@@ -11,6 +11,7 @@ const state = {
   activeTask: {},
   activeComments: [],
   page: 1,
+  activeNewTask: {},
 };
 
 const mutations = {
@@ -113,10 +114,11 @@ const actions = {
     commit(types.GOT_STH);
     return tasks;
   },
-  async getAllNewStudentTasks({ commit }) {
+  async getAllNewStudentTasks({ commit }, ) {
     commit(types.FETCH_STH);
     const tasks = await api.getAllNewStudentTasks();
-    commit(types.SET_NEW_STUDENT_TASKS, tasks);
+    commit(types.SET_NEW_STUDENT_TASKS, tasks.reverse());
+
     commit(types.GOT_STH);
     return tasks;
   },
@@ -154,16 +156,12 @@ const actions = {
     // },
   taskDetail({ commit }, id) {
     commit(types.FETCH_STH);
-    const tasks = state.tasks;
-    const current = tasks.filter(item => (item._id === id));
+    const tasks = state.tasks.concat(state.allNewStudentTasks);
+    const current = tasks.filter(item => (item._id == id));
+
     commit(types.SET_ACTIVE_TASK, current[0]);
   },
-  taskNewStudentDetail({ commit }, id) {
-    commit(types.FETCH_STH);
-    const tasks = state.allNewStudentTasks;
-    const current = tasks.filter(item => (item._id === id));
-    commit(types.SET_ACTIVE_TASK, current[0]);
-  },
+
   async leaveComment({ commit }, { content, taskId }) {
     commit(types.FETCH_STH);
     commit(types.ADD_TASK_COMMENT, await api.leaveComment(content, taskId));
@@ -184,9 +182,19 @@ const actions = {
     }
   },
 };
+const getters = {
+  isAllNewTasksDone(state) {
+    let res = true;
+    for (const task of state.allNewStudentTasks) {
+      res = res && !!task.isDone;
+    }
+    return res;
+  },
+};
 
 export default {
   state,
   mutations,
   actions,
+  getters,
 };

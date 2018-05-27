@@ -1,8 +1,16 @@
 <template lang="html">
   <div class="">
   <div class="task-detail">
-    <div class="task-title">{{task.name}}</div>
+    <div class="task-title">{{task.name}}
+
+      <div class="" style="margin-top:.5rem;">
+        <mt-badge  class="" size="normal" color="#4fc1e9">经验:{{task.exp}}</mt-badge>
+        <mt-badge class="" size="normal" style="margin-left:.3rem;" color="#ffc107">悦币:{{task.goldToken}}</mt-badge>
+      </div>
+
+    </div>
      <div class="task-head">
+
        <!-- <div>发布 {{task.created | dateFormat}}</div>
        <div>过期 {{task.expireTime | dateFormat}}</div>
        <div>类型 {{task.type}}</div> -->

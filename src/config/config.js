@@ -2,8 +2,8 @@ export default {
   appid: 'wxb3762a929cf9e070',
   // appid: 'wxf8e294c011cd47e1', // dev
     // appsecret: '0a607b7dc2ff4fa027b8594a99f9e086',
-  // openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w',
-  openid: 'oBSpWsx1zRDhDuDwptpV9ANkVdLM',
+  openid: 'oBSpWs2odX2VI1MWUayjLHAkVmRE',
+  // openid: 'oBSpWsx1zRDhDuDwptpV9ANkVdLM',
   server: {
     midServer: 'https://joywill.cc',
     bigServer: 'https://joywill.cc/api',

@@ -55,13 +55,18 @@
          </mt-tab-item>
        </mt-navbar>
      </div> -->
-     <div class="new-student-tasks">
-       <new-student-tasks :tasks="allNewStudentTasks"></new-student-tasks>
+     <div class="new-student-tasks" v-if="!isAllNewTasksDone">
+       <div class="" style="color:#6F2DBD;text-align:center;font-size:1.2rem;">
+         完成节日任务 开启宝箱赢卡牌
+       </div>
+       <new-student-task-item v-for="(task) in allNewStudentTasks" class="task-item" :taskdata="task"
+       :key="task._id"
+       @click.native="handleClick(task._id)"></new-student-task-item>
      </div>
 
 
-     <div class="tasklist" >
-       <p v-if="taskByDate.length==0" class="no-task">
+     <div class="tasklist">
+       <p v-if="tasks.length==0" class="no-task">
          已完成所有挑战
        </p>
        <!--<div
@@ -120,7 +125,7 @@ import Tips from '../components/Tips';
 import NewsSlider from '../components/NewsSlider';
 import imgCell from '../components/ImgCell';
 import TaskItem from '../components/TaskItem';
-import newStudentTasks from '../components/newStudentTasks';
+import newStudentTaskItem from '../components/newStudentTaskItem';
 
 const moment = require('moment');
 moment.lang('zh-cn');
@@ -129,7 +134,7 @@ moment.lang('zh-cn');
 // import bagImg from '../assets/bag.jpg';
 import { api } from '../api';
 import { MessageBox, Toast, Indicator } from 'mint-ui';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 // import Expbar from '../components/Expbar';
 // import Chart from '../components/Chart';
@@ -169,6 +174,12 @@ export default {
       page: state => state.task.page,
       selected: state => state.task.selected,
     }),
+    ...mapGetters([
+      'isAllNewTasksDone',
+    ]),
+    // loading(){
+    //   return !this.isAllNewTasksDone;
+    // }
 
   },
   // vuex: {
@@ -178,8 +189,8 @@ export default {
   //     tip: state => state.tip,
   //   },
   // },
-  mounted() {
-      this.getAllNewStudentTasks();
+  async mounted() {
+    await this.getAllNewStudentTasks();
     // this.getAllTaskList(this.page);
     // this.selectedTasks = this.taskByDate.filter((data) => {
     //   const today = moment().startOf('day');
@@ -247,6 +258,7 @@ export default {
         });
       }
     },
+
   },
   //   async handleMove(){
   //     const user = this.user;
@@ -280,7 +292,7 @@ export default {
     NewsSlider,
     imgCell,
     TaskItem,
-    newStudentTasks,
+    newStudentTaskItem,
   },
 };
 </script>
@@ -337,6 +349,10 @@ export default {
 padding:  0 .5rem 0 2rem;
 
 margin-top: 1rem;
+}
+.new-student-tasks{
+  padding:  0 .5rem 0 .5rem;
+  margin-top: 1rem;
 }
 .tasklist::before{
   content: '';
