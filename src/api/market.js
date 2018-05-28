@@ -27,3 +27,15 @@ export const buyGood = data =>
             reject(err);
           });
       });
+
+export const revertGood = data =>
+new Promise((resolve, reject) => {
+  serviceV2
+    .post('/revertGood', data)
+    .then((result) => {
+      resolve(result.data.data);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
