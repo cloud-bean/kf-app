@@ -80,9 +80,9 @@
             this.popupVisible = true;
           }
           console.log('will buy');
-          // await this.buy({ goodId: this.goodData._id });
+          await this.buy({ goodId: this.goodData._id });
         } catch (e) {
-          console.log('not buy')
+          console.log('not buy');
           console.log(e);
         }
       },
