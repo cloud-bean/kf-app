@@ -10,11 +10,16 @@
       <div  class="slogan">
         让学习上瘾
 
-        <div  class="logo">
-          <img src="../assets/logo.jpg" alt="" style="width:8rem;border:2px solid #6F2DBD;border-radius: 5px;">
 
-        </div>
       </div>
+      <transition name="fade">
+
+      <div  class="logo" v-if="showLogo">
+        <img src="../assets/logo.jpg" alt="" style="width:6rem;border:2px solid #6F2DBD;border-radius: 5px;">
+
+      </div>
+    </transition>
+
       <!-- <div  class="logo">
          <i class="fa fa-th" aria-hidden="true" style="color:#6F2DBD"></i>JoyBox
       </div> -->
@@ -61,6 +66,7 @@ export default {
   data() {
     return {
       mockdata,
+      showLogo: false,
     };
   },
   components: {
@@ -110,54 +116,52 @@ export default {
       });
     },
     async init() {
-  //     const urlObj = url.parse(window.location.href,true);
-  //     var code = urlObj.query.code;
-  //     const sendUrl = window.location.href.split('#')[0];
-  //     try{
-  //       if(code){
-  //         // this.$store.commit(types.FETCH_STH);
-  //         // $.showPreloader('加载中...');
-  //
-  //         if(process.env.NODE_ENV == 'production'){
-  //           await this.auth({appid:config.appid,code});
-  //           this.setProgress(20);
-  //           await this.getJsConfig(sendUrl);
-  //           this.setProgress(40);
-  //         }else{
-  //           await this.authL({appid:config.appid,openid:config.openid});
-  //           // await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
-  //         }
-  //
-  //       wx.config(this.jsConfig);
-  //       this.configWx();
-  //       this.setProgress(60);
-  //       // await this.getUserRecords();
-  //       await this.getNews();
-  //       this.setProgress(90);
-  //       await this.getUserInfo(this.userid);
-  //       this.setProgress(100);
-  //       await this.getRanks(1);
-  //       // this.setLogin(true);
-  //         // this.$router.push('/profile');
-  //       if(this.user.phone && this.user.qq) {
-  //         this.setLogin(true);
-  //         this.$router.push('/profile');
-  //       } else {
-  //         this.$router.push('/signup');
-  //       }
-  //     }
-  //   else {
-  //
-  //     let redirctUrl = config.route.testRedirect;
-  //     // let redirctUrl = util.getAuthorizeURL(config.appidTest, config.server.testServer, 'wechat', 'snsapi_userinfo');
-  //     if(process.env.NODE_ENV == 'production'){
-  //       redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
-  //     }
-  //     window.location.href = redirctUrl;
-  //   }
-  // } catch(err) {
-  //   console.log(err);
-  // }
+      const urlObj = url.parse(window.location.href, true);
+      const code = urlObj.query.code;
+      const sendUrl = window.location.href.split('#')[0];
+      try {
+        if (code) {
+          // this.$store.commit(types.FETCH_STH);
+          // $.showPreloader('加载中...');
+
+          if (process.env.NODE_ENV == 'production') {
+            await this.auth({ appid: config.appid, code });
+            this.setProgress(20);
+            await this.getJsConfig(sendUrl);
+            this.setProgress(40);
+          } else {
+            await this.authL({ appid: config.appid, openid: config.openid });
+            // await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
+          }
+
+          wx.config(this.jsConfig);
+          this.configWx();
+          this.showLogo = true;
+        // await this.getUserRecords();
+          await this.getNews();
+          this.setProgress(90);
+          await this.getUserInfo(this.userid);
+          this.setProgress(100);
+          await this.getRanks(1);
+        // this.setLogin(true);
+          // this.$router.push('/profile');
+          if (this.user.phone && this.user.qq) {
+            this.setLogin(true);
+            this.$router.push('/profile');
+          } else {
+            this.$router.push('/signup');
+          }
+        } else {
+          let redirctUrl = config.route.testRedirect;
+      // let redirctUrl = util.getAuthorizeURL(config.appidTest, config.server.testServer, 'wechat', 'snsapi_userinfo');
+          if (process.env.NODE_ENV == 'production') {
+            redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
+          }
+          window.location.href = redirctUrl;
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
 
   },
@@ -197,10 +201,10 @@ export default {
 .slogan{
   color: #888;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue",STHeiti,"Microsoft Yahei",Tahoma,Simsun,sans-serif;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-top: 1rem;
   position: fixed;
-  top: 15rem;
+  top: 8rem;
   left: 0;
   right: 0;
   margin: 0 0;
@@ -218,7 +222,7 @@ export default {
   right: 0;
   left:0;
   margin: auto;
-  bottom:5rem;
+  bottom:3rem;
   /* color:#6F2DBD; */
   /* border-radius: 10px; */
   /* border:3px solid #6F2DBD; */
@@ -228,7 +232,7 @@ export default {
   right: 0;
   left:0;
   margin: auto;
-  bottom:13rem;
+  bottom:8rem;
 }
 
 .init{
@@ -245,4 +249,12 @@ export default {
   background-color:#fff;
   /* padding: 0rem 8rem; */
 }
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+
 </style>
