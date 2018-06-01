@@ -2,16 +2,16 @@
     <!-- <info></info>
     <expbar></expbar>
     <chart></chart> -->
-<div class="intro">
+<!-- <div class="intro">
   <img :src="intro" alt="" style="width:100%;">
-</div>
+</div> -->
 
 
 
 </template>
 
 <script>
-import  intro from '../assets/intro.png';
+// import  intro from '../assets/intro.png';
 
 // import Expbar from '../components/Expbar';
 // import Chart from '../components/Chart';
@@ -22,7 +22,7 @@ import  intro from '../assets/intro.png';
 export default {
   data() {
     return {
-      intro,
+      // intro,
     };
   },
 

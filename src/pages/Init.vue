@@ -6,13 +6,28 @@
        <!-- <div class="time">
          {{loginDate}}
       </div> -->
+
       <div  class="slogan">
-        v0.6.20180509
+        让学习上瘾
+
+        <div  class="logo">
+          <img src="../assets/logo.jpg" alt="" style="width:8rem;border:2px solid #6F2DBD;border-radius: 5px;">
+
+        </div>
       </div>
+      <!-- <div  class="logo">
+         <i class="fa fa-th" aria-hidden="true" style="color:#6F2DBD"></i>JoyBox
+      </div> -->
+      <div class="" style="position:fixed;bottom:.5rem;color:#eee;">
+        v0.6.20180601
+      </div>
+      <!-- <div  class="logo">
+        <i class="fa fa-th" aria-hidden="true"></i> 悦盒
+      </div> -->
             <!-- <mt-progress :value="progress" :bar-height="5"></mt-progress>
             <div>已加载{{progress}}%</div> -->
-            <div class="logo">
-              <square-loader :loading="true" color="#fff" ></square-loader>
+            <div class="spinner">
+              <beat-loader :loading="true" color="#6F2DBD"></beat-loader>
 
               <!-- <mt-spinner style="margin:0 auto;" type="triple-bounce" color="#fff" :size="40"></mt-spinner> -->
             </div>
@@ -28,8 +43,8 @@ import config from '../config/config';
 import util from '../config/util';
 import mockdata from '../../test/mock';
 import * as types from '../vuex/mutation_types';
-import index from '../assets/index.jpg';
-import SquareLoader from 'vue-spinner/src/SquareLoader.vue'
+import logo from '../assets/logo.jpg';
+import BeatLoader from 'vue-spinner/src/BeatLoader.vue';
 
 const moment = require('moment');
 
@@ -48,8 +63,8 @@ export default {
       mockdata,
     };
   },
-  components:{
-    SquareLoader,
+  components: {
+    BeatLoader,
   },
   computed: {
     ...mapState({
@@ -60,9 +75,9 @@ export default {
       login: state => state.login,
 
     }),
-    loginDate(){
+    loginDate() {
       return moment().format('YYYY年MM月DD日');
-    }
+    },
   },
   methods: {
     ...mapActions([
@@ -81,69 +96,69 @@ export default {
       'getUserCards',
       'setProgress',
     ]),
-    configWx(){
+    configWx() {
       wx.onMenuShareTimeline({
         title: '我在悦维用Joybox学习，你也来吧', // 分享标题
         link: 'joywill.cc/#/intro', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
         // imgUrl: logo, // 分享图标
-        success: function () {
+        success() {
           // 用户确认分享后执行的回调函数
         },
-        cancel: function () {
+        cancel() {
           // 用户取消分享后执行的回调函数
-        }
+        },
       });
     },
-    async init(){
-      const urlObj = url.parse(window.location.href,true);
-      var code = urlObj.query.code;
-      const sendUrl = window.location.href.split('#')[0];
-      try{
-        if(code){
-          // this.$store.commit(types.FETCH_STH);
-          // $.showPreloader('加载中...');
-
-          if(process.env.NODE_ENV == 'production'){
-            await this.auth({appid:config.appid,code});
-            this.setProgress(20);
-            await this.getJsConfig(sendUrl);
-            this.setProgress(40);
-          }else{
-            await this.authL({appid:config.appid,openid:config.openid});
-            // await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
-          }
-
-        wx.config(this.jsConfig);
-        this.configWx();
-        this.setProgress(60);
-        // await this.getUserRecords();
-        await this.getNews();
-        this.setProgress(90);
-        await this.getUserInfo(this.userid);
-        this.setProgress(100);
-        await this.getRanks(1);
-        // this.setLogin(true);
-          // this.$router.push('/profile');
-        if(this.user.phone && this.user.qq) {
-          this.setLogin(true);
-          this.$router.push('/profile');
-        } else {
-          this.$router.push('/signup');
-        }
-      }
-    else {
-
-      let redirctUrl = config.route.testRedirect;
-      // let redirctUrl = util.getAuthorizeURL(config.appidTest, config.server.testServer, 'wechat', 'snsapi_userinfo');
-      if(process.env.NODE_ENV == 'production'){
-        redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
-      }
-      window.location.href = redirctUrl;
-    }
-  } catch(err) {
-    console.log(err);
-  }
-},
+    async init() {
+  //     const urlObj = url.parse(window.location.href,true);
+  //     var code = urlObj.query.code;
+  //     const sendUrl = window.location.href.split('#')[0];
+  //     try{
+  //       if(code){
+  //         // this.$store.commit(types.FETCH_STH);
+  //         // $.showPreloader('加载中...');
+  //
+  //         if(process.env.NODE_ENV == 'production'){
+  //           await this.auth({appid:config.appid,code});
+  //           this.setProgress(20);
+  //           await this.getJsConfig(sendUrl);
+  //           this.setProgress(40);
+  //         }else{
+  //           await this.authL({appid:config.appid,openid:config.openid});
+  //           // await this.authLocal({userid: config.secret.userid, accessToken: config.secret.accessToken});
+  //         }
+  //
+  //       wx.config(this.jsConfig);
+  //       this.configWx();
+  //       this.setProgress(60);
+  //       // await this.getUserRecords();
+  //       await this.getNews();
+  //       this.setProgress(90);
+  //       await this.getUserInfo(this.userid);
+  //       this.setProgress(100);
+  //       await this.getRanks(1);
+  //       // this.setLogin(true);
+  //         // this.$router.push('/profile');
+  //       if(this.user.phone && this.user.qq) {
+  //         this.setLogin(true);
+  //         this.$router.push('/profile');
+  //       } else {
+  //         this.$router.push('/signup');
+  //       }
+  //     }
+  //   else {
+  //
+  //     let redirctUrl = config.route.testRedirect;
+  //     // let redirctUrl = util.getAuthorizeURL(config.appidTest, config.server.testServer, 'wechat', 'snsapi_userinfo');
+  //     if(process.env.NODE_ENV == 'production'){
+  //       redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
+  //     }
+  //     window.location.href = redirctUrl;
+  //   }
+  // } catch(err) {
+  //   console.log(err);
+  // }
+    },
 
   },
   //
@@ -164,13 +179,13 @@ export default {
   //     setLogin,
   //   }
   // },
-  mounted(){
+  mounted() {
     this.$nextTick(() => {
       this.init();
     });
-},
+  },
 
-}
+};
 </script>
 <style scoped>
 /* .time{
@@ -180,18 +195,40 @@ export default {
 
 }*/
 .slogan{
-  color: #fff;
-  font-family: 幼圆;
-  font-size: 1rem;
+  color: #888;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue",STHeiti,"Microsoft Yahei",Tahoma,Simsun,sans-serif;
+  font-size: 2.5rem;
   margin-top: 1rem;
+  position: fixed;
+  top: 15rem;
+  left: 0;
+  right: 0;
+  margin: 0 0;
   /* font-weight:700  ; */
 }
+.eng-slogan{
+  color: #aaa;
+  font-size: 1.5rem;
+  color:#6F2DBD;
+
+}
 .logo{
-  position:absolute;
+
+  position:fixed;
   right: 0;
   left:0;
   margin: auto;
   bottom:5rem;
+  /* color:#6F2DBD; */
+  /* border-radius: 10px; */
+  /* border:3px solid #6F2DBD; */
+}
+.spinner{
+  position:absolute;
+  right: 0;
+  left:0;
+  margin: auto;
+  bottom:13rem;
 }
 
 .init{
@@ -203,9 +240,9 @@ export default {
   left:0;
   z-index:999;
   text-align: center;
-  background-image: url('../assets/index.jpg');
-  background-size: contain;
-  background-color:#eee;
+  /* background-image: url('../assets/index.jpg'); */
+  /* background-size: contain; */
+  background-color:#fff;
   /* padding: 0rem 8rem; */
 }
 </style>
