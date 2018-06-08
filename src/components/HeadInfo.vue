@@ -23,7 +23,9 @@
         </div>
     </div>
     <div class="info">
+      <status-bar></status-bar>
     </div>
+
   </div>
 
 
@@ -32,11 +34,12 @@
 
 <script>
   import { Toast } from 'mint-ui';
+  import StatusBar from './statusBar';
 
-export default{
+export default {
   props: ['user', 'rank'],
   components: {
-
+    StatusBar,
   },
   methods: {
     showAccRules() {
@@ -92,12 +95,11 @@ export default{
   width:100%;
   text-align: center;
   // font-size: 0.8rem;
-  padding: 0.1rem;
+
   /*display: flex;*/
   /*flex-direction: row;*/
   /*justify-content: space-around;*/
   /*align-items: center;*/
-  background-color: #B9CDDA;
   margin: 0 auto;
   // margin-top:-0.8rem;
   // box-shadow:0px 0px 5px #555555;
