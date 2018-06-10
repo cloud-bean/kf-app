@@ -22,9 +22,9 @@
           <!-- <div class="slogan">{{user.option.slogan || 'Learning with joy, achieving with will.'}}</div> -->
         </div>
     </div>
-    <div class="info">
+    <!-- <div class="info">
       <status-bar></status-bar>
-    </div>
+    </div> -->
 
   </div>
 

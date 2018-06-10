@@ -66,13 +66,13 @@
         MessageBox(this.goodData.name, this.goodData.description);
       },
       async handleBuy() {
-        // if (this.money < this.goodData.price) {
-        //   Toast({
-        //     message: '没有足够的悦维币，快去完成任务吧',
-        //     position: 'bottom',
-        //   });
-        //   return;
-        // }
+        if (this.money < this.goodData.price) {
+          Toast({
+            message: '没有足够的悦维币，快去完成任务吧',
+            position: 'bottom',
+          });
+          return;
+        }
         try {
           await MessageBox.confirm(`将花费${this.goodData.price}悦币，确定购买吗？`);
           if (this.goodData.category === 'card') {
