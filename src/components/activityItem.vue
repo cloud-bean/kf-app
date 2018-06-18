@@ -78,25 +78,27 @@
           </div>
         </div>
       </div>
-      <div class="icon Cell -2of12">
-        <mt-badge color="#eee">
+      <!-- <div class="icon Cell -2of12">
+        <mt-badge color="#888">
           <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}" v-on:click="upVoteIt">
           </i>
           {{activityData.upVotes.length}}
         </mt-badge>
-      </div>
+      </div> -->
 
-      <div class="icon Cell -2of12" @click="toggleShowMsgs">
-        <mt-badge color="#eee"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
+      <div class="icon Cell -2of12" @click="addMsg">
+        <!-- <mt-badge color="#888"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
+          吐槽
           {{activityData.messages ? activityData.messages.length : 0}}
-        </mt-badge>
+        </mt-badge> -->
+         <mt-button size="small" plain @click="addMsg">吐槽</mt-button>
 
       </div>
 
-      <div v-if="showMsgs" style="display:block; width: 100%; padding: 10px; margin: 5px; border: 1px solid #ccc5;">
-        <mt-cell style="border: none;">
+      <div v-if="showMsgs&&activityData.messages.length>0" style="display:block; width: 100%; padding: 10px; margin: 5px;">
+        <!-- <mt-cell style="border: none;">
           <mt-button size="small" plain @click="addMsg">评论</mt-button>
-        </mt-cell>
+        </mt-cell> -->
 
         <mt-cell :title="message.user" :label="message.created | timefromNow"
                  style="border-bottom: 1px dashed #ccc5;"
@@ -117,7 +119,7 @@
     components: {},
     data() {
       return {
-        showMsgs: false,
+        showMsgs: true,
         battleScore: false,
       };
     },
@@ -152,7 +154,7 @@
         this.showMsgs = !this.showMsgs;
       },
       addMsg() {
-        MessageBox.prompt('说点什么?', '').then(({ value, action }) => {
+        MessageBox.prompt('尽情吐槽吧?', '').then(({ value, action }) => {
           console.log(value, action);
           if (value.length > 0) {
             // send msg to api
@@ -224,7 +226,7 @@
     font-size: 1rem;
   }
   .likenum {
-    color: #7d7d7d;
+    color: #888;
   }
   .active {
     color: rgba(241, 55, 55, 0.753);
@@ -233,6 +235,6 @@
     color: rgba(84, 84, 209, 0.671);
   }
   .inactive{
-    color: #ccc;
+    color: #888;
   }
 </style>

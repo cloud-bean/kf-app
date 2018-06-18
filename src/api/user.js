@@ -1,5 +1,4 @@
-import config from '../config/config';
-import { service } from './service';
+import { service, serviceV2 } from './service';
 
 export const getUserInfo = userid =>
   new Promise((resolve, reject) => {
@@ -48,5 +47,18 @@ export const getUserRecords = () =>
         reject(err);
       });
   });
+export const getKeepInfo = () => {
+  new Promise((resolve, reject) => {
+    serviceV2
+      .get('/keep')
+      .then(result => {
+        const keepInfo = result.data.data;
+        resolve(keepInfo);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+}
 export const setMemberAvatar = (id, data) => service.put(`/users/${id}/change/avatar`, data);
 export const getAllMemberAvatars = () => service.get('/imageGallerys?name=avatarForMember');

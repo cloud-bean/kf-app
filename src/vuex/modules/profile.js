@@ -7,6 +7,7 @@ const state = {
   userRecords: {},
   tip: {},
   lotterys: [],
+  keepInfo: {},
 };
 
 const mutations = {
@@ -28,6 +29,9 @@ const mutations = {
   [types.BUY_GOODS](state, money) {
     state.user.option.goldToken -= money;
   },
+  [types.SET_KEEP_INFO](state, keepInfo) {
+    state.keepInfo = keepInfo;
+  },
 };
 const getters = {
   userInfo: state => state.user,
@@ -47,6 +51,15 @@ const actions = {
     try {
       commit(types.FETCH_STH);
       commit(types.SET_USER_RECORDS, await api.getUserRecords());
+      commit(types.GOT_STH);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async getKeepInfo({ commit }) {
+    try {
+      commit(types.FETCH_STH);
+      commit(types.SET_KEEP_INFO, await api.getKeepInfo());
       commit(types.GOT_STH);
     } catch (err) {
       console.log(err);

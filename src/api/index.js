@@ -53,4 +53,5 @@ export const api = {
   revertGood: marketApi.revertGood,
   openCardPool: cardApi.openCardPool,
   getAllNewStudentTasks: taskApi.getAllNewStudentTasks,
+  getKeepInfo: userApi.getKeepInfo,
 };

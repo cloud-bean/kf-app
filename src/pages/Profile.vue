@@ -5,7 +5,7 @@
 <div class="">
   <div class="user-info">
 
-      <info :user="user" :rank="myRank.rankIndex"></info>
+      <info :user="user" :rank="myRank.rankIndex" :keepInfo="keepInfo"></info>
 
     <!--<div class="tip">
       <tips :tip="tip"></tips>
@@ -41,7 +41,7 @@
    </div>
    <div class="profile-content">
 
-     <news-slider :news="news" :news-detail="newsDetail"></news-slider>
+     <!-- <news-slider :news="news" :news-detail="newsDetail"></news-slider> -->
 
      <!-- <div class="button-area"> -->
      <!-- <mt-navbar v-model="selected">
@@ -111,10 +111,7 @@
        <mt-button  size="large" type="primary" plain disabled>没有更多任务</mt-button>
      </div> -->
    </div>
-   </div>
-
 </div>
-
 
 </template>
 
@@ -173,6 +170,8 @@ export default {
       taskQuantityInfo: state => state.task.taskQuantityInfo,
       page: state => state.task.page,
       selected: state => state.task.selected,
+      keepInfo: state => state.profile.keepInfo,
+
     }),
     ...mapGetters([
       'isAllNewTasksDone',
@@ -191,6 +190,8 @@ export default {
   // },
   async mounted() {
     await this.getAllNewStudentTasks();
+    await this.getKeepInfo();
+
     // this.getAllTaskList(this.page);
     // this.selectedTasks = this.taskByDate.filter((data) => {
     //   const today = moment().startOf('day');
@@ -208,6 +209,7 @@ export default {
       'cleanTaskList',
       'changeNavbar',
       'getAllNewStudentTasks',
+      'getKeepInfo',
     ]),
     loadAllTasks() {
       // this.selectedTasks = this.taskByDate;
@@ -385,7 +387,7 @@ margin-top: 1rem;
   z-index:2;
 }
 .profile-content{
-  margin-top: 7.5rem;
+  margin-top: 16rem;
 }
 .task-date{
   margin-bottom: .5rem;

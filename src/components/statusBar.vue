@@ -3,21 +3,22 @@
         <div class="sum-info Grid -left">
             <div class="awesome-day">
                 续航
-                <div>0 <i class="fa fa-bolt" aria-hidden="true"></i></div>
+                <div>{{awesomeDays}} <i class="fa fa-bolt" aria-hidden="true"></i></div>
             </div>
             <div class="awesome-week">
                 完美周数
-                <div>2 <i class="fa fa-certificate" aria-hidden="true"></i></div>
+                <div>{{keepInfo.perfectWeeks}} <i class="fa fa-certificate" aria-hidden="true"></i></div>
             </div>
         </div>
         <div class="keep-status Grid -around">
-            <div class="day Cell">
-                日
+
+            <div v-for="(item,index) in weekDay" :key="item" class="day Cell">
+                {{item}}
                 <div>
-                    <i class="fa fa-circle"></i>
+                    <i v-bind:class="[keepInfo.keepDays[index]?fa-circle:fa-circle-o, fa]"></i>
                 </div>
             </div>
-            <div class="day Cell">
+            <!-- <div class="day Cell">
                 一
                 <div>
                     <i class="fa fa-circle"></i>
@@ -52,7 +53,7 @@
                 <div>
                     <i class="fa fa-circle"></i>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="more-info">更多</div>
 
@@ -90,6 +91,30 @@ export default {
   components: {
 
   },
+  data: {
+      weekDay:['日','一','二','三','四','五','六'],
+
+
+  },
+  computed: {
+      awesomeDays(){
+          let awesomeDayCount = 0;
+          let contDay = 0;
+          const keepDays = this.keepInfo.keepDays;
+          for (let item of keepDays) {
+              if(item){
+                 contDay++;
+                 if(contDay > awesomeDayCount){
+                    awesomeDayCount =  contDay; 
+                 }
+              }else{
+                  contDay = 0;
+              }
+          }
+          return awesomeDayCount;
+      }
+  },
+  props:['keepInfo'],
   methods: {
 
   },
