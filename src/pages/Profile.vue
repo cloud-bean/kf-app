@@ -165,13 +165,11 @@ export default {
       cards: state => state.card.cards,
       tasks: state => state.task.tasks,
       allNewStudentTasks: state => state.task.allNewStudentTasks,
-
       taskByDate: state => state.task.taskByDate,
       taskQuantityInfo: state => state.task.taskQuantityInfo,
       page: state => state.task.page,
       selected: state => state.task.selected,
       keepInfo: state => state.profile.keepInfo,
-
     }),
     ...mapGetters([
       'isAllNewTasksDone',
@@ -191,7 +189,7 @@ export default {
   async mounted() {
     await this.getAllNewStudentTasks();
     await this.getKeepInfo();
-
+    console.log(this.keepInfo)
     // this.getAllTaskList(this.page);
     // this.selectedTasks = this.taskByDate.filter((data) => {
     //   const today = moment().startOf('day');

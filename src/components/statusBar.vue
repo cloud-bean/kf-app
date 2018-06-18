@@ -12,10 +12,10 @@
         </div>
         <div class="keep-status Grid -around">
 
-            <div v-for="(item,index) in weekDay" :key="item" class="day Cell">
+            <div v-for="(item,index) in weekDay" :key="index" class="day Cell">
                 {{item}}
                 <div>
-                    <i v-bind:class="[keepInfo.keepDays[index]?fa-circle:fa-circle-o, fa]"></i>
+                    <i v-bind:class="[keepInfo.keepDays[index]?'fa-circle':'fa-circle-o', 'fa']"></i>
                 </div>
             </div>
             <!-- <div class="day Cell">
@@ -93,8 +93,6 @@ export default {
   },
   data: {
       weekDay:['日','一','二','三','四','五','六'],
-
-
   },
   computed: {
       awesomeDays(){
