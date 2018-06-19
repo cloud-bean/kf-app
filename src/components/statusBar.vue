@@ -64,10 +64,11 @@
   color:#555;
     background-color: #eee;
     position: relative;
+    font-size: 1rem;
+
 }
 .sum-info{
     padding: .5rem 1rem;
-    font-size: 1.2rem;
     border-bottom: 1px solid #ccc;
 }
 .awesome-week{

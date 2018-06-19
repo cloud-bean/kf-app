@@ -389,7 +389,7 @@ margin-top: 1rem;
   z-index:2;
 }
 .profile-content{
-  margin-top: 16rem;
+  margin-top: 15rem;
 }
 .task-date{
   margin-bottom: .5rem;
