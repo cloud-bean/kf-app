@@ -4,11 +4,12 @@
   <chart></chart> -->
   <div class="">
     <info class="user-info" :user="user" :rank="myRank.rankIndex"></info>
+    <!-- <news-slider :news="news" :news-detail="newsDetail"></news-slider> -->
 
     <div class="activitylist">
       <mt-loadmore :top-method="loadTop"  ref="loadmore">
         <p v-if="activities.length==0" class="no-task">
-          暂无任务
+          暂无动态
         </p>
 
         <div v-infinite-scroll="loadMoreTask"
@@ -31,9 +32,11 @@
 
 <script>
   import activityItem from '../components/activityItem';
-  import {api} from '../api';
-  import {MessageBox, Toast, Indicator} from 'mint-ui';
-  import {mapState, mapActions} from 'vuex';
+  import { api } from '../api';
+  import { MessageBox, Toast, Indicator } from 'mint-ui';
+  import { mapState, mapActions } from 'vuex';
+  import NewsSlider from '../components/NewsSlider';
+
   import Info from '../components/HeadInfo';
   // import Expbar from '../components/Expbar';
   // import Chart from '../components/Chart';
@@ -59,6 +62,8 @@
       page: state => state.activity.page,
       user: state => state.profile.user,
       myRank: state => state.rank.myRank,
+      news: state => state.news.news,
+
     }),
     // vuex: {
     //   getters: {
@@ -137,8 +142,9 @@
     components: {
       activityItem,
       Info,
-    }
-  }
+      NewsSlider,
+    },
+  };
 </script>
 
 
@@ -158,5 +164,9 @@
     width: 100%;
     top: 0;
     z-index: 2;
+  }
+  .tip{
+    position: relative;
+    z-index: -1;
   }
 </style>

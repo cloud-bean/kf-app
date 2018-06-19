@@ -1,26 +1,11 @@
 <template>
 
 <div class="">
-    <!--<swiper v-ref:swiper
-        direction="horizontal"
-        :mousewheel-control="true"
-        :performance-mode="false"
-        :pagination-visible="true"
-        :pagination-clickable="true"
-        :loop="true">-->
 <mt-swipe :auto="4000" :showIndicators="true">
 
     <mt-swipe-item  v-for="(item,index) in news"><news-item :newsData="item" @click.native="handleClick(index)"></news-item></mt-swipe-item>
 
 </mt-swipe>
- 
-
-    
-<!--
-</swiper>-->
-
- 
-
 </div>
 
 
@@ -72,14 +57,14 @@ export default {
   z-index: -1;
 }
 .new-area{
-  margin-top: .5rem;
+  /* margin-top: .5rem; */
   margin-left: .3rem;
   margin-right: .3rem;
 
   /*background: #eee;*/
 }
       .mint-swipe {
-        height: 120px;
+        height: 125px;
         width: 96%;
         margin: 0 auto;
         margin-top: 0.3rem;

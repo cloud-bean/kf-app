@@ -5,7 +5,10 @@
 <div class="">
   <div class="user-info">
 
-      <info :user="user" :rank="myRank.rankIndex" :keepInfo="keepInfo"></info>
+      <info :user="user" :rank="myRank.rankIndex"></info>
+      <div class="info">
+        <status-bar :keepInfo="keepInfo"></status-bar>
+      </div>
 
     <!--<div class="tip">
       <tips :tip="tip"></tips>
@@ -41,7 +44,7 @@
    </div>
    <div class="profile-content">
 
-     <!-- <news-slider :news="news" :news-detail="newsDetail"></news-slider> -->
+     <news-slider :news="news" :news-detail="newsDetail"></news-slider>
 
      <!-- <div class="button-area"> -->
      <!-- <mt-navbar v-model="selected">
@@ -55,14 +58,14 @@
          </mt-tab-item>
        </mt-navbar>
      </div> -->
-     <div class="new-student-tasks" v-if="!isAllNewTasksDone">
+     <!-- <div class="new-student-tasks" v-if="!isAllNewTasksDone">
        <div class="" style="color:#6F2DBD;text-align:center;font-size:1.2rem;">
          完成节日任务 开启宝箱赢卡牌
        </div>
        <new-student-task-item v-for="(task) in allNewStudentTasks" class="task-item" :taskdata="task"
        :key="task._id"
        @click.native="handleClick(task._id)"></new-student-task-item>
-     </div>
+     </div> -->
 
 
      <div class="tasklist">
@@ -122,6 +125,8 @@ import Tips from '../components/Tips';
 import NewsSlider from '../components/NewsSlider';
 import imgCell from '../components/ImgCell';
 import TaskItem from '../components/TaskItem';
+import statusBar from '../components/statusBar';
+
 import newStudentTaskItem from '../components/newStudentTaskItem';
 
 const moment = require('moment');
@@ -152,6 +157,7 @@ export default {
       loading: false,
       hasMore: true,
       selectedTasks: [],
+      // keepInfo: { user: '5b21faf1c25fd24f024a20dc', year: 2018, weekInYear: 24, keepDays: [true, true, true, false, true, true, false], perfectWeeks: 1 },
     };
   },
   computed: {
@@ -186,10 +192,8 @@ export default {
   //     tip: state => state.tip,
   //   },
   // },
-  async mounted() {
+  async created() {
     await this.getAllNewStudentTasks();
-    await this.getKeepInfo();
-    console.log(this.keepInfo)
     // this.getAllTaskList(this.page);
     // this.selectedTasks = this.taskByDate.filter((data) => {
     //   const today = moment().startOf('day');
@@ -207,7 +211,6 @@ export default {
       'cleanTaskList',
       'changeNavbar',
       'getAllNewStudentTasks',
-      'getKeepInfo',
     ]),
     loadAllTasks() {
       // this.selectedTasks = this.taskByDate;
@@ -293,6 +296,7 @@ export default {
     imgCell,
     TaskItem,
     newStudentTaskItem,
+    statusBar,
   },
 };
 </script>
@@ -393,6 +397,22 @@ margin-top: 1rem;
 .more{
   width: 80%;
   margin: 0 auto;
+}
+.info{
+  width:100%;
+  text-align: center;
+  // font-size: 0.8rem;
+
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: space-around;*/
+  /*align-items: center;*/
+  margin: 0 auto;
+  // margin-top:-0.8rem;
+  // box-shadow:0px 0px 5px #555555;
+  // border-radius: 5px;
+
+  /*border-top: 1px solid white;*/
 }
 .opacity{background:rgba(0,0,0,.5); }
 </style>

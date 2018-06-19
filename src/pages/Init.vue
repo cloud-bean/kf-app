@@ -101,6 +101,7 @@ export default {
       'getUserLottery',
       'getUserCards',
       'setProgress',
+      'getKeepInfo',
     ]),
     configWx() {
       wx.onMenuShareTimeline({
@@ -138,6 +139,7 @@ export default {
           this.configWx();
           this.showLogo = true;
         // await this.getUserRecords();
+          await this.getKeepInfo();
           await this.getNews();
           this.setProgress(90);
           await this.getUserInfo(this.userid);

@@ -22,9 +22,7 @@
           <!-- <div class="slogan">{{user.option.slogan || 'Learning with joy, achieving with will.'}}</div> -->
         </div>
     </div>
-    <div class="info">
-      <status-bar :keepInfo="keepInfo"></status-bar>
-    </div>
+
 
   </div>
 
@@ -34,12 +32,10 @@
 
 <script>
   import { Toast } from 'mint-ui';
-  import StatusBar from './statusBar';
 
 export default {
-  props: ['user', 'rank', 'keepInfo'],
+  props: ['user', 'rank'],
   components: {
-    StatusBar,
   },
   methods: {
     showAccRules() {
@@ -52,6 +48,8 @@ export default {
     gotoSetting() {
       this.$router.push('/signup');
     },
+  },
+  mounted() {
   },
   computed: {
     expPercent() {

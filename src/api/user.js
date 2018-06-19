@@ -47,18 +47,18 @@ export const getUserRecords = () =>
         reject(err);
       });
   });
-export const getKeepInfo = () => {
+export const getKeepInfo = () =>
   new Promise((resolve, reject) => {
     serviceV2
       .get('/keep')
       .then(result => {
         const keepInfo = result.data.data;
+        console.log('1');
         resolve(keepInfo);
       })
       .catch(err => {
         reject(err);
       });
   });
-}
 export const setMemberAvatar = (id, data) => service.put(`/users/${id}/change/avatar`, data);
 export const getAllMemberAvatars = () => service.get('/imageGallerys?name=avatarForMember');

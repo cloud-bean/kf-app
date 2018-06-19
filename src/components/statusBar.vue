@@ -55,12 +55,13 @@
                 </div>
             </div> -->
         </div>
-        <div class="more-info">更多</div>
+        <!-- <div class="more-info">更多</div> -->
 
     </div>
 </template>
 <style scoped>
 .status-bar{
+  color:#555;
     background-color: #eee;
     position: relative;
 }
@@ -91,32 +92,32 @@ export default {
   components: {
 
   },
-  data: {
-      weekDay:['日','一','二','三','四','五','六'],
+  data() {
+    return {
+      weekDay: ['日', '一', '二', '三', '四', '五', '六'],
+    };
   },
   computed: {
-      awesomeDays(){
-          let awesomeDayCount = 0;
-          let contDay = 0;
-          const keepDays = this.keepInfo.keepDays;
-          for (let item of keepDays) {
-              if(item){
-                 contDay++;
-                 if(contDay > awesomeDayCount){
-                    awesomeDayCount =  contDay; 
-                 }
-              }else{
-                  contDay = 0;
-              }
+    awesomeDays() {
+      let awesomeDayCount = 0;
+      let contDay = 0;
+      const keepDays = this.keepInfo.keepDays;
+      for (const item of keepDays) {
+        if (item) {
+          contDay++;
+          if (contDay > awesomeDayCount) {
+            awesomeDayCount = contDay;
           }
-          return awesomeDayCount;
+        } else {
+          contDay = 0;
+        }
       }
+      return awesomeDayCount;
+    },
   },
-  props:['keepInfo'],
+  props: ['keepInfo'],
   methods: {
 
   },
 };
 </script>
-
-

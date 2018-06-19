@@ -61,8 +61,8 @@ const actions = {
       commit(types.FETCH_STH);
       commit(types.SET_KEEP_INFO, await api.getKeepInfo());
       commit(types.GOT_STH);
-    } catch (err) {
-      console.log(err);
+    } catch (e) {
+      console.log(e);
     }
   },
   async getTip({ commit }) {
