@@ -23,7 +23,7 @@ export const getTaskList = state =>
 export const getAllTaskList = page =>
   new Promise((resolve, reject) => {
     service
-      .get(`/allTasks?page=${page}&limit=${config.task.limit}&sort=-startTime`)
+      .get(`/allTasks?page=${page}&limit=${config.task.limit}&sortBy=-startTime`)
       .then(result => {
         if (result.data.code == 'success') {
           const tasks = result.data.data;
