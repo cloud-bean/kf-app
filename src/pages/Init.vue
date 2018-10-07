@@ -24,7 +24,7 @@
          <i class="fa fa-th" aria-hidden="true" style="color:#6F2DBD"></i>JoyBox
       </div> -->
       <div class="" style="position:fixed;bottom:.5rem;color:#eee;">
-        v0.6.20180601
+        v0.7.20181007
       </div>
       <!-- <div  class="logo">
         <i class="fa fa-th" aria-hidden="true"></i> 悦盒
@@ -107,7 +107,7 @@ export default {
       wx.onMenuShareTimeline({
         title: '我在悦维用Joybox学习，你也来吧', // 分享标题
         link: 'joywill.cc/#/intro', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        // imgUrl: logo, // 分享图标
+        imgUrl: logo, // 分享图标
         success() {
           // 用户确认分享后执行的回调函数
         },
