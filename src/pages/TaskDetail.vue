@@ -182,6 +182,7 @@ export default {
   // },
   mounted() {
     this.getComments(this.task._id);
+    this.configWx();
   },
   methods: {
     ...mapActions([
@@ -192,6 +193,38 @@ export default {
       'getUserCards',
       'getUserLottery',
     ]),
+    configWx() {
+      let imgUrl = '../assets/logo.jpg';
+      if (this.task.contentImage && this.task.contentImage.URL) {
+        imgUrl = this.task.contentImage.URL;
+      }
+      wx.onMenuShareTimeline({
+        title: `【悦盒JoyBox】${this.task.name}`, // 分享标题
+        link: 'joywill.cc/#/intro', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl, // 分享图标
+        success() {
+          // 用户确认分享后执行的回调函数
+          console.log('分享成功');
+        },
+        cancel() {
+          // 用户取消分享后执行的回调函数
+        },
+      });
+
+      wx.onMenuShareAppMessage({
+        title: '【悦盒JoyBox】让学习上瘾！', // 分享标题
+        desc: `#挑战：${this.task.name}`, // 分享描述
+        link: 'joywill.cc/#/intro', // 分享链接
+        imgUrl: '../assets/logo.jpg', // 分享图标
+        type: '', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success() {
+          // 用户确认分享后执行的回调函数
+        }, cancel() {
+          // 用户取消分享后执行的回调函数
+        },
+      });
+    },
     isExpired() {
       if (new Date(this.task.expireTime) < new Date()) return true;
       return false;
