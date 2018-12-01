@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="score">
+    <mt-button @click.native="gotoListPage">返回作业列表</mt-button>
     <div class="info">
       <div>{{activeOrder.task.name}}</div>
       <div>学生姓名：{{activeOrder.student.displayName}}</div>
@@ -19,6 +20,7 @@
     </div>
     <div class="pic" v-if="activeOrder.files[0].type==0">
       <img :src="localData" width="100%" style="display:block;">
+      <img :src="activeOrder.files[0].URL" width="100%" style="display:block;">
     </div>
     <div class="voice" v-if="activeOrder.files[0].type==1" >
       <i class="fa fa-play-circle-o" @click="playVoice"></i>
@@ -65,6 +67,9 @@ export default {
     ...mapActions([
       'setScore',
     ]),
+    gotoListPage() {
+      this.$router.back();
+    },
     getImageFromWechat(){
       const serverId = this.activeOrder.files[0].URL;
       const that = this;

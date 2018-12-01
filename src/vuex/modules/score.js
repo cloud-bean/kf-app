@@ -3,12 +3,14 @@ import { api } from '../../api';
 
 const state = {
   orders: [],
+  totalCount: 0,
   activeOrder: {},
 };
 
 const mutations = {
-  [types.SET_ORDERS](state, orders) {
+  [types.SET_ORDERS](state, { orders, totalCount}) {
     state.orders = orders;
+    state.totalCount = totalCount;
   },
   [types.SET_ACTIVE_ORDER](state, order) {
     state.activeOrder = order;
@@ -16,9 +18,10 @@ const mutations = {
 };
 
 const actions = {
-  async getOrders({ commit }) {
+  async getOrders({ commit }, { page, limit }) {
     commit(types.FETCH_STH);
-    commit(types.SET_ORDERS, await api.getOrders());
+    console.log('enter get orders', page, limit);
+    commit(types.SET_ORDERS, await api.getOrders(page, limit));
     commit(types.GOT_STH);
   },
   orderDetail({ commit, state }, index) {

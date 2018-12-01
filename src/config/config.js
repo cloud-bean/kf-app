@@ -2,13 +2,14 @@ export default {
   appid: 'wxb3762a929cf9e070',
   // appid: 'wxf8e294c011cd47e1', // dev
     // appsecret: '0a607b7dc2ff4fa027b8594a99f9e086',
-  openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w',
-  // openid: 'oBSpWsx1zRDhDuDwptpV9ANkVdLM',
+  // openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w', // xinxin
+  // openid: 'oBSpWs4ypPXs-dLdOqf-lgNYvmHw', // 康老师
+  openid: 'oBSpWsx1zRDhDuDwptpV9ANkVdLM', // ghh
   server: {
     midServer: 'https://joywill.cc',
     bigServer: 'https://joywill.cc/api',
     bigServerV2: 'https://joywill.cc/v2',
-    // bigServer: 'http://192.168.31.227:7000/api/base',
+    // bigServer: 'http://127.0.0.1:7000/api/base',
     // bigServerV2: 'http://localhost:7000/api/v2',
     gameBoardServer: 'http://127.0.0.1:3000',
 

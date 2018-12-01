@@ -2,6 +2,11 @@
   <div class="">
     <div class="card no-margin">
       <div class="card-content">
+        <div class="page-box">
+          <mt-button v-if="page > 1" @click.native="prePage">上一页</mt-button>
+          <span>第{{ page }}页 / 共{{totalPage}}页, 共{{totalCount}}个</span>
+          <mt-button v-if="page < totalPage" @click.native="nextPage">下一页</mt-button>
+        </div>
         <div v-for="(item, index) in orders" :key="index" class="rank-list">
           <order-item :orderData='item' class="rank-item" @click.native="handleClick(index)"></order-item>
         </div>
@@ -26,8 +31,9 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
+      page: 1,
+      limit: 5
     }
-
   },
   methods:{
     ...mapActions([
@@ -38,10 +44,30 @@ export default {
       this.orderDetail(index);
       this.$router.push('/orderDetail');
     },
+    prePage(){
+      this.page = this.page - 1;
+      this.getOrders({
+        page: this.page,
+        limit: this.limit
+      });
+    },
+    nextPage(){
+      this.page = this.page + 1;
+      this.getOrders({
+        page: this.page,
+        limit: this.limit
+      });
+    },
   },
-  computed: mapState({
-    orders: state => state.score.orders,
-  }),
+  computed: {
+      ...mapState({
+      orders: state => state.score.orders,
+      totalCount:  state => state.score.totalCount,
+    }),
+    totalPage() {
+      return Math.ceil(this.totalCount/this.limit);
+    }
+  },
   // vuex: {
   //   getters: {
   //     orders: state => state.orders,
@@ -55,7 +81,10 @@ export default {
   mounted(){
     this.$nextTick(()=> {
       // if(this.orders.length == 0){
-        this.getOrders();
+        this.getOrders({
+          page: this.page,
+          limit: this.limit
+        });
       // }
     })
   },
@@ -128,5 +157,11 @@ export default {
     width: 3rem;
     text-align: center;
     border-radius: 50%;
+  }
+  .page-box {
+    text-align: center;
+    background: #4FC1E9;
+    margin: 10px;
+    padding: 10px;
   }
 </style>
