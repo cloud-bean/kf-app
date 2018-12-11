@@ -8,15 +8,26 @@
     </div>
     <div class="inputarea">
       <!-- <input v-model="score" class="input" type="number" name="" value="" placeholder="分数" /> -->
-      <mt-field placeholder="评分" type="number" v-model="score"></mt-field>
-  
+
+      <mt-radio
+        title="评分(完美、优秀、可以、差强人意、非常差)"
+        v-model="score"
+        :options="[5, 4, 3, 2, 1]">
+      </mt-radio>
+
+      <mt-radio
+        title="快捷评语（下方输入框中可以点评知识点~）"
+        v-model="comments"
+        :options="['简直完美！', '非常棒！', '不错，加油~ ', '努力！', '一定要好好努力哈~']">
+      </mt-radio>
+
       <!-- <textarea v-model="comments" class="input" type="text" name="" value="" placeholder="评语" /> -->
       <mt-field placeholder="评语" type="textarea" v-model="comments" rows="4"></mt-field>
-  
+
       <br/>
       <!-- <button  type="button" name="button" class="button input" >提交</button> -->
       <mt-button @click="handleClick" type="primary" size="large">提交</mt-button>
-  
+
     </div>
     <div class="pic" v-if="activeOrder.files[0].type==0">
       <img :src="localData" width="100%" style="display:block;">
@@ -28,7 +39,7 @@
         您的浏览器不支持 audio 标签。
       </audio> -->
     </div>
-  
+
   </div>
 </template>
 
@@ -69,7 +80,7 @@
       } else if (this.activeOrder.files[0].type == 1) {
         this.getVoicefromWechat();
       }
-  
+
     },
     methods: {
       ...mapActions([
@@ -116,8 +127,8 @@
           this.localData = URL;
           console.log('11',this.localData);
           return;
-        }; 
-        
+        };
+
         const serverId = this.activeOrder.files[0].URL;
         const that = this;
         wx.downloadVoice({
@@ -131,7 +142,7 @@
             console.log('无资源');
           },
         });
-        
+
       },
       playVoice() {
         wx.playVoice({
@@ -149,7 +160,7 @@
           })
           .then(() => {
             this.$router.push('/success');
-  
+
           })
       }
     }
@@ -162,7 +173,7 @@
     border: 1px solid #eef;
     margin-top: 1rem;
   }
-  
+
   .info {
     font-size: 14px;
     padding: .5rem 0.5rem;
@@ -172,7 +183,7 @@
     justify-content: space-around;
     height: 6rem;
   }
-  
+
   .score {
     height: auto;
     /*height: auto;
@@ -183,7 +194,7 @@
     margin: .5em;
     padding: .5em;
   }
-  
+
   .inputarea {
     padding: 0.5rem 0.5rem;
     /*display: flex;
@@ -192,7 +203,7 @@
     /*height:16rem;*/
     background: #eef;
   }
-  
+
   .voice {
     text-align: center;
     margin: 0 auto;

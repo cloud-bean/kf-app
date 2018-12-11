@@ -22,7 +22,7 @@ export const getOrders = (page, limit) =>
 export const setScore = (score, comments, orderId) =>
   new Promise((resolve, reject) => {
     service
-      .post(`/orders/${orderId}/record`, { score, comments })
+      .post(`/orders/${orderId}/record`, { score, comments, flag: 'speed' })
       .then(result => {
         resolve(result);
       })
