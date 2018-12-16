@@ -3,8 +3,8 @@ export default {
   // appid: 'wxf8e294c011cd47e1', // dev
     // appsecret: '0a607b7dc2ff4fa027b8594a99f9e086',
   // openid: 'oBSpWs96E0WY7ZI63zOzxjR1ap7w', // xinxin
-  // openid: 'oBSpWs4ypPXs-dLdOqf-lgNYvmHw', // 康老师
-  openid: 'oBSpWsx1zRDhDuDwptpV9ANkVdLM', // ghh
+  openid: 'oBSpWs4ypPXs-dLdOqf-lgNYvmHw', // 康老师
+  // openid: 'oBSpWsx1zRDhDuDwptpV9ANkVdLM', // ghh
   server: {
     midServer: 'https://joywill.cc',
     bigServer: 'https://joywill.cc/api',
