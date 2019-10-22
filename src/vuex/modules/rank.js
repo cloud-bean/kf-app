@@ -9,9 +9,11 @@ const state = {
 
 const mutations = {
     [types.SET_RANK](state, ranks) {
+      if(ranks && ranks.length > 0) {
         state.page++;
         state.ranks = state.ranks.concat(ranks.rankList);
         state.myRank = ranks.me;
+      }
     },
     [types.LIKE_FRIEND](state, index) {
         state.ranks[index].isUpVoted = true;

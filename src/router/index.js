@@ -15,8 +15,8 @@ import newsDetailPage from '../pages/NewsDetail';
 import marketPage from '../pages/Market';
 import recordVoicePage from '../pages/RecordVoice';
 import introPage from '../pages/Intro';
-import gameBoardPage from '../pages/gameBoardPage';
-import BattleResault from '../pages/BattleResault';
+// import gameBoardPage from '../pages/gameBoardPage';
+import BattleResult from '../pages/BattleResult';
 import Activity from '../pages/Activity';
 // import signinPage from '../pages/SignIn';
 
@@ -52,8 +52,8 @@ export default new VueRouter({
     { path: '/market', component: marketPage },
     { path: '/recordVoice', component: recordVoicePage },
     { path: '/intro', component: introPage },
-    { path: '/match', component: gameBoardPage },
-    { path: '/battleresault', component: BattleResault },
+    // { path: '/match', component: gameBoardPage },
+    { path: '/battleResult', component: BattleResult },
     { path: '/activity', component: Activity },
 
 

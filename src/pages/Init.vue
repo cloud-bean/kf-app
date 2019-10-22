@@ -125,7 +125,7 @@ export default {
           // this.$store.commit(types.FETCH_STH);
           // $.showPreloader('加载中...');
 
-          if (process.env.NODE_ENV == 'production') {
+          if (process.env.NODE_ENV === 'production') {
             await this.auth({ appid: config.appid, code });
             this.setProgress(20);
             await this.getJsConfig(sendUrl);
@@ -155,9 +155,10 @@ export default {
           }
         } else {
           let redirctUrl = config.route.testRedirect;
-      // let redirctUrl = util.getAuthorizeURL(config.appidTest, config.server.testServer, 'wechat', 'snsapi_userinfo');
-          if (process.env.NODE_ENV == 'production') {
-            redirctUrl = util.getAuthorizeURL(config.appid, config.server.midServer, 'wechat', 'snsapi_userinfo');
+          if (process.env.NODE_ENV === 'production') {
+            // eslint-disable-next-line max-len
+            redirctUrl = util.getAuthorizeURL(config.appid,
+              config.server.midServer, 'wechat', 'snsapi_userinfo');
           }
           window.location.href = redirctUrl;
         }

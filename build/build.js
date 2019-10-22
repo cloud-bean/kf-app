@@ -12,8 +12,6 @@ var client = require('scp2')
 
 var clientOption = {
   host: process.env.TINY_SERVER_HOST,
-  username: process.env.TINY_SERVER_USER,
-  password: process.env.TINY_SERVER_PASSWD,
   path: process.env.TINY_SERVER_PATH,
 };
 
@@ -35,11 +33,11 @@ webpack(webpackConfig, function(err, stats) {
         chunks: false,
         chunkModules: false
     }) + '\n');
-    client.scp('./dist/', clientOption, function(err) {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log('Finished, deploy complete!')
-        }
-    });
+    // client.scp('./dist/', clientOption, function(err) {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         console.log('Finished, deploy complete!')
+    //     }
+    // });
 })
