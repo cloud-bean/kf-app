@@ -17,7 +17,7 @@
     </div>
        <div class="markdown-desc">
 
-          <div v-html="tansMarkdown(task.description)" v-if="task.description">
+          <div v-html="tansMarkdown(task.description)" v-if="task.description" style="min-height: 200px;">
           </div>
           <img :src="task.contentImage.URL" alt="" width="100%" v-if="task.contentImage"/>
           <div v-html="task.txVideoFrame">
@@ -39,7 +39,7 @@
             <div v-html="tansMarkdown(task.summary)"  v-if="task.summary">
             </div>
           </div>
-          <div class="" style="border:1px solid #ccc;padding:.3rem;" v-if="task.cardPool && !hasOpen">
+          <!-- <div class="" style="border:1px solid #ccc;padding:.3rem;" v-if="task.cardPool && !hasOpen">
             <div class="" style="color:#6F2DBD;text-align:center">
               任务中包含通关密码，填写后开启宝箱
             </div>
@@ -47,7 +47,7 @@
             <div v-if="passCode==task.passCode"  @click="handleOpenBox">
               <card-pool-item :cardPoolData="task.cardPool"></card-pool-item>
             </div>
-          </div>
+          </div> -->
           <div class="task-footer">
             <head-list :user-list="task.taskDoneUsers"></head-list>
           </div>
@@ -136,7 +136,7 @@ export default {
   data() {
     return {
       actions: [
-        { name: '文本', method: this.handleComment },
+        // { name: '文本', method: this.handleComment },
         { name: '语音', method: this.handleRecord },
         { name: '图片', method: this.photo },
       ],
@@ -321,20 +321,18 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
-.task-detail{
+.task-detail {
   /*padding: 0.5rem 0.5rem;*/
   /*background-color: #eef;*/
-
 }
-.task-title{
+.task-title {
   padding: 1rem 1rem;
   font-size: 1.2rem;
-  background-color: #6F2DBD;
+  background-color: #6f2dbd;
   opacity: 0.8;
   color: white;
 }
-.task-head{
+.task-head {
   /* display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -344,60 +342,60 @@ export default {
   /* font-size: 0.8rem; */
   /* color: white; */
 }
-.task-content{
+.task-content {
   padding: 1rem 1rem;
   background-color: #eef;
   font-size: 0.8rem;
-/*color: blue;*/
+  /*color: blue;*/
 }
 
-.button-area{
+.button-area {
   /*display: flex;*/
   /*flex-direction: column;*/
   /*justify-content: space-around;*/
-  padding: .5rem 0.5rem;
-  font-size: .8rem;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.8rem;
   background-color: #eef;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
-.task-footer{
+.task-footer {
   /*padding: 1rem 1rem;*/
   /*margin-bottom: 0.2rem;*/
-  margin-top: .3rem;
-  padding-top: .2rem;
+  margin-top: 0.3rem;
+  padding-top: 0.2rem;
   border-top: 1px solid #ccc;
 }
-.summary{
+.summary {
   background-color: #eee;
-  padding: .5rem;
+  padding: 0.5rem;
   border: 1px solid #ccc;
 }
-.play-audio{
+.play-audio {
   /*border: 1px solid #ccc;*/
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   height: 2rem;
 }
-.play-audio audio{
-  height:100%;
+.play-audio audio {
+  height: 100%;
   width: 100%;
 }
 
-.play-video{
-  height:10rem;
+.play-video {
+  height: 10rem;
   width: 100%;
   border: 1px solid #ccc;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
-.play-video video{
-  height:100%;
+.play-video video {
+  height: 100%;
   width: 100%;
 }
-.expire{
+.expire {
   text-align: center;
   color: #fff;
   font-size: 1rem;
-  padding: .5rem;
-  background-color: rgba(255,0,0,.8);
+  padding: 0.5rem;
+  background-color: rgba(255, 0, 0, 0.8);
 }
 /*.image-content{
 position: absolute;
@@ -437,25 +435,25 @@ overflow: hidden;
   text-align: center;
   padding: 0.1rem 0;
 }*/
-.mulbutton{
+.mulbutton {
   /*position: fixed;*/
   /*right: 3rem;*/
   /*bottom: 3.5rem;*/
   /* width:100%; */
   /* padding: .2rem .5rem; */
 }
-.record-panel{
-  position:fixed;
-  margin:auto;
-  left:0;
-  right:0;
-  top:8rem;
-  bottom:0;
-  width:90%;
+.record-panel {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 8rem;
+  bottom: 0;
+  width: 90%;
   /*height:10rem;*/
   /*padding: 1rem;*/
 }
-.bottom-msg{
+.bottom-msg {
   /* position: fixed; */
   width: 90%;
   /* bottom: 4rem;
@@ -463,7 +461,6 @@ overflow: hidden;
   left: 0; */
   margin: 1rem auto;
   margin-top: 0;
-
 }
 .mask {
   position: fixed;
@@ -473,7 +470,7 @@ overflow: hidden;
   top: 0;
   left: 0;
   z-index: 998;
-  background: rgba(0, 0, 0, .8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .card-view {

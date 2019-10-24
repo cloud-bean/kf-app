@@ -3,7 +3,8 @@
   <div class="img-cell Grid -middle -around">
     <!-- <float-message-bar desc="很不幸我的朋友，你没有获得卡牌" :show.sync="showMsgBar"></float-message-bar> -->
     <div class="img Cell -1of12 Grid -center -middle">
-      <img :src="!!(this.commodityData.file)?this.commodityData.file.URL+'?imageView2/2/h/100/q/100|imageslim':boximg" alt="" class=""/>
+      <img :src="!!(this.commodityData.file)?this.commodityData.file.URL+'?imageView2/2/h/100/q/100|imageslim':boximg"
+        alt="" class="" />
     </div>
     <div class="Cell -6of12 Grid good-item" style="">
       <div class="title Cell -12of12" @click="showDetails">
@@ -22,8 +23,8 @@
     </div>
     <div class="mask" v-if="popupVisible" @click="closeCard"></div>
     <transition enter-active-class=" animated flipInY" leave-active-class=" animated flipOutY">
-      <card-view class="card-view" v-if="popupVisible" :card-data="card" @click.native="closeCard"
-                 :product="false"></card-view>
+      <card-view class="card-view" v-if="popupVisible" :card-data="card" @click.native="closeCard" :product="false">
+      </card-view>
     </transition>
   </div>
 
@@ -44,8 +45,13 @@
 
 <script>
   import boximg from '../assets/box.jpg';
-  import { MessageBox, Toast } from 'mint-ui';
-  import { mapState } from 'vuex';
+  import {
+    MessageBox,
+    Toast,
+  } from 'mint-ui';
+  import {
+    mapState,
+  } from 'vuex';
   import CardView from '../components/CardView';
   import FloatMessageBar from '../components/floatMessageBar';
 
@@ -79,15 +85,17 @@
       async handleBuy() {
         if (this.money < this.commodityData.ticketPrice) {
           Toast({
-            message: '没有足够的悦维币，快去完成任务吧',
+            message: '没有足够的悦币，快去完成任务吧',
             position: 'bottom',
           });
           return;
         }
         try {
           await MessageBox.confirm(`确定购买吗，将花费${this.commodityData.ticketPrice}悦币`);
-          const option = { cardPoolId: this.commodityData._id,
-            money: this.commodityData.ticketPrice };
+          const option = {
+            cardPoolId: this.commodityData._id,
+            money: this.commodityData.ticketPrice,
+          };
           const data = await this.buy(option);
           console.log(data);
           if (!data.card) {
@@ -104,9 +112,9 @@
         } catch (e) {
           console.log(e);
         }
-      }
+      },
     },
-  }
+  };
 
 </script>
 
@@ -188,6 +196,6 @@
     width: 70%;
   }
 
-  .good-item {
-  }
+  .good-item {}
+
 </style>

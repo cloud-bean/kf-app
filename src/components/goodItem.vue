@@ -2,7 +2,8 @@
 
   <div class="img-cell Grid -middle -around">
     <div class="img Cell -1of12 Grid -center -middle">
-      <img :src="!!(this.goodData.detail.file)?this.goodData.detail.file.URL+'-kf.app.market.card':boximg" alt="" class=""/>
+      <img :src="!!(this.goodData.detail.file)?this.goodData.detail.file.URL+'-kf.app.market.card':boximg" alt=""
+        class="" />
     </div>
     <div class="Cell -6of12 Grid">
       <div class="title Cell -12of12" @click="showDetails">
@@ -20,22 +21,29 @@
     </div>
 
     <div class="icon Cell -2of12">
-      <mt-button type="primary" size="small" @click="handleCancel" v-if="user && (user._id==goodData.owner._id)">撤回</mt-button>
+      <mt-button type="primary" size="small" @click="handleCancel" v-if="user && (user._id==goodData.owner._id)">撤回
+      </mt-button>
       <mt-button type="primary" size="small" plain @click="handleBuy" v-else>购买</mt-button>
 
     </div>
     <div class="mask" v-if="popupVisible" @click="closeCard"></div>
     <transition enter-active-class=" animated flipInY" leave-active-class=" animated flipOutY">
-      <card-view class="card-view" v-if="popupVisible" :card-data="card" @click.native="closeCard"
-                 :product="false"></card-view>
+      <card-view class="card-view" v-if="popupVisible" :card-data="card" @click.native="closeCard" :product="false">
+      </card-view>
     </transition>
   </div>
 </template>
 
 <script>
   import boximg from '../assets/box.jpg';
-  import { MessageBox, Toast } from 'mint-ui';
-  import { mapState, mapActions } from 'vuex';
+  import {
+    MessageBox,
+    Toast
+  } from 'mint-ui';
+  import {
+    mapState,
+    mapActions
+  } from 'vuex';
   import CardView from '../components/CardView';
   import FloatMessageBar from '../components/floatMessageBar';
 
@@ -68,7 +76,7 @@
       async handleBuy() {
         if (this.money < this.goodData.price) {
           Toast({
-            message: '没有足够的悦维币，快去完成任务吧',
+            message: '没有足够的悦币，快去完成任务吧',
             position: 'bottom',
           });
           return;
@@ -80,7 +88,9 @@
             this.popupVisible = true;
           }
           console.log('will buy');
-          await this.buy({ goodId: this.goodData._id });
+          await this.buy({
+            goodId: this.goodData._id
+          });
         } catch (e) {
           console.log('not buy');
           console.log(e);
@@ -89,7 +99,9 @@
       async handleCancel() {
         try {
           await MessageBox.confirm(`确定下架${this.goodData.name}吗？`);
-          await this.revert({ goodId: this.goodData._id });
+          await this.revert({
+            goodId: this.goodData._id
+          });
         } catch (e) {
           console.log(e);
         }
@@ -176,4 +188,5 @@
     z-index: 999;
     width: 70%;
   }
+
 </style>

@@ -1,14 +1,15 @@
 <template>
   <div class="signup">
     <div class="Grid avatar-panel " v-if="avatarPanel">
-      <img  class="Cell -3of12" v-for="avatar in memberAvatars" :key="avatar._id" :src="avatar.URL" @click="setAvatar(avatar.URL)" style="margin:0 auto;padding:5px;max-width: 6rem; max-height: 6rem;">
+      <img class="Cell -3of12" v-for="avatar in memberAvatars" :key="avatar._id" :src="avatar.URL"
+        @click="setAvatar(avatar.URL)" style="margin:0 auto;padding:5px;max-width: 6rem; max-height: 6rem;">
     </div>
 
     <div v-if="user.displayName">
       <header class="header">
         <mt-header title="更新信息"></mt-header>
         <div class="headimg" @click="showAvatarPanel()">
-          <img :src="user.profileImageURL" alt="" class="avatar"/>
+          <img :src="user.profileImageURL" alt="" class="avatar" />
           <div style="font-size:.8rem;color:#ccc;">点击更换头像</div>
           <div class="name">{{displayName}}</div>
         </div>
@@ -17,20 +18,21 @@
         <mt-field label="姓名" placeholder="请输入用户名" v-model="displayName"></mt-field>
         <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone"></mt-field>
         <mt-field label="QQ号" placeholder="请输入您的QQ号" type="number" v-model="qq"></mt-field>
-        <mt-field label="我的宣言" placeholder="learning with joy"  v-model="slogan"></mt-field>
+        <mt-field label="我的宣言" placeholder="learning with joy" v-model="slogan"></mt-field>
         <div class="Grid">
           <div class="Cell -3of12" style="padding:10px;">选择学校：</div>
           <select class="Cell -9of12" v-model="school">
-            <option v-for="(schoolName, index) in optionSchools" :value="schoolName" :key="index">{{schoolName}}</option>
+            <option v-for="(schoolName, index) in optionSchools" :value="schoolName" :key="index">{{schoolName}}
+            </option>
           </select>
         </div>
         <mt-field label="学校名称：" placeholder="请输入您的学校名称" type="text" v-model="school"></mt-field>
-        <mt-button style="margin-top:2rem;" :class="{'valid': checkDataValid}"
-        size="large" @click="submit" :disabled="!checkDataValid">提交</mt-button>
+        <mt-button style="margin-top:2rem;" :class="{'valid': checkDataValid}" size="large" @click="submit"
+          :disabled="!checkDataValid">提交</mt-button>
       </div>
     </div>
 
-<!-- cb47ca -->
+    <!-- cb47ca -->
     <div v-if="!user.displayName">
       <div v-if="!hasSelected">
         <mt-button style="margin-top:2rem;" size="large" type="primary" @click="select('1')">已有QQ账号</mt-button>
@@ -44,15 +46,15 @@
           </header>
           <div class="field">
             <!--<div  style="margin: 10px;">-->
-              <!--<mt-field label="QQ号" placeholder="请输入您的QQ号" type="tel" v-model="qq"></mt-field>-->
-              <!--<mt-field label="密码" placeholder="密码" type="password" v-model="password"></mt-field>-->
+            <!--<mt-field label="QQ号" placeholder="请输入您的QQ号" type="tel" v-model="qq"></mt-field>-->
+            <!--<mt-field label="密码" placeholder="密码" type="password" v-model="password"></mt-field>-->
             <!--</div>-->
             <!--<mt-button style="margin-top:2rem;" size="large" type="primary" @click="loginWithQQ">登录</mt-button>-->
             <!--<mt-button style="margin-top:2rem; background-color: #0ad311;" size="large" type="primary" @click="loginWithQQAndBindWechat">登录并绑定当前微信</mt-button>-->
-          <!---->
-            <div  style="margin: 5px; font-size: 18px;
+            <!---->
+            <div style="margin: 5px; font-size: 18px;
                   padding: 5px; -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;">
-              <span>请联系悦维老师，提供如下信息：</span>
+              <span>请联系客服老师，提供如下信息：</span>
               <div style="color: red;">
                 <p>&nbsp;&nbsp;1.先前注册的账号中填写的qq号</p>
                 <p>&nbsp;&nbsp;2.本次新注册的用户名</p>
@@ -65,7 +67,7 @@
           <header class="header">
             <mt-header title="填写注册信息"></mt-header>
             <div class="headimg" @click="showAvatarPanel()">
-              <img :src="user.profileImageURL" alt="" class="avatar"/>
+              <img :src="user.profileImageURL" alt="" class="avatar" />
               <div style="font-size:.8rem;color:#ccc;">点击更换头像</div>
               <div class="name">{{displayName}}</div>
             </div>
@@ -74,16 +76,17 @@
             <mt-field label="姓名" placeholder="请输入用户名" v-model="displayName"></mt-field>
             <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone"></mt-field>
             <mt-field label="QQ号" placeholder="请输入您的QQ号" type="number" v-model="qq"></mt-field>
-            <mt-field label="我的宣言" placeholder="learning with joy"  v-model="slogan"></mt-field>
+            <mt-field label="我的宣言" placeholder="learning with joy" v-model="slogan"></mt-field>
             <div class="Grid">
               <div class="Cell -3of12" style="padding:10px;">选择学校：</div>
-                <select class="Cell -9of12" v-model="school">
-                  <option v-for="(schoolName, index) in optionSchools" :value="schoolName" :key="index">{{schoolName}}</option>
-                </select>
+              <select class="Cell -9of12" v-model="school">
+                <option v-for="(schoolName, index) in optionSchools" :value="schoolName" :key="index">{{schoolName}}
+                </option>
+              </select>
             </div>
             <mt-field label="学校名称：" placeholder="请输入您的学校名称" type="text" v-model="school"></mt-field>
-            <mt-button style="margin-top:2rem;" :class="{'valid': checkDataValid}"
-              size="large" @click="submit" :disabled="!checkDataValid">注册新账号</mt-button>
+            <mt-button style="margin-top:2rem;" :class="{'valid': checkDataValid}" size="large" @click="submit"
+              :disabled="!checkDataValid">注册新账号</mt-button>
           </div>
         </div>
       </div>
@@ -93,12 +96,20 @@
 </template>
 
 <script>
-  import { Navbar, TabItem } from 'mint-ui';
+  import {
+    Navbar,
+    TabItem,
+  } from 'mint-ui';
   import Vue from 'vue';
   Vue.component(Navbar.name, Navbar);
   Vue.component(TabItem.name, TabItem);
-  import { mapState, mapActions } from 'vuex';
-import { throws } from 'assert';
+  import {
+    mapState,
+    mapActions,
+  } from 'vuex';
+  import {
+    throws,
+  } from 'assert';
 
   export default {
     data() {
@@ -115,7 +126,8 @@ import { throws } from 'assert';
         hasSelected: false,
         optionSchools: ['西工大附中', '西安铁一中', '陕师大附中',
           '西安高新一中', '西安交大附中', '西安爱知中学', '西北大学附中', '西电附中',
-          '西安市第一中学', '西安市第七十中学', '其他学校']
+          '西安市第一中学', '西安市第七十中学', '其他学校',
+        ],
       };
     },
     mounted() {
@@ -134,7 +146,7 @@ import { throws } from 'assert';
       memberAvatars: state => state.memberAvatars,
       // freeCourses: state => state.course.freeCourses,
       checkDataValid() {
-        var res = this.qq && this.phone && this.school && this.slogan && this.displayName;
+        let res = this.qq && this.phone && this.school && this.slogan && this.displayName;
         return res != null && res.length > 0;
       },
     }),
@@ -164,7 +176,13 @@ import { throws } from 'assert';
         const slogan = this.slogan;
         const qq = this.qq;
         try {
-          await this.signUp({ displayName, phone, slogan, school, qq });
+          await this.signUp({
+            displayName,
+            phone,
+            slogan,
+            school,
+            qq,
+          });
         } catch (err) {
           console.log(err);
         }
@@ -191,6 +209,7 @@ import { throws } from 'assert';
       },
     },
   };
+
 </script>
 
 <style scoped>
@@ -203,6 +222,7 @@ import { throws } from 'assert';
     color: #fff;
     font-weight: 700;
   }
+
   select {
     width: 100%;
     font-size: 1rem;
@@ -264,4 +284,5 @@ import { throws } from 'assert';
     background-color: rgba(0, 0, 0, .8);
     z-index: 100;
   }
+
 </style>
