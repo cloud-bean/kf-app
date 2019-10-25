@@ -50,12 +50,13 @@ img{
   border: 2px solid #ccc;
   box-shadow: 0px 0px 1px 1px rgba(216,216,216,.8);
   border-radius: 5px;
-
+  height: 100px;
+  width: 70px;
 }
 
 img[lazy=loading] {
   /*width: 100px;*/
-  height: 100px;
+
   background-image: url('../assets/cardLoading.png');
   margin: auto;
 }

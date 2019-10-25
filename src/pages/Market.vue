@@ -6,9 +6,8 @@
 
     <div class="commodity-list">
       <mt-navbar v-model="active" class="selecter">
-        <mt-tab-item id="good">个人</mt-tab-item>
-        <mt-tab-item id="commodity">官方</mt-tab-item>
-        <mt-tab-item id="erciyuan">二次元</mt-tab-item>
+        <mt-tab-item id="good" v-if="allCards && allCards.length > 0">跳蚤市场</mt-tab-item>
+        <mt-tab-item id="commodity">官方卡包</mt-tab-item>
       </mt-navbar>
       <!-- <mt-button plain @click="setActive('commodity')">官方</mt-button>
       <mt-button plain @click="setActive('good')">个人</mt-button>
@@ -21,15 +20,13 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="good">
           <!--<div class="good-list">-->
-            <div class="commodity" v-for="(item, index) in allCards" :key="index">
-              <good-item :goodData='item' :buy='buyTheGood' :revert='revertTheGood' :user="user"></good-item>
-            </div>
-          <!--</div>-->
-        </mt-tab-container-item>
-        <mt-tab-container-item id="erciyuan">
-          <div class="commodity" v-for="(item, index) in allErciyuan" :key="index">
-            <good-item :goodData='item' :buy='buyTheGood'></good-item>
+          <div class="commodity" v-for="(item, index) in allCards" :key="index" v-if="allCards">
+            <good-item :goodData='item' :buy='buyTheGood' :revert='revertTheGood' :user="user"></good-item>
           </div>
+          <div v-else>
+            <p>暂无二手卡牌，可以出售自己的卡牌哦</p>
+          </div>
+          <!--</div>-->
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
@@ -39,117 +36,131 @@
 </template>
 
 <script>
+  import CommodityItem from '../components/CommodityItem';
+  import goodItem from '../components/goodItem';
+  import Info from '../components/HeadInfo';
 
-import CommodityItem from '../components/CommodityItem';
-import goodItem from '../components/goodItem';
-import Info from '../components/HeadInfo';
+  // import { getMyRecords } from '../vuex/actions';
+  import {
+    mapState,
+    mapActions,
+    mapGetters,
+  } from 'vuex';
+  import {
+    TabContainer,
+    TabContainerItem,
+    Button,
+  } from 'mint-ui';
+  import Vue from 'vue';
 
-// import { getMyRecords } from '../vuex/actions';
-import { mapState, mapActions, mapGetters } from 'vuex';
-import { TabContainer, TabContainerItem, Button } from 'mint-ui';
-import Vue from 'vue';
+  Vue.component(TabContainer.name, TabContainer);
+  Vue.component(TabContainerItem.name, TabContainerItem);
+  Vue.component(Button.name, Button);
 
-Vue.component(TabContainer.name, TabContainer);
-Vue.component(TabContainerItem.name, TabContainerItem);
-Vue.component(Button.name, Button);
-
-export default {
-  data() {
-    return {
-      active: 'good',
-    };
-  },
-  computed: {
-    ...mapState({
-    // user: state => state.profile.user,
-    // userRecords: state => state.profile.userRecords,
-    // tip: state => state.profile.tip,
-    // news: state => state.news.news,
-      cardPool: state => state.card.cardPool,
-      allGoods: state => state.market.allGoods,
-      user: state => state.profile.user,
-      myRank: state => state.rank.myRank,
-    }),
-    allCards() {
-      return this.allGoods.filter((item) => {
-        if (item.category == 'card') return item;
-      });
+  export default {
+    data() {
+      return {
+        active: 'commodity',
+      };
     },
-    allErciyuan() {
-      return this.allGoods.filter((item) => {
-        if (item.category == 'erciyuan') return item;
-      });
+    computed: {
+      ...mapState({
+        // user: state => state.profile.user,
+        // userRecords: state => state.profile.userRecords,
+        // tip: state => state.profile.tip,
+        // news: state => state.news.news,
+        cardPool: state => state.card.cardPool,
+        allGoods: state => state.market.allGoods,
+        user: state => state.profile.user,
+        myRank: state => state.rank.myRank,
+      }),
+      allCards() {
+        return this.allGoods.filter((item) => {
+          if (item.category === 'card') {
+            return item;
+          }
+        });
+      },
+      allErciyuan() {
+        return this.allGoods.filter((item) => {
+          if (item.category === 'erciyuan') return item;
+        });
+      },
+      // ...mapGetters('market',[
+      //   'allCards',
+      //   'allErciyuan',
+      // ]),
     },
-    // ...mapGetters('market',[
-    //   'allCards',
-    //   'allErciyuan',
-    // ]),
-  },
 
-  // vuex: {
-  //   getters: {
-  //     user: state => state.user,
-  //     myRecords: state => state.myRecords,
-  //     tip: state => state.tip,
-  //   },
-  // },
-  mounted() {
-    this.getCardPool(1);
-    this.getAllGoods();
-  },
-  methods: {
-    ...mapActions([
-      'getCardPool',
-      'buyLottery',
-      'openLotteryBox',
-      'getAllGoods',
-      'buyGood',
-      'revertGood',
-      'getUserInfo',
-    ]),
-    async buyTheGood(data) {
-      await this.buyGood(data);
-      await this.getAllGoods();
-      await this.getCardPool(1);
-      await this.getUserInfo(this.user._id);
+    // vuex: {
+    //   getters: {
+    //     user: state => state.user,
+    //     myRecords: state => state.myRecords,
+    //     tip: state => state.tip,
+    //   },
+    // },
+    mounted() {
+      this.getCardPool(1);
+      this.getAllGoods();
     },
-    async revertTheGood(data) {
-      await this.revertGood(data);
-      await this.getAllGoods();
-      await this.getCardPool(1);
+    methods: {
+      ...mapActions([
+        'getCardPool',
+        'buyLottery',
+        'openLotteryBox',
+        'getAllGoods',
+        'buyGood',
+        'revertGood',
+        'getUserInfo',
+      ]),
+      async buyTheGood(data) {
+        await this.buyGood(data);
+        await this.getAllGoods();
+        await this.getCardPool(1);
+        await this.getUserInfo(this.user._id);
+      },
+      async revertTheGood(data) {
+        await this.revertGood(data);
+        await this.getAllGoods();
+        await this.getCardPool(1);
+      },
+      setActive(id) {
+        this.active = id;
+      },
     },
-    setActive(id) {
-      this.active = id;
-    },
-  },
 
-  components: {
-    CommodityItem,
-    goodItem,
-    Info,
-  },
-};
+    components: {
+      CommodityItem,
+      goodItem,
+      Info,
+    },
+  };
+
 </script>
 
 
 <style scoped>
-.commodity{
+  .commodity {
     margin-top: .5rem;
-}
-.commodity-list{
+  }
+
+  .commodity-list {
     margin-top: 8rem;
-}
-.good-list{
-  margin-top: .5rem;
-}
-.user-info{
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index:2;
-}
-.selecter{
-  font-size: 1rem !important;
-}
+  }
+
+  .good-list {
+    margin-top: .5rem;
+  }
+
+  .user-info {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+  }
+
+  .selecter {
+    font-size: 1rem !important;
+  }
 
 </style>

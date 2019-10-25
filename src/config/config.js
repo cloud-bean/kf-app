@@ -19,7 +19,7 @@ export default {
     accessToken: 'b8a94cfea5924d9650d4a72e8b10137f8a609c87d477f11ebe04b006ba427672',
     userid: '59ed737f3b601c873f41417a',
   },
-  openid: 'oBSpWs4ypPXs-dLdOqf-lgNYvmHw', // 公众号的openid， 可以用来本地调试的用户
+  openid: 'o-Jyvv3aUdYlVwRY8MyRCw5vhsQM', // 公众号的openid， 可以用来本地调试的用户
   task: {
     limit: 5,
   },

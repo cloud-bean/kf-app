@@ -4,7 +4,6 @@
     <chart></chart> -->
 <div class="">
   <div class="user-info">
-
       <info :user="user" :rank="myRank.rankIndex"></info>
       <div class="info">
         <status-bar :keepInfo="keepInfo"></status-bar>
@@ -130,7 +129,7 @@ import statusBar from '../components/statusBar';
 import newStudentTaskItem from '../components/newStudentTaskItem';
 
 const moment = require('moment');
-moment.lang('zh-cn');
+moment.locale('zh-cn');
 // import { getMyRecords } from '../vuex/actions';
 // import rankImg from '../assets/rank.jpg';
 // import bagImg from '../assets/bag.jpg';

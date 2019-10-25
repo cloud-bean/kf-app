@@ -23,7 +23,7 @@
          <i class="fa fa-th" aria-hidden="true" style="color:#6F2DBD"></i>JoyBox
       </div> -->
       <div class="" style="position:fixed;bottom:.5rem;color:#eee;">
-        v0.7.20181007
+        v0.8.20191025
       </div>
       <!-- <div  class="logo">
         <i class="fa fa-th" aria-hidden="true"></i> 悦盒

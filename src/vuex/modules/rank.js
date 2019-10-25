@@ -9,7 +9,7 @@ const state = {
 
 const mutations = {
     [types.SET_RANK](state, ranks) {
-      if(ranks && ranks.length > 0) {
+      if (ranks) {
         state.page++;
         state.ranks = state.ranks.concat(ranks.rankList);
         state.myRank = ranks.me;

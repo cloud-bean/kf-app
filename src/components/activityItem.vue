@@ -32,15 +32,15 @@
 
         <mt-badge color="#eee" @click.native="upVoteIt">
           <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}" > </i>
-          {{activityData.upVotes.length}}
+          <span class="active">{{activityData.upVotes.length > 0 ? activityData.upVotes.length : ''}}</span>
         </mt-badge>
 
         <mt-badge @click.native="toggleShowMsgs" color="#eee">
           <i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
-          {{activityData.messages ? activityData.messages.length : 0}}
+          <span class="active2">{{activityData.messages.length > 0 ? activityData.messages.length : ''}}</span>
         </mt-badge>
 
-        <div v-if="showMsgs" style="display:block; width: 100%; padding: 10px; margin: 5px; border: 1px solid #ccc5;">
+        <div v-if="showMsgs" style="display:block; width: 100%; padding: 5px; margin: 5px;">
           <mt-cell style="border: none;">
             <mt-button size="small" plain @click="addMsg">评论</mt-button>
           </mt-cell>
@@ -55,50 +55,61 @@
     </div>
 
   </div>
-  <div v-else>
-    <div class="img-cell Grid -middle -around">
+  <div v-else-if="activityData.user">
+    <div class="img-cell Grid -middle -around" >
 
-      <div v-if="activityData.user" class="img Cell -2of12 Grid -center -middle">
+      <div class="img Cell -2of12 Grid -top">
         <img :src="!!(activityData.user.profileImageURL) ? activityData.user.profileImageURL : ''" alt=""
-             style=" -webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;"/>
-        <span>{{activityData.user.displayName}}</span>
+             style=" -webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;width: 40px; height: 40px;border: 1px solid gold;" />
       </div>
 
       <div class="Cell -6of12 Grid">
-
         <div v-if="activityData.module === 'battle'" :style="{backgroundImage: 'url(' + activityData.detail.themeCoverImage.URL + '?imageView2/2/w/400/h/200/q/75|imageslim' + ')'}">
           <mt-badge>{{ activityData.mode }} - {{ activityData.themeName}}</mt-badge>
         </div>
         <div v-else>
           <div class=" Cell -12of12">
-            <span class="title">{{activityData.title}} {{activityData.detail.name}}</span>
+            <p style="color: #286dff;">{{activityData.user ? activityData.user.displayName : '--' }}</p>
+
+            <p>{{activityData.title}}
+              <span style="color: #6f2dbd;"> {{activityData.detail.name}}</span>
+            </p>
           </div>
           <div class="desc">
             {{activityData.created | timefromNow}}
           </div>
         </div>
       </div>
-      <!-- <div class="icon Cell -2of12">
-        <mt-badge color="#888">
+      <div class="icon Cell -2of12">
+        <mt-badge color="#eee">
           <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}" v-on:click="upVoteIt">
           </i>
-          {{activityData.upVotes.length}}
+          <span class="active">{{activityData.upVotes.length > 0 ? activityData.upVotes.length : ''}}</span>
         </mt-badge>
-      </div> -->
-
-      <div class="icon Cell -2of12" @click="addMsg">
-        <!-- <mt-badge color="#888"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
-          吐槽
-          {{activityData.messages ? activityData.messages.length : 0}}
-        </mt-badge> -->
-         <mt-button size="small" plain @click="addMsg">吐槽</mt-button>
-
       </div>
 
+<!--      <mt-badge color="#eee" @click.native="upVoteIt">-->
+<!--        <i class="fa fa-heart fa-lg " v-bind:class="{active:hasVoted,inactive:!hasVoted}" > </i>-->
+<!--        {{activityData.upVotes.length}}-->
+<!--      </mt-badge>-->
+
+      <mt-badge @click.native="toggleShowMsgs" color="#eee">
+        <i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>
+        <span class="active2">{{ activityData.messages.length > 0 ? activityData.messages.length : ''}}</span>
+      </mt-badge>
+
+<!--      <div class="icon Cell -2of12" @click="addMsg">-->
+<!--        &lt;!&ndash; <mt-badge color="#888"><i class="fa fa-comments fa-lg" v-bind:class="{active2: hasMsgs,inactive:!hasMsgs}"></i>-->
+<!--          吐槽-->
+<!--          {{activityData.messages ? activityData.messages.length : 0}}-->
+<!--        </mt-badge> &ndash;&gt;-->
+<!--         <mt-button size="small" plain @click="addMsg">吐槽</mt-button>-->
+<!--      </div>-->
+
       <div v-if="showMsgs&&activityData.messages.length>0" style="display:block; width: 100%; padding: 10px; margin: 5px;">
-        <!-- <mt-cell style="border: none;">
-          <mt-button size="small" plain @click="addMsg">评论</mt-button>
-        </mt-cell> -->
+        <mt-cell style="border: none;">
+          <mt-button size="small" plain @click="addMsg">+ 评论</mt-button>
+        </mt-cell>
 
         <mt-cell :title="message.user" :label="message.created | timefromNow"
                  style="border-bottom: 1px dashed #ccc5;"
@@ -154,7 +165,7 @@
         this.showMsgs = !this.showMsgs;
       },
       addMsg() {
-        MessageBox.prompt('尽情吐槽吧?', '').then(({ value, action }) => {
+        MessageBox.prompt('想说点什么?', '').then(({ value, action }) => {
           console.log(value, action);
           if (value.length > 0) {
             // send msg to api
