@@ -6,7 +6,7 @@
 
     <div class="commodity-list">
       <mt-navbar v-model="active" class="selecter">
-        <mt-tab-item id="good" v-if="allCards && allCards.length > 0">跳蚤市场</mt-tab-item>
+        <mt-tab-item id="good">跳蚤市场</mt-tab-item>
         <mt-tab-item id="commodity">官方卡包</mt-tab-item>
       </mt-navbar>
       <!-- <mt-button plain @click="setActive('commodity')">官方</mt-button>
@@ -20,11 +20,11 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="good">
           <!--<div class="good-list">-->
-          <div class="commodity" v-for="(item, index) in allCards" :key="index" v-if="allCards">
+          <div class="commodity" v-for="(item, index) in allCards" :key="index" >
             <good-item :goodData='item' :buy='buyTheGood' :revert='revertTheGood' :user="user"></good-item>
           </div>
-          <div v-else>
-            <p>暂无二手卡牌，可以出售自己的卡牌哦</p>
+          <div v-if="!allCards || allCards.length === 0" style="padding: 10px;">
+            <p>暂无二手卡牌，可以出售自己的卡牌哦, 还可以从官方卡包中购买卡牌~</p>
           </div>
           <!--</div>-->
         </mt-tab-container-item>
@@ -60,7 +60,7 @@
   export default {
     data() {
       return {
-        active: 'commodity',
+        active: 'good',
       };
     },
     computed: {

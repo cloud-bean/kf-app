@@ -17,7 +17,7 @@
       </div>
       <div class="markdown-desc">
 
-        <div v-html="tansMarkdown(task.description)" v-if="task.description" style="min-height: 200px;">
+        <div v-html="task.description" v-if="task.description" style="min-height: 200px;">
         </div>
         <img :src="task.contentImage.URL" alt="" width="100%" v-if="task.contentImage" />
         <div v-html="task.txVideoFrame">
@@ -34,9 +34,9 @@
             </audio>
           </div>
         </div>
-        <div class="summary" v-if="task.isDone || isExpired()">
+        <div class="summary" v-if="task.summary && (task.isDone || isExpired())">
           <img :src="task.summaryImage.URL" alt="" width="100%" v-if="task.summaryImage" />
-          <div v-html="tansMarkdown(task.summary)" v-if="task.summary">
+          <div v-html="task.summary" v-if="task.summary">
           </div>
         </div>
         <!-- <div class="" style="border:1px solid #ccc;padding:.3rem;" v-if="task.cardPool && !hasOpen">
@@ -141,11 +141,11 @@
         actions: [
           // { name: '文本', method: this.handleComment },
           {
-            name: '语音',
+            name: '录音',
             method: this.handleRecord,
           },
           {
-            name: '图片',
+            name: '拍照',
             method: this.photo,
           },
         ],
@@ -388,7 +388,7 @@
     /*margin-bottom: 0.2rem;*/
     margin-top: 0.3rem;
     padding-top: 0.2rem;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #fbfbfb;
   }
 
   .summary {

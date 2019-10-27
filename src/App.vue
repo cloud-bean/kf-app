@@ -30,7 +30,7 @@
             <i class="fa fa-calendar" slot="icon" aria-hidden="true"></i>
             任务
           </mt-tab-item>
-          <mt-tab-item id="卡牌" v-if="cards && cards.length > 0">
+          <mt-tab-item id="卡牌">
             <i class="fa fa-map" slot="icon" aria-hidden="true"></i>
             卡牌
           </mt-tab-item>
