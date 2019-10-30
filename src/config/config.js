@@ -20,6 +20,7 @@ export default {
     userid: '59ed737f3b601c873f41417a',
   },
   openid: 'o-Jyvv3aUdYlVwRY8MyRCw5vhsQM', // 公众号的openid， 可以用来本地调试的用户
+  // openid: 'o-Jyvv6oPTPHeVYZiGA8nE6JDAx0', // teacher
   task: {
     limit: 5,
   },
