@@ -43,6 +43,8 @@
 
 <script>
   // const wx = require('weixin-js-sdk');
+  import { Toast } from 'mint-ui';
+
   import {
     setScore,
   } from '../vuex/actions';
@@ -50,9 +52,6 @@
     mapState,
     mapActions,
   } from 'vuex';
-  import {
-    MessageBox,
-  } from 'mint-ui';
   export default {
     data() {
       return {
@@ -155,14 +154,20 @@
         const orderId = this.activeOrder._id;
         const score = this.score;
         const comments = this.comments;
-        this.setScore({
-          score,
-          comments,
-          orderId,
-        })
-          .then(() => {
+        if (score === '' || comments === '') {
+          Toast({
+            message: '请填写完整，分数和评语都需要。',
+            position: 'bottom',
+          });
+        } else {
+          this.setScore({
+            score,
+            comments,
+            orderId,
+          }).then(() => {
             this.$router.push('/success');
           });
+        }
       },
     },
   };
