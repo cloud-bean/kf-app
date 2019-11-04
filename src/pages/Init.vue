@@ -8,25 +8,18 @@
 
       <div class="slogan">
         让学习上瘾
-
-
       </div>
       <transition name="fade">
-
         <div class="logo" v-if="showLogo">
-          <img src="../assets/logo.jpg" alt="" style="width:6rem;border:2px solid #6F2DBD;border-radius: 5px;">
-
+          <img :src="logoUrl" alt="" style="width:6rem;border:2px solid #6F2DBD;border-radius: 5px;">
         </div>
       </transition>
 
-      <!-- <div  class="logo">
-         <i class="fa fa-th" aria-hidden="true" style="color:#6F2DBD"></i>JoyBox
-      </div> -->
       <div class="" style="position:fixed;bottom:.5rem;color:#eee;">
-        v0.8.20191025
+        v0.9.20191104
       </div>
       <!-- <div  class="logo">
-        <i class="fa fa-th" aria-hidden="true"></i> 悦盒
+        <i class="fa fa-th" aria-hidden="true"></i> 课堂大师
       </div> -->
       <!-- <mt-progress :value="progress" :bar-height="5"></mt-progress>
             <div>已加载{{progress}}%</div> -->
@@ -46,29 +39,21 @@
   import config from '../config/config';
   import util from '../config/util';
   import mockdata from '../../test/mock';
-  import * as types from '../vuex/mutation_types';
-  import logo from '../assets/logo.jpg';
   import BeatLoader from 'vue-spinner/src/BeatLoader.vue';
 
   const moment = require('moment');
 
-  // import { auth, getUserInfo, authLocal, getJsConfig, getMyRecords, getTip, setLogin } from '../vuex/actions';
-  // import {loader} from '../config/util';
   import {
     mapState,
     mapActions,
   } from 'vuex';
-
   const url = require('url');
-  const co = require('co');
-  const querystring = require('querystring');
-
-
   export default {
     data() {
       return {
         mockdata,
         showLogo: false,
+        logoUrl: 'https://qn.file.classmaster.cn/classmaster-wxgzh-logo.png',
       };
     },
     components: {
@@ -106,10 +91,11 @@
         'getKeepInfo',
       ]),
       configWx() {
+        let that = this;
         wx.onMenuShareTimeline({
-          title: '我在用Joybox学习，你也来吧', // 分享标题
+          title: '我在用「课堂大师」学习，你也来吧', // 分享标题
           link: 'https://joybox.classmaster.cn/#/intro', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: logo, // 分享图标
+          imgUrl: that.logoUrl, // 分享图标
           success() {
             // 用户确认分享后执行的回调函数
           },

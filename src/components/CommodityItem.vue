@@ -11,7 +11,7 @@
         {{commodityData.name}}
       </div>
       <div class="subtitle Cell -12of12">
-        售价{{commodityData.ticketPrice}}悦币 <span style="color:#26a2ff;">来自悦盒官方</span>
+        售价{{commodityData.ticketPrice}}金币 <span style="color:#26a2ff;">来自官方</span>
       </div>
       <div class="desc">
         获奖概率 {{commodityData.threshold + '%'}}
@@ -85,13 +85,13 @@
       async handleBuy() {
         if (this.money < this.commodityData.ticketPrice) {
           Toast({
-            message: '没有足够的悦币，快去完成任务吧',
+            message: '没有足够的金币，快去完成任务吧',
             position: 'bottom',
           });
           return;
         }
         try {
-          await MessageBox.confirm(`确定购买吗，将花费${this.commodityData.ticketPrice}悦币`);
+          await MessageBox.confirm(`确定购买吗，将花费${this.commodityData.ticketPrice}金币`);
           const option = {
             cardPoolId: this.commodityData._id,
             money: this.commodityData.ticketPrice,

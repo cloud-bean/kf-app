@@ -16,13 +16,17 @@
 </div> -->
 
     <!--<div class="button-area">
-  <mt-button @click="handleBuy" type="danger" size="large">买宝箱(1悦币买1次)</mt-button>
+  <mt-button @click="handleBuy" type="danger" size="large">买宝箱(1金币买1次)</mt-button>
 </div>-->
     <!-- <div class="title" v-if="cards.length!=0">我的卡牌</div> -->
 
     <div class="Grid -left bag-content">
       <div class="Cell -3of12 card-item" v-for="(card,index) in cards" v-if="card.status==0">
         <card class="card" :card-data="card" @click.native="openCard(index)"></card>
+      </div>
+      <div style="padding:10px;" v-if="!cards || (cards.length === 0)">
+        <p>你还没有卡牌。</p>
+        <span style="color:grey; font-size: 10pt;">做任务、参加课堂对战都可以赢得金币，在集市里面可以购买官方卡牌和二手卡牌。卡牌可以兑换实物奖励、在课堂上使用等，收集卡牌，解锁更多玩法。</span>
       </div>
     </div>
 

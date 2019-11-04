@@ -9,14 +9,10 @@
     <div class="date">
       {{news.created | dateFormat}}
     </div>
-    <div class="news-content markdown-desc">
+    <div class="markdown-desc">
       <div v-html="news.content">
       </div>
     </div>
-    <!--
-     <div v-for="comment in comments" class="message-item">
-       <message-item :data="comment"></message-item>
-     </div>-->
   </div>
 
 
@@ -25,14 +21,7 @@
 
 <script>
   import MessageItem from '../components/MessageItem';
-  import MessageInput from '../components/MessageInput';
   import { mapState, mapActions } from 'vuex';
-  import { Toast } from 'mint-ui';
-  // import VueMarkdown from 'vue-markdown'
-
-  const markdown = require('markdown').markdown;
-
-  // import { getComments, leaveComment, submitOrder } from '../vuex/actions';
 
   export default {
     data() {
@@ -43,23 +32,7 @@
     },
     computed: mapState({
       news: state => state.news.activeNews,
-      //   comments: state => state.task.activeComments,
     }),
-    //
-    // vuex: {
-    //   getters: {
-    //     task : state => state.activeTask,
-    //     comments: state => state.activeComments,
-    //   },
-    //   actions: {
-    //     getComments,
-    //     leaveComment,
-    //     submitOrder,
-    //   }
-    // },
-    mounted() {
-      // this.getComments(this.task._id);
-    },
     methods: {
       ...mapActions([
         'getComments',
@@ -75,8 +48,8 @@
 <style lang="css" scoped>
 
   .title{
-    font-size: 2rem;
-    color: #ccc;
+    font-size: 1.6rem;
+    color: #555555;
     padding: 0rem 1.5rem;
   }
   .date{
@@ -88,6 +61,10 @@
   .back-img{
     width: 100%;
     height:180px;
+  }
+  .news-content {
+    padding: 0.3rem 1rem;
+    color: #333333;
   }
 
 </style>

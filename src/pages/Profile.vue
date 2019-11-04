@@ -26,8 +26,8 @@
 
     <!-- <div class="mask opacity" v-if="!user.providerData.unionid && display" @click="closeCard">
       <div class="info">
-        为了给用户更好的使用体验，解决部分苹果用户的兼容问题，JoyBox团队加班设计及开发了悦盒的微信小程序
-        ，需要大家对现有数据进行迁移，迁移完毕后可以继续使用公众号也可以使用悦盒小程序，感谢您对悦盒的支持和鼓励。
+        为了给用户更好的使用体验，解决部分苹果用户的兼容问题，团队设计及开发了课堂大师的微信小程序，需要大家对现有数据进行迁移，迁移完毕后
+        可以继续使用公众号也可以使用小程序，感谢您对课堂大师的支持。
       </div>
       <div class="move-button">
           <mt-button type="default" size="large" class="move" @click="handleMove">迁移用户数据到小程序</mt-button>
@@ -388,7 +388,7 @@ margin-top: 1rem;
   z-index:2;
 }
 .profile-content{
-  margin-top: 15rem;
+  margin-top: 13.5rem;
 }
 .task-date{
   margin-bottom: .5rem;

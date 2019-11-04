@@ -1,6 +1,6 @@
 <template>
   <div class="news-item Grid  -center" :style="{backgroundImage: 'url(' + newsData.file.URL+'?imageView2/2/w/400/h/200/q/75|imageslim' + ')'}">
-      <div class="news-content Cell -9of12">
+      <div class="news-content Cell ">
         {{newsData.title}}
         <div class="subtitle">
           {{newsData.subTitle}}
@@ -45,7 +45,6 @@
   margin-top: .5rem;
   font-size: 0.8rem;
   color: #ccc;
-
 }
 .news-content{
   background-color: rgba(0,0,0,.4);

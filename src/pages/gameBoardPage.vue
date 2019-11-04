@@ -4,7 +4,7 @@
   <!-- <div class="panel" v-if="board">
 
     <mt-badge type="primary" :content="board.aliveCount + '人'"></mt-badge>
-    <mt-badge type="success" :content="board.totalRewardTokens + '悦币'"></mt-badge>
+    <mt-badge type="success" :content="board.totalRewardTokens + '金币'"></mt-badge>
 
 
     <h2>
@@ -12,10 +12,10 @@
     </h2>
 
     <div v-if="board.hasEnd">
-      共 {{ board.userIds.length }} 人瓜分 {{ board.totalRewardTokens }} 个悦币
+      共 {{ board.userIds.length }} 人瓜分 {{ board.totalRewardTokens }} 个金币
 
-      <p v-if="wdUserInfo && wdUserInfo.isAlive">恭喜您获得 {{ wdUserInfo.gotTokens }} 个悦币！</p>
-      <p v-if="wdUserInfo && !wdUserInfo.isAlive">下次再战，当王者赚悦币！</p>
+      <p v-if="wdUserInfo && wdUserInfo.isAlive">恭喜您获得 {{ wdUserInfo.gotTokens }} 个金币！</p>
+      <p v-if="wdUserInfo && !wdUserInfo.isAlive">下次再战，当王者赚金币！</p>
     </div>
 
     <div v-if="wdUserInfo && !wdUserInfo.isAlive">

@@ -9,7 +9,7 @@
         <div class="Grid">
           <!-- <mt-badge class="" size="small" color="#888">{{taskdata.type}}</mt-badge> -->
           <mt-badge v-if="!expire" class="" size="small" color="#4fc1e9">经验:{{taskdata.exp}}</mt-badge>
-          <mt-badge v-if="!expire" class="" size="small" style="margin-left:.3rem;" color="#ffc107">悦币:{{taskdata.goldToken}}</mt-badge>
+          <mt-badge v-if="!expire" class="" size="small" style="margin-left:.3rem;" color="#ffc107">金币:{{taskdata.goldToken}}</mt-badge>
           <mt-badge v-if="expire"  size="small" style="margin-left:.3rem;" color="#8080806b">已超期</mt-badge>
         </div>
       </div>

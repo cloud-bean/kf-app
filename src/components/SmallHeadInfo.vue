@@ -1,10 +1,10 @@
 <template>
   <div class="" >
     <div class="userhead Grid -between">
-       
+
         <div class="Cell -4of12">
             <div class="detailInfo">
-                <div> 剩余悦币 {{user.option.goldToken}}</div>
+                <div> 剩余金币 {{user.option.goldToken}}</div>
             </div>
         </div>
         <!-- <div class="Cell -4of12">

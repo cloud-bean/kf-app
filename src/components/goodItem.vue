@@ -13,7 +13,7 @@
       <!--{{goodData.description}}-->
       <!--</div>-->
       <div class="subtitle Cell -12of12">
-        售价{{goodData.price}}悦币 <span style="color:#26a2ff;">来自{{goodData.owner.displayName}}</span>
+        售价{{goodData.price}}金币 <span style="color:#26a2ff;">来自{{goodData.owner.displayName}}</span>
       </div>
       <div class="desc">
         发布于 {{goodData.created | timefromNow}}
@@ -76,13 +76,13 @@
       async handleBuy() {
         if (this.money < this.goodData.price) {
           Toast({
-            message: '没有足够的悦币，快去完成任务吧',
+            message: '没有足够的金币，快去完成任务吧',
             position: 'bottom',
           });
           return;
         }
         try {
-          await MessageBox.confirm(`将花费${this.goodData.price}悦币，确定购买吗？`);
+          await MessageBox.confirm(`将花费${this.goodData.price}金币，确定购买吗？`);
           if (this.goodData.category === 'card') {
             this.card = this.goodData.detail;
             this.popupVisible = true;

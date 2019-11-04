@@ -2,6 +2,11 @@
   <div class="">
     <div class="card no-margin">
       <div class="card-content">
+        <div v-if="!orders || (orders.length === 0)" style="padding: 10px;">
+          <p>没有待批改的任务作业</p>
+          <span style="color:grey; font-size: 10pt;">学生提交的作业会在这里看到，批改审核时，选择分数和快捷评语，或者输入评语。
+            分数是[5，4，3，2，1]，会影响到完成任务获取的经验值和悦币的数量。</span>
+        </div>
         <div class="page-box">
           <mt-button v-if="page > 1" @click.native="prePage">上一页</mt-button>
           <span>第{{ page }}页 / 共{{totalPage}}页, 共{{totalCount}}个</span>

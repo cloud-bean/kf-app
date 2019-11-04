@@ -85,10 +85,9 @@
   </transition> -->
 
     <div class="mask opacity" v-if="loading">
-      <!-- JoyBox -->
       <div class="spinner">
         <div class="" style="margin-bottom:1rem;font-size:1.2rem">
-          JOYBOX 悦盒
+          课堂大师
         </div>
         <scale-loader :loading="loading" color="#fff"></scale-loader>
       </div>

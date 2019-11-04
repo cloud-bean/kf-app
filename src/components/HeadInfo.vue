@@ -11,9 +11,9 @@
           <span @click="showAccRules"><mt-badge size="small" type="success">{{ speedRate }}</mt-badge></span>
         </div>
         <div class="exp">
-          <span class=""> 成长值 {{user.option.exp}}</span> .
-          <span class=""> 悦币 {{user.option.goldToken}}</span> .
-          <span class=""> 排位 {{rank}}</span>
+          <span class=""> 经验 {{user.option.exp}} </span>&nbsp;
+          <span class=""> 金币 {{user.option.goldToken}} </span>&nbsp;
+          <span class=""> 排名 {{rank}}</span>
         </div>
         <div class="">
           <mt-progress :value="expPercent" :barHeight="8">
@@ -69,9 +69,9 @@
       },
       speedRate() {
         if (!this.user.speedRate || (this.user.speedRate === 0)) {
-          return 'x1.00';
+          return '加速度 x1.07';
         }
-        return `x${((100 + this.user.speedRate) / 100).toFixed(2)}`;
+        return `加速度 x${((100 + this.user.speedRate) / 100).toFixed(2)}`;
       }
     },
   };

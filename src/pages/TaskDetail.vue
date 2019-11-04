@@ -5,7 +5,7 @@
 
         <div class="" style="margin-top:.5rem;">
           <mt-badge class="" size="normal" color="#4fc1e9">经验:{{task.exp}}</mt-badge>
-          <mt-badge class="" size="normal" style="margin-left:.3rem;" color="#ffc107">悦币:{{task.goldToken}}</mt-badge>
+          <mt-badge class="" size="normal" style="margin-left:.3rem;" color="#ffc107">金币:{{task.goldToken}}</mt-badge>
         </div>
 
       </div>
@@ -209,12 +209,12 @@ export default {
       });
     },
     configWx() {
-      let imgUrl = '../assets/logo.jpg';
+      let imgUrl = 'https://qn.file.classmaster.cn/classmaster-wxgzh-logo.png';
       if (this.task.contentImage && this.task.contentImage.URL) {
         imgUrl = this.task.contentImage.URL;
       }
       wx.onMenuShareTimeline({
-        title: `【悦盒JoyBox】${this.task.name}`, // 分享标题
+        title: `【课堂大师】${this.task.name}`, // 分享标题
         link: 'https://joybox.classmaster.cn/#/intro', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
         imgUrl, // 分享图标
         success() {
@@ -227,7 +227,7 @@ export default {
       });
 
       wx.onMenuShareAppMessage({
-        title: '【悦盒JoyBox】让学习上瘾！', // 分享标题
+        title: '【课堂大师】让学习上瘾！', // 分享标题
         desc: `#挑战：${this.task.name}`, // 分享描述
         link: 'https://joybox.classmaster.cn/#/intro', // 分享链接
         imgUrl: '../assets/logo.jpg', // 分享图标

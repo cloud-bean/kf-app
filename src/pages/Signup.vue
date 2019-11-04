@@ -124,18 +124,15 @@
         otherSchool: false,
         selected: '0',
         hasSelected: false,
-        optionSchools: ['西工大附中', '西安铁一中', '陕师大附中',
-          '西安高新一中', '西安交大附中', '西安爱知中学', '西北大学附中', '西电附中',
-          '西安市第一中学', '西安市第七十中学', '其他学校',
-        ],
+        optionSchools: ['师大附小', '大雁塔小学', '翠华路小学', '其他学校'],
       };
     },
     mounted() {
       this.$nextTick(() => {
         this.displayName = this.user.displayName;
         this.phone = this.user.phone;
-        this.school = this.user.option.school || '西工大附中';
-        this.slogan = this.user.option.slogan || 'Learning with Joy';
+        this.school = this.user.option.school || '师大附小';
+        this.slogan = this.user.option.slogan || '快乐学习~';
         this.qq = this.user.qq;
         this.getAllMemberAvatars();
         this.getFreeCourses();

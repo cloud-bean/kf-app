@@ -33,7 +33,6 @@
         <option value ="西电附中">西电附中</option>
         <option value ="西安市第一中学">西安市第一中学</option>
         <option value ="西安市第七十中学">西安市第七十中学</option>
-        <option value ="其他学校">客服姐姐帮我选~</option>
       </select>
     </div>
     <mt-field label="出场BGM" placeholder="我的宣言"  v-model="slogan"></mt-field>
@@ -54,8 +53,8 @@ export default {
     return {
       displayName: '',
       phone: '',
-      slogan: 'Learning with Joy',
-      school:'西工大附中',
+      slogan: '快乐学习',
+      school:'陕师大附小',
       avatarPanel:false,
       initCourse:'',
       // note: changing this line won't causes changes

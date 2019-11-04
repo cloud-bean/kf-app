@@ -5,6 +5,23 @@
       <div>{{activeOrder.task.name}}</div>
       <div>学生姓名：{{activeOrder.student.displayName}}</div>
       <div>提交时间：{{activeOrder.created | dateFormat}}</div>
+      <div style="border: 1px solid blue; padding: 2px;">
+        <p>学生提交的作业材料【图片或音频】：</p>
+        <br />
+        <div class="pic" v-if="activeOrder.files[0].type==0">
+          <img :src="localData" width="100%" style="display:block;" @click="previewImage(localData)">
+          <!-- <img :src="activeOrder.files[0].URL" width="100%" style="display:block;"> -->
+        </div>
+        <div class="voice" v-if="activeOrder.files[0].type==1">
+          <i class="fa fa-play-circle-o" @click="playVoice"></i>
+          <!-- <audio :src="activeOrder.files[0].URL" controls="controls">
+            您的浏览器不支持 audio 标签。
+          </audio> -->
+        </div>
+        <div v-if="!activeOrder.files || (activeOrder.files.length === 0)">
+          无材料资源文件
+        </div>
+      </div>
     </div>
     <div class="inputarea">
       <!-- <input v-model="score" class="input" type="number" name="" value="" placeholder="分数" /> -->
@@ -24,20 +41,7 @@
       <mt-button @click="handleClick" type="primary" size="large">提交</mt-button>
 
     </div>
-    <div style="border: 1px solid blue; padding: 2px;">
-      <p>学生提交的作业材料：</p>
-      <br />
-      <div class="pic" v-if="activeOrder.files[0].type==0">
-        <img :src="localData" width="100%" style="display:block;" @click="previewImage(localData)">
-        <!-- <img :src="activeOrder.files[0].URL" width="100%" style="display:block;"> -->
-      </div>
-      <div class="voice" v-if="activeOrder.files[0].type==1">
-        <i class="fa fa-play-circle-o" @click="playVoice"></i>
-        <!-- <audio :src="activeOrder.files[0].URL" controls="controls">
-          您的浏览器不支持 audio 标签。
-        </audio> -->
-      </div>
-    </div>
+
   </div>
 </template>
 
@@ -56,8 +60,8 @@
     data() {
       return {
         localData: '',
-        score: '',
-        comments: '',
+        score: '4',
+        comments: '非常棒！',
       };
     },
     computed: mapState({

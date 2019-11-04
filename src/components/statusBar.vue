@@ -2,61 +2,20 @@
     <div class="status-bar">
         <div class="sum-info Grid -left">
             <div class="awesome-day">
-                续航
-                <div>{{awesomeDays}} <i class="fa fa-bolt" aria-hidden="true"></i></div>
+              <i class="fa fa-bolt" aria-hidden="true"></i> 续航 {{awesomeDays}} 天
             </div>
             <div class="awesome-week">
-                完美周数
-                <div>{{keepInfo.perfectWeeks}} <i class="fa fa-certificate" aria-hidden="true"></i></div>
+                <i class="fa fa-certificate" aria-hidden="true"></i> 完美周 {{keepInfo.perfectWeeks}} 个
             </div>
         </div>
         <div class="keep-status Grid -around">
-
             <div v-for="(item,index) in weekDay" :key="index" class="day Cell">
                 {{item}}
                 <div>
                     <i v-bind:class="[keepInfo.keepDays[index]?'fa-circle':'fa-circle-o', 'fa']"></i>
                 </div>
             </div>
-            <!-- <div class="day Cell">
-                一
-                <div>
-                    <i class="fa fa-circle"></i>
-                </div>
-            </div>
-            <div class="day Cell">
-                二
-                <div>
-                    <i class="fa fa-circle"></i>
-                </div>
-            </div>
-            <div class="day Cell">
-                三
-                <div>
-                    <i class="fa fa-circle-o"></i>
-                </div>
-            </div>
-            <div class="day Cell">
-                四
-                <div>
-                    <i class="fa fa-circle"></i>
-                </div>
-            </div>
-            <div class="day Cell">
-                五
-                <div>
-                    <i class="fa fa-circle-o"></i>
-                </div>
-            </div>
-            <div class="day Cell">
-                六
-                <div>
-                    <i class="fa fa-circle"></i>
-                </div>
-            </div> -->
         </div>
-        <!-- <div class="more-info">更多</div> -->
-
     </div>
 </template>
 <style scoped>
@@ -72,7 +31,7 @@
     border-bottom: 1px solid #ccc;
 }
 .awesome-week{
-    margin-left: 1rem;
+  margin-left: 2rem;
 }
 .keep-status{
     padding: .5rem;

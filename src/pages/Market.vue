@@ -24,7 +24,8 @@
             <good-item :goodData='item' :buy='buyTheGood' :revert='revertTheGood' :user="user"></good-item>
           </div>
           <div v-if="!allCards || allCards.length === 0" style="padding: 10px;">
-            <p>暂无二手卡牌，可以出售自己的卡牌哦, 还可以从官方卡包中购买卡牌~</p>
+            <p>暂无二手卡牌</p>
+            <span style="color:grey; font-size: 10pt;">可以出售自己的卡牌哦, 还可以从官方卡包中购买卡牌~</span>
           </div>
           <!--</div>-->
         </mt-tab-container-item>
