@@ -5,6 +5,22 @@
       <div>{{activeOrder.task.name}}</div>
       <div>学生姓名：{{activeOrder.student.displayName}}</div>
       <div>提交时间：{{activeOrder.created | dateFormat}}</div>
+
+    </div>
+    <div class="inputarea">
+      <!-- <input v-model="score" class="input" type="number" name="" value="" placeholder="分数" /> -->
+
+      <mt-radio title="评分(完美、优秀、可以、差强人意、非常差)" v-model="score" :options="['5', '4', '3', '2', '1']">
+      </mt-radio>
+
+      <mt-radio title="快捷评语（下方输入框中可以点评知识点~）" v-model="comments"
+        :options="['简直完美！', '非常棒！', '不错，加油~ ', '努力！', '一定要好好努力哈~']">
+      </mt-radio>
+
+      <!-- <textarea v-model="comments" class="input" type="text" name="" value="" placeholder="评语" /> -->
+      <mt-field placeholder="评语" type="textarea" v-model="comments" rows="4"></mt-field>
+
+      <br />
       <div style="border: 1px solid blue; padding: 2px;">
         <p>学生提交的作业材料【图片或音频】：</p>
         <br />
@@ -22,19 +38,6 @@
           无材料资源文件
         </div>
       </div>
-    </div>
-    <div class="inputarea">
-      <!-- <input v-model="score" class="input" type="number" name="" value="" placeholder="分数" /> -->
-
-      <mt-radio title="评分(完美、优秀、可以、差强人意、非常差)" v-model="score" :options="['5', '4', '3', '2', '1']">
-      </mt-radio>
-
-      <mt-radio title="快捷评语（下方输入框中可以点评知识点~）" v-model="comments"
-        :options="['简直完美！', '非常棒！', '不错，加油~ ', '努力！', '一定要好好努力哈~']">
-      </mt-radio>
-
-      <!-- <textarea v-model="comments" class="input" type="text" name="" value="" placeholder="评语" /> -->
-      <mt-field placeholder="评语" type="textarea" v-model="comments" rows="4"></mt-field>
 
       <br />
       <!-- <button  type="button" name="button" class="button input" >提交</button> -->
@@ -47,7 +50,9 @@
 
 <script>
   // const wx = require('weixin-js-sdk');
-  import { Toast } from 'mint-ui';
+  import {
+    Toast,
+  } from 'mint-ui';
 
   import {
     setScore,
@@ -61,7 +66,7 @@
       return {
         localData: '',
         score: '4',
-        comments: '非常棒！',
+        comments: '',
       };
     },
     computed: mapState({
