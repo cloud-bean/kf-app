@@ -25,7 +25,7 @@
     "js-url": "^2.3.0",
     "markdown": "^0.5.0",
     "mint-ui": "^2.2.13",
-    "moment": "^2.10.6",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.7",
     "muse-ui": "^2.1.0",
     "qrcanvas-vue": "^1.0.1",
